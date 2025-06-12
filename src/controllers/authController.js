@@ -75,8 +75,6 @@ class AuthController {
      * Logout user
      */
     logout = asyncHandler(async (req, res) => {
-        // In a stateless JWT setup, logout is handled on the client side
-        // Here we can log the logout event
         logger.info(`User logged out: ${req.user.email}`);
 
         res.json({

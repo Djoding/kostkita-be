@@ -1,0 +1,46 @@
+{
+  message: {
+    error: 'Route /api/user/test not found',
+    stack: 'Error: Route /api/user/test not found\n' +
+      '    at notFoundHandler (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/middleware/errorHandler.js:134:19)\n' +
+      '    at Layer.handle [as handle_request] (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at trim_prefix (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/index.js:328:13)\n' +
+      '    at /Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/index.js:286:9\n' +
+      '    at Function.process_params (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/index.js:346:12)\n' +
+      '    at next (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/index.js:280:10)\n' +
+      '    at initialize (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/passport/lib/middleware/initialize.js:98:5)\n' +
+      '    at Layer.handle [as handle_request] (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at trim_prefix (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/index.js:328:13)\n' +
+      '    at /Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/index.js:286:9',
+    url: '/api/user/test',
+    method: 'GET',
+    ip: '::1',
+    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:05:52'
+}
+{
+  message: {
+    error: 'Route /api/user/test not found',
+    stack: 'Error: Route /api/user/test not found\n' +
+      '    at notFoundHandler (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/middleware/errorHandler.js:134:19)\n' +
+      '    at Layer.handle [as handle_request] (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at trim_prefix (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/index.js:328:13)\n' +
+      '    at /Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/index.js:286:9\n' +
+      '    at Function.process_params (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/index.js:346:12)\n' +
+      '    at next (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/index.js:280:10)\n' +
+      '    at initialize (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/passport/lib/middleware/initialize.js:98:5)\n' +
+      '    at Layer.handle [as handle_request] (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at trim_prefix (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/index.js:328:13)\n' +
+      '    at /Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/index.js:286:9',
+    url: '/api/user/test',
+    method: 'GET',
+    ip: '::1',
+    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:05:54'
+}

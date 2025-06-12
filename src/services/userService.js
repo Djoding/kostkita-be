@@ -98,7 +98,7 @@ class UserService {
         const allowedFields = ['full_name', 'phone', 'whatsapp_number', 'avatar'];
         const filteredData = {};
 
-        // Filter only allowed fields
+        // filter only allowed fields
         Object.keys(updateData).forEach(key => {
             if (allowedFields.includes(key) && updateData[key] !== undefined) {
                 filteredData[key] = updateData[key];
@@ -136,7 +136,7 @@ class UserService {
         const allowedFields = ['full_name', 'email', 'role', 'phone', 'whatsapp_number', 'is_approved'];
         const filteredData = {};
 
-        // Filter only allowed fields
+        // filter only allowed fields
         Object.keys(updateData).forEach(key => {
             if (allowedFields.includes(key) && updateData[key] !== undefined) {
                 filteredData[key] = updateData[key];
@@ -147,7 +147,6 @@ class UserService {
             throw new AppError('No valid fields to update', 400);
         }
 
-        // Check if email is being updated and if it's unique
         if (filteredData.email) {
             const existingUser = await prisma.users.findFirst({
                 where: {
@@ -186,7 +185,6 @@ class UserService {
      * Delete user
      */
     async deleteUser(userId) {
-        // Check if user exists
         const user = await prisma.users.findUnique({
             where: { user_id: userId }
         });
@@ -195,7 +193,7 @@ class UserService {
             throw new AppError('User not found', 404);
         }
 
-        // Delete user (cascade will handle related records)
+        // delete user (cascade records)
         await prisma.users.delete({
             where: { user_id: userId }
         });

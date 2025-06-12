@@ -11,7 +11,6 @@ class AuthService {
     async register(userData) {
         const { email, username, password, full_name, role = 'PENGHUNI', phone, whatsapp_number } = userData;
 
-        // Check if user already exists
         const existingUser = await prisma.users.findFirst({
             where: {
                 OR: [
@@ -30,10 +29,10 @@ class AuthService {
             }
         }
 
-        // Hash password
+        // hash password
         const hashedPassword = await bcrypt.hash(password, 12);
 
-        // Create user
+        // create user
         const user = await prisma.users.create({
             data: {
                 email,
@@ -56,7 +55,7 @@ class AuthService {
             }
         });
 
-        // Generate tokens
+        // generate tokens
         const tokens = jwtService.generateTokens({
             userId: user.user_id,
             email: user.email,
@@ -75,7 +74,6 @@ class AuthService {
      * Login user
      */
     async login(email, password) {
-        // Find user
         const user = await prisma.users.findUnique({
             where: { email },
             select: {
@@ -94,26 +92,26 @@ class AuthService {
             throw new AppError('Invalid email or password', 401);
         }
 
-        // Check password
+        // check password
         const isValidPassword = await bcrypt.compare(password, user.password);
         if (!isValidPassword) {
             throw new AppError('Invalid email or password', 401);
         }
 
-        // Update last login
+        // update last login
         await prisma.users.update({
             where: { user_id: user.user_id },
             data: { last_login: new Date() }
         });
 
-        // Generate tokens
+        // generate tokens
         const tokens = jwtService.generateTokens({
             userId: user.user_id,
             email: user.email,
             role: user.role
         });
 
-        // Remove password from response
+        // remove password from response
         const { password: _, ...userWithoutPassword } = user;
 
         logger.info(`User logged in: ${email}`);
@@ -133,7 +131,7 @@ class AuthService {
         });
 
         if (user) {
-            // Update last login
+            // update last login
             user = await prisma.users.update({
                 where: { user_id: user.user_id },
                 data: {
@@ -151,13 +149,13 @@ class AuthService {
                 }
             });
         } else {
-            // Check if user exists with same email
+            // check if user exists with same email
             const existingUser = await prisma.users.findUnique({
                 where: { email: profile.emails[0].value }
             });
 
             if (existingUser) {
-                // Link Google account
+                // link Google account
                 user = await prisma.users.update({
                     where: { user_id: existingUser.user_id },
                     data: {
@@ -177,7 +175,7 @@ class AuthService {
                     }
                 });
             } else {
-                // Create new user
+                // create new user
                 const username = await this.generateUniqueUsername(profile.emails[0].value.split('@')[0]);
 
                 user = await prisma.users.create({
@@ -207,7 +205,7 @@ class AuthService {
             }
         }
 
-        // Generate tokens
+        // generate tokens
         const tokens = jwtService.generateTokens({
             userId: user.user_id,
             email: user.email,
@@ -233,7 +231,7 @@ class AuthService {
             throw new AppError('User not found', 404);
         }
 
-        // Skip current password check for Google users
+        // skip  password and checking for google users
         if (!user.google_id) {
             const isValidPassword = await bcrypt.compare(currentPassword, user.password);
             if (!isValidPassword) {
@@ -241,10 +239,10 @@ class AuthService {
             }
         }
 
-        // Hash new password
+        // hash new password
         const hashedPassword = await bcrypt.hash(newPassword, 12);
 
-        // Update password
+        // update password
         await prisma.users.update({
             where: { user_id: userId },
             data: { password: hashedPassword }
@@ -272,7 +270,7 @@ class AuthService {
      * Verify email token (placeholder for future implementation)
      */
     async verifyEmail(token) {
-        // Implementation for email verification
+        // email verification
         throw new AppError('Email verification not implemented yet', 501);
     }
 
@@ -280,7 +278,7 @@ class AuthService {
      * Request password reset (placeholder for future implementation)
      */
     async requestPasswordReset(email) {
-        // Implementation for password reset
+        // password reset
         throw new AppError('Password reset not implemented yet', 501);
     }
 }

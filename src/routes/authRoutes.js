@@ -12,7 +12,7 @@ const {
 
 const router = express.Router();
 
-// Public routes
+// public routes
 router.post('/register',
     sanitizeInput,
     registerValidator,
@@ -31,7 +31,7 @@ router.post('/refresh-token',
     refreshToken
 );
 
-// Google OAuth routes
+// google OAuth routes
 router.get('/google',
     passport.authenticate('google', { scope: ['profile', 'email'] })
 );
@@ -41,7 +41,7 @@ router.get('/google/callback',
     authController.googleCallback
 );
 
-// Password reset
+// password reset
 router.post('/request-password-reset',
     sanitizeInput,
     requestPasswordResetValidator,
@@ -53,7 +53,7 @@ router.get('/verify-email/:token',
     authController.verifyEmail
 );
 
-// Protected routes
+// protected routes
 router.use(authenticateJWT);
 
 router.get('/profile',

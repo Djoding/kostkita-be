@@ -114,7 +114,6 @@ const refreshToken = async (req, res, next) => {
 
         const decoded = jwtService.verifyRefreshToken(refreshToken);
 
-        // Get fresh user data
         const user = await prisma.users.findUnique({
             where: { user_id: decoded.userId },
             select: {
@@ -134,7 +133,6 @@ const refreshToken = async (req, res, next) => {
             });
         }
 
-        // Generate new tokens
         const tokens = jwtService.generateTokens({
             userId: user.user_id,
             email: user.email,

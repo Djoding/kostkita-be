@@ -17,10 +17,10 @@ const {
 
 const router = express.Router();
 
-// All routes require authentication
+// all routes require authentication
 router.use(authenticateJWT);
 
-// Profile routes (accessible by all authenticated users)
+// profile routes (accessible by all authenticated users)
 router.get('/profile',
     userController.getUserById
 );
@@ -32,7 +32,7 @@ router.put('/profile',
     userController.updateProfile
 );
 
-// Search users (accessible by all authenticated users)
+// search users (accessible by all authenticated users)
 router.get('/search',
     validatePagination,
     searchUsersValidator,
@@ -40,10 +40,10 @@ router.get('/search',
     userController.searchUsers
 );
 
-// Admin only routes
+// admin only routes
 router.use(authorize('ADMIN'));
 
-// User management
+// user management
 router.get('/',
     validatePagination,
     getUsersValidator,

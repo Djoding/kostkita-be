@@ -526,3 +526,1495 @@
   service: 'kosan-api',
   timestamp: '2025-06-12 14:56:17'
 }
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 14:59:51'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 14:59:51'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 14:59:51'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 14:59:51'
+}
+{
+  message: 'Received SIGINT. Starting graceful shutdown...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:05:19'
+}
+{
+  message: 'HTTP server closed',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:05:19'
+}
+{
+  message: 'Database connection closed',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:05:19'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:05:21'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:05:21'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:05:21'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:05:21'
+}
+{
+  message: {
+    error: 'Route /api/user/test not found',
+    stack: 'Error: Route /api/user/test not found\n' +
+      '    at notFoundHandler (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/middleware/errorHandler.js:134:19)\n' +
+      '    at Layer.handle [as handle_request] (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at trim_prefix (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/index.js:328:13)\n' +
+      '    at /Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/index.js:286:9\n' +
+      '    at Function.process_params (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/index.js:346:12)\n' +
+      '    at next (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/index.js:280:10)\n' +
+      '    at initialize (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/passport/lib/middleware/initialize.js:98:5)\n' +
+      '    at Layer.handle [as handle_request] (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at trim_prefix (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/index.js:328:13)\n' +
+      '    at /Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/index.js:286:9',
+    url: '/api/user/test',
+    method: 'GET',
+    ip: '::1',
+    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:05:52'
+}
+{
+  message: {
+    error: 'Route /api/user/test not found',
+    stack: 'Error: Route /api/user/test not found\n' +
+      '    at notFoundHandler (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/middleware/errorHandler.js:134:19)\n' +
+      '    at Layer.handle [as handle_request] (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at trim_prefix (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/index.js:328:13)\n' +
+      '    at /Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/index.js:286:9\n' +
+      '    at Function.process_params (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/index.js:346:12)\n' +
+      '    at next (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/index.js:280:10)\n' +
+      '    at initialize (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/passport/lib/middleware/initialize.js:98:5)\n' +
+      '    at Layer.handle [as handle_request] (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at trim_prefix (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/index.js:328:13)\n' +
+      '    at /Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/index.js:286:9',
+    url: '/api/user/test',
+    method: 'GET',
+    ip: '::1',
+    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:05:54'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:08:05'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:08:05'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:08:05'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:08:05'
+}
+{
+  message: 'Received SIGINT. Starting graceful shutdown...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:09:54'
+}
+{
+  message: 'HTTP server closed',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:09:54'
+}
+{
+  message: 'Database connection closed',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:09:54'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:12:39'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:12:39'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:12:39'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:12:39'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:17:08'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:17:08'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:17:08'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:17:08'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:17:09'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:17:09'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:17:09'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:17:09'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:07'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:07'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:07'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:07'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:10'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:10'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:10'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:10'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:12'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:12'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:12'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:12'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:15'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:15'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:15'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:15'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:22'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:22'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:22'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:22'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:23'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:23'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:23'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:23'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:25'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:25'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:25'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:25'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:28'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:28'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:28'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:28'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:29'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:29'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:29'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:29'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:45'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:45'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:45'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:45'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:47'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:47'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:47'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:47'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:52'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:52'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:52'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:52'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:53'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:53'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:53'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:18:53'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:04'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:04'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:04'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:04'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:05'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:05'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:05'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:05'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:08'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:08'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:08'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:08'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:10'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:10'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:10'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:10'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:17'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:17'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:17'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:17'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:19'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:19'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:19'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:19'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:40'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:40'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:40'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:40'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:50'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:50'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:50'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:50'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:54'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:54'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:54'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:54'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:55'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:55'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:55'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:19:55'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:06'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:06'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:06'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:06'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:08'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:08'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:08'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:08'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:11'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:11'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:11'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:11'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:14'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:14'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:14'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:14'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:25'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:25'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:25'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:25'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:30'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:30'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:30'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:30'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:32'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:32'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:32'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:32'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:35'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:35'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:35'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:35'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:39'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:39'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:39'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:39'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:42'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:42'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:42'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:42'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:45'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:45'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:45'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:45'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:48'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:48'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:48'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:48'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:54'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:54'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:54'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:54'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:57'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:57'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:57'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:57'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:59'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:59'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:59'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:20:59'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:00'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:00'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:00'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:00'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:06'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:06'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:06'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:06'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:13'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:13'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:13'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:13'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:17'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:17'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:17'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:17'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:19'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:19'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:19'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:19'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:23'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:23'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:23'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:23'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:23'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:23'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:23'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:23'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:40'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:40'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:40'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:40'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:46'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:46'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:46'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:46'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:47'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:47'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:47'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:47'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:55'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:55'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:55'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:55'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:59'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:59'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:59'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:21:59'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:22:05'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:22:05'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:22:05'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:22:05'
+}
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:22:12'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:22:12'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:22:12'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:22:12'
+}
+{
+  message: 'Received SIGINT. Starting graceful shutdown...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:23:40'
+}
+{
+  message: 'HTTP server closed',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:23:40'
+}
+{
+  message: 'Database connection closed',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 15:23:40'
+}

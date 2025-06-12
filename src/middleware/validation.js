@@ -81,7 +81,6 @@ const validatePagination = (req, res, next) => {
     const limit = parseInt(req.query.limit) || 10;
     const offset = (page - 1) * limit;
 
-    // Validate page and limit
     if (page < 1) {
         return res.status(400).json({
             success: false,
@@ -96,7 +95,6 @@ const validatePagination = (req, res, next) => {
         });
     }
 
-    // Add pagination to request
     req.pagination = {
         page,
         limit,
@@ -118,7 +116,6 @@ const validateFileUpload = (allowedTypes = [], maxSize = 5 * 1024 * 1024) => {
         const files = req.files || [req.file];
 
         for (const file of files) {
-            // Check file size
             if (file.size > maxSize) {
                 return res.status(400).json({
                     success: false,
@@ -126,7 +123,6 @@ const validateFileUpload = (allowedTypes = [], maxSize = 5 * 1024 * 1024) => {
                 });
             }
 
-            // Check file type
             if (allowedTypes.length > 0 && !allowedTypes.includes(file.mimetype)) {
                 return res.status(400).json({
                     success: false,

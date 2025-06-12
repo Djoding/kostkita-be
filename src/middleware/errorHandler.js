@@ -70,14 +70,12 @@ const sendErrorDev = (err, res) => {
 };
 
 const sendErrorProd = (err, res) => {
-    // Operational, trusted error: send message to client
     if (err.isOperational) {
         res.status(err.statusCode).json({
             success: false,
             message: err.message
         });
     } else {
-        // Programming or other unknown error: don't leak error details
         logger.error('ERROR:', err);
 
         res.status(500).json({
@@ -94,7 +92,6 @@ const globalErrorHandler = (err, req, res, next) => {
     err.statusCode = err.statusCode || 500;
     err.status = err.status || 'error';
 
-    // Log error
     logger.error({
         error: err.message,
         stack: err.stack,
@@ -110,7 +107,6 @@ const globalErrorHandler = (err, req, res, next) => {
         let error = { ...err };
         error.message = err.message;
 
-        // Handle specific error types
         if (error.code && error.code.startsWith('P')) {
             error = handlePrismaError(error);
         } else if (error.name === 'JsonWebTokenError') {
