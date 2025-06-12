@@ -1,46 +1,119 @@
-const { body } = require('express-validator');
+const { body, query } = require('express-validator');
 
-exports.loginValidator = [
+const updateProfileValidator = [
+    body('full_name')
+        .optional()
+        .isLength({ min: 2, max: 100 })
+        .withMessage('Full name must be between 2 and 100 characters')
+        .trim(),
+
+    body('phone')
+        .optional()
+        .isMobilePhone('id-ID')
+        .withMessage('Please provide a valid Indonesian phone number'),
+
+    body('whatsapp_number')
+        .optional()
+        .isMobilePhone('id-ID')
+        .withMessage('Please provide a valid Indonesian WhatsApp number'),
+
+    body('avatar')
+        .optional()
+        .isURL()
+        .withMessage('Avatar must be a valid URL')
+];
+
+const updateUserValidator = [
+    body('full_name')
+        .optional()
+        .isLength({ min: 2, max: 100 })
+        .withMessage('Full name must be between 2 and 100 characters')
+        .trim(),
+
     body('email')
+        .optional()
         .isEmail()
-        .withMessage('Email is required')
+        .withMessage('Please provide a valid email')
         .normalizeEmail(),
-    body('password')
-        .notEmpty()
-        .withMessage('Password is required')
-]
 
-exports.registerValidator = [
-    body('name')
-        .notEmpty()
-        .withMessage('Name is required')
-        .isLength({ min: 3 })
-        .withMessage('Name must be at least 3 characters long'),
-    body('email')
-        .isEmail()
-        .withMessage('Email is required')
-        .normalizeEmail(),
-    body('password')
-        .notEmpty()
-        .withMessage('Password is required')
-        .isLength({ min: 6 })
-        .withMessage('Password must be at least 6 characters long'),
     body('role')
-        .notEmpty()
-        .withMessage('Role is required')
-        .isIn(['Pengelola', 'Penghuni'])
-        .withMessage('Role must be either Pengelola or Penghuni')
-]
+        .optional()
+        .isIn(['ADMIN', 'PENGELOLA', 'PENGHUNI', 'TAMU'])
+        .withMessage('Invalid role'),
 
-exports.loginWithGoogleValidator = [
-    body('token')
+    body('phone')
+        .optional()
+        .isMobilePhone('id-ID')
+        .withMessage('Please provide a valid Indonesian phone number'),
+
+    body('whatsapp_number')
+        .optional()
+        .isMobilePhone('id-ID')
+        .withMessage('Please provide a valid Indonesian WhatsApp number'),
+
+    body('is_approved')
+        .optional()
+        .isBoolean()
+        .withMessage('is_approved must be a boolean value')
+];
+
+const approveUserValidator = [
+    body('is_approved')
+        .isBoolean()
+        .withMessage('is_approved must be a boolean value')
+];
+
+const getUsersValidator = [
+    query('role')
+        .optional()
+        .isIn(['ADMIN', 'PENGELOLA', 'PENGHUNI', 'TAMU'])
+        .withMessage('Invalid role filter'),
+
+    query('is_approved')
+        .optional()
+        .isIn(['true', 'false'])
+        .withMessage('is_approved must be true or false'),
+
+    query('search')
+        .optional()
+        .isLength({ min: 2, max: 50 })
+        .withMessage('Search query must be between 2 and 50 characters')
+        .trim(),
+
+    query('page')
+        .optional()
+        .isInt({ min: 1 })
+        .withMessage('Page must be a positive integer'),
+
+    query('limit')
+        .optional()
+        .isInt({ min: 1, max: 100 })
+        .withMessage('Limit must be between 1 and 100')
+];
+
+const searchUsersValidator = [
+    query('q')
         .notEmpty()
-        .withMessage('Token is required')
-        .isString()
-        .withMessage('Token must be a string'),
-    body('role')
-        .notEmpty()
-        .withMessage('Role is required')
-        .isIn(['Pengelola', 'Penghuni'])
-        .withMessage('Role must be either Pengelola or Penghuni'),
-]
+        .withMessage('Search query is required')
+        .isLength({ min: 2, max: 50 })
+        .withMessage('Search query must be between 2 and 50 characters')
+        .trim(),
+
+    query('page')
+        .optional()
+        .isInt({ min: 1 })
+        .withMessage('Page must be a positive integer'),
+
+    query('limit')
+        .optional()
+        .isInt({ min: 1, max: 100 })
+        .withMessage('Limit must be between 1 and 100')
+];
+
+module.exports = {
+    updateProfileValidator,
+    updateUserValidator,
+    approveUserValidator,
+    getUsersValidator,
+    searchUsersValidator
+};
