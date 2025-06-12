@@ -1,2 +1,40 @@
 node_modules
+.env# ======================
+# Node.js
+# ======================
+node_modules/
+dist/
 .env
+.env.*.local
+.nyc_output/
+coverage/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ======================
+# Prisma
+# ======================
+prisma/generated/
+prisma/client/
+prisma/dev.db
+prisma/.DS_Store
+prisma/*.sqlite
+
+# ======================
+# VSCode
+# ======================
+.vscode/
+*.code-workspace
+
+# ======================
+# MacOS / Linux
+# ======================
+.DS_Store
+Thumbs.db
+
+# ======================
+# Logs
+# ======================
+logs/
+*.log

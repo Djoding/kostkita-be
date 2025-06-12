@@ -2102,3 +2102,45 @@
   service: 'kosan-api',
   timestamp: '2025-06-12 16:18:36'
 }
+{
+  message: '🚀 Server running on port 3000',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 18:35:51'
+}
+{
+  message: '📖 API Documentation: http://localhost:3000/api/v1',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 18:35:51'
+}
+{
+  message: '🏥 Health Check: http://localhost:3000/health',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 18:35:51'
+}
+{
+  message: '🌍 Environment: development',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 18:35:51'
+}
+{
+  message: 'Received SIGINT. Starting graceful shutdown...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 18:35:53'
+}
+{
+  message: 'HTTP server closed',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 18:35:53'
+}
+{
+  message: 'Database connection closed',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-12 18:35:53'
+}
