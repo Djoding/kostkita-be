@@ -2,22 +2,22 @@
 
 ## 📋 Deskripsi Proyek
 
-Kost Management System adalah aplikasi backend untuk mengelola sistem kost modern yang terintegrasi dengan layanan catering dan laundry. Sistem ini dirancang untuk memudahkan pengelola kost, penghuni, dan penyedia layanan dalam menjalankan operasional sehari-hari.
+Kost Management System adalah aplikasi backend untuk mengelola sistem kost yang terintegrasi dengan layanan catering dan laundry. Sistem ini dirancang untuk memudahkan pengelola kost, penghuni, dan penyedia layanan dalam menjalankan operasional sehari-hari.
 
 ### 🎯 Fitur Utama
 - **User Management**: Sistem autentikasi multi-role (Admin, Pengelola, Penghuni, Tamu)
 - **Kost Management**: Pengelolaan kost, kamar, fasilitas, dan peraturan
 - **Reservation System**: Sistem booking dengan workflow approval
-- **Catering Service**: Layanan pemesanan makanan terintegrasi
-- **Laundry Service**: Layanan laundry dengan sistem pricing fleksibel
-- **Payment Integration**: Integrasi QRIS dan transfer bank
+- **Catering Service**: Layanan pemesanan makanan
+- **Laundry Service**: Layanan pemesanan laundry
+- **Payment Integration**: Integrasi pembayaran QRIS 
 
 ### 🛠 Tech Stack
 - **Backend**: Node.js + Express.js
 - **Database**: PostgreSQL
-- **Authentication**: JWT
-- **File Storage**: Cloudinary/Local Storage
-- **Documentation**: Swagger/OpenAPI
+- **Authentication**: JWT & OAuth
+- **File Storage**: Local Storage
+- **Documentation**: Postman API
 
 ---
 
@@ -39,12 +39,11 @@ main (production)
 #### 1. **Persiapan Awal**
 ```bash
 # Clone repository
-git clone <repository-url>
-cd kost-management-backend
+git clone https://github.com/djoding/kostkita-be.git
+cd kostkita-be
 
-# Setup branch lokal
-git checkout -b feature/your-feature-name
-git push -u origin feature/your-feature-name
+# Menuju branch lokal
+git checkout feature/your-feature-name
 ```
 
 #### 2. **Development Cycle**
@@ -170,7 +169,6 @@ git push origin v1.0.0
 
 ### `main` Branch
 - Require PR with 2 approvals
-- Require status checks (CI/CD)
 - No direct push allowed
 - Require up-to-date branches
 
@@ -212,6 +210,7 @@ git checkout development
 git pull origin development
 git checkout feature/your-feature
 git merge development
+
 # Resolve conflicts manually
 git commit -m "resolve: merge conflicts with development"
 ```
@@ -228,6 +227,7 @@ git push -f origin feature/your-feature
 git checkout main
 git pull origin main
 git checkout -b hotfix/critical-bug-fix
+
 # Make fix
 git commit -m "fix: critical bug in production"
 # PR to main with priority review
@@ -236,12 +236,8 @@ git commit -m "fix: critical bug in production"
 ---
 
 ## 📞 Support
-
 - **Technical Issues**: Create GitHub Issue
 - **Process Questions**: Ask in team chat
-- **Emergency**: Contact project lead directly
 
-**Team Leads:**
-- **Backend Lead**: [Name]
-- **DevOps**: [Name]
-- **Project Manager**: [Name]
+**Team PIC:**
+- **Github Reviewer**: Derva
