@@ -10,11 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-generator seed {
-  provider = "node"
-  run      = "node prisma/seed.js"
-}
-
 model MasterFasilitas {
   fasilitas_id   String            @id @default(uuid()) @db.Uuid
   nama_fasilitas String            @db.VarChar(255)
