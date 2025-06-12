@@ -28,10 +28,10 @@ Kost Management System adalah aplikasi backend untuk mengelola sistem kost yang 
 ```
 main (production)
 ├── development (staging)
-    ├── feature/user-auth (Derva)
-    ├── feature/kost-room (Fizi)
-    ├── feature/reservation (Amib)
-    └── feature/services (Fikri)
+    ├── feature/auth (Derva)
+    ├── feature/property (Fizi)
+    ├── feature/payment (Amib)
+    └── feature/service (Fikri)
 ```
 
 ### 🔄 Git Workflow Step-by-Step
