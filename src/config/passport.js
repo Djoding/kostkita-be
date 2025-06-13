@@ -43,13 +43,11 @@ passport.use(new GoogleStrategy({
     callbackURL: process.env.OAUTH_CALLBACK_URL
 }, async (accessToken, refreshToken, profile, done) => {
     try {
-        // check if user already exists
         let user = await prisma.users.findUnique({
             where: { google_id: profile.id }
         });
 
         if (user) {
-            // update last login
             user = await prisma.users.update({
                 where: { user_id: user.user_id },
                 data: {
@@ -60,13 +58,11 @@ passport.use(new GoogleStrategy({
             return done(null, user);
         }
 
-        // check if email exists 
         const existingUser = await prisma.users.findUnique({
             where: { email: profile.emails[0].value }
         });
 
         if (existingUser) {
-            // link google account to existing user
             user = await prisma.users.update({
                 where: { user_id: existingUser.user_id },
                 data: {
@@ -79,7 +75,6 @@ passport.use(new GoogleStrategy({
             return done(null, user);
         }
 
-        // create new user
         const username = await generateUniqueUsername(profile.emails[0].value.split('@')[0]);
 
         user = await prisma.users.create({
@@ -88,10 +83,10 @@ passport.use(new GoogleStrategy({
                 username: username,
                 full_name: profile.displayName,
                 google_id: profile.id,
-                role: 'PENGHUNI', // default role: Penghuni
+                role: 'PENGHUNI', 
                 avatar: profile.photos[0]?.value,
                 email_verified: true,
-                is_approved: true, // auto-approve OAuth
+                is_approved: true,
                 last_login: new Date()
             }
         });
@@ -102,7 +97,6 @@ passport.use(new GoogleStrategy({
     }
 }));
 
-// helper function to generate unique username
 async function generateUniqueUsername(baseUsername) {
     let username = baseUsername;
     let counter = 1;

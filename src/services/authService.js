@@ -29,10 +29,8 @@ class AuthService {
             }
         }
 
-        // hash password
         const hashedPassword = await bcrypt.hash(password, 12);
 
-        // create user
         const user = await prisma.users.create({
             data: {
                 email,
@@ -42,7 +40,7 @@ class AuthService {
                 role,
                 phone,
                 whatsapp_number,
-                is_approved: role === 'PENGHUNI' // Auto-approve regular users
+                is_approved: role === 'PENGHUNI'
             },
             select: {
                 user_id: true,
@@ -55,7 +53,6 @@ class AuthService {
             }
         });
 
-        // generate tokens
         const tokens = jwtService.generateTokens({
             userId: user.user_id,
             email: user.email,
@@ -92,26 +89,22 @@ class AuthService {
             throw new AppError('Invalid email or password', 401);
         }
 
-        // check password
         const isValidPassword = await bcrypt.compare(password, user.password);
         if (!isValidPassword) {
             throw new AppError('Invalid email or password', 401);
         }
 
-        // update last login
         await prisma.users.update({
             where: { user_id: user.user_id },
             data: { last_login: new Date() }
         });
 
-        // generate tokens
         const tokens = jwtService.generateTokens({
             userId: user.user_id,
             email: user.email,
             role: user.role
         });
 
-        // remove password from response
         const { password: _, ...userWithoutPassword } = user;
 
         logger.info(`User logged in: ${email}`);
@@ -131,7 +124,6 @@ class AuthService {
         });
 
         if (user) {
-            // update last login
             user = await prisma.users.update({
                 where: { user_id: user.user_id },
                 data: {
@@ -149,13 +141,11 @@ class AuthService {
                 }
             });
         } else {
-            // check if user exists with same email
             const existingUser = await prisma.users.findUnique({
                 where: { email: profile.emails[0].value }
             });
 
             if (existingUser) {
-                // link Google account
                 user = await prisma.users.update({
                     where: { user_id: existingUser.user_id },
                     data: {
@@ -175,7 +165,6 @@ class AuthService {
                     }
                 });
             } else {
-                // create new user
                 const username = await this.generateUniqueUsername(profile.emails[0].value.split('@')[0]);
 
                 user = await prisma.users.create({
@@ -205,7 +194,6 @@ class AuthService {
             }
         }
 
-        // generate tokens
         const tokens = jwtService.generateTokens({
             userId: user.user_id,
             email: user.email,
@@ -231,7 +219,6 @@ class AuthService {
             throw new AppError('User not found', 404);
         }
 
-        // skip  password and checking for google users
         if (!user.google_id) {
             const isValidPassword = await bcrypt.compare(currentPassword, user.password);
             if (!isValidPassword) {
@@ -239,10 +226,8 @@ class AuthService {
             }
         }
 
-        // hash new password
         const hashedPassword = await bcrypt.hash(newPassword, 12);
 
-        // update password
         await prisma.users.update({
             where: { user_id: userId },
             data: { password: hashedPassword }
@@ -270,7 +255,6 @@ class AuthService {
      * Verify email token (placeholder for future implementation)
      */
     async verifyEmail(token) {
-        // email verification
         throw new AppError('Email verification not implemented yet', 501);
     }
 
@@ -278,7 +262,6 @@ class AuthService {
      * Request password reset (placeholder for future implementation)
      */
     async requestPasswordReset(email) {
-        // password reset
         throw new AppError('Password reset not implemented yet', 501);
     }
 }

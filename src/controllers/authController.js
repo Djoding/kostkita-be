@@ -38,7 +38,6 @@ class AuthController {
         const user = req.user;
         const result = await authService.googleAuth(user);
 
-        // Redirect to frontend with tokens
         const redirectUrl = `${process.env.FRONTEND_URL}/auth/callback?token=${result.accessToken}&refresh=${result.refreshToken}`;
         res.redirect(redirectUrl);
     });

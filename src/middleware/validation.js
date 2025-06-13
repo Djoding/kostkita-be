@@ -36,14 +36,12 @@ const handleValidationErrors = (req, res, next) => {
  * Sanitize input data
  */
 const sanitizeInput = (req, res, next) => {
-    // Remove undefined and null values from body
     if (req.body && typeof req.body === 'object') {
         Object.keys(req.body).forEach(key => {
             if (req.body[key] === undefined || req.body[key] === null || req.body[key] === '') {
                 delete req.body[key];
             }
 
-            // Trim string values
             if (typeof req.body[key] === 'string') {
                 req.body[key] = req.body[key].trim();
             }

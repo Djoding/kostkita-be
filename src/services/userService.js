@@ -98,7 +98,6 @@ class UserService {
         const allowedFields = ['full_name', 'phone', 'whatsapp_number', 'avatar'];
         const filteredData = {};
 
-        // filter only allowed fields
         Object.keys(updateData).forEach(key => {
             if (allowedFields.includes(key) && updateData[key] !== undefined) {
                 filteredData[key] = updateData[key];
@@ -136,7 +135,6 @@ class UserService {
         const allowedFields = ['full_name', 'email', 'role', 'phone', 'whatsapp_number', 'is_approved'];
         const filteredData = {};
 
-        // filter only allowed fields
         Object.keys(updateData).forEach(key => {
             if (allowedFields.includes(key) && updateData[key] !== undefined) {
                 filteredData[key] = updateData[key];
@@ -193,7 +191,6 @@ class UserService {
             throw new AppError('User not found', 404);
         }
 
-        // delete user (cascade records)
         await prisma.users.delete({
             where: { user_id: userId }
         });
