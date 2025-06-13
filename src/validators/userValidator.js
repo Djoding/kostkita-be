@@ -9,12 +9,12 @@ const updateProfileValidator = [
 
     body('phone')
         .optional()
-        .isMobilePhone('id-ID')
+        .matches(/^(\+62|0)[0-9]{8,13}$/)
         .withMessage('Please provide a valid Indonesian phone number'),
 
     body('whatsapp_number')
         .optional()
-        .isMobilePhone('id-ID')
+        .matches(/^(\+62|0)[0-9]{8,13}$/)
         .withMessage('Please provide a valid Indonesian WhatsApp number'),
 
     body('avatar')
@@ -43,12 +43,12 @@ const updateUserValidator = [
 
     body('phone')
         .optional()
-        .isMobilePhone('id-ID')
+        .matches(/^(\+62|0)[0-9]{8,13}$/)
         .withMessage('Please provide a valid Indonesian phone number'),
 
     body('whatsapp_number')
         .optional()
-        .isMobilePhone('id-ID')
+        .matches(/^(\+62|0)[0-9]{8,13}$/)
         .withMessage('Please provide a valid Indonesian WhatsApp number'),
 
     body('is_approved')
@@ -110,10 +110,25 @@ const searchUsersValidator = [
         .withMessage('Limit must be between 1 and 100')
 ];
 
+const bulkApproveValidator = [
+    body('user_ids')
+        .isArray({ min: 1 })
+        .withMessage('user_ids must be a non-empty array'),
+
+    body('user_ids.*')
+        .isUUID()
+        .withMessage('Each user_id must be a valid UUID'),
+
+    body('is_approved')
+        .isBoolean()
+        .withMessage('is_approved must be a boolean value')
+];
+
 module.exports = {
     updateProfileValidator,
     updateUserValidator,
     approveUserValidator,
     getUsersValidator,
-    searchUsersValidator
+    searchUsersValidator,
+    bulkApproveValidator
 };
