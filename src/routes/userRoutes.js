@@ -7,52 +7,49 @@ const {
     validateUUID,
     validatePagination
 } = require('../middleware/validation');
-const {
-    updateProfileValidator,
-    updateUserValidator,
-    approveUserValidator,
-    getUsersValidator,
-    searchUsersValidator
-} = require('../validators/userValidator');
+const userValidator = require('../validators/userValidator');
 
 const router = express.Router();
 
-// all routes require authentication
 router.use(authenticateJWT);
 
-// profile routes (accessible by all authenticated users)
-router.get('/profile',
-    userController.getUserById
-);
+router.get('/profile', userController.getUserById);
 
 router.put('/profile',
     sanitizeInput,
-    updateProfileValidator,
+    userValidator.updateProfileValidator,
     handleValidationErrors,
     userController.updateProfile
 );
 
-// search users (accessible by all authenticated users)
 router.get('/search',
     validatePagination,
-    searchUsersValidator,
+    userValidator.searchUsersValidator,
     handleValidationErrors,
     userController.searchUsers
 );
 
-// admin only routes
 router.use(authorize('ADMIN'));
 
-// user management
 router.get('/',
     validatePagination,
-    getUsersValidator,
+    userValidator.getUsersValidator,
     handleValidationErrors,
     userController.getAllUsers
 );
 
-router.get('/stats',
-    userController.getUserStats
+router.get('/stats', userController.getUserStats);
+
+router.get('/pending',
+    validatePagination,
+    userController.getPendingUsers
+);
+
+router.post('/bulk-approve',
+    sanitizeInput,
+    userValidator.bulkApproveValidator,
+    handleValidationErrors,
+    userController.bulkApproveUsers
 );
 
 router.get('/:id',
@@ -63,7 +60,7 @@ router.get('/:id',
 router.put('/:id',
     validateUUID('id'),
     sanitizeInput,
-    updateUserValidator,
+    userValidator.updateUserValidator,
     handleValidationErrors,
     userController.updateUser
 );
@@ -76,7 +73,7 @@ router.delete('/:id',
 router.patch('/:id/approve',
     validateUUID('id'),
     sanitizeInput,
-    approveUserValidator,
+    userValidator.approveUserValidator,
     handleValidationErrors,
     userController.approveUser
 );

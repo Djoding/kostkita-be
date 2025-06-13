@@ -6,151 +6,108 @@ const helmet = require('helmet');
 const compression = require('compression');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
-const passport = require('passport');
-
+const passport = require('./config/passport');
 const logger = require('./config/logger');
-require('./config/passport');
-
+const routes = require('./routes');
 const { globalErrorHandler, notFoundHandler } = require('./middleware/errorHandler');
-
-const authRoutes = require('./routes/authRoutes');
-const userRoutes = require('./routes/userRoutes');
-
 const app = express();
-
-app.set('trust proxy', 1);
+const PORT = process.env.PORT || 3000;
 
 app.use(helmet({
-    crossOriginEmbedderPolicy: false,
-    contentSecurityPolicy: {
-        directives: {
-            defaultSrc: ["'self'"],
-            styleSrc: ["'self'", "'unsafe-inline'"],
-            scriptSrc: ["'self'"],
-            imgSrc: ["'self'", "data:", "https:"],
-        },
-    },
+    crossOriginResourcePolicy: { policy: "cross-origin" }
 }));
-
 app.use(cors({
-    origin: process.env.FRONTEND_URL || '*',
+    origin: function (origin, callback) {
+        if (!origin) return callback(null, true);
+        
+        const allowedOrigins = [
+            'http://localhost:3000',
+            'http://localhost:3001',
+            'http://192.168.1.100:3000', // di isi fleksibel sesuai ip lokal
+            process.env.FRONTEND_URL
+        ].filter(Boolean);
+
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+        
+        callback(new Error('Not allowed by CORS'));
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-requested-with'],
+    exposedHeaders: ['set-cookie']
 }));
-
-const limiter = rateLimit({
-    windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000, // 15 minutes
-    max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS) || 100, // limit each IP to 100 requests per windowMs
-    message: {
-        success: false,
-        message: 'Too many requests from this IP, please try again later.'
-    },
-    standardHeaders: true,
-    legacyHeaders: false,
-});
-
-app.use('/api', limiter);
-
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(compression());
 
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 } else {
-    app.use(morgan('combined', { stream: logger.stream }));
+    app.use(morgan('combined', {
+        stream: {
+            write: (message) => logger.info(message.trim())
+        }
+    }));
 }
 
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
-
-app.use(passport.initialize());
-
-app.get('/health', async (req, res) => {
-    try {
-        const prisma = require('./config/database');
-        await prisma.$queryRaw`SELECT 1`;
-
-        res.json({
-            success: true,
-            message: 'Server is healthy',
-            timestamp: new Date().toISOString(),
-            uptime: process.uptime(),
-            environment: process.env.NODE_ENV,
-            version: process.env.npm_package_version || '1.0.0'
-        });
-    } catch (error) {
-        logger.error('Health check failed:', error);
-        res.status(500).json({
-            success: false,
-            message: 'Health check failed',
-            timestamp: new Date().toISOString()
-        });
-    }
+const generalLimiter = rateLimit({
+    windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000, // 15 minutes
+    max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS) || 100,
+    message: {
+        success: false,
+        message: 'Too many requests from this IP, please try again later'
+    },
+    standardHeaders: true,
+    legacyHeaders: false,
 });
 
-const API_VERSION = process.env.API_VERSION || 'v1';
+app.use('/api/', generalLimiter);
+app.use(passport.initialize());
 
-app.use(`/api/${API_VERSION}/auth`, authRoutes);
-app.use(`/api/${API_VERSION}/users`, userRoutes);
+app.get('/health', (req, res) => {
+    res.json({
+        success: true,
+        message: 'Server is running',
+        timestamp: new Date().toISOString(),
+        environment: process.env.NODE_ENV,
+        version: '1.0.0'
+    });
+});
 
-app.get(`/api/${API_VERSION}`, (req, res) => {
+app.get('/api', (req, res) => {
     res.json({
         success: true,
         message: 'Kosan Management API',
-        version: API_VERSION,
-        documentation: {
-            auth: `${req.protocol}://${req.get('host')}/api/${API_VERSION}/auth`,
-            users: `${req.protocol}://${req.get('host')}/api/${API_VERSION}/users`,
+        version: 'v1',
+        endpoints: {
+            auth: '/api/v1/auth',
+            users: '/api/v1/users',
+            health: '/health'
         },
-        endpoints: [
-            'POST /auth/register - Register new user',
-            'POST /auth/login - Login user',
-            'GET /auth/google - Google OAuth',
-            'GET /auth/profile - Get user profile',
-            'POST /auth/change-password - Change password',
-            'GET /users - Get all users (Admin)',
-            'GET /users/profile - Get current user profile',
-            'PUT /users/profile - Update user profile',
-            'GET /users/search - Search users',
-        ]
+        documentation: '/api/v1/docs'
     });
 });
 
+app.use('/api/v1', routes);
+app.use('/uploads', express.static('uploads'));
 app.use(notFoundHandler);
-
 app.use(globalErrorHandler);
 
-const PORT = process.env.PORT || 3000;
-
 const server = app.listen(PORT, () => {
-    logger.info(`🚀 Server running on port ${PORT}`);
-    logger.info(`📖 API Documentation: http://localhost:${PORT}/api/${API_VERSION}`);
-    logger.info(`🏥 Health Check: http://localhost:${PORT}/health`);
-    logger.info(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
+    logger.info(`Server running on port ${PORT} in ${process.env.NODE_ENV} mode`);
+    console.log(`🚀 Server running on http://localhost:${PORT}`);
+    console.log(`🏥 Health check: http://localhost:${PORT}/health`);
+    console.log(`📚 API Info: http://localhost:${PORT}/api`);
 });
 
 const gracefulShutdown = (signal) => {
-    logger.info(`Received ${signal}. Starting graceful shutdown...`);
-
-    server.close(async () => {
-        logger.info('HTTP server closed');
-
-        try {
-            const prisma = require('./config/database');
-            await prisma.$disconnect();
-            logger.info('Database connection closed');
-
-            process.exit(0);
-        } catch (error) {
-            logger.error('Error during graceful shutdown:', error);
-            process.exit(1);
-        }
+    logger.info(`${signal} received. Shutting down gracefully...`);
+    server.close(() => {
+        logger.info('Server closed. Exiting process...');
+        process.exit(0);
     });
-
-    setTimeout(() => {
-        logger.error('Forcing shutdown due to timeout');
-        process.exit(1);
-    }, 10000);
 };
 
 process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
@@ -158,12 +115,14 @@ process.on('SIGINT', () => gracefulShutdown('SIGINT'));
 
 process.on('unhandledRejection', (err) => {
     logger.error('Unhandled Promise Rejection:', err);
-    gracefulShutdown('UNHANDLED_REJECTION');
+    server.close(() => {
+        process.exit(1);
+    });
 });
 
 process.on('uncaughtException', (err) => {
     logger.error('Uncaught Exception:', err);
-    gracefulShutdown('UNCAUGHT_EXCEPTION');
+    process.exit(1);
 });
 
 module.exports = app;

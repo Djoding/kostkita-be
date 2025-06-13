@@ -11,6 +11,10 @@ class AuthService {
     async register(userData) {
         const { email, username, password, full_name, role = 'PENGHUNI', phone, whatsapp_number } = userData;
 
+        if (!email || !username || !password || !full_name) {
+            throw new AppError('Email, username, password, and full name are required', 400);
+        }
+
         const existingUser = await prisma.users.findFirst({
             where: {
                 OR: [
@@ -29,20 +33,19 @@ class AuthService {
             }
         }
 
-        // hash password
         const hashedPassword = await bcrypt.hash(password, 12);
 
-        // create user
         const user = await prisma.users.create({
             data: {
                 email,
                 username,
                 password: hashedPassword,
                 full_name,
-                role,
+                role: role.toUpperCase(),
                 phone,
                 whatsapp_number,
-                is_approved: role === 'PENGHUNI' // Auto-approve regular users
+                is_approved: role === 'PENGHUNI',
+                email_verified: false
             },
             select: {
                 user_id: true,
@@ -51,11 +54,14 @@ class AuthService {
                 full_name: true,
                 role: true,
                 is_approved: true,
+                email_verified: true,
+                phone: true,
+                whatsapp_number: true,
+                avatar: true,
                 created_at: true
             }
         });
 
-        // generate tokens
         const tokens = jwtService.generateTokens({
             userId: user.user_id,
             email: user.email,
@@ -66,7 +72,7 @@ class AuthService {
 
         return {
             user,
-            ...tokens
+            tokens
         };
     }
 
@@ -74,6 +80,10 @@ class AuthService {
      * Login user
      */
     async login(email, password) {
+        if (!email || !password) {
+            throw new AppError('Email and password are required', 400);
+        }
+
         const user = await prisma.users.findUnique({
             where: { email },
             select: {
@@ -84,6 +94,9 @@ class AuthService {
                 full_name: true,
                 role: true,
                 is_approved: true,
+                email_verified: true,
+                phone: true,
+                whatsapp_number: true,
                 avatar: true
             }
         });
@@ -92,33 +105,33 @@ class AuthService {
             throw new AppError('Invalid email or password', 401);
         }
 
-        // check password
+        if (!user.is_approved && user.role !== 'PENGHUNI') {
+            throw new AppError('Account pending approval. Please contact administrator.', 403);
+        }
+
         const isValidPassword = await bcrypt.compare(password, user.password);
         if (!isValidPassword) {
             throw new AppError('Invalid email or password', 401);
         }
 
-        // update last login
         await prisma.users.update({
             where: { user_id: user.user_id },
             data: { last_login: new Date() }
         });
 
-        // generate tokens
         const tokens = jwtService.generateTokens({
             userId: user.user_id,
             email: user.email,
             role: user.role
         });
 
-        // remove password from response
         const { password: _, ...userWithoutPassword } = user;
 
         logger.info(`User logged in: ${email}`);
 
         return {
             user: userWithoutPassword,
-            ...tokens
+            tokens
         };
     }
 
@@ -127,11 +140,22 @@ class AuthService {
      */
     async googleAuth(profile) {
         let user = await prisma.users.findUnique({
-            where: { google_id: profile.id }
+            where: { google_id: profile.id },
+            select: {
+                user_id: true,
+                email: true,
+                username: true,
+                full_name: true,
+                role: true,
+                is_approved: true,
+                email_verified: true,
+                phone: true,
+                whatsapp_number: true,
+                avatar: true
+            }
         });
 
         if (user) {
-            // update last login
             user = await prisma.users.update({
                 where: { user_id: user.user_id },
                 data: {
@@ -145,17 +169,18 @@ class AuthService {
                     full_name: true,
                     role: true,
                     is_approved: true,
+                    email_verified: true,
+                    phone: true,
+                    whatsapp_number: true,
                     avatar: true
                 }
             });
         } else {
-            // check if user exists with same email
             const existingUser = await prisma.users.findUnique({
                 where: { email: profile.emails[0].value }
             });
 
             if (existingUser) {
-                // link Google account
                 user = await prisma.users.update({
                     where: { user_id: existingUser.user_id },
                     data: {
@@ -171,12 +196,16 @@ class AuthService {
                         full_name: true,
                         role: true,
                         is_approved: true,
+                        email_verified: true,
+                        phone: true,
+                        whatsapp_number: true,
                         avatar: true
                     }
                 });
             } else {
-                // create new user
-                const username = await this.generateUniqueUsername(profile.emails[0].value.split('@')[0]);
+                const username = await this.generateUniqueUsername(
+                    profile.emails[0].value.split('@')[0]
+                );
 
                 user = await prisma.users.create({
                     data: {
@@ -188,7 +217,8 @@ class AuthService {
                         avatar: profile.photos[0]?.value,
                         email_verified: true,
                         is_approved: true,
-                        last_login: new Date()
+                        last_login: new Date(),
+                        password: await bcrypt.hash(Math.random().toString(36), 12)
                     },
                     select: {
                         user_id: true,
@@ -197,6 +227,9 @@ class AuthService {
                         full_name: true,
                         role: true,
                         is_approved: true,
+                        email_verified: true,
+                        phone: true,
+                        whatsapp_number: true,
                         avatar: true
                     }
                 });
@@ -205,7 +238,6 @@ class AuthService {
             }
         }
 
-        // generate tokens
         const tokens = jwtService.generateTokens({
             userId: user.user_id,
             email: user.email,
@@ -214,8 +246,49 @@ class AuthService {
 
         return {
             user,
-            ...tokens
+            tokens
         };
+    }
+
+    /**
+     * Refresh access token
+     */
+    async refreshToken(refreshToken) {
+        if (!refreshToken) {
+            throw new AppError('Refresh token is required', 400);
+        }
+
+        const decoded = jwtService.verifyRefreshToken(refreshToken);
+
+        const user = await prisma.users.findUnique({
+            where: { user_id: decoded.userId },
+            select: {
+                user_id: true,
+                email: true,
+                role: true,
+                is_approved: true
+            }
+        });
+
+        if (!user || !user.is_approved) {
+            throw new AppError('User not found or not approved', 401);
+        }
+
+        const newTokens = jwtService.generateTokens({
+            userId: user.user_id,
+            email: user.email,
+            role: user.role
+        });
+
+        return newTokens;
+    }
+
+    /**
+     * Logout user
+     */
+    async logout(userId) {
+        logger.info(`User logged out: ${userId}`);
+        return true;
     }
 
     /**
@@ -231,7 +304,6 @@ class AuthService {
             throw new AppError('User not found', 404);
         }
 
-        // skip  password and checking for google users
         if (!user.google_id) {
             const isValidPassword = await bcrypt.compare(currentPassword, user.password);
             if (!isValidPassword) {
@@ -239,10 +311,8 @@ class AuthService {
             }
         }
 
-        // hash new password
         const hashedPassword = await bcrypt.hash(newPassword, 12);
 
-        // update password
         await prisma.users.update({
             where: { user_id: userId },
             data: { password: hashedPassword }
@@ -266,21 +336,60 @@ class AuthService {
         return username;
     }
 
-    /**
-     * Verify email token (placeholder for future implementation)
-     */
-    async verifyEmail(token) {
-        // email verification
-        throw new AppError('Email verification not implemented yet', 501);
-    }
+    // /**
+    //  * Get user by ID
+    //  */
+    // async getUserById(userId) {
+    //     const user = await prisma.users.findUnique({
+    //         where: { user_id: userId },
+    //         select: {
+    //             user_id: true,
+    //             email: true,
+    //             username: true,
+    //             full_name: true,
+    //             role: true,
+    //             is_approved: true,
+    //             email_verified: true,
+    //             phone: true,
+    //             whatsapp_number: true,
+    //             avatar: true,
+    //             created_at: true,
+    //             updated_at: true
+    //         }
+    //     });
 
-    /**
-     * Request password reset (placeholder for future implementation)
-     */
-    async requestPasswordReset(email) {
-        // password reset
-        throw new AppError('Password reset not implemented yet', 501);
-    }
+    //     if (!user) {
+    //         throw new AppError('User not found', 404);
+    //     }
+
+    //     return user;
+    // }
+
+    // /**
+    //  * Request password reset
+    //  */
+    // async requestPasswordReset(email) {
+    //     const user = await prisma.users.findUnique({
+    //         where: { email }
+    //     });
+
+    //     if (!user) {
+    //         return { message: 'If email exists, reset link has been sent' };
+    //     }
+
+    //     // email sending logic
+    //     logger.info(`Password reset requested for: ${email}`);
+
+    //     throw new AppError('Password reset functionality not implemented yet', 501);
+    // }
+
+    // /**
+    //  * Verify email token
+    //  */
+    // async verifyEmail(token) {
+    //     // email verification logic
+    //     throw new AppError('Email verification not implemented yet', 501);
+    // }
 }
 
 module.exports = new AuthService();

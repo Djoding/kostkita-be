@@ -1177,7 +1177,7 @@ async function main() {
         console.log(`   📋 Master Tipe Kamar: ${tipeKamar.length}`);
         console.log(`   📋 Master Peraturan: ${peraturan.length}`);
         console.log(`   📋 Master Layanan Laundry: ${layananLaundry.length}`);
-        console.log(`   🍽️  Catering: 2 with ${cateringMenus.length} menu items`);
+        console.log(`   🍽️ Catering: 2 with ${cateringMenus.length} menu items`);
         console.log(`   🧺 Laundry: 2 with pricing`);
         console.log(`   📝 Reservasi: ${Math.min(occupiedRooms.length, penghuni.length)}`);
         console.log(`   🍕 Pesanan Catering: ${pesananCatering.length}`);

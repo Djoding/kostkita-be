@@ -6,17 +6,27 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
+    "dev:debug": "nodemon --inspect src/server.js",
     "test": "jest",
     "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:push": "prisma db push",
     "db:seed": "node prisma/seed.js",
     "db:reset": "prisma migrate reset",
     "db:studio": "prisma studio",
+    "db:deploy": "prisma migrate deploy",
+    "setup": "chmod +x setup.sh && ./setup.sh",
     "build": "babel src -d dist",
     "lint": "eslint src/",
-    "lint:fix": "eslint src/ --fix"
+    "lint:fix": "eslint src/ --fix",
+    "logs": "tail -f logs/app.log",
+    "clean": "rm -rf dist/ node_modules/.cache",
+    "postinstall": "prisma generate"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   },
   "keywords": [
     "nodejs",
@@ -36,6 +46,7 @@
     "dotenv": "^16.5.0",
     "express": "^4.21.1",
     "express-rate-limit": "^7.4.1",
+    "express-session": "^1.18.1",
     "express-validator": "^7.2.1",
     "helmet": "^8.0.0",
     "joi": "^17.13.3",
