@@ -52,6 +52,57 @@ class AuthController {
         next();
     });
 
+    googleMobileAuth = asyncHandler(async (req, res) => {
+    const { idToken } = req.body;
+    
+    if (!idToken) {
+        return res.status(400).json({
+            success: false,
+            message: 'Google ID token is required'
+        });
+    }
+
+    const { OAuth2Client } = require('google-auth-library');
+    const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+    
+    try {
+        const ticket = await client.verifyIdToken({
+            idToken: idToken,
+            audience: process.env.GOOGLE_CLIENT_ID,
+        });
+        
+        const payload = ticket.getPayload();
+        
+        const profile = {
+            id: payload.sub,
+            emails: [{ value: payload.email }],
+            displayName: payload.name,
+            photos: [{ value: payload.picture }]
+        };
+        
+        const result = await authService.googleAuth(profile);
+        
+        res.json({
+            success: true,
+            message: 'Google authentication successful',
+            data: {
+                user: result.user,
+                accessToken: result.tokens.accessToken,
+                refreshToken: result.tokens.refreshToken,
+                tokenType: 'Bearer',
+                expiresIn: result.tokens.expiresIn
+            }
+        });
+        
+    } catch (error) {
+        logger.error('Google mobile auth error:', error);
+        res.status(400).json({
+            success: false,
+            message: 'Invalid Google ID token'
+        });
+    }
+});
+
     /**
      * Google OAuth callback
      */

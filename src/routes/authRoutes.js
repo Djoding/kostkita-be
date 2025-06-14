@@ -46,6 +46,11 @@ router.post('/login',
     authController.login
 );
 
+router.post('/google/mobile',
+    sanitizeInput,
+    authController.googleMobileAuth
+);
+
 router.post('/refresh-token',
     authLimitGeneral,
     refreshToken
