@@ -19,8 +19,9 @@ model MasterFasilitas {
   created_at     DateTime          @default(now())
   updated_at     DateTime          @updatedAt
 
-  kost_fasilitas  KostFasilitas[]
-  kamar_fasilitas KamarFasilitas[]
+  kost_fasilitas KostFasilitas[]
+  // Relasi kamar_fasilitas dihapus karena model Kamar tidak ada lagi
+  // kamar_fasilitas KamarFasilitas[] // <-- DIHAPUS
 
   @@map("master_fasilitas")
 }
@@ -35,7 +36,11 @@ model MasterTipeKamar {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  kamar Kamar[]
+  // Relasi kamar dihapus karena model Kamar tidak ada lagi
+  // kamar Kamar[] // <-- DIHAPUS
+
+  // Tambahkan relasi ke model Kost yang baru akan memiliki tipe kamar
+  kost Kost[] @relation("KostTipeKamar") // Relasi baru dari MasterTipeKamar ke Kost
 
   @@map("master_tipe_kamar")
 }
@@ -50,7 +55,8 @@ model MasterPeraturan {
   updated_at     DateTime          @updatedAt
 
   kost_peraturan  KostPeraturan[]
-  kamar_peraturan KamarPeraturan[]
+  // Relasi kamar_peraturan dihapus karena model Kamar tidak ada lagi
+  // kamar_peraturan KamarPeraturan[] // <-- DIHAPUS
 
   @@map("master_peraturan")
 }
@@ -87,7 +93,7 @@ model Users {
   updated_at      DateTime  @updatedAt
 
   kost_managed                 Kost[]               @relation("PengelolaKost")
-  reservasi                    Reservasi[]
+  reservasi                    Reservasi[] // Tetap ada, relasi akan ke Kost nanti
   pesanan_catering             PesananCatering[]
   pesanan_laundry              PesananLaundry[]
   validated_reservasi          Reservasi[]          @relation("ValidatedBy")
@@ -104,7 +110,7 @@ model Kost {
   alamat                  String   @db.Text
   gmaps_link              String?  @db.Text
   deskripsi               String?  @db.Text
-  total_kamar             Int
+  total_kamar             Int      // Menunjukkan total unit kamar dari tipe yang sama
   daya_listrik            String?  @db.VarChar(50)
   sumber_air              String?  @db.VarChar(100)
   wifi_speed              String?  @db.VarChar(100)
@@ -113,44 +119,36 @@ model Kost {
   kapasitas_parkir_sepeda Int      @default(0)
   biaya_tambahan          Decimal? @db.Decimal(10, 2)
   jam_survey              String?  @db.VarChar(50)
-  foto_kost               Json?    @default("[]")
+  foto_kost               Json?    @default("[]") // FOTO KOS DIGUNAKAN UNTUK MEWAKILI FOTO KAMAR JUGA
   qris_image              String?  @db.Text
   rekening_info           Json?
   is_approved             Boolean  @default(false)
   created_at              DateTime @default(now())
   updated_at              DateTime @updatedAt
 
+  // ATRIBUT DARI MODEL KAMAR YANG DIPINDAHKAN KE SINI:
+  tipe_id       String      @db.Uuid // Mengacu ke tipe kamar utama/tunggal untuk kos ini
+  harga_bulanan Decimal     @db.Decimal(10, 2)
+  deposit       Decimal     @db.Decimal(10, 2)
+  // status KamarStatus @default(TERSEDIA) // <-- PERTIMBANGAN: status kamar bisa jadi per unit. Jika ini di Kost, berarti semua kamar punya status sama. Lebih baik ini dihapus atau dihandle secara logis di aplikasi jika kos masih punya kamar 'terisi' dan 'kosong'
+  
   pengelola      Users           @relation("PengelolaKost", fields: [pengelola_id], references: [user_id], onDelete: Cascade)
-  kamar          Kamar[]
+  tipe           MasterTipeKamar @relation("KostTipeKamar", fields: [tipe_id], references: [tipe_id]) // Relasi baru ke MasterTipeKamar
+
+  // Relasi kamar dihapus, reservasi akan langsung ke Kost
+  // kamar          Kamar[] // <-- DIHAPUS
+
   catering       Catering[]
   laundry        Laundry[]
   kost_fasilitas KostFasilitas[]
   kost_peraturan KostPeraturan[]
 
+  reservasi      Reservasi[] // Relasi baru: Reservasi akan langsung ke Kost ini
+
   @@map("kost")
 }
 
-model Kamar {
-  kamar_id      String      @id @default(uuid()) @db.Uuid
-  kost_id       String      @db.Uuid
-  tipe_id       String      @db.Uuid
-  nomor_kamar   String      @db.VarChar(20)
-  harga_bulanan Decimal     @db.Decimal(10, 2)
-  deposit       Decimal     @db.Decimal(10, 2)
-  foto_kamar    Json?       @default("[]")
-  status        KamarStatus @default(TERSEDIA)
-  created_at    DateTime    @default(now())
-  updated_at    DateTime    @updatedAt
-
-  kost            Kost             @relation(fields: [kost_id], references: [kost_id], onDelete: Cascade)
-  tipe            MasterTipeKamar  @relation(fields: [tipe_id], references: [tipe_id])
-  reservasi       Reservasi[]
-  kamar_fasilitas KamarFasilitas[]
-  kamar_peraturan KamarPeraturan[]
-
-  @@unique([kost_id, nomor_kamar])
-  @@map("kamar")
-}
+// Model Kamar DIHAPUS SEPENUHNYA
 
 model KostFasilitas {
   kost_id      String @db.Uuid
@@ -163,16 +161,17 @@ model KostFasilitas {
   @@map("kost_fasilitas")
 }
 
-model KamarFasilitas {
-  kamar_id     String @db.Uuid
-  fasilitas_id String @db.Uuid
+// Model KamarFasilitas DIHAPUS SEPENUHNYA
+// model KamarFasilitas {
+//   kamar_id     String @db.Uuid
+//   fasilitas_id String @db.Uuid
 
-  kamar     Kamar           @relation(fields: [kamar_id], references: [kamar_id], onDelete: Cascade)
-  fasilitas MasterFasilitas @relation(fields: [fasilitas_id], references: [fasilitas_id], onDelete: Cascade)
+//   kamar     Kamar           @relation(fields: [kamar_id], references: [kamar_id], onDelete: Cascade)
+//   fasilitas MasterFasilitas @relation(fields: [fasilitas_id], references: [fasilitas_id], onDelete: Cascade)
 
-  @@id([kamar_id, fasilitas_id])
-  @@map("kamar_fasilitas")
-}
+//   @@id([kamar_id, fasilitas_id])
+//   @@map("kamar_fasilitas")
+// }
 
 model KostPeraturan {
   kost_id             String  @db.Uuid
@@ -186,22 +185,23 @@ model KostPeraturan {
   @@map("kost_peraturan")
 }
 
-model KamarPeraturan {
-  kamar_id            String  @db.Uuid
-  peraturan_id        String  @db.Uuid
-  keterangan_tambahan String? @db.Text
+// Model KamarPeraturan DIHAPUS SEPENUHNYA
+// model KamarPeraturan {
+//   kamar_id            String  @db.Uuid
+//   peraturan_id        String  @db.Uuid
+//   keterangan_tambahan String? @db.Text
 
-  kamar     Kamar           @relation(fields: [kamar_id], references: [kamar_id], onDelete: Cascade)
-  peraturan MasterPeraturan @relation(fields: [peraturan_id], references: [peraturan_id], onDelete: Cascade)
+//   kamar     Kamar           @relation(fields: [kamar_id], references: [kamar_id], onDelete: Cascade)
+//   peraturan MasterPeraturan @relation(fields: [peraturan_id], references: [peraturan_id], onDelete: Cascade)
 
-  @@id([kamar_id, peraturan_id])
-  @@map("kamar_peraturan")
-}
+//   @@id([kamar_id, peraturan_id])
+//   @@map("kamar_peraturan")
+// }
 
 model Reservasi {
   reservasi_id     String          @id @default(uuid()) @db.Uuid
   user_id          String          @db.Uuid
-  kamar_id         String          @db.Uuid
+  kost_id          String          @db.Uuid // <-- DIUBAH: Dulu kamar_id, sekarang kost_id
   tanggal_check_in DateTime        @db.Date
   durasi_bulan     Int
   total_harga      Decimal         @db.Decimal(12, 2)
@@ -216,7 +216,7 @@ model Reservasi {
   updated_at       DateTime        @updatedAt
 
   user      Users     @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
-  kamar     Kamar     @relation(fields: [kamar_id], references: [kamar_id], onDelete: Cascade)
+  kost      Kost      @relation(fields: [kost_id], references: [kost_id], onDelete: Cascade) // <-- DIUBAH relasi
   validator Users?    @relation("ValidatedBy", fields: [validated_by], references: [user_id])
   penghuni  Penghuni?
 
@@ -237,6 +237,9 @@ model Penghuni {
 
   @@map("penghuni")
 }
+
+// Model Catering, CateringMenu, PesananCatering, PembayaranCatering, Laundry, LaundryHarga, PesananLaundry, PembayaranLaundry, Enums tetap sama
+// ... (Model-model di bawah ini tidak berubah) ...
 
 model Catering {
   catering_id     String   @id @default(uuid()) @db.Uuid
@@ -266,7 +269,7 @@ model CateringMenu {
   foto_menu    String?          @db.Text
   is_available Boolean          @default(true)
   created_at   DateTime         @default(now())
-  updated_at   DateTime         @updatedAt
+  updated_at   DateTime @updatedAt
 
   catering Catering          @relation(fields: [catering_id], references: [catering_id], onDelete: Cascade)
   pesanan  PesananCatering[]
@@ -303,7 +306,7 @@ model PembayaranCatering {
   verified_at   DateTime?
   catatan       String?          @db.Text
   created_at    DateTime         @default(now())
-  updated_at    DateTime         @updatedAt
+  updated_at    DateTime @updatedAt
 
   pesanan  PesananCatering @relation(fields: [pesanan_id], references: [pesanan_id], onDelete: Cascade)
   verifier Users?          @relation("VerifiedBy", fields: [verified_by], references: [user_id])
@@ -350,7 +353,7 @@ model PesananLaundry {
   pesanan_id       String               @id @default(uuid()) @db.Uuid
   user_id          String               @db.Uuid
   laundry_id       String               @db.Uuid
-  detail_layanan   Json 
+  detail_layanan   Json
   total_estimasi   Decimal              @db.Decimal(8, 2)
   total_final      Decimal?             @db.Decimal(8, 2)
   berat_actual     Decimal?             @db.Decimal(5, 2)
@@ -359,7 +362,7 @@ model PesananLaundry {
   status           PesananLaundryStatus @default(ORDER)
   catatan          String?              @db.Text
   created_at       DateTime             @default(now())
-  updated_at       DateTime             @updatedAt
+  updated_at       DateTime @updatedAt
 
   user       Users              @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
   laundry    Laundry            @relation(fields: [laundry_id], references: [laundry_id], onDelete: Cascade)
@@ -379,7 +382,7 @@ model PembayaranLaundry {
   verified_at   DateTime?
   catatan       String?          @db.Text
   created_at    DateTime         @default(now())
-  updated_at    DateTime         @updatedAt
+  updated_at    DateTime @updatedAt
 
   pesanan  PesananLaundry @relation(fields: [pesanan_id], references: [pesanan_id], onDelete: Cascade)
   verifier Users?         @relation("VerifiedBy", fields: [verified_by], references: [user_id])
