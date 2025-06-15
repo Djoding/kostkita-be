@@ -66,8 +66,10 @@ class AuthController {
         const { OAuth2Client } = require('google-auth-library');
 
         const clientIds = [
+            '493320600420-86og9e4gofabhq4lrsoscgnt9s0de946.apps.googleusercontent.com',
+
             process.env.GOOGLE_CLIENT_ID,
-            process.env.REVERSED_CLIENT_ID,
+
             '407408718192.apps.googleusercontent.com',
         ].filter(Boolean);
 
@@ -75,9 +77,12 @@ class AuthController {
         let verified = false;
         let lastError;
 
+        console.log('🔍 Received ID token from Flutter...');
+        console.log('📱 Platform:', platform);
+
         for (const clientId of clientIds) {
             try {
-                console.log(`Trying to verify with client ID: ${clientId}`);
+                console.log(`🔑 Trying to verify with client ID: ${clientId}`);
                 const client = new OAuth2Client(clientId);
                 const ticket = await client.verifyIdToken({
                     idToken: idToken,
@@ -85,8 +90,8 @@ class AuthController {
                 });
 
                 const payload = ticket.getPayload();
-                console.log(`Verification successful with: ${clientId}`);
-                console.log(`User: ${payload.name} (${payload.email})`);
+                console.log(`✅ Verification successful with: ${clientId}`);
+                console.log(`👤 User: ${payload.name} (${payload.email})`);
 
                 profile = {
                     id: payload.sub,
@@ -99,19 +104,22 @@ class AuthController {
                 break;
             } catch (error) {
                 lastError = error;
-                console.log(`Failed with client ID ${clientId}: ${error.message}`);
+                console.log(`❌ Failed with client ID ${clientId}: ${error.message}`);
                 continue;
             }
         }
 
         if (!verified) {
-            console.error('All client ID verifications failed:', lastError?.message);
+            console.error('🚫 All client ID verifications failed');
+            console.error('Last error:', lastError?.message);
+
             return res.status(400).json({
                 success: false,
                 message: 'Invalid Google ID token',
                 debug: process.env.NODE_ENV === 'development' ? {
                     error: lastError?.message,
-                    triedClientIds: clientIds.length
+                    triedClientIds: clientIds,
+                    receivedPlatform: platform
                 } : undefined
             });
         }
@@ -119,7 +127,7 @@ class AuthController {
         try {
             const result = await authService.googleAuth(profile);
 
-            console.log(`Google auth successful for: ${profile.emails[0].value}`);
+            console.log(`🎉 Google auth successful for: ${profile.emails[0].value}`);
 
             res.json({
                 success: true,

@@ -218,24 +218,8 @@ model Reservasi {
   user      Users     @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
   kamar     Kamar     @relation(fields: [kamar_id], references: [kamar_id], onDelete: Cascade)
   validator Users?    @relation("ValidatedBy", fields: [validated_by], references: [user_id])
-  penghuni  Penghuni?
 
   @@map("reservasi")
-}
-
-model Penghuni {
-  penghuni_id    String         @id @default(uuid()) @db.Uuid
-  reservasi_id   String         @unique @db.Uuid
-  tanggal_masuk  DateTime       @db.Date
-  tanggal_keluar DateTime?      @db.Date
-  deposit        Decimal        @db.Decimal(10, 2)
-  status         PenghuniStatus @default(AKTIF)
-  created_at     DateTime       @default(now())
-  updated_at     DateTime       @updatedAt
-
-  reservasi Reservasi @relation(fields: [reservasi_id], references: [reservasi_id], onDelete: Cascade)
-
-  @@map("penghuni")
 }
 
 model Catering {

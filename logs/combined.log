@@ -3507,3 +3507,51 @@
   service: 'kosan-api',
   timestamp: '2025-06-15 10:41:05'
 }
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-15 23:45:01'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-15 23:45:01'
+}
+{
+  message: 'Google auth attempt for email: dervaag1122@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-15 23:48:13'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-15 23:48:28'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-15 23:48:32'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-15 23:48:32'
+}
+{
+  message: 'Google auth attempt for email: dervaag1122@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-15 23:48:34'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-16 01:12:24'
+}
