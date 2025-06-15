@@ -70,7 +70,7 @@ async function main() {
         },
       }),
 
-      // Fasilitas Kamar (meskipun tidak ada model kamar, ini bisa diasumsikan fasilitas standar di setiap unit kos)
+      // Fasilitas Kamar (diasumsikan fasilitas standar di setiap unit kos)
       prisma.masterFasilitas.create({
         data: {
           nama_fasilitas: "AC",
@@ -395,13 +395,13 @@ async function main() {
     const kost1 = await prisma.kost.create({
       data: {
         pengelola_id: pengelola1.user_id,
-        nama_kost: "Kost Merdeka Raya (Tipe Standard)", // Nama mencerminkan tipe kamar seragam
+        nama_kost: "Kost Merdeka Raya (Tipe Standard)",
         alamat:
           "Jl. Merdeka Raya No. 123, Menteng, Jakarta Pusat, DKI Jakarta 10310",
         gmaps_link: "https://goo.gl/maps/example1",
         deskripsi:
           "Kost nyaman dan strategis di pusat kota Jakarta. Semua kamar bertipe Standard dengan fasilitas standar dan keamanan 24 jam.",
-        total_kamar: 20, // Total unit kamar yang tersedia dari tipe ini
+        total_kamar: 20,
         daya_listrik: "1300 VA",
         sumber_air: "PDAM",
         wifi_speed: "Indihome 50 Mbps",
@@ -411,10 +411,9 @@ async function main() {
         biaya_tambahan: 50000,
         jam_survey: "08:00 - 21:00 WIB",
         foto_kost: [
-          // Ini akan jadi foto yang mewakili kamar juga
-          "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800", // Contoh foto kamar standar
-          "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800", // Contoh foto area umum
-          "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800", // Contoh foto kamar mandi
+          "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800",
+          "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800",
+          "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800",
         ],
         qris_image:
           "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400",
@@ -427,20 +426,20 @@ async function main() {
         tipe_id: tipeKamar[0].tipe_id, // Menggunakan tipe 'Standard'
         harga_bulanan: 1500000,
         deposit: 1500000,
-        // 'status' KamarStatus dihapus karena tidak lagi di level Kost
+        harga_final: 1550000, // Contoh: harga_bulanan + biaya_tambahan
       },
     });
 
     const kost2 = await prisma.kost.create({
       data: {
         pengelola_id: pengelola2.user_id,
-        nama_kost: "Kost Sudirman Residence (Tipe Premium)", // Nama mencerminkan tipe kamar seragam
+        nama_kost: "Kost Sudirman Residence (Tipe Premium)",
         alamat:
           "Jl. Sudirman No. 456, Setiabudi, Jakarta Selatan, DKI Jakarta 12920",
         gmaps_link: "https://goo.gl/maps/example2",
         deskripsi:
           "Kost eksklusif dengan pemandangan kota Jakarta. Semua kamar bertipe Premium dengan fasilitas premium dan pelayanan seperti hotel.",
-        total_kamar: 30, // Total unit kamar yang tersedia dari tipe ini
+        total_kamar: 30,
         daya_listrik: "2200 VA",
         sumber_air: "PDAM + Filter",
         wifi_speed: "Fiber Optic 100 Mbps",
@@ -450,10 +449,9 @@ async function main() {
         biaya_tambahan: 75000,
         jam_survey: "07:00 - 22:00 WIB",
         foto_kost: [
-          // Ini akan jadi foto yang mewakili kamar juga
-          "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800", // Contoh foto kamar premium
-          "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800", // Contoh foto area umum
-          "https://images.unsplash.com/photo-1574362848149-11496d93a7c7?w=800", // Contoh foto kamar mandi premium
+          "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800",
+          "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800",
+          "https://images.unsplash.com/photo-1574362848149-11496d93a7c7?w=800",
         ],
         qris_image:
           "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400",
@@ -466,6 +464,7 @@ async function main() {
         tipe_id: tipeKamar[1].tipe_id, // Menggunakan tipe 'Premium'
         harga_bulanan: 3000000,
         deposit: 3000000,
+        harga_final: 3075000, // Contoh: harga_bulanan + biaya_tambahan
       },
     });
 
@@ -475,7 +474,6 @@ async function main() {
     console.log("📝 Adding Fasilitas to Kost...");
 
     // Kost 1 Fasilitas (Termasuk fasilitas "kamar" yang kini diasumsikan ada di semua unit)
-    // Kita gunakan fasilitas umum, parkir, dan fasilitas 'KAMAR' yang standar untuk Kost1 (Tipe Standard)
     const kost1FasilitasIds = [
       fasilitas[0].fasilitas_id, // WiFi (UMUM)
       fasilitas[1].fasilitas_id, // CCTV (UMUM)
@@ -499,7 +497,6 @@ async function main() {
     );
 
     // Kost 2 Fasilitas (Termasuk fasilitas "kamar" yang kini diasumsikan ada di semua unit)
-    // Kita gunakan fasilitas umum, parkir, dan fasilitas 'KAMAR' yang premium untuk Kost2 (Tipe Premium)
     const kost2FasilitasIds = [
       fasilitas[0].fasilitas_id, // WiFi (UMUM)
       fasilitas[1].fasilitas_id, // CCTV (UMUM)
@@ -587,23 +584,19 @@ async function main() {
 
     console.log("✅ Added peraturan to kost");
 
-    // --- Reservasi and Penghuni Creation (Now linked directly to Kost) ---
-    console.log("📝 Creating Reservasi and Penghuni...");
+    // --- Reservasi Creation (Now linked directly to Kost and includes penghuni details) ---
+    console.log("📝 Creating Reservasi...");
 
     const penghuniUsers = [penghuni1, penghuni2, penghuni3];
     const kostsForReservation = [kost1, kost2];
 
-    // Create a few reservations for demonstration
-    // Note: With no individual Kamar, total_kamar in Kost represents total units.
-    // We'll just create a few reservations against the Kost directly.
-
-    // Reservasi 1 for Kost 1
+    // Reservasi 1 for Kost 1 (ACTIVE Penghuni)
     const checkInDate1 = new Date();
-    checkInDate1.setMonth(checkInDate1.getMonth() - 2);
+    checkInDate1.setMonth(checkInDate1.getMonth() - 2); // 2 months ago
     const reservasi1 = await prisma.reservasi.create({
       data: {
         user_id: penghuniUsers[0].user_id,
-        kost_id: kostsForReservation[0].kost_id, // Directly link to Kost
+        kost_id: kostsForReservation[0].kost_id,
         tanggal_check_in: checkInDate1,
         durasi_bulan: 12,
         total_harga: kostsForReservation[0].harga_bulanan * 12,
@@ -613,24 +606,19 @@ async function main() {
         metode_bayar: "TRANSFER",
         validated_by: adminUser.user_id,
         validated_at: checkInDate1,
-      },
-    });
-    await prisma.penghuni.create({
-      data: {
-        reservasi_id: reservasi1.reservasi_id,
-        tanggal_masuk: reservasi1.tanggal_check_in,
-        deposit: kostsForReservation[0].deposit,
-        status: "AKTIF",
+        tanggal_masuk: checkInDate1, // Tanggal masuk sama dengan check-in karena sudah APPROVED & AKTIF
+        deposit_amount: kostsForReservation[0].deposit,
+        status_penghunian: "AKTIF",
       },
     });
 
-    // Reservasi 2 for Kost 1
+    // Reservasi 2 for Kost 1 (ACTIVE Penghuni)
     const checkInDate2 = new Date();
-    checkInDate2.setMonth(checkInDate2.getMonth() - 1);
+    checkInDate2.setMonth(checkInDate2.getMonth() - 1); // 1 month ago
     const reservasi2 = await prisma.reservasi.create({
       data: {
         user_id: penghuniUsers[1].user_id,
-        kost_id: kostsForReservation[0].kost_id, // Directly link to Kost
+        kost_id: kostsForReservation[0].kost_id,
         tanggal_check_in: checkInDate2,
         durasi_bulan: 6,
         total_harga: kostsForReservation[0].harga_bulanan * 6,
@@ -640,34 +628,30 @@ async function main() {
         metode_bayar: "QRIS",
         validated_by: adminUser.user_id,
         validated_at: checkInDate2,
-      },
-    });
-    await prisma.penghuni.create({
-      data: {
-        reservasi_id: reservasi2.reservasi_id,
-        tanggal_masuk: reservasi2.tanggal_check_in,
-        deposit: kostsForReservation[0].deposit,
-        status: "AKTIF",
+        tanggal_masuk: checkInDate2,
+        deposit_amount: kostsForReservation[0].deposit,
+        status_penghunian: "AKTIF",
       },
     });
 
-    // Reservasi 3 for Kost 2
-    const checkInDate3 = new Date();
+    // Reservasi 3 for Kost 2 (PENDING Validation)
+    const checkInDate3 = new Date(); // Today
     const reservasi3 = await prisma.reservasi.create({
       data: {
         user_id: penghuniUsers[2].user_id,
-        kost_id: kostsForReservation[1].kost_id, // Directly link to Kost
+        kost_id: kostsForReservation[1].kost_id,
         tanggal_check_in: checkInDate3,
         durasi_bulan: 3,
         total_harga: kostsForReservation[1].harga_bulanan * 3,
         bukti_bayar:
           "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400",
-        status: "WAITING_VALIDATION", // Example status
+        status: "PENDING", // Initial status for a new reservation pending payment/validation
         metode_bayar: "TRANSFER",
+        // deposit_amount, tanggal_masuk, tanggal_keluar, status_penghunian are null for PENDING status
       },
     });
 
-    console.log(`✅ Created 3 reservasi and 2 penghuni`);
+    console.log(`✅ Created 3 reservasi`);
 
     // --- Catering Services ---
     console.log("📝 Creating Catering...");
@@ -844,7 +828,7 @@ async function main() {
           menu_id: catering1Menus[0].menu_id,
           jumlah_porsi: 2,
           total_harga: catering1Menus[0].harga * 2,
-          status: "COMPLETED",
+          status: "DITERIMA", // Changed from COMPLETED
           catatan: "Pedas sedang",
         },
       }),
@@ -854,7 +838,7 @@ async function main() {
           menu_id: catering2Menus[0].menu_id,
           jumlah_porsi: 1,
           total_harga: catering2Menus[0].harga,
-          status: "CONFIRMED",
+          status: "PROSES", // Changed from CONFIRMED
           catatan: "Tanpa mayonnaise",
         },
       }),
@@ -868,7 +852,7 @@ async function main() {
           metode: "QRIS",
           bukti_bayar:
             "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400",
-          status: "VERIFIED",
+          status: "VERIFIED", // Changed from VERIFIED
           verified_by: adminUser.user_id,
           verified_at: new Date(),
         },
@@ -1047,7 +1031,7 @@ async function main() {
           berat_actual: null,
           tanggal_antar: new Date(),
           estimasi_selesai: dayAfterTomorrow,
-          status: "DITERIMA",
+          status: "DITERIMA", // Changed from DITERIMA
           catatan: "Jas kantor dan dress",
         },
       }),
@@ -1061,7 +1045,7 @@ async function main() {
           metode: "TRANSFER",
           bukti_bayar:
             "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400",
-          status: pesanan.status === "PROSES" ? "VERIFIED" : "PENDING",
+          status: pesanan.status === "PROSES" ? "VERIFIED" : "PENDING", // Changed from VERIFIED
           verified_by: pesanan.status === "PROSES" ? adminUser.user_id : null,
           verified_at: pesanan.status === "PROSES" ? new Date() : null,
         },
@@ -1076,18 +1060,13 @@ async function main() {
     console.log("\n📊 Summary:");
     console.log(`   👥 Users: 6 (1 Admin, 2 Pengelola, 3 Penghuni)`);
     console.log(`   🏠 Kost: 2`);
-    console.log(
-      `   🚪 Total Kamar Estimasi: ${
-        kost1.total_kamar + kost2.total_kamar
-      } (berdasarkan total_kamar di setiap Kost)`
-    );
+    console.log(`   📝 Reservasi: 3`);
     console.log(`   📋 Master Fasilitas: ${fasilitas.length}`);
     console.log(`   📋 Master Tipe Kamar: ${tipeKamar.length}`);
     console.log(`   📋 Master Peraturan: ${peraturan.length}`);
     console.log(`   📋 Master Layanan Laundry: ${layananLaundry.length}`);
     console.log(`   🍽️ Catering: 2 with ${cateringMenus.length} menu items`);
     console.log(`   🧺 Laundry: 2 with pricing`);
-    console.log(`   📝 Reservasi: 3`); // Updated based on hardcoded 3 reservations
     console.log(`   🍕 Pesanan Catering: ${pesananCatering.length}`);
     console.log(`   👔 Pesanan Laundry: ${pesananLaundry.length}`);
 

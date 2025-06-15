@@ -167,7 +167,7 @@ model Reservasi {
   durasi_bulan     Int
   total_harga      Decimal         @db.Decimal(12, 2)
   bukti_bayar      String?         @db.Text
-  status           ReservasiStatus @default(PENDING_PAYMENT) // Status siklus reservasi
+  status           ReservasiStatus @default(PENDING) // Status siklus reservasi
   metode_bayar     MetodeBayar?
   catatan          String?         @db.Text
   rejection_reason String?         @db.Text
@@ -305,7 +305,7 @@ model PesananLaundry {
   berat_actual     Decimal?             @db.Decimal(5, 2)
   tanggal_antar    DateTime?
   estimasi_selesai DateTime?
-  status           PesananLaundryStatus @default(ORDER)
+  status           PesananLaundryStatus @default(PENDING)
   catatan          String?              @db.Text
   created_at       DateTime             @default(now())
   updated_at       DateTime @updatedAt
@@ -340,7 +340,6 @@ enum UserRole {
   ADMIN
   PENGELOLA
   PENGHUNI
-  TAMU
 }
 
 enum FasilitasKategori {
@@ -355,18 +354,10 @@ enum PeraturanKategori {
   KOST_UMUM
 }
 
-enum KamarStatus {
-  TERSEDIA
-  TERISI
-  MAINTENANCE
-}
-
 enum ReservasiStatus {
-  PENDING_PAYMENT
-  WAITING_VALIDATION
+  PENDING
   APPROVED
   REJECTED
-  EXPIRED
 }
 
 enum PenghuniStatus {
@@ -382,29 +373,23 @@ enum CateringKategori {
 
 enum PesananCateringStatus {
   PENDING
-  CONFIRMED
-  READY
-  COMPLETED
-  CANCELLED
+  PROSES
+  DITERIMA
 }
 
 enum PesananLaundryStatus {
-  ORDER
-  DITERIMA
+  PENDING
   PROSES
-  SELESAI
-  DIAMBIL
+  DITERIMA
 }
 
 enum MetodeBayar {
   QRIS
   TRANSFER
-  CASH
 }
 
 enum StatusPembayaran {
   PENDING
-  UPLOADED
   VERIFIED
-  FAILED
+  REJECTED
 }
