@@ -183,10 +183,6 @@ model Reservasi {
   kost      Kost      @relation(fields: [kost_id], references: [kost_id], onDelete: Cascade)
   validator Users?    @relation("ValidatedBy", fields: [validated_by], references: [user_id])
 
-
-  @@map("reservasi")
-}
-
 model Catering {
   catering_id     String   @id @default(uuid()) @db.Uuid
   kost_id         String   @db.Uuid
