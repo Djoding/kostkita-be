@@ -2,6 +2,7 @@ const authService = require('../services/authService');
 const { asyncHandler } = require('../middleware/errorHandler');
 const prisma = require('../config/database');
 const logger = require('../config/logger');
+const fileService = require('../services/fileService');
 
 class AuthController {
     /**
@@ -53,55 +54,94 @@ class AuthController {
     });
 
     googleMobileAuth = asyncHandler(async (req, res) => {
-    const { idToken } = req.body;
-    
-    if (!idToken) {
-        return res.status(400).json({
-            success: false,
-            message: 'Google ID token is required'
-        });
-    }
+        const { idToken, platform } = req.body;
 
-    const { OAuth2Client } = require('google-auth-library');
-    const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
-    
-    try {
-        const ticket = await client.verifyIdToken({
-            idToken: idToken,
-            audience: process.env.GOOGLE_CLIENT_ID,
-        });
-        
-        const payload = ticket.getPayload();
-        
-        const profile = {
-            id: payload.sub,
-            emails: [{ value: payload.email }],
-            displayName: payload.name,
-            photos: [{ value: payload.picture }]
-        };
-        
-        const result = await authService.googleAuth(profile);
-        
-        res.json({
-            success: true,
-            message: 'Google authentication successful',
-            data: {
-                user: result.user,
-                accessToken: result.tokens.accessToken,
-                refreshToken: result.tokens.refreshToken,
-                tokenType: 'Bearer',
-                expiresIn: result.tokens.expiresIn
+        if (!idToken) {
+            return res.status(400).json({
+                success: false,
+                message: 'Google ID token is required'
+            });
+        }
+
+        const { OAuth2Client } = require('google-auth-library');
+
+        const clientIds = [
+            process.env.GOOGLE_CLIENT_ID,
+            process.env.REVERSED_CLIENT_ID,
+            '407408718192.apps.googleusercontent.com',
+        ].filter(Boolean);
+
+        let profile;
+        let verified = false;
+        let lastError;
+
+        for (const clientId of clientIds) {
+            try {
+                console.log(`Trying to verify with client ID: ${clientId}`);
+                const client = new OAuth2Client(clientId);
+                const ticket = await client.verifyIdToken({
+                    idToken: idToken,
+                    audience: clientId,
+                });
+
+                const payload = ticket.getPayload();
+                console.log(`Verification successful with: ${clientId}`);
+                console.log(`User: ${payload.name} (${payload.email})`);
+
+                profile = {
+                    id: payload.sub,
+                    emails: [{ value: payload.email }],
+                    displayName: payload.name,
+                    photos: [{ value: payload.picture }]
+                };
+
+                verified = true;
+                break;
+            } catch (error) {
+                lastError = error;
+                console.log(`Failed with client ID ${clientId}: ${error.message}`);
+                continue;
             }
-        });
-        
-    } catch (error) {
-        logger.error('Google mobile auth error:', error);
-        res.status(400).json({
-            success: false,
-            message: 'Invalid Google ID token'
-        });
-    }
-});
+        }
+
+        if (!verified) {
+            console.error('All client ID verifications failed:', lastError?.message);
+            return res.status(400).json({
+                success: false,
+                message: 'Invalid Google ID token',
+                debug: process.env.NODE_ENV === 'development' ? {
+                    error: lastError?.message,
+                    triedClientIds: clientIds.length
+                } : undefined
+            });
+        }
+
+        try {
+            const result = await authService.googleAuth(profile);
+
+            console.log(`Google auth successful for: ${profile.emails[0].value}`);
+
+            res.json({
+                success: true,
+                message: 'Google authentication successful',
+                data: {
+                    user: result.user,
+                    accessToken: result.tokens.accessToken,
+                    refreshToken: result.tokens.refreshToken,
+                    tokenType: 'Bearer',
+                    expiresIn: result.tokens.expiresIn
+                }
+            });
+
+        } catch (error) {
+            logger.error('Google mobile auth error:', error);
+            res.status(500).json({
+                success: false,
+                message: 'Authentication failed',
+                error: process.env.NODE_ENV === 'development' ? error.message : undefined
+            });
+        }
+    });
 
     /**
      * Google OAuth callback
@@ -232,52 +272,112 @@ class AuthController {
     });
 
     /**
-     * Update user profile
-     */
+    * Update user profile
+    */
     updateProfile = asyncHandler(async (req, res) => {
         const userId = req.user.user_id;
-        const updateData = req.body;
+        let updateData = {};
+        let avatarUrl = null;
 
-        const allowedFields = ['full_name', 'phone', 'whatsapp_number', 'avatar'];
-        const filteredData = {};
+        if (req.file) {
+            try {
+                const processedPath = await fileService.processImage(req.file.path, {
+                    width: 400,
+                    height: 400,
+                    quality: 85,
+                    format: 'jpeg'
+                });
 
-        Object.keys(updateData).forEach(key => {
-            if (allowedFields.includes(key) && updateData[key] !== undefined) {
-                filteredData[key] = updateData[key];
+                const result = await fileService.moveFile(processedPath, 'avatars');
+                avatarUrl = result.url;
+            } catch (error) {
+                if (req.file) {
+                    await fileService.deleteFile(req.file.path);
+                }
+                throw new AppError('Failed to process avatar', 500);
+            }
+        }
+
+        const allowedFields = ['full_name', 'phone', 'whatsapp_number'];
+
+        allowedFields.forEach(field => {
+            if (req.body[field] !== undefined) {
+                updateData[field] = req.body[field];
             }
         });
 
-        if (Object.keys(filteredData).length === 0) {
+        if (avatarUrl) {
+            updateData.avatar = avatarUrl;
+        } else if (req.body.avatar !== undefined) {
+            updateData.avatar = req.body.avatar;
+        }
+
+        if (Object.keys(updateData).length === 0) {
             return res.status(400).json({
                 success: false,
                 message: 'No valid fields to update'
             });
         }
 
-        const updatedUser = await prisma.users.update({
-            where: { user_id: userId },
-            data: filteredData,
-            select: {
-                user_id: true,
-                email: true,
-                username: true,
-                full_name: true,
-                role: true,
-                phone: true,
-                whatsapp_number: true,
-                is_approved: true,
-                is_guest: true,
-                avatar: true,
-                email_verified: true,
-                updated_at: true
-            }
-        });
+        try {
+            const currentUser = await prisma.users.findUnique({
+                where: { user_id: userId },
+                select: { avatar: true }
+            });
 
-        res.json({
-            success: true,
-            message: 'Profile updated successfully',
-            data: { user: updatedUser }
-        });
+            if (avatarUrl && currentUser.avatar && currentUser.avatar.startsWith('/uploads/')) {
+                await fileService.deleteFile(`.${currentUser.avatar}`);
+            }
+
+            const updatedUser = await prisma.users.update({
+                where: { user_id: userId },
+                data: {
+                    ...updateData,
+                    updated_at: new Date()
+                },
+                select: {
+                    user_id: true,
+                    email: true,
+                    username: true,
+                    full_name: true,
+                    role: true,
+                    phone: true,
+                    whatsapp_number: true,
+                    is_approved: true,
+                    is_guest: true,
+                    avatar: true,
+                    email_verified: true,
+                    updated_at: true
+                }
+            });
+
+            if (updatedUser.avatar && !updatedUser.avatar.startsWith('http')) {
+                updatedUser.avatar_url = fileService.generateFileUrl(updatedUser.avatar);
+            } else {
+                updatedUser.avatar_url = updatedUser.avatar;
+            }
+
+            res.json({
+                success: true,
+                message: 'Profile updated successfully',
+                data: {
+                    user: updatedUser,
+                    ...(req.file && {
+                        uploaded_file: {
+                            original_name: req.file.originalname,
+                            size: req.file.size,
+                            url: avatarUrl
+                        }
+                    })
+                }
+            });
+
+        } catch (error) {
+            if (req.file) {
+                await fileService.deleteFile(req.file.path);
+            }
+            throw error;
+        }
     });
 
     /**
@@ -592,6 +692,49 @@ class AuthController {
             data: { activities: activities.slice(0, limit) }
         });
     });
+
+
+
+    /**
+     * Get user profile with full avatar URL
+     */
+    getProfile = asyncHandler(async (req, res) => {
+        const user = req.user;
+
+        const fullUserData = await prisma.users.findUnique({
+            where: { user_id: user.user_id },
+            select: {
+                user_id: true,
+                email: true,
+                username: true,
+                full_name: true,
+                role: true,
+                phone: true,
+                whatsapp_number: true,
+                is_approved: true,
+                is_guest: true,
+                avatar: true,
+                email_verified: true,
+                last_login: true,
+                created_at: true,
+                updated_at: true
+            }
+        });
+
+        if (fullUserData.avatar && !fullUserData.avatar.startsWith('http')) {
+            fullUserData.avatar_url = fileService.generateFileUrl(fullUserData.avatar);
+        } else {
+            fullUserData.avatar_url = fullUserData.avatar;
+        }
+
+        res.json({
+            success: true,
+            message: 'Profile retrieved successfully',
+            data: { user: fullUserData }
+        });
+    });
 }
+
+
 
 module.exports = new AuthController();
