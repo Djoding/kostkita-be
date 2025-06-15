@@ -87,8 +87,17 @@ const updateProfileValidator = [
 
     body('avatar')
         .optional()
-        .isURL()
-        .withMessage('Avatar must be a valid URL')
+        .custom((value, { req }) => {
+            if (req.file) return true;
+
+            if (value && typeof value === 'string') {
+                const urlRegex = /^(https?:\/\/)|(\/uploads\/)/;
+                if (!urlRegex.test(value)) {
+                    throw new Error('Avatar must be a valid URL or file upload');
+                }
+            }
+            return true;
+        })
 ];
 
 const requestPasswordResetValidator = [

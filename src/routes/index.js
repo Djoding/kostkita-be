@@ -2,7 +2,6 @@ const express = require('express');
 const authRoutes = require('./authRoutes');
 const userRoutes = require('./userRoutes');
 const masterRoutes = require('./masterRoutes');
-
 const router = express.Router();
 
 router.get('/docs', (req, res) => {

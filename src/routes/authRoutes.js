@@ -5,7 +5,7 @@ const { authenticateJWT, refreshToken } = require('../middleware/auth');
 const { handleValidationErrors, sanitizeInput } = require('../middleware/validation');
 const authValidator = require('../validators/authValidator');
 const rateLimit = require('express-rate-limit');
-
+const uploadMiddleware = require('../middleware/upload');
 const router = express.Router();
 
 const authLimitStrict = rateLimit({
@@ -172,19 +172,23 @@ router.use(authenticateJWT);
 
 router.get('/profile', authController.getProfile);
 router.put('/profile',
+    uploadMiddleware.single('avatar', 'temp'),
     sanitizeInput,
     authValidator.updateProfileValidator,
     handleValidationErrors,
     authController.updateProfile
 );
+
 router.get('/dashboard-stats', authController.getDashboardStats);
 router.get('/activity', authController.getActivity);
+
 router.post('/change-password',
     sanitizeInput,
     authValidator.changePasswordValidator,
     handleValidationErrors,
     authController.changePassword
 );
+
 router.post('/logout', authController.logout);
 router.get('/check', authController.checkAuth);
 
