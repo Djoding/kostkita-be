@@ -3355,35 +3355,30 @@
   message: 'Server running on port 3000 in development mode',
   level: 'info',
   service: 'kosan-api',
-  timestamp: '2025-06-13 23:55:38'
 }
 {
   message: 'Server running on port 3000 in development mode',
   level: 'info',
   service: 'kosan-api',
-  timestamp: '2025-06-14 00:14:52'
 }
 {
   message: 'Server running on port 3000 in development mode',
   level: 'info',
   service: 'kosan-api',
-  timestamp: '2025-06-14 00:15:13'
 }
 {
   message: 'Server running on port 3000 in development mode',
   level: 'info',
   service: 'kosan-api',
-  timestamp: '2025-06-14 00:15:24'
 }
 {
   message: 'Server running on port 3000 in development mode',
   level: 'info',
   service: 'kosan-api',
-  timestamp: '2025-06-14 00:15:37'
 }
 {
   message: 'Server running on port 3000 in development mode',
   level: 'info',
   service: 'kosan-api',
-  timestamp: '2025-06-14 00:15:50'
+
 }

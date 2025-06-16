@@ -139,6 +139,7 @@ class AuthService {
      * Google OAuth login/register
      */
     async googleAuth(profile) {
+        logger.info(`Google auth attempt for email: ${profile.emails[0].value}`);
         let user = await prisma.users.findUnique({
             where: { google_id: profile.id },
             select: {

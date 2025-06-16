@@ -1,6 +1,7 @@
 const express = require('express');
 const authRoutes = require('./authRoutes');
 const userRoutes = require('./userRoutes');
+const orderCateringRoutes = require('./orderCateringRoutes');
 const masterRoutes = require('./masterRoutes');
 const kostRoutes = require('./kostRoutes');
 
@@ -93,6 +94,7 @@ router.use('/auth', authRoutes);
 router.use('/users', userRoutes);
 router.use('/master', masterRoutes);
 router.use('/kostProperty',kostRoutes);
+router.use('/order/catering', orderCateringRoutes);
 
 router.get('/', (req, res) => {
     res.json({
