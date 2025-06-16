@@ -306,16 +306,17 @@ async function main() {
 
     const adminUser = await prisma.users.create({
       data: {
-        email: "admin@kosan.com",
-        username: "admin",
-        password: await bcrypt.hash("Admin123!", 12),
-        full_name: "System Administrator",
-        role: "ADMIN",
-        phone: "081234567890",
-        whatsapp_number: "081234567890",
+        email: 'admin@kosan.com',
+        username: 'admin',
+        password: await bcrypt.hash('Admin123!', 12),
+        full_name: 'System Administrator',
+        role: 'ADMIN',
+        phone: '081234567890',
+        whatsapp_number: '081234567890',
         is_approved: true,
         email_verified: true,
-      },
+        has_manual_password: true 
+      }
     });
 
     const pengelola1 = await prisma.users.create({
@@ -329,6 +330,7 @@ async function main() {
         whatsapp_number: "081234567891",
         is_approved: true,
         email_verified: true,
+        has_manual_password: true
       },
     });
 
@@ -343,6 +345,7 @@ async function main() {
         whatsapp_number: "081234567892",
         is_approved: true,
         email_verified: true,
+        has_manual_password: true
       },
     });
 
@@ -357,6 +360,7 @@ async function main() {
         whatsapp_number: "081234567893",
         is_approved: true,
         email_verified: true,
+        has_manual_password: true
       },
     });
 
@@ -371,6 +375,7 @@ async function main() {
         whatsapp_number: "081234567894",
         is_approved: true,
         email_verified: true,
+        has_manual_password: true
       },
     });
 
@@ -385,6 +390,7 @@ async function main() {
         whatsapp_number: "081234567895",
         is_approved: true,
         email_verified: true,
+        has_manual_password: true
       },
     });
 
@@ -546,8 +552,8 @@ async function main() {
               peraturan_id === peraturan[0].peraturan_id
                 ? "Tamu hanya boleh berkunjung sampai jam 20:00 WIB"
                 : peraturan_id === peraturan[1].peraturan_id
-                ? "Pintu utama ditutup jam 22:00 WIB"
-                : null,
+                  ? "Pintu utama ditutup jam 22:00 WIB"
+                  : null,
           },
         })
       )
@@ -574,8 +580,8 @@ async function main() {
               peraturan_id === peraturan[0].peraturan_id
                 ? "Tamu menginap dikenakan biaya Rp 50.000/malam"
                 : peraturan_id === peraturan[1].peraturan_id
-                ? "Akses kartu berlaku 24 jam untuk penghuni VIP"
-                : null,
+                  ? "Akses kartu berlaku 24 jam untuk penghuni VIP"
+                  : null,
           },
         })
       )
@@ -1009,8 +1015,7 @@ async function main() {
     ]);
 
     console.log(
-      `✅ Created ${
-        laundry1HargaItems.length + laundry2HargaItems.length
+      `✅ Created ${laundry1HargaItems.length + laundry2HargaItems.length
       } laundry pricing`
     );
 
