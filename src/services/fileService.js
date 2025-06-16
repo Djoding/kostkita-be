@@ -20,6 +20,12 @@ class FileService {
                 `${this.uploadPath}/avatars`,
                 `${this.uploadPath}/kost`,
                 `${this.uploadPath}/kamar`,
+                `${this.uploadPath}/catering_payment`,
+                `${this.uploadPath}/laundry_payment`,
+                `${this.uploadPath}/catering_menu`,
+                `${this.uploadPath}/laundry_menu`,
+                `${this.uploadPath}/catering`,
+                `${this.uploadPath}/laundry`,
                 `${this.uploadPath}/temp`
             ];
 
