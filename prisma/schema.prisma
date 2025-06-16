@@ -61,29 +61,30 @@ model MasterLayananLaundry {
   created_at   DateTime @default(now())
   updated_at   DateTime @updatedAt
 
-  laundry_harga   LaundryHarga[]
+  laundry_harga          LaundryHarga[]
   detail_pesanan_laundry DetailPesananLaundry[]
 
   @@map("master_layanan_laundry")
 }
 
 model Users {
-  user_id         String    @id @default(uuid()) @db.Uuid
-  email           String    @unique @db.VarChar(255)
-  username        String    @unique @db.VarChar(100)
-  password        String?   @db.VarChar(255)
-  role            UserRole
-  full_name       String    @db.VarChar(255)
-  phone           String?   @db.VarChar(20)
-  whatsapp_number String?   @db.VarChar(20)
-  is_approved     Boolean   @default(false)
-  is_guest        Boolean   @default(false)
-  google_id       String?   @unique
-  avatar          String?   @db.Text
-  email_verified  Boolean   @default(false)
-  last_login      DateTime?
-  created_at      DateTime  @default(now())
-  updated_at      DateTime  @updatedAt
+  user_id             String    @id @default(uuid()) @db.Uuid
+  email               String    @unique @db.VarChar(255)
+  username            String    @unique @db.VarChar(100)
+  password            String?   @db.VarChar(255)
+  role                UserRole
+  full_name           String    @db.VarChar(255)
+  phone               String?   @db.VarChar(20)
+  whatsapp_number     String?   @db.VarChar(20)
+  is_approved         Boolean   @default(false)
+  is_guest            Boolean   @default(false)
+  google_id           String?   @unique
+  avatar              String?   @db.Text
+  email_verified      Boolean   @default(false)
+  has_manual_password Boolean   @default(false)
+  last_login          DateTime?
+  created_at          DateTime  @default(now())
+  updated_at          DateTime  @updatedAt
 
   kost_managed                 Kost[]               @relation("PengelolaKost")
   reservasi                    Reservasi[]
@@ -119,7 +120,7 @@ model Kost {
   created_at              DateTime @default(now())
   updated_at              DateTime @updatedAt
 
-  tipe_id       String   @db.Uuid 
+  tipe_id       String   @db.Uuid
   harga_bulanan Decimal  @db.Decimal(10, 2)
   deposit       Decimal? @db.Decimal(10, 2)
   harga_final   Decimal  @db.Decimal(10, 2)
@@ -178,7 +179,7 @@ model Reservasi {
   updated_at        DateTime        @updatedAt
   tanggal_keluar    DateTime?       @db.Date
   deposit_amount    Decimal?        @db.Decimal(10, 2)
-  status_penghunian PenghuniStatus? 
+  status_penghunian PenghuniStatus?
 
   user      Users  @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
   kost      Kost   @relation(fields: [kost_id], references: [kost_id], onDelete: Cascade)
@@ -217,20 +218,20 @@ model CateringMenu {
   created_at   DateTime         @default(now())
   updated_at   DateTime         @updatedAt
 
-  catering Catering          @relation(fields: [catering_id], references: [catering_id], onDelete: Cascade)
+  catering       Catering                @relation(fields: [catering_id], references: [catering_id], onDelete: Cascade)
   detail_pesanan DetailPesananCatering[]
 
   @@map("catering_menu")
 }
 
 model PesananCatering {
-  pesanan_id   String                @id @default(uuid()) @db.Uuid
-  user_id      String                @db.Uuid
-  total_harga  Decimal               @db.Decimal(8, 2)
-  status       PesananCateringStatus @default(PENDING)
-  catatan      String?               @db.Text
-  created_at   DateTime              @default(now())
-  updated_at   DateTime              @updatedAt
+  pesanan_id  String                @id @default(uuid()) @db.Uuid
+  user_id     String                @db.Uuid
+  total_harga Decimal               @db.Decimal(8, 2)
+  status      PesananCateringStatus @default(PENDING)
+  catatan     String?               @db.Text
+  created_at  DateTime              @default(now())
+  updated_at  DateTime              @updatedAt
 
   user       Users               @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
   pembayaran PembayaranCatering?
@@ -241,14 +242,14 @@ model PesananCatering {
 }
 
 model DetailPesananCatering {
-  detail_id    String           @id @default(uuid()) @db.Uuid
-  pesanan_id   String           @db.Uuid
-  menu_id      String           @db.Uuid
+  detail_id    String  @id @default(uuid()) @db.Uuid
+  pesanan_id   String  @db.Uuid
+  menu_id      String  @db.Uuid
   jumlah_porsi Int
-  harga_satuan Decimal          @db.Decimal(8, 2)
+  harga_satuan Decimal @db.Decimal(8, 2)
 
-  pesanan      PesananCatering @relation(fields: [pesanan_id], references: [pesanan_id], onDelete: Cascade)
-  menu         CateringMenu    @relation(fields: [menu_id], references: [menu_id], onDelete: Cascade)
+  pesanan PesananCatering @relation(fields: [pesanan_id], references: [pesanan_id], onDelete: Cascade)
+  menu    CateringMenu    @relation(fields: [menu_id], references: [menu_id], onDelete: Cascade)
 
   @@map("detail_pesanan_catering")
 }
@@ -331,18 +332,17 @@ model PesananLaundry {
 }
 
 model DetailPesananLaundry {
-  detail_id     String                 @id @default(uuid()) @db.Uuid
-  pesanan_id    String                 @db.Uuid
-  layanan_id    String                 @db.Uuid
-  jumlah_satuan Int                    
-  harga_per_satuan Decimal             @db.Decimal(8, 2)
+  detail_id        String  @id @default(uuid()) @db.Uuid
+  pesanan_id       String  @db.Uuid
+  layanan_id       String  @db.Uuid
+  jumlah_satuan    Int
+  harga_per_satuan Decimal @db.Decimal(8, 2)
 
-  pesanan       PesananLaundry       @relation(fields: [pesanan_id], references: [pesanan_id], onDelete: Cascade)
-  layanan       MasterLayananLaundry @relation(fields: [layanan_id], references: [layanan_id], onDelete: Cascade)
+  pesanan PesananLaundry       @relation(fields: [pesanan_id], references: [pesanan_id], onDelete: Cascade)
+  layanan MasterLayananLaundry @relation(fields: [layanan_id], references: [layanan_id], onDelete: Cascade)
 
   @@map("detail_pesanan_laundry")
 }
-
 
 model PembayaranLaundry {
   pembayaran_id String           @id @default(uuid()) @db.Uuid

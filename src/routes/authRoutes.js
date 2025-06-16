@@ -56,6 +56,17 @@ router.post('/refresh-token',
     refreshToken
 );
 
+router.post('/setup-password',
+    sanitizeInput,
+    [
+        body('email').isEmail().withMessage('Valid email required'),
+        body('newPassword').isLength({ min: 8 }).withMessage('Password min 8 characters'),
+        body('confirmPassword').notEmpty().withMessage('Confirm password required')
+    ],
+    handleValidationErrors,
+    authController.setupPassword
+);
+
 router.post('/request-password-reset',
     authLimitStrict,
     sanitizeInput,

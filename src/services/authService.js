@@ -45,7 +45,8 @@ class AuthService {
                 phone,
                 whatsapp_number,
                 is_approved: role === 'PENGHUNI',
-                email_verified: false
+                email_verified: false,
+                has_manual_password: true
             },
             select: {
                 user_id: true,
@@ -55,6 +56,7 @@ class AuthService {
                 role: true,
                 is_approved: true,
                 email_verified: true,
+                has_manual_password: true,
                 phone: true,
                 whatsapp_number: true,
                 avatar: true,
@@ -95,6 +97,8 @@ class AuthService {
                 role: true,
                 is_approved: true,
                 email_verified: true,
+                has_manual_password: true,
+                google_id: true,
                 phone: true,
                 whatsapp_number: true,
                 avatar: true
@@ -103,6 +107,15 @@ class AuthService {
 
         if (!user) {
             throw new AppError('Invalid email or password', 401);
+        }
+
+        if (user.google_id && !user.has_manual_password) {
+            throw new AppError('Please set up your password first. You registered with Google.', 423, {
+                error_code: 'PASSWORD_SETUP_REQUIRED',
+                user_id: user.user_id,
+                email: user.email,
+                setup_required: true
+            });
         }
 
         if (!user.is_approved && user.role !== 'PENGHUNI') {
@@ -139,7 +152,6 @@ class AuthService {
      * Google OAuth login/register
      */
     async googleAuth(profile) {
-        logger.info(`Google auth attempt for email: ${profile.emails[0].value}`);
         let user = await prisma.users.findUnique({
             where: { google_id: profile.id },
             select: {
@@ -150,6 +162,7 @@ class AuthService {
                 role: true,
                 is_approved: true,
                 email_verified: true,
+                has_manual_password: true,
                 phone: true,
                 whatsapp_number: true,
                 avatar: true
@@ -171,6 +184,7 @@ class AuthService {
                     role: true,
                     is_approved: true,
                     email_verified: true,
+                    has_manual_password: true,
                     phone: true,
                     whatsapp_number: true,
                     avatar: true
@@ -198,6 +212,7 @@ class AuthService {
                         role: true,
                         is_approved: true,
                         email_verified: true,
+                        has_manual_password: true,
                         phone: true,
                         whatsapp_number: true,
                         avatar: true
@@ -219,7 +234,8 @@ class AuthService {
                         email_verified: true,
                         is_approved: true,
                         last_login: new Date(),
-                        password: await bcrypt.hash(Math.random().toString(36), 12)
+                        password: await bcrypt.hash(Math.random().toString(36), 12),
+                        has_manual_password: false
                     },
                     select: {
                         user_id: true,
@@ -229,6 +245,7 @@ class AuthService {
                         role: true,
                         is_approved: true,
                         email_verified: true,
+                        has_manual_password: true,
                         phone: true,
                         whatsapp_number: true,
                         avatar: true
@@ -249,6 +266,57 @@ class AuthService {
             user,
             tokens
         };
+    }
+
+    async setupPassword(email, newPassword) {
+        if (!email || !newPassword) {
+            throw new AppError('Email and new password are required', 400);
+        }
+
+        const user = await prisma.users.findUnique({
+            where: { email },
+            select: {
+                user_id: true,
+                email: true,
+                google_id: true,
+                has_manual_password: true
+            }
+        });
+
+        if (!user) {
+            throw new AppError('User not found', 404);
+        }
+
+        if (!user.google_id || user.has_manual_password) {
+            throw new AppError('Password setup not required for this account', 400);
+        }
+
+        const hashedPassword = await bcrypt.hash(newPassword, 12);
+
+        const updatedUser = await prisma.users.update({
+            where: { user_id: user.user_id },
+            data: {
+                password: hashedPassword,
+                has_manual_password: true
+            },
+            select: {
+                user_id: true,
+                email: true,
+                username: true,
+                full_name: true,
+                role: true,
+                is_approved: true,
+                email_verified: true,
+                has_manual_password: true,
+                phone: true,
+                whatsapp_number: true,
+                avatar: true
+            }
+        });
+
+        logger.info(`Password setup completed for: ${email}`);
+
+        return updatedUser;
     }
 
     /**

@@ -152,6 +152,35 @@ class AuthController {
     });
 
     /**
+    * Setup password for OAuth users
+    */
+    setupPassword = asyncHandler(async (req, res) => {
+        const { email, newPassword, confirmPassword } = req.body;
+
+        if (newPassword !== confirmPassword) {
+            return res.status(400).json({
+                success: false,
+                message: 'Passwords do not match'
+            });
+        }
+
+        if (newPassword.length < 8) {
+            return res.status(400).json({
+                success: false,
+                message: 'Password must be at least 8 characters long'
+            });
+        }
+
+        const user = await authService.setupPassword(email, newPassword);
+
+        res.json({
+            success: true,
+            message: 'Password setup completed successfully',
+            data: { user }
+        });
+    });
+
+    /**
      * Google OAuth callback
      */
     googleCallback = asyncHandler(async (req, res) => {
