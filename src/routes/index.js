@@ -1,6 +1,7 @@
 const express = require('express');
 const authRoutes = require('./authRoutes');
 const userRoutes = require('./userRoutes');
+const orderCateringRoutes = require('./orderCateringRoutes');
 const masterRoutes = require('./masterRoutes');
 const router = express.Router();
 
@@ -83,6 +84,7 @@ router.get('/docs', (req, res) => {
 router.use('/auth', authRoutes);
 router.use('/users', userRoutes);
 router.use('/master', masterRoutes);
+router.use('/order/catering', orderCateringRoutes);
 
 router.get('/', (req, res) => {
     res.json({

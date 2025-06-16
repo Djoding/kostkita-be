@@ -154,8 +154,6 @@ async function main() {
     console.log(`✅ Created ${fasilitas.length} fasilitas`);
 
     console.log("📝 Creating Master Tipe Kamar...");
-    // Updated MasterTipeKamar to match the current simplified app logic
-    // where a Kost maps to one of these types
     const tipeKamar = await Promise.all([
       prisma.masterTipeKamar.create({
         data: {
@@ -607,8 +605,7 @@ async function main() {
         metode_bayar: "TRANSFER",
         validated_by: adminUser.user_id,
         validated_at: checkInDate1,
-        // tanggal_masuk is removed as it's redundant with tanggal_check_in
-        deposit_amount: kostsForReservation[0].deposit, // Corrected to deposit_amount
+        deposit_amount: kostsForReservation[0].deposit,
         status_penghunian: "AKTIF",
       },
     });
@@ -629,8 +626,7 @@ async function main() {
         metode_bayar: "QRIS",
         validated_by: adminUser.user_id,
         validated_at: checkInDate2,
-        // tanggal_masuk is removed as it's redundant with tanggal_check_in
-        deposit_amount: kostsForReservation[0].deposit, // Corrected to deposit_amount
+        deposit_amount: kostsForReservation[0].deposit,
         status_penghunian: "AKTIF",
       },
     });
@@ -646,10 +642,8 @@ async function main() {
         total_harga: kostsForReservation[1].harga_bulanan * 3,
         bukti_bayar:
           "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400",
-        status: "PENDING", // Initial status for a new reservation pending payment/validation
+        status: "PENDING",
         metode_bayar: "TRANSFER",
-        // deposit_amount, tanggal_keluar, status_penghunian are null for PENDING reservations by default
-        // These are nullable fields, so omitting them will set them to null.
       },
     });
 
@@ -821,49 +815,85 @@ async function main() {
     cateringMenus.push(...catering1Menus, ...catering2Menus);
     console.log(`✅ Created ${cateringMenus.length} catering menu items`);
 
-    console.log("📝 Creating Sample Pesanan Catering...");
+    console.log("📝 Creating Sample Pesanan Catering (Multiple Items)...");
 
-    const pesananCatering = await Promise.all([
-      prisma.pesananCatering.create({
-        data: {
-          user_id: penghuni1.user_id,
-          menu_id: catering1Menus[0].menu_id,
-          jumlah_porsi: 2,
-          total_harga: catering1Menus[0].harga * 2,
-          status: "DITERIMA", // Changed to DITERIMA
-          catatan: "Pedas sedang",
-        },
-      }),
-      prisma.pesananCatering.create({
-        data: {
-          user_id: penghuni2.user_id,
-          menu_id: catering2Menus[0].menu_id,
-          jumlah_porsi: 1,
-          total_harga: catering2Menus[0].harga,
-          status: "PROSES", // Changed to PROSES
-          catatan: "Tanpa mayonnaise",
-        },
-      }),
-    ]);
-
-    for (const pesanan of pesananCatering) {
-      await prisma.pembayaranCatering.create({
-        data: {
-          pesanan_id: pesanan.pesanan_id,
-          jumlah: pesanan.total_harga,
-          metode: "QRIS",
-          bukti_bayar:
-            "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400",
-          status: "VERIFIED",
-          verified_by: adminUser.user_id,
-          verified_at: new Date(),
-        },
-      });
-    }
-
-    console.log(
-      `✅ Created ${pesananCatering.length} pesanan catering with payments`
+    const cateringOrder1Items = [
+      { menu: catering1Menus[0], qty: 2 },
+      { menu: catering1Menus[3], qty: 3 },
+      { menu: catering1Menus[4], qty: 1 },
+    ];
+    const totalHargaCatering1 = cateringOrder1Items.reduce(
+      (sum, item) => sum + item.menu.harga * item.qty,
+      0
     );
+
+    const pesananCatering1 = await prisma.pesananCatering.create({
+      data: {
+        user_id: penghuni1.user_id,
+        total_harga: totalHargaCatering1,
+        status: "DITERIMA",
+        catatan: "Gudeg pedas, teh jangan terlalu manis",
+        detail_pesanan: {
+          create: cateringOrder1Items.map((item) => ({
+            menu_id: item.menu.menu_id,
+            jumlah_porsi: item.qty,
+            harga_satuan: item.menu.harga,
+          })),
+        },
+      },
+    });
+
+    const cateringOrder2Items = [
+      { menu: catering2Menus[0], qty: 1 },
+      { menu: catering2Menus[3], qty: 2 },
+    ];
+    const totalHargaCatering2 = cateringOrder2Items.reduce(
+      (sum, item) => sum + item.menu.harga * item.qty,
+      0
+    );
+
+    const pesananCatering2 = await prisma.pesananCatering.create({
+      data: {
+        user_id: penghuni2.user_id,
+        total_harga: totalHargaCatering2,
+        status: "PROSES",
+        catatan: "Packing rapih",
+        detail_pesanan: {
+          create: cateringOrder2Items.map((item) => ({
+            menu_id: item.menu.menu_id,
+            jumlah_porsi: item.qty,
+            harga_satuan: item.menu.harga,
+          })),
+        },
+      },
+    });
+
+    await prisma.pembayaranCatering.create({
+      data: {
+        pesanan_id: pesananCatering1.pesanan_id,
+        jumlah: pesananCatering1.total_harga,
+        metode: "QRIS",
+        bukti_bayar:
+          "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400",
+        status: "VERIFIED",
+        verified_by: adminUser.user_id,
+        verified_at: new Date(),
+      },
+    });
+    await prisma.pembayaranCatering.create({
+      data: {
+        pesanan_id: pesananCatering2.pesanan_id,
+        jumlah: pesananCatering2.total_harga,
+        metode: "TRANSFER",
+        bukti_bayar:
+          "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400",
+        status: "VERIFIED",
+        verified_by: adminUser.user_id,
+        verified_at: new Date(),
+      },
+    });
+
+    console.log(`✅ Created 2 pesanan catering with payments (multi-item)`);
 
     // --- Laundry Services ---
     console.log("📝 Creating Laundry...");
@@ -908,11 +938,11 @@ async function main() {
 
     console.log("📝 Creating Laundry Harga...");
 
-    const laundry1Harga = await Promise.all([
+    const laundry1HargaItems = await Promise.all([
       prisma.laundryHarga.create({
         data: {
           laundry_id: laundry1.laundry_id,
-          layanan_id: layananLaundry[0].layanan_id, // Cuci Kering
+          layanan_id: layananLaundry[0].layanan_id,
           harga_per_satuan: 8000,
           is_available: true,
         },
@@ -920,7 +950,7 @@ async function main() {
       prisma.laundryHarga.create({
         data: {
           laundry_id: laundry1.laundry_id,
-          layanan_id: layananLaundry[1].layanan_id, // Cuci Setrika
+          layanan_id: layananLaundry[1].layanan_id,
           harga_per_satuan: 12000,
           is_available: true,
         },
@@ -928,7 +958,7 @@ async function main() {
       prisma.laundryHarga.create({
         data: {
           laundry_id: laundry1.laundry_id,
-          layanan_id: layananLaundry[2].layanan_id, // Setrika Saja
+          layanan_id: layananLaundry[2].layanan_id,
           harga_per_satuan: 5000,
           is_available: true,
         },
@@ -936,18 +966,18 @@ async function main() {
       prisma.laundryHarga.create({
         data: {
           laundry_id: laundry1.laundry_id,
-          layanan_id: layananLaundry[4].layanan_id, // Cuci Sepatu
+          layanan_id: layananLaundry[4].layanan_id,
           harga_per_satuan: 15000,
           is_available: true,
         },
       }),
     ]);
 
-    const laundry2Harga = await Promise.all([
+    const laundry2HargaItems = await Promise.all([
       prisma.laundryHarga.create({
         data: {
           laundry_id: laundry2.laundry_id,
-          layanan_id: layananLaundry[0].layanan_id, // Cuci Kering
+          layanan_id: layananLaundry[0].layanan_id,
           harga_per_satuan: 12000,
           is_available: true,
         },
@@ -955,7 +985,7 @@ async function main() {
       prisma.laundryHarga.create({
         data: {
           laundry_id: laundry2.laundry_id,
-          layanan_id: layananLaundry[1].layanan_id, // Cuci Setrika
+          layanan_id: layananLaundry[1].layanan_id,
           harga_per_satuan: 18000,
           is_available: true,
         },
@@ -963,7 +993,7 @@ async function main() {
       prisma.laundryHarga.create({
         data: {
           laundry_id: laundry2.laundry_id,
-          layanan_id: layananLaundry[3].layanan_id, // Dry Clean
+          layanan_id: layananLaundry[3].layanan_id,
           harga_per_satuan: 35000,
           is_available: true,
         },
@@ -971,7 +1001,7 @@ async function main() {
       prisma.laundryHarga.create({
         data: {
           laundry_id: laundry2.laundry_id,
-          layanan_id: layananLaundry[5].layanan_id, // Cuci Selimut
+          layanan_id: layananLaundry[5].layanan_id,
           harga_per_satuan: 25000,
           is_available: true,
         },
@@ -980,11 +1010,11 @@ async function main() {
 
     console.log(
       `✅ Created ${
-        laundry1Harga.length + laundry2Harga.length
+        laundry1HargaItems.length + laundry2HargaItems.length
       } laundry pricing`
     );
 
-    console.log("📝 Creating Sample Pesanan Laundry...");
+    console.log("📝 Creating Sample Pesanan Laundry (Multiple Items)...");
 
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
@@ -992,85 +1022,122 @@ async function main() {
     const dayAfterTomorrow = new Date();
     dayAfterTomorrow.setDate(dayAfterTomorrow.getDate() + 2);
 
-    const pesananLaundry = await Promise.all([
-      prisma.pesananLaundry.create({
-        data: {
-          user_id: penghuni1.user_id,
-          laundry_id: laundry1.laundry_id,
-          detail_layanan: [
-            {
-              layanan_id: layananLaundry[1].layanan_id,
-              nama_layanan: "Cuci Setrika",
-              qty: 3,
-              harga: 12000,
-              subtotal: 36000,
-            },
-          ],
-          total_estimasi: 36000,
-          total_final: 42000,
-          berat_actual: 3.5,
-          tanggal_antar: new Date(),
-          estimasi_selesai: tomorrow,
-          status: "PROSES",
-          catatan: "Jangan pakai pelembut",
-        },
-      }),
-      prisma.pesananLaundry.create({
-        data: {
-          user_id: penghuni2.user_id,
-          laundry_id: laundry2.laundry_id,
-          detail_layanan: [
-            {
-              layanan_id: layananLaundry[3].layanan_id,
-              nama_layanan: "Dry Clean",
-              qty: 2,
-              harga: 35000,
-              subtotal: 70000,
-            },
-          ],
-          total_estimasi: 70000,
-          total_final: 70000,
-          berat_actual: null,
-          tanggal_antar: new Date(),
-          estimasi_selesai: dayAfterTomorrow,
-          status: "DITERIMA",
-          catatan: "Jas kantor dan dress",
-        },
-      }),
-    ]);
-
-    for (const pesanan of pesananLaundry) {
-      await prisma.pembayaranLaundry.create({
-        data: {
-          pesanan_id: pesanan.pesanan_id,
-          jumlah: pesanan.total_final || pesanan.total_estimasi,
-          metode: "TRANSFER",
-          bukti_bayar:
-            "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400",
-          status: "VERIFIED",
-          verified_by: pesanan.status === "PROSES" ? adminUser.user_id : null,
-          verified_at: pesanan.status === "PROSES" ? new Date() : null,
-        },
-      });
-    }
-
-    console.log(
-      `✅ Created ${pesananLaundry.length} pesanan laundry with payments`
+    const laundryOrder1Items = [
+      {
+        layanan: layananLaundry[1],
+        qty: 3,
+        hargaSatuan: laundry1HargaItems[1].harga_per_satuan,
+      },
+      {
+        layanan: layananLaundry[4],
+        qty: 1,
+        hargaSatuan: laundry1HargaItems[3].harga_per_satuan,
+      },
+    ];
+    const totalEstimasiLaundry1 = laundryOrder1Items.reduce(
+      (sum, item) => sum + item.hargaSatuan * item.qty,
+      0
     );
+
+    const pesananLaundry1 = await prisma.pesananLaundry.create({
+      data: {
+        user_id: penghuni1.user_id,
+        laundry_id: laundry1.laundry_id,
+        total_estimasi: totalEstimasiLaundry1,
+        total_final: totalEstimasiLaundry1 + 6000,
+        berat_actual: 3.5,
+        tanggal_antar: new Date(),
+        estimasi_selesai: tomorrow,
+        status: "PROSES",
+        catatan: "Jangan pakai pelembut",
+        detail_pesanan_laundry: {
+          create: laundryOrder1Items.map((item) => ({
+            layanan_id: item.layanan.layanan_id,
+            jumlah_satuan: item.qty,
+            harga_per_satuan: item.hargaSatuan,
+          })),
+        },
+      },
+    });
+
+    const laundryOrder2Items = [
+      {
+        layanan: layananLaundry[3],
+        qty: 2,
+        hargaSatuan: laundry2HargaItems[2].harga_per_satuan,
+      },
+      {
+        layanan: layananLaundry[5],
+        qty: 1,
+        hargaSatuan: laundry2HargaItems[3].harga_per_satuan,
+      },
+    ];
+    const totalEstimasiLaundry2 = laundryOrder2Items.reduce(
+      (sum, item) => sum + item.hargaSatuan * item.qty,
+      0
+    );
+
+    const pesananLaundry2 = await prisma.pesananLaundry.create({
+      data: {
+        user_id: penghuni2.user_id,
+        laundry_id: laundry2.laundry_id,
+        total_estimasi: totalEstimasiLaundry2,
+        total_final: totalEstimasiLaundry2,
+        berat_actual: null,
+        tanggal_antar: new Date(),
+        estimasi_selesai: dayAfterTomorrow,
+        status: "DITERIMA",
+        catatan: "Jas kantor dan dress",
+        detail_pesanan_laundry: {
+          create: laundryOrder2Items.map((item) => ({
+            layanan_id: item.layanan.layanan_id,
+            jumlah_satuan: item.qty,
+            harga_per_satuan: item.hargaSatuan,
+          })),
+        },
+      },
+    });
+
+    await prisma.pembayaranLaundry.create({
+      data: {
+        pesanan_id: pesananLaundry1.pesanan_id,
+        jumlah: pesananLaundry1.total_final || pesananLaundry1.total_estimasi,
+        metode: "TRANSFER",
+        bukti_bayar:
+          "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400",
+        status: "VERIFIED",
+        verified_by: adminUser.user_id,
+        verified_at: new Date(),
+      },
+    });
+    await prisma.pembayaranLaundry.create({
+      data: {
+        pesanan_id: pesananLaundry2.pesanan_id,
+        jumlah: pesananLaundry2.total_final || pesananLaundry2.total_estimasi,
+        metode: "QRIS",
+        bukti_bayar:
+          "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400",
+        status: "VERIFIED",
+        verified_by: adminUser.user_id,
+        verified_at: new Date(),
+      },
+    });
+
+    console.log(`✅ Created 2 pesanan laundry with payments (multi-item)`);
 
     console.log("\n🎉 Database seeding completed successfully!");
     console.log("\n📊 Summary:");
     console.log(`   👥 Users: 6 (1 Admin, 2 Pengelola, 3 Penghuni)`);
     console.log(`   🏠 Kost: 2`);
-    console.log(`   📝 Reservasi: 3`); // Adjusted count based on hardcoded examples
+    console.log(`   📝 Reservasi: 3`);
     console.log(`   📋 Master Fasilitas: ${fasilitas.length}`);
     console.log(`   📋 Master Tipe Kamar: ${tipeKamar.length}`);
     console.log(`   📋 Master Peraturan: ${peraturan.length}`);
     console.log(`   📋 Master Layanan Laundry: ${layananLaundry.length}`);
     console.log(`   🍽️ Catering: 2 with ${cateringMenus.length} menu items`);
     console.log(`   🧺 Laundry: 2 with pricing`);
-    console.log(`   🍕 Pesanan Catering: ${pesananCatering.length}`);
-    console.log(`   👔 Pesanan Laundry: ${pesananLaundry.length}`);
+    console.log(`   🍕 Pesanan Catering: 2 (multi-item)`);
+    console.log(`   👔 Pesanan Laundry: 2 (multi-item)`);
 
     console.log("\n🔑 Default Login Credentials:");
     console.log("   Admin: admin@kosan.com / Admin123!");
