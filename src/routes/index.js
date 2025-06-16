@@ -1,7 +1,9 @@
 const express = require('express');
 const authRoutes = require('./authRoutes');
 const userRoutes = require('./userRoutes');
+const orderCateringRoutes = require('./orderCateringRoutes');
 const masterRoutes = require('./masterRoutes');
+const kostRoutes = require('./kostRoutes');
 
 const router = express.Router();
 
@@ -55,7 +57,14 @@ router.get('/docs', (req, res) => {
                     'PUT /master/fasilitas/:id - Update fasilitas (Admin only)',
                     'DELETE /master/fasilitas/:id - Delete fasilitas (Admin only)'
                 ]
-            }
+            },
+            kostProperty: {
+                base: '/kostProperty',
+                description: 'Property data management',
+                routes:[
+
+                ]
+            },
         },
         authentication: {
             type: 'Bearer Token',
@@ -84,6 +93,8 @@ router.get('/docs', (req, res) => {
 router.use('/auth', authRoutes);
 router.use('/users', userRoutes);
 router.use('/master', masterRoutes);
+router.use('/kostProperty',kostRoutes);
+router.use('/order/catering', orderCateringRoutes);
 
 router.get('/', (req, res) => {
     res.json({

@@ -16,21 +16,23 @@ const PORT = process.env.PORT || 3000;
 app.use(helmet({
     crossOriginResourcePolicy: { policy: "cross-origin" }
 }));
+
 app.use(cors({
     origin: function (origin, callback) {
         if (!origin) return callback(null, true);
-        
+
         const allowedOrigins = [
             'http://localhost:3000',
             'http://localhost:3001',
-            'http://192.168.1.100:3000', // di isi fleksibel sesuai ip lokal
+            'capacitor://localhost',
+            'ionic://localhost',
             process.env.FRONTEND_URL
         ].filter(Boolean);
 
         if (allowedOrigins.includes(origin)) {
             return callback(null, true);
         }
-        
+
         callback(new Error('Not allowed by CORS'));
     },
     credentials: true,
@@ -38,6 +40,7 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization', 'x-requested-with'],
     exposedHeaders: ['set-cookie']
 }));
+
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(compression());
@@ -91,7 +94,17 @@ app.get('/api', (req, res) => {
 });
 
 app.use('/api/v1', routes);
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static('uploads', {
+    maxAge: '1y',
+    etag: true,
+    lastModified: true
+}));
+setInterval(async () => {
+    const fileService = require('./services/fileService');
+    await fileService.cleanTempFiles();
+}, 60 * 60 * 1000);
+
+
 app.use(notFoundHandler);
 app.use(globalErrorHandler);
 
