@@ -3670,3 +3670,638 @@
   service: 'kosan-api',
   timestamp: '2025-06-17 10:52:49'
 }
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 21:33:33'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 21:33:33'
+}
+{
+  message: {
+    error: '\n' +
+      '\x1B[31mInvalid \x1B[1m`prisma.kost.findUnique()`\x1B[22m invocation in\x1B[39m\n' +
+      '\x1B[4mC:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\services\\kostService.js:169:40\x1B[24m\n' +
+      '\n' +
+      '  \x1B[2m\x1B[90m166\x1B[39m  * Get Kost by ID\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m167\x1B[39m  */\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m168\x1B[39m \x1B[36masync\x1B[39m \x1B[36mgetKostById\x1B[39m\x1B[34m(\x1B[39mkostId\x1B[34m)\x1B[39m \x1B[34m{\x1B[39m\x1B[22m\n' +
+      '\x1B[1m\x1B[31m→\x1B[39m\x1B[22m \x1B[2m\x1B[90m169\x1B[39m     \x1B[36mconst\x1B[39m kost = \x1B[36mawait\x1B[39m prisma\x1B[34m.\x1B[39mkost\x1B[34m.\x1B[39m\x1B[36mfindUnique\x1B[39m\x1B[34m(\x1B[39m\x1B[22m{\n' +
+      '            where: {\n' +
+      '              kost_id: "47e9935d-15fd-4e3b-9c4c-00a0edf83abb"\n' +
+      '            },\n' +
+      '            include: {\n' +
+      '              pengelola: {\n' +
+      '                select: {\n' +
+      '                  full_name: true,\n' +
+      '                  phone: true,\n' +
+      '                  whatsapp_number: true\n' +
+      '                }\n' +
+      '              },\n' +
+      '              kost_fasilitas: {\n' +
+      '                include: {\n' +
+      '                  fasilitas: true\n' +
+      '                }\n' +
+      '              },\n' +
+      '              \x1B[31mkamar\x1B[39m: {\n' +
+      '              \x1B[31m~~~~~\x1B[39m\n' +
+      '                include: {\n' +
+      '                  tipe: true\n' +
+      '                }\n' +
+      '              },\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mtipe\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mcatering\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mlaundry\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mkost_peraturan\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mreservasi\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m\n' +
+      '            }\n' +
+      '          }\x1B[2m)\x1B[22m\n' +
+      '\n' +
+      'Unknown field \x1B[31m`kamar`\x1B[39m for \x1B[1minclude\x1B[22m statement on model \x1B[1m`Kost`\x1B[22m. Available options are listed in \x1B[32mgreen\x1B[39m.',
+    stack: 'PrismaClientValidationError: \n' +
+      '\x1B[31mInvalid \x1B[1m`prisma.kost.findUnique()`\x1B[22m invocation in\x1B[39m\n' +
+      '\x1B[4mC:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\services\\kostService.js:169:40\x1B[24m\n' +
+      '\n' +
+      '  \x1B[2m\x1B[90m166\x1B[39m  * Get Kost by ID\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m167\x1B[39m  */\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m168\x1B[39m \x1B[36masync\x1B[39m \x1B[36mgetKostById\x1B[39m\x1B[34m(\x1B[39mkostId\x1B[34m)\x1B[39m \x1B[34m{\x1B[39m\x1B[22m\n' +
+      '\x1B[1m\x1B[31m→\x1B[39m\x1B[22m \x1B[2m\x1B[90m169\x1B[39m     \x1B[36mconst\x1B[39m kost = \x1B[36mawait\x1B[39m prisma\x1B[34m.\x1B[39mkost\x1B[34m.\x1B[39m\x1B[36mfindUnique\x1B[39m\x1B[34m(\x1B[39m\x1B[22m{\n' +
+      '            where: {\n' +
+      '              kost_id: "47e9935d-15fd-4e3b-9c4c-00a0edf83abb"\n' +
+      '            },\n' +
+      '            include: {\n' +
+      '              pengelola: {\n' +
+      '                select: {\n' +
+      '                  full_name: true,\n' +
+      '                  phone: true,\n' +
+      '                  whatsapp_number: true\n' +
+      '                }\n' +
+      '              },\n' +
+      '              kost_fasilitas: {\n' +
+      '                include: {\n' +
+      '                  fasilitas: true\n' +
+      '                }\n' +
+      '              },\n' +
+      '              \x1B[31mkamar\x1B[39m: {\n' +
+      '              \x1B[31m~~~~~\x1B[39m\n' +
+      '                include: {\n' +
+      '                  tipe: true\n' +
+      '                }\n' +
+      '              },\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mtipe\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mcatering\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mlaundry\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mkost_peraturan\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mreservasi\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m\n' +
+      '            }\n' +
+      '          }\x1B[2m)\x1B[22m\n' +
+      '\n' +
+      'Unknown field \x1B[31m`kamar`\x1B[39m for \x1B[1minclude\x1B[22m statement on model \x1B[1m`Kost`\x1B[22m. Available options are listed in \x1B[32mgreen\x1B[39m.\n' +
+      '    at wn (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:29:1363)\n' +
+      '    at $n.handleRequestError (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:121:6958)\n' +
+      '    at $n.handleAndLogRequestError (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:121:6623)\n' +
+      '    at $n.request (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:121:6307)\n' +
+      '    at async l (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:130:9633)\n' +
+      '    at async KostService.getKostById (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\services\\kostService.js:169:22)\n' +
+      '    at async C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\controllers\\kostController.js:25:22',
+    url: '/api/v1/kost/47e9935d-15fd-4e3b-9c4c-00a0edf83abb',
+    method: 'GET',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:10:54'
+}
+{
+  message: {
+    error: '\n' +
+      '\x1B[31mInvalid \x1B[1m`prisma.kost.findUnique()`\x1B[22m invocation in\x1B[39m\n' +
+      '\x1B[4mC:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\services\\kostService.js:169:40\x1B[24m\n' +
+      '\n' +
+      '  \x1B[2m\x1B[90m166\x1B[39m  * Get Kost by ID\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m167\x1B[39m  */\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m168\x1B[39m \x1B[36masync\x1B[39m \x1B[36mgetKostById\x1B[39m\x1B[34m(\x1B[39mkostId\x1B[34m)\x1B[39m \x1B[34m{\x1B[39m\x1B[22m\n' +
+      '\x1B[1m\x1B[31m→\x1B[39m\x1B[22m \x1B[2m\x1B[90m169\x1B[39m     \x1B[36mconst\x1B[39m kost = \x1B[36mawait\x1B[39m prisma\x1B[34m.\x1B[39mkost\x1B[34m.\x1B[39m\x1B[36mfindUnique\x1B[39m\x1B[34m(\x1B[39m\x1B[22m{\n' +
+      '            where: {\n' +
+      '              kost_id: "5a718afc-5fc8-48ed-959f-c5932e7a6d74"\n' +
+      '            },\n' +
+      '            include: {\n' +
+      '              pengelola: {\n' +
+      '                select: {\n' +
+      '                  full_name: true,\n' +
+      '                  phone: true,\n' +
+      '                  whatsapp_number: true\n' +
+      '                }\n' +
+      '              },\n' +
+      '              kost_fasilitas: {\n' +
+      '                include: {\n' +
+      '                  fasilitas: true\n' +
+      '                }\n' +
+      '              },\n' +
+      '              \x1B[31mkamar\x1B[39m: {\n' +
+      '              \x1B[31m~~~~~\x1B[39m\n' +
+      '                include: {\n' +
+      '                  tipe: true\n' +
+      '                }\n' +
+      '              },\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mtipe\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mcatering\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mlaundry\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mkost_peraturan\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mreservasi\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m\n' +
+      '            }\n' +
+      '          }\x1B[2m)\x1B[22m\n' +
+      '\n' +
+      'Unknown field \x1B[31m`kamar`\x1B[39m for \x1B[1minclude\x1B[22m statement on model \x1B[1m`Kost`\x1B[22m. Available options are listed in \x1B[32mgreen\x1B[39m.',
+    stack: 'PrismaClientValidationError: \n' +
+      '\x1B[31mInvalid \x1B[1m`prisma.kost.findUnique()`\x1B[22m invocation in\x1B[39m\n' +
+      '\x1B[4mC:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\services\\kostService.js:169:40\x1B[24m\n' +
+      '\n' +
+      '  \x1B[2m\x1B[90m166\x1B[39m  * Get Kost by ID\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m167\x1B[39m  */\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m168\x1B[39m \x1B[36masync\x1B[39m \x1B[36mgetKostById\x1B[39m\x1B[34m(\x1B[39mkostId\x1B[34m)\x1B[39m \x1B[34m{\x1B[39m\x1B[22m\n' +
+      '\x1B[1m\x1B[31m→\x1B[39m\x1B[22m \x1B[2m\x1B[90m169\x1B[39m     \x1B[36mconst\x1B[39m kost = \x1B[36mawait\x1B[39m prisma\x1B[34m.\x1B[39mkost\x1B[34m.\x1B[39m\x1B[36mfindUnique\x1B[39m\x1B[34m(\x1B[39m\x1B[22m{\n' +
+      '            where: {\n' +
+      '              kost_id: "5a718afc-5fc8-48ed-959f-c5932e7a6d74"\n' +
+      '            },\n' +
+      '            include: {\n' +
+      '              pengelola: {\n' +
+      '                select: {\n' +
+      '                  full_name: true,\n' +
+      '                  phone: true,\n' +
+      '                  whatsapp_number: true\n' +
+      '                }\n' +
+      '              },\n' +
+      '              kost_fasilitas: {\n' +
+      '                include: {\n' +
+      '                  fasilitas: true\n' +
+      '                }\n' +
+      '              },\n' +
+      '              \x1B[31mkamar\x1B[39m: {\n' +
+      '              \x1B[31m~~~~~\x1B[39m\n' +
+      '                include: {\n' +
+      '                  tipe: true\n' +
+      '                }\n' +
+      '              },\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mtipe\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mcatering\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mlaundry\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mkost_peraturan\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mreservasi\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m\n' +
+      '            }\n' +
+      '          }\x1B[2m)\x1B[22m\n' +
+      '\n' +
+      'Unknown field \x1B[31m`kamar`\x1B[39m for \x1B[1minclude\x1B[22m statement on model \x1B[1m`Kost`\x1B[22m. Available options are listed in \x1B[32mgreen\x1B[39m.\n' +
+      '    at wn (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:29:1363)\n' +
+      '    at $n.handleRequestError (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:121:6958)\n' +
+      '    at $n.handleAndLogRequestError (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:121:6623)\n' +
+      '    at $n.request (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:121:6307)\n' +
+      '    at async l (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:130:9633)\n' +
+      '    at async KostService.getKostById (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\services\\kostService.js:169:22)\n' +
+      '    at async C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\controllers\\kostController.js:25:22',
+    url: '/api/v1/kost/5a718afc-5fc8-48ed-959f-c5932e7a6d74',
+    method: 'GET',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:11:31'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:18:05'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:18:05'
+}
+{
+  service: 'kosan-api',
+  path: '/login',
+  method: 'POST',
+  errors: [
+    {
+      field: 'email',
+      message: 'Please provide a valid email',
+      value: undefined,
+      location: 'body'
+    },
+    {
+      field: 'password',
+      message: 'Password is required',
+      value: undefined,
+      location: 'body'
+    }
+  ],
+  body: { email: '@' },
+  level: 'warn',
+  message: 'Validation errors:',
+  timestamp: '2025-06-17 22:20:18'
+}
+{
+  message: 'User logged in: pengelola1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:25:36'
+}
+{
+  message: 'User logged in: pengelola1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:29:30'
+}
+{
+  service: 'kosan-api',
+  path: '/',
+  method: 'POST',
+  errors: [
+    {
+      field: 'pengelola_id',
+      message: 'Valid pengelola ID required',
+      value: undefined,
+      location: 'body'
+    }
+  ],
+  body: {
+    nama_kost: 'Kost Mawar',
+    alamat: 'Jl. Mawar No. 1',
+    total_kamar: 10,
+    gmaps_link: 'https://maps.google.com/example',
+    deskripsi: 'Kost strategis dekat kampus',
+    kapasitas_parkir_motor: 5,
+    kapasitas_parkir_mobil: 2,
+    biaya_tambahan: 100000,
+    daya_listrik: '1300 VA',
+    sumber_air: 'PDAM',
+    wifi_speed: '30 Mbps',
+    jam_survey: '08:00 - 16:00',
+    foto_kost: [
+      'https://example.com/foto1.jpg',
+      'https://example.com/foto2.jpg'
+    ],
+    qris_image: 'https://example.com/qris.png',
+    rekening_info: { bank: 'BCA', nomor: '1234567890', nama: 'Nama Pemilik' },
+    tipe_id: '1a44be6b-5289-45d6-9de4-076a4a1aa787',
+    harga_bulanan: 800000,
+    deposit: 500000,
+    harga_final: 1300000
+  },
+  level: 'warn',
+  message: 'Validation errors:',
+  timestamp: '2025-06-17 22:29:45'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:32:40'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:32:40'
+}
+{
+  message: {
+    error: '\n' +
+      '\x1B[31mInvalid \x1B[1m`prisma.kost.create()`\x1B[22m invocation in\x1B[39m\n' +
+      '\x1B[4mC:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\services\\kostService.js:80:40\x1B[24m\n' +
+      '\n' +
+      "  \x1B[2m\x1B[90m77\x1B[39m     \x1B[36mthrow\x1B[39m \x1B[36mnew\x1B[39m AppError\x1B[34m(\x1B[39m\x1B[1m\x1B[32m'Kost already exists at this location'\x1B[39m\x1B[22m\x1B[2m\x1B[34m,\x1B[39m \x1B[36m409\x1B[39m\x1B[34m)\x1B[39m\x1B[34m;\x1B[39m\x1B[22m\n" +
+      '  \x1B[2m\x1B[90m78\x1B[39m \x1B[34m}\x1B[39m\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m79\x1B[39m \x1B[22m\n' +
+      '\x1B[1m\x1B[31m→\x1B[39m\x1B[22m \x1B[2m\x1B[90m80\x1B[39m \x1B[36mconst\x1B[39m kost = \x1B[36mawait\x1B[39m prisma\x1B[34m.\x1B[39mkost\x1B[34m.\x1B[39m\x1B[36mcreate\x1B[39m\x1B[34m(\x1B[39m\x1B[22m{\n' +
+      '       data: {\n' +
+      '         pengelola_id: "417d9c15-98a1-4d85-bb70-827bc441f2c1",\n' +
+      '         nama_kost: "Kost Mawar",\n' +
+      '         alamat: "Jl. Mawar No. 1",\n' +
+      '         gmaps_link: "https://maps.google.com/example",\n' +
+      '         deskripsi: "Kost strategis dekat kampus",\n' +
+      '         total_kamar: 10,\n' +
+      '         daya_listrik: "1300 VA",\n' +
+      '         sumber_air: "PDAM",\n' +
+      '         wifi_speed: "30 Mbps",\n' +
+      '         kapasitas_parkir_motor: 5,\n' +
+      '         kapasitas_parkir_mobil: 2,\n' +
+      '         kapasitas_parkir_sepeda: 0,\n' +
+      '         biaya_tambahan: 100000,\n' +
+      '         jam_survey: "08:00 - 16:00",\n' +
+      '         foto_kost: [\n' +
+      '           "https://example.com/foto1.jpg",\n' +
+      '           "https://example.com/foto2.jpg"\n' +
+      '         ],\n' +
+      '         qris_image: "https://example.com/qris.png",\n' +
+      '         rekening_info: {\n' +
+      '           bank: "BCA",\n' +
+      '           nomor: "1234567890",\n' +
+      '           nama: "Nama Pemilik"\n' +
+      '         },\n' +
+      '         is_approved: false,\n' +
+      '     \x1B[32m+\x1B[39m   \x1B[32mharga_bulanan\x1B[39m\x1B[32m: \x1B[39m\x1B[32mDecimal\x1B[39m\n' +
+      '       },\n' +
+      '       include: {\n' +
+      '         pengelola: {\n' +
+      '           select: {\n' +
+      '             full_name: true,\n' +
+      '             phone: true\n' +
+      '           }\n' +
+      '         }\n' +
+      '       }\n' +
+      '     }\x1B[2m)\x1B[22m\n' +
+      '\n' +
+      'Argument `\x1B[32mharga_bulanan\x1B[39m` is missing.',
+    stack: 'PrismaClientValidationError: \n' +
+      '\x1B[31mInvalid \x1B[1m`prisma.kost.create()`\x1B[22m invocation in\x1B[39m\n' +
+      '\x1B[4mC:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\services\\kostService.js:80:40\x1B[24m\n' +
+      '\n' +
+      "  \x1B[2m\x1B[90m77\x1B[39m     \x1B[36mthrow\x1B[39m \x1B[36mnew\x1B[39m AppError\x1B[34m(\x1B[39m\x1B[1m\x1B[32m'Kost already exists at this location'\x1B[39m\x1B[22m\x1B[2m\x1B[34m,\x1B[39m \x1B[36m409\x1B[39m\x1B[34m)\x1B[39m\x1B[34m;\x1B[39m\x1B[22m\n" +
+      '  \x1B[2m\x1B[90m78\x1B[39m \x1B[34m}\x1B[39m\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m79\x1B[39m \x1B[22m\n' +
+      '\x1B[1m\x1B[31m→\x1B[39m\x1B[22m \x1B[2m\x1B[90m80\x1B[39m \x1B[36mconst\x1B[39m kost = \x1B[36mawait\x1B[39m prisma\x1B[34m.\x1B[39mkost\x1B[34m.\x1B[39m\x1B[36mcreate\x1B[39m\x1B[34m(\x1B[39m\x1B[22m{\n' +
+      '       data: {\n' +
+      '         pengelola_id: "417d9c15-98a1-4d85-bb70-827bc441f2c1",\n' +
+      '         nama_kost: "Kost Mawar",\n' +
+      '         alamat: "Jl. Mawar No. 1",\n' +
+      '         gmaps_link: "https://maps.google.com/example",\n' +
+      '         deskripsi: "Kost strategis dekat kampus",\n' +
+      '         total_kamar: 10,\n' +
+      '         daya_listrik: "1300 VA",\n' +
+      '         sumber_air: "PDAM",\n' +
+      '         wifi_speed: "30 Mbps",\n' +
+      '         kapasitas_parkir_motor: 5,\n' +
+      '         kapasitas_parkir_mobil: 2,\n' +
+      '         kapasitas_parkir_sepeda: 0,\n' +
+      '         biaya_tambahan: 100000,\n' +
+      '         jam_survey: "08:00 - 16:00",\n' +
+      '         foto_kost: [\n' +
+      '           "https://example.com/foto1.jpg",\n' +
+      '           "https://example.com/foto2.jpg"\n' +
+      '         ],\n' +
+      '         qris_image: "https://example.com/qris.png",\n' +
+      '         rekening_info: {\n' +
+      '           bank: "BCA",\n' +
+      '           nomor: "1234567890",\n' +
+      '           nama: "Nama Pemilik"\n' +
+      '         },\n' +
+      '         is_approved: false,\n' +
+      '     \x1B[32m+\x1B[39m   \x1B[32mharga_bulanan\x1B[39m\x1B[32m: \x1B[39m\x1B[32mDecimal\x1B[39m\n' +
+      '       },\n' +
+      '       include: {\n' +
+      '         pengelola: {\n' +
+      '           select: {\n' +
+      '             full_name: true,\n' +
+      '             phone: true\n' +
+      '           }\n' +
+      '         }\n' +
+      '       }\n' +
+      '     }\x1B[2m)\x1B[22m\n' +
+      '\n' +
+      'Argument `\x1B[32mharga_bulanan\x1B[39m` is missing.\n' +
+      '    at wn (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:29:1363)\n' +
+      '    at $n.handleRequestError (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:121:6958)\n' +
+      '    at $n.handleAndLogRequestError (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:121:6623)\n' +
+      '    at $n.request (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:121:6307)\n' +
+      '    at async l (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:130:9633)\n' +
+      '    at async KostService.createKost (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\services\\kostService.js:80:22)\n' +
+      '    at async C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\controllers\\kostController.js:43:22',
+    url: '/api/v1/kost',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:32:46'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:37:04'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:37:04'
+}
+{
+  message: 'New kost created: Kost Mawar by Budi Santoso',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:37:09'
+}
+{
+  message: 'Kost updated: b0090f90-1478-4c6f-9c35-df8c38e44ec3',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:40:11'
+}
+{
+  message: 'User logged in: admin@kosan.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:42:26'
+}
+{
+  message: 'Kost soft deleted: b0090f90-1478-4c6f-9c35-df8c38e44ec3',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:42:43'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:52:49'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:52:49'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:53:55'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:53:55'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:53:57'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:53:57'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:54:26'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:54:26'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:55:43'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:55:43'
+}
+{
+  message: 'User logged in: pengelola1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:56:47'
+}
+{
+  message: 'New kost created: Kost Mawar by Budi Santoso',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:57:26'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 23:00:00'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 23:00:00'
+}
+{
+  message: 'User logged in: pengelola1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 23:00:16'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 23:02:42'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 23:02:42'
+}
+{
+  message: {
+    error: 'nama_kost is not defined',
+    stack: 'ReferenceError: nama_kost is not defined\n' +
+      '    at KostService.getKostByOwner (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\services\\kostService.js:240:24)\n' +
+      '    at C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\controllers\\kostController.js:87:44\n' +
+      '    at C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\middleware\\errorHandler.js:22:25\n' +
+      '    at Layer.handle [as handle_request] (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\express\\lib\\router\\layer.js:95:5)\n' +
+      '    at next (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\express\\lib\\router\\route.js:149:13)\n' +
+      '    at C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\middleware\\auth.js:76:9\n' +
+      '    at Layer.handle [as handle_request] (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\express\\lib\\router\\layer.js:95:5)\n' +
+      '    at next (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\express\\lib\\router\\route.js:149:13)\n' +
+      '    at C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\middleware\\auth.js:28:9\n' +
+      '    at strategy.success (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\passport\\lib\\middleware\\authenticate.js:222:18)',
+    url: '/api/v1/kost/owner',
+    method: 'GET',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 23:02:45'
+}
+{
+  message: 'User logged in: pengelola1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 23:02:58'
+}
+{
+  message: {
+    error: 'nama_kost is not defined',
+    stack: 'ReferenceError: nama_kost is not defined\n' +
+      '    at KostService.getKostByOwner (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\services\\kostService.js:240:24)\n' +
+      '    at C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\controllers\\kostController.js:87:44\n' +
+      '    at C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\middleware\\errorHandler.js:22:25\n' +
+      '    at Layer.handle [as handle_request] (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\express\\lib\\router\\layer.js:95:5)\n' +
+      '    at next (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\express\\lib\\router\\route.js:149:13)\n' +
+      '    at C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\middleware\\auth.js:76:9\n' +
+      '    at Layer.handle [as handle_request] (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\express\\lib\\router\\layer.js:95:5)\n' +
+      '    at next (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\express\\lib\\router\\route.js:149:13)\n' +
+      '    at C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\middleware\\auth.js:28:9\n' +
+      '    at strategy.success (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\passport\\lib\\middleware\\authenticate.js:222:18)',
+    url: '/api/v1/kost/owner',
+    method: 'GET',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 23:03:12'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 23:04:38'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 23:04:38'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 23:05:00'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 23:05:00'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 23:09:33'
+}
