@@ -51,11 +51,9 @@ module.exports = {
         );
       }
 
-      const parsedItems = JSON.parse(items);
-
       const result = await laundryService.createLaundryOrderWithPayment(
         userIdFromToken,
-        { items: parsedItems, catatan, metode_bayar },
+        { items: items, catatan, metode_bayar },
         buktiBayarFile
       );
 

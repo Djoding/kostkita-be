@@ -3670,3 +3670,1231 @@
   service: 'kosan-api',
   timestamp: '2025-06-17 10:52:49'
 }
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:00:44'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:00:45'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:00:46'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:11:18'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:11:18'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:11:32'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:12:32'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:12:32'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:12:43'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:12:43'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:12:49'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:12:49'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:12:51'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:12:51'
+}
+{
+  message: {
+    error: 'Penghuni tidak memiliki reservasi aktif di kost ini atau kostId tidak valid.',
+    stack: 'Error: Penghuni tidak memiliki reservasi aktif di kost ini atau kostId tidak valid.\n' +
+      '    at Object.getLaundryHistoryForTenant (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:20:15)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:17:21',
+    url: '/api/v1/order/laundry?kostId=e328531f-6544-4898-b950-4b5a5507e1ef',
+    method: 'GET',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:13:34'
+}
+{
+  message: {
+    error: `Unexpected token 'o', "[object Obj"... is not valid JSON`,
+    stack: `SyntaxError: Unexpected token 'o', "[object Obj"... is not valid JSON\n` +
+      '    at JSON.parse (<anonymous>)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:32\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/middleware/errorHandler.js:22:25\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at handleValidationErrors (/Users/bimadharmawan/Documents/kostkita-be/src/middleware/validation.js:32:5)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at validateCreateLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/validators/orderLaundryValidator.js:53:5)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)',
+    url: '/api/v1/order/laundry',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:22:52'
+}
+{
+  message: {
+    error: `Unexpected token 'o', "[object Obj"... is not valid JSON`,
+    stack: `SyntaxError: Unexpected token 'o', "[object Obj"... is not valid JSON\n` +
+      '    at JSON.parse (<anonymous>)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:32\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/middleware/errorHandler.js:22:25\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at handleValidationErrors (/Users/bimadharmawan/Documents/kostkita-be/src/middleware/validation.js:32:5)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at validateCreateLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/validators/orderLaundryValidator.js:53:5)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)',
+    url: '/api/v1/order/laundry',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:24:00'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:26:11'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:26:11'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:26:15'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:26:15'
+}
+{
+  message: 'File deleted: ./uploads/laundry_payment/3ecbfbe4-9f82-4eb1-83b9-b6c265672b2f_1750134379183_processed.jpeg',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:26:19'
+}
+{
+  service: 'kosan-api',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'unlink',
+  path: './uploads/laundry_payment/3ecbfbe4-9f82-4eb1-83b9-b6c265672b2f_1750134379183_processed.jpeg',
+  level: 'warn',
+  message: "Failed to delete file: uploads/laundry_payment/3ecbfbe4-9f82-4eb1-83b9-b6c265672b2f_1750134379183_processed.jpeg ENOENT: no such file or directory, unlink './uploads/laundry_payment/3ecbfbe4-9f82-4eb1-83b9-b6c265672b2f_1750134379183_processed.jpeg'",
+  stack: "Error: ENOENT: no such file or directory, unlink './uploads/laundry_payment/3ecbfbe4-9f82-4eb1-83b9-b6c265672b2f_1750134379183_processed.jpeg'\n" +
+    '    at async Object.unlink (node:internal/fs/promises:1060:10)\n' +
+    '    at async FileService.deleteFile (/Users/bimadharmawan/Documents/kostkita-be/src/services/fileService.js:120:13)\n' +
+    '    at async Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:327:7)\n' +
+    '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+  timestamp: '2025-06-17 11:26:19'
+}
+{
+  message: {
+    error: 'Salah satu atau lebih layanan laundry tidak ditemukan atau tidak tersedia: .',
+    stack: 'Error: Salah satu atau lebih layanan laundry tidak ditemukan atau tidak tersedia: .\n' +
+      '    at Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:185:13)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+    url: '/api/v1/order/laundry',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:26:19'
+}
+{
+  message: 'File deleted: ./uploads/laundry_payment/2e6395b9-c60c-4beb-ba7a-5034e0a4ebf9_1750134490558_processed.jpeg',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:28:10'
+}
+{
+  service: 'kosan-api',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'unlink',
+  path: './uploads/laundry_payment/2e6395b9-c60c-4beb-ba7a-5034e0a4ebf9_1750134490558_processed.jpeg',
+  level: 'warn',
+  message: "Failed to delete file: uploads/laundry_payment/2e6395b9-c60c-4beb-ba7a-5034e0a4ebf9_1750134490558_processed.jpeg ENOENT: no such file or directory, unlink './uploads/laundry_payment/2e6395b9-c60c-4beb-ba7a-5034e0a4ebf9_1750134490558_processed.jpeg'",
+  stack: "Error: ENOENT: no such file or directory, unlink './uploads/laundry_payment/2e6395b9-c60c-4beb-ba7a-5034e0a4ebf9_1750134490558_processed.jpeg'\n" +
+    '    at async Object.unlink (node:internal/fs/promises:1060:10)\n' +
+    '    at async FileService.deleteFile (/Users/bimadharmawan/Documents/kostkita-be/src/services/fileService.js:120:13)\n' +
+    '    at async Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:327:7)\n' +
+    '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+  timestamp: '2025-06-17 11:28:10'
+}
+{
+  message: {
+    error: 'Salah satu atau lebih layanan laundry tidak ditemukan atau tidak tersedia: .',
+    stack: 'Error: Salah satu atau lebih layanan laundry tidak ditemukan atau tidak tersedia: .\n' +
+      '    at Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:185:13)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+    url: '/api/v1/order/laundry',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:28:10'
+}
+{
+  message: 'File deleted: ./uploads/laundry_payment/addab2aa-4509-4033-99bc-fa9095ccb543_1750134687947_processed.jpeg',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:31:28'
+}
+{
+  service: 'kosan-api',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'unlink',
+  path: './uploads/laundry_payment/addab2aa-4509-4033-99bc-fa9095ccb543_1750134687947_processed.jpeg',
+  level: 'warn',
+  message: "Failed to delete file: uploads/laundry_payment/addab2aa-4509-4033-99bc-fa9095ccb543_1750134687947_processed.jpeg ENOENT: no such file or directory, unlink './uploads/laundry_payment/addab2aa-4509-4033-99bc-fa9095ccb543_1750134687947_processed.jpeg'",
+  stack: "Error: ENOENT: no such file or directory, unlink './uploads/laundry_payment/addab2aa-4509-4033-99bc-fa9095ccb543_1750134687947_processed.jpeg'\n" +
+    '    at async Object.unlink (node:internal/fs/promises:1060:10)\n' +
+    '    at async FileService.deleteFile (/Users/bimadharmawan/Documents/kostkita-be/src/services/fileService.js:120:13)\n' +
+    '    at async Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:327:7)\n' +
+    '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+  timestamp: '2025-06-17 11:31:28'
+}
+{
+  message: {
+    error: 'Salah satu atau lebih layanan laundry tidak ditemukan atau tidak tersedia: .',
+    stack: 'Error: Salah satu atau lebih layanan laundry tidak ditemukan atau tidak tersedia: .\n' +
+      '    at Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:185:13)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+    url: '/api/v1/order/laundry',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:31:28'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:36:33'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:36:33'
+}
+{
+  message: 'File deleted: ./uploads/laundry_payment/8138482e-24b8-44a5-aeef-2d03264d46ec_1750135002572_processed.jpeg',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:36:42'
+}
+{
+  service: 'kosan-api',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'unlink',
+  path: './uploads/laundry_payment/8138482e-24b8-44a5-aeef-2d03264d46ec_1750135002572_processed.jpeg',
+  level: 'warn',
+  message: "Failed to delete file: uploads/laundry_payment/8138482e-24b8-44a5-aeef-2d03264d46ec_1750135002572_processed.jpeg ENOENT: no such file or directory, unlink './uploads/laundry_payment/8138482e-24b8-44a5-aeef-2d03264d46ec_1750135002572_processed.jpeg'",
+  stack: "Error: ENOENT: no such file or directory, unlink './uploads/laundry_payment/8138482e-24b8-44a5-aeef-2d03264d46ec_1750135002572_processed.jpeg'\n" +
+    '    at async Object.unlink (node:internal/fs/promises:1060:10)\n' +
+    '    at async FileService.deleteFile (/Users/bimadharmawan/Documents/kostkita-be/src/services/fileService.js:120:13)\n' +
+    '    at async Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:351:7)\n' +
+    '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+  timestamp: '2025-06-17 11:36:42'
+}
+{
+  message: {
+    error: 'Anda tidak memiliki reservasi aktif di kost yang menyediakan layanan laundry ini.',
+    stack: 'Error: Anda tidak memiliki reservasi aktif di kost yang menyediakan layanan laundry ini.\n' +
+      '    at Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:293:13)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+    url: '/api/v1/order/laundry',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:36:42'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:37:01'
+}
+{
+  message: 'File deleted: ./uploads/laundry_payment/ad8bb030-a909-42ee-a63b-07b0ab8799a7_1750135034480_processed.jpeg',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:37:14'
+}
+{
+  service: 'kosan-api',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'unlink',
+  path: './uploads/laundry_payment/ad8bb030-a909-42ee-a63b-07b0ab8799a7_1750135034480_processed.jpeg',
+  level: 'warn',
+  message: "Failed to delete file: uploads/laundry_payment/ad8bb030-a909-42ee-a63b-07b0ab8799a7_1750135034480_processed.jpeg ENOENT: no such file or directory, unlink './uploads/laundry_payment/ad8bb030-a909-42ee-a63b-07b0ab8799a7_1750135034480_processed.jpeg'",
+  stack: "Error: ENOENT: no such file or directory, unlink './uploads/laundry_payment/ad8bb030-a909-42ee-a63b-07b0ab8799a7_1750135034480_processed.jpeg'\n" +
+    '    at async Object.unlink (node:internal/fs/promises:1060:10)\n' +
+    '    at async FileService.deleteFile (/Users/bimadharmawan/Documents/kostkita-be/src/services/fileService.js:120:13)\n' +
+    '    at async Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:351:7)\n' +
+    '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+  timestamp: '2025-06-17 11:37:14'
+}
+{
+  message: {
+    error: 'Anda tidak memiliki reservasi aktif di kost yang menyediakan layanan laundry ini.',
+    stack: 'Error: Anda tidak memiliki reservasi aktif di kost yang menyediakan layanan laundry ini.\n' +
+      '    at Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:293:13)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+    url: '/api/v1/order/laundry',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:37:14'
+}
+{
+  message: 'File deleted: ./uploads/laundry_payment/a0230814-bdc9-4b1d-b4d8-28efd4c6e62f_1750135123579_processed.jpeg',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:38:43'
+}
+{
+  service: 'kosan-api',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'unlink',
+  path: './uploads/laundry_payment/a0230814-bdc9-4b1d-b4d8-28efd4c6e62f_1750135123579_processed.jpeg',
+  level: 'warn',
+  message: "Failed to delete file: uploads/laundry_payment/a0230814-bdc9-4b1d-b4d8-28efd4c6e62f_1750135123579_processed.jpeg ENOENT: no such file or directory, unlink './uploads/laundry_payment/a0230814-bdc9-4b1d-b4d8-28efd4c6e62f_1750135123579_processed.jpeg'",
+  stack: "Error: ENOENT: no such file or directory, unlink './uploads/laundry_payment/a0230814-bdc9-4b1d-b4d8-28efd4c6e62f_1750135123579_processed.jpeg'\n" +
+    '    at async Object.unlink (node:internal/fs/promises:1060:10)\n' +
+    '    at async FileService.deleteFile (/Users/bimadharmawan/Documents/kostkita-be/src/services/fileService.js:120:13)\n' +
+    '    at async Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:351:7)\n' +
+    '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+  timestamp: '2025-06-17 11:38:43'
+}
+{
+  message: {
+    error: 'Anda tidak memiliki reservasi aktif di kost yang menyediakan layanan laundry ini.',
+    stack: 'Error: Anda tidak memiliki reservasi aktif di kost yang menyediakan layanan laundry ini.\n' +
+      '    at Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:293:13)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+    url: '/api/v1/order/laundry',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:38:43'
+}
+{
+  message: 'File deleted: ./uploads/laundry_payment/751af0f5-5f7c-4f12-97c9-72aabac82541_1750135435301_processed.jpeg',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:43:55'
+}
+{
+  service: 'kosan-api',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'unlink',
+  path: './uploads/laundry_payment/751af0f5-5f7c-4f12-97c9-72aabac82541_1750135435301_processed.jpeg',
+  level: 'warn',
+  message: "Failed to delete file: uploads/laundry_payment/751af0f5-5f7c-4f12-97c9-72aabac82541_1750135435301_processed.jpeg ENOENT: no such file or directory, unlink './uploads/laundry_payment/751af0f5-5f7c-4f12-97c9-72aabac82541_1750135435301_processed.jpeg'",
+  stack: "Error: ENOENT: no such file or directory, unlink './uploads/laundry_payment/751af0f5-5f7c-4f12-97c9-72aabac82541_1750135435301_processed.jpeg'\n" +
+    '    at async Object.unlink (node:internal/fs/promises:1060:10)\n' +
+    '    at async FileService.deleteFile (/Users/bimadharmawan/Documents/kostkita-be/src/services/fileService.js:120:13)\n' +
+    '    at async Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:351:7)\n' +
+    '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+  timestamp: '2025-06-17 11:43:55'
+}
+{
+  message: {
+    error: 'Anda tidak memiliki reservasi aktif di kost yang menyediakan layanan laundry ini.',
+    stack: 'Error: Anda tidak memiliki reservasi aktif di kost yang menyediakan layanan laundry ini.\n' +
+      '    at Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:293:13)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+    url: '/api/v1/order/laundry',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:43:55'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:47:29'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:47:29'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:47:30'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:47:30'
+}
+{
+  message: 'File deleted: ./uploads/laundry_payment/dfb766d7-336a-4445-ac41-bc1b6790de0d_1750135653371_processed.jpeg',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:47:33'
+}
+{
+  service: 'kosan-api',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'unlink',
+  path: './uploads/laundry_payment/dfb766d7-336a-4445-ac41-bc1b6790de0d_1750135653371_processed.jpeg',
+  level: 'warn',
+  message: "Failed to delete file: uploads/laundry_payment/dfb766d7-336a-4445-ac41-bc1b6790de0d_1750135653371_processed.jpeg ENOENT: no such file or directory, unlink './uploads/laundry_payment/dfb766d7-336a-4445-ac41-bc1b6790de0d_1750135653371_processed.jpeg'",
+  stack: "Error: ENOENT: no such file or directory, unlink './uploads/laundry_payment/dfb766d7-336a-4445-ac41-bc1b6790de0d_1750135653371_processed.jpeg'\n" +
+    '    at async Object.unlink (node:internal/fs/promises:1060:10)\n' +
+    '    at async FileService.deleteFile (/Users/bimadharmawan/Documents/kostkita-be/src/services/fileService.js:120:13)\n' +
+    '    at async Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:351:7)\n' +
+    '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+  timestamp: '2025-06-17 11:47:33'
+}
+{
+  message: {
+    error: 'Anda tidak memiliki reservasi aktif di kost yang menyediakan layanan laundry ini.',
+    stack: 'Error: Anda tidak memiliki reservasi aktif di kost yang menyediakan layanan laundry ini.\n' +
+      '    at Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:293:13)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+    url: '/api/v1/order/laundry',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:47:33'
+}
+{
+  message: 'File deleted: ./uploads/laundry_payment/c484e1b6-d63d-4058-a564-ab1c38153e37_1750135699381_processed.jpeg',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:48:19'
+}
+{
+  service: 'kosan-api',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'unlink',
+  path: './uploads/laundry_payment/c484e1b6-d63d-4058-a564-ab1c38153e37_1750135699381_processed.jpeg',
+  level: 'warn',
+  message: "Failed to delete file: uploads/laundry_payment/c484e1b6-d63d-4058-a564-ab1c38153e37_1750135699381_processed.jpeg ENOENT: no such file or directory, unlink './uploads/laundry_payment/c484e1b6-d63d-4058-a564-ab1c38153e37_1750135699381_processed.jpeg'",
+  stack: "Error: ENOENT: no such file or directory, unlink './uploads/laundry_payment/c484e1b6-d63d-4058-a564-ab1c38153e37_1750135699381_processed.jpeg'\n" +
+    '    at async Object.unlink (node:internal/fs/promises:1060:10)\n' +
+    '    at async FileService.deleteFile (/Users/bimadharmawan/Documents/kostkita-be/src/services/fileService.js:120:13)\n' +
+    '    at async Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:351:7)\n' +
+    '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+  timestamp: '2025-06-17 11:48:19'
+}
+{
+  message: {
+    error: 'Anda tidak memiliki reservasi aktif di kost yang menyediakan layanan laundry ini.',
+    stack: 'Error: Anda tidak memiliki reservasi aktif di kost yang menyediakan layanan laundry ini.\n' +
+      '    at Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:293:13)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+    url: '/api/v1/order/laundry',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:48:19'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:59:34'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:59:34'
+}
+{
+  message: 'File deleted: ./uploads/laundry_payment/966c16ea-2b25-4867-ab92-caac090ea2cf_1750136412846_processed.jpeg',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 12:00:12'
+}
+{
+  service: 'kosan-api',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'unlink',
+  path: './uploads/laundry_payment/966c16ea-2b25-4867-ab92-caac090ea2cf_1750136412846_processed.jpeg',
+  level: 'warn',
+  message: "Failed to delete file: uploads/laundry_payment/966c16ea-2b25-4867-ab92-caac090ea2cf_1750136412846_processed.jpeg ENOENT: no such file or directory, unlink './uploads/laundry_payment/966c16ea-2b25-4867-ab92-caac090ea2cf_1750136412846_processed.jpeg'",
+  stack: "Error: ENOENT: no such file or directory, unlink './uploads/laundry_payment/966c16ea-2b25-4867-ab92-caac090ea2cf_1750136412846_processed.jpeg'\n" +
+    '    at async Object.unlink (node:internal/fs/promises:1060:10)\n' +
+    '    at async FileService.deleteFile (/Users/bimadharmawan/Documents/kostkita-be/src/services/fileService.js:120:13)\n' +
+    '    at async Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:358:7)\n' +
+    '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+  timestamp: '2025-06-17 12:00:12'
+}
+{
+  message: {
+    error: 'Anda tidak memiliki reservasi aktif di kost yang menyediakan layanan laundry ini.',
+    stack: 'Error: Anda tidak memiliki reservasi aktif di kost yang menyediakan layanan laundry ini.\n' +
+      '    at Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:300:13)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+    url: '/api/v1/order/laundry',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 12:00:12'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 12:00:58'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 17:21:06'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 17:21:06'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 17:21:13'
+}
+{
+  message: 'File deleted: ./uploads/reservation_payment/d8eba5d1-dd4b-4590-b2c2-3b882748ca61_1750155858284_processed.jpeg',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 17:24:18'
+}
+{
+  message: {
+    error: 'Gagal membuat reservasi kost: \n' +
+      '\x1B[31mInvalid \x1B[1m`tx.reservasi.create()`\x1B[22m invocation in\x1B[39m\n' +
+      '\x1B[4m/Users/bimadharmawan/Documents/kostkita-be/src/services/reservasiService.js:136:46\x1B[24m\n' +
+      '\n' +
+      '  \x1B[2m\x1B[90m133\x1B[39m \x1B[22m\n' +
+      '  \x1B[2m\x1B[90m134\x1B[39m \x1B[90m// 5. Buat reservasi dalam transaksi\x1B[39m\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m135\x1B[39m \x1B[36mconst\x1B[39m newReservation = \x1B[36mawait\x1B[39m prisma\x1B[34m.\x1B[39m\x1B[36m$transaction\x1B[39m\x1B[34m(\x1B[39m\x1B[36masync\x1B[39m \x1B[34m(\x1B[39mtx\x1B[34m)\x1B[39m => \x1B[34m{\x1B[39m\x1B[22m\n' +
+      '\x1B[1m\x1B[31m→\x1B[39m\x1B[22m \x1B[2m\x1B[90m136\x1B[39m   \x1B[36mconst\x1B[39m reservation = \x1B[36mawait\x1B[39m tx\x1B[34m.\x1B[39mreservasi\x1B[34m.\x1B[39m\x1B[36mcreate\x1B[39m\x1B[34m(\x1B[39m\x1B[22m{\n' +
+      '          data: {\n' +
+      '            user_id: "8a8154bc-a5d3-40dc-9e33-47bac1ad8fed",\n' +
+      '            kost_id: "75187e0f-ad45-4b91-8e66-40819ad2f27c",\n' +
+      '            tanggal_check_in: new Date("2025-07-01T00:00:00.000Z"),\n' +
+      '            durasi_bulan: \x1B[31m"2"\x1B[39m,\n' +
+      '                          \x1B[31m~~~\x1B[39m\n' +
+      '            total_harga: new Prisma.Decimal("6150000"),\n' +
+      '            bukti_bayar: "/uploads/reservation_payment/d8eba5d1-dd4b-4590-b2c2-3b882748ca61_1750155858284_processed.jpeg",\n' +
+      '            status: "PENDING",\n' +
+      '            metode_bayar: "QRIS",\n' +
+      '            catatan: undefined,\n' +
+      '            tanggal_keluar: new Date("2030-03-01T00:00:00.000Z"),\n' +
+      '            deposit_amount: new Prisma.Decimal("3000000")\n' +
+      '          }\n' +
+      '        }\x1B[2m)\x1B[22m\n' +
+      '\n' +
+      'Argument `\x1B[1mdurasi_bulan\x1B[22m`: Invalid value provided. Expected \x1B[32mInt\x1B[39m, provided \x1B[31mString\x1B[39m.',
+    stack: 'Error: Gagal membuat reservasi kost: \n' +
+      '\x1B[31mInvalid \x1B[1m`tx.reservasi.create()`\x1B[22m invocation in\x1B[39m\n' +
+      '\x1B[4m/Users/bimadharmawan/Documents/kostkita-be/src/services/reservasiService.js:136:46\x1B[24m\n' +
+      '\n' +
+      '  \x1B[2m\x1B[90m133\x1B[39m \x1B[22m\n' +
+      '  \x1B[2m\x1B[90m134\x1B[39m \x1B[90m// 5. Buat reservasi dalam transaksi\x1B[39m\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m135\x1B[39m \x1B[36mconst\x1B[39m newReservation = \x1B[36mawait\x1B[39m prisma\x1B[34m.\x1B[39m\x1B[36m$transaction\x1B[39m\x1B[34m(\x1B[39m\x1B[36masync\x1B[39m \x1B[34m(\x1B[39mtx\x1B[34m)\x1B[39m => \x1B[34m{\x1B[39m\x1B[22m\n' +
+      '\x1B[1m\x1B[31m→\x1B[39m\x1B[22m \x1B[2m\x1B[90m136\x1B[39m   \x1B[36mconst\x1B[39m reservation = \x1B[36mawait\x1B[39m tx\x1B[34m.\x1B[39mreservasi\x1B[34m.\x1B[39m\x1B[36mcreate\x1B[39m\x1B[34m(\x1B[39m\x1B[22m{\n' +
+      '          data: {\n' +
+      '            user_id: "8a8154bc-a5d3-40dc-9e33-47bac1ad8fed",\n' +
+      '            kost_id: "75187e0f-ad45-4b91-8e66-40819ad2f27c",\n' +
+      '            tanggal_check_in: new Date("2025-07-01T00:00:00.000Z"),\n' +
+      '            durasi_bulan: \x1B[31m"2"\x1B[39m,\n' +
+      '                          \x1B[31m~~~\x1B[39m\n' +
+      '            total_harga: new Prisma.Decimal("6150000"),\n' +
+      '            bukti_bayar: "/uploads/reservation_payment/d8eba5d1-dd4b-4590-b2c2-3b882748ca61_1750155858284_processed.jpeg",\n' +
+      '            status: "PENDING",\n' +
+      '            metode_bayar: "QRIS",\n' +
+      '            catatan: undefined,\n' +
+      '            tanggal_keluar: new Date("2030-03-01T00:00:00.000Z"),\n' +
+      '            deposit_amount: new Prisma.Decimal("3000000")\n' +
+      '          }\n' +
+      '        }\x1B[2m)\x1B[22m\n' +
+      '\n' +
+      'Argument `\x1B[1mdurasi_bulan\x1B[22m`: Invalid value provided. Expected \x1B[32mInt\x1B[39m, provided \x1B[31mString\x1B[39m.\n' +
+      '    at Object.createReservation (/Users/bimadharmawan/Documents/kostkita-be/src/services/reservasiService.js:171:11)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/reservasiController.js:28:30',
+    url: '/api/v1/reservasi',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 17:24:18'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 17:25:43'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 17:25:43'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 17:25:47'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 17:25:47'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 17:26:29'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 17:26:29'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 17:26:36'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 17:26:36'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 17:27:08'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 17:27:08'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:07:04'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:07:04'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:07:58'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:07:58'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:08:00'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:08:00'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:08:02'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:08:02'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:08:40'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:08:40'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:08:47'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:08:47'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:08:53'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:08:53'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:08:54'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:08:54'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:08:56'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:08:56'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:08:57'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:08:57'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:09:02'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:09:02'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:10:19'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:10:19'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:10:21'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:10:21'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:10:24'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:10:24'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:11:10'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:11:10'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:11:53'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:17:05'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:17:05'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:17:07'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:17:07'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:17:10'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:17:10'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:17:12'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:17:12'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:17:41'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:17:41'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:17:50'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:17:50'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:17:51'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:17:51'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:18:22'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:18:22'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:18:57'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:18:57'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:19:00'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:19:00'
+}
+{
+  message: 'User logged in: pengelola2@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:22:09'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:29:41'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:29:41'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:29:44'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:29:44'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:29:46'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:29:46'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:29:47'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:29:48'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:30:11'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:30:11'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:30:16'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:30:16'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:30:35'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:30:35'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:30:59'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:30:59'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:31:02'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:31:02'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:31:22'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:31:22'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:31:24'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:31:24'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:32:20'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:34:29'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:34:29'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:34:50'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:34:50'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:35:52'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:35:52'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 18:40:05'
+}
