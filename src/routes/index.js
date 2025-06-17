@@ -58,11 +58,15 @@ router.get('/docs', (req, res) => {
                     'DELETE /master/fasilitas/:id - Delete fasilitas (Admin only)'
                 ]
             },
-            kostProperty: {
-                base: '/kostProperty',
-                description: 'Property data management',
-                routes:[
-
+            kost: {
+                base: '/kost',
+                description: 'Kost management',
+                routes: [
+                    'GET /kost - Get all kost (Public)',
+                    'GET /kost/:id - Get kost by ID (Public)',
+                    'POST /kost - Create kost (Pengelola/Admin)',
+                    'PUT /kost/:id - Update kost (Pengelola/Admin)',
+                    'DELETE /kost/:id - Delete kost (Admin only)'
                 ]
             },
         },
@@ -93,8 +97,8 @@ router.get('/docs', (req, res) => {
 router.use('/auth', authRoutes);
 router.use('/users', userRoutes);
 router.use('/master', masterRoutes);
-router.use('/kostProperty',kostRoutes);
 router.use('/order/catering', orderCateringRoutes);
+router.use('/kost', kostRoutes);
 
 router.get('/', (req, res) => {
     res.json({
@@ -105,7 +109,8 @@ router.get('/', (req, res) => {
             '/auth - Authentication routes',
             '/users - User management routes',
             '/master - Master data routes',
-            '/docs - API documentation'
+            '/docs - API documentation',
+            '/kost - Kost management routes',
         ]
     });
 });
@@ -118,7 +123,8 @@ router.use('*', (req, res) => {
             '/api/v1/auth',
             '/api/v1/users',
             '/api/v1/master',
-            '/api/v1/docs'
+            '/api/v1/docs',
+            '/api/v1/kost',
         ]
     });
 });

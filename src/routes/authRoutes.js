@@ -1,6 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const authController = require('../controllers/authController');
+const { body } = require('express-validator');
 const { authenticateJWT, refreshToken } = require('../middleware/auth');
 const { handleValidationErrors, sanitizeInput } = require('../middleware/validation');
 const authValidator = require('../validators/authValidator');
