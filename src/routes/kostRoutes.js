@@ -6,19 +6,24 @@ const kostValidator = require('../validators/kostValidator');
 
 const router = express.Router();
 
-router.get('/kost', kostController.getAllKost);
+router.get('/', kostController.getAllKost);
+router.get('/:kost_id',
+    validateUUID('kost_id'),
+    kostController.getKostById
+);
 
 router.use(authenticateJWT);
-router.use(authorize('ADMIN'));
 
-router.post('/kost',
+router.post('/',
+    authorize('PENGELOLA', 'ADMIN'),
     sanitizeInput,
     kostValidator.kostValidator.createKost,
     handleValidationErrors,
     kostController.createKost
 );
 
-router.put('/kost/:kost_id',
+router.put('/:kost_id',
+    authorize('PENGELOLA', 'ADMIN'),
     validateUUID('kost_id'),
     sanitizeInput,
     kostValidator.kostValidator.updateKost,
@@ -26,7 +31,8 @@ router.put('/kost/:kost_id',
     kostController.updateKost
 );
 
-router.delete('/kost/:kost_id',
+router.delete('/:kost_id',
+    authorize('ADMIN'),
     validateUUID('kost_id'),
     kostController.deleteKost
 );
