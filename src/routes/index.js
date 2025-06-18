@@ -2,10 +2,11 @@ const express = require("express");
 const authRoutes = require("./authRoutes");
 const userRoutes = require("./userRoutes");
 const orderCateringRoutes = require("./orderCateringRoutes");
+const orderLaundryRoutes = require("./orderLaundryRoutes");
 const masterRoutes = require("./masterRoutes");
 const kostRoutes = require("./kostRoutes");
-const orderLaundryRoutes = require("./orderLaundryRoutes");
 const reservasiRoutes = require("./reservasiRoutes");
+const cateringRoutes = require("./cateringRoutes");
 
 const router = express.Router();
 
@@ -72,6 +73,21 @@ router.get("/docs", (req, res) => {
                     "DELETE /kost/:id - Delete kost (Admin only)",
                 ],
             },
+            catering: {
+                base: "/catering",
+                description: "Catering management",
+                routes: [
+                    "GET /catering?kost_id=uuid - Get catering list by kost (Pengelola & Penghuni)",
+                    "POST /catering - Create catering (Pengelola only)",
+                    "GET /catering/:id/menu - Get catering menu (Pengelola & Penghuni)",
+                    "POST /catering/:id/menu - Add catering menu item (Pengelola only)",
+                    "PUT /catering/:catering_id/menu/:menu_id - Update catering menu item (Pengelola only)",
+                    "DELETE /catering/:catering_id/menu/:menu_id - Delete catering menu item (Pengelola only)",
+                    "GET /catering/orders - Get user orders (Pengelola only)",
+                    "GET /catering/orders/:id - Get user order detail (Pengelola only)",
+                    "PATCH /catering/orders/:id/status - Update order status (Pengelola only)",
+                ],
+            },
         },
         authentication: {
             type: "Bearer Token",
@@ -90,20 +106,12 @@ router.get("/docs", (req, res) => {
                 format: {
                     success: false,
                     message: "string",
-                    error: "object",
+                    errors: "array (optional)",
                 },
             },
         },
     });
 });
-
-router.use("/auth", authRoutes);
-router.use("/users", userRoutes);
-router.use("/master", masterRoutes);
-router.use("/order/catering", orderCateringRoutes);
-router.use("/kost", kostRoutes);
-router.use("/order/laundry", orderLaundryRoutes);
-router.use("/reservasi", reservasiRoutes);
 
 router.get("/", (req, res) => {
     res.json({
@@ -116,9 +124,22 @@ router.get("/", (req, res) => {
             "/master - Master data routes",
             "/docs - API documentation",
             "/kost - Kost management routes",
+            "/order/catering - Catering order routes",
+            "/order/laundry - Laundry order routes",
+            "/reservasi - Reservasi routes",
+            "/catering - Catering management routes",
         ],
     });
 });
+
+router.use("/auth", authRoutes);
+router.use("/users", userRoutes);
+router.use("/master", masterRoutes);
+router.use("/order/catering", orderCateringRoutes);
+router.use("/order/laundry", orderLaundryRoutes);
+router.use("/kost", kostRoutes);
+router.use("/reservasi", reservasiRoutes);
+router.use("/catering", cateringRoutes);
 
 router.use("*", (req, res) => {
     res.status(404).json({
@@ -130,6 +151,10 @@ router.use("*", (req, res) => {
             "/api/v1/master",
             "/api/v1/docs",
             "/api/v1/kost",
+            "/api/v1/order/catering",
+            "/api/v1/order/laundry",
+            "/api/v1/reservasi",
+            "/api/v1/catering",
         ],
     });
 });
