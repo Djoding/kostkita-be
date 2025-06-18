@@ -5,6 +5,7 @@ const {
   validateCreateReservation,
   validateUpdateReservationStatus,
   validateExtendReservation,
+  validateGetKostReservations,
 } = require("../validators/reservasiValidator");
 const { authenticateJWT } = require("../middleware/auth");
 const upload = require("../middleware/upload");
@@ -39,6 +40,12 @@ router.put(
   validateExtendReservation,
   handleValidationErrors,
   reservasiController.extendReservation
+);
+
+router.get(
+  "/pengelola/:kostId",
+  handleValidationErrors,
+  reservasiController.getManagedKostReservations
 );
 
 module.exports = router;

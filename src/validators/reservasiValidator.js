@@ -1,4 +1,4 @@
-const { body, query, validationResult } = require("express-validator");
+const { body, param, validationResult } = require("express-validator");
 
 const validateCreateReservation = [
   body("kost_id")
@@ -86,8 +86,24 @@ const validateExtendReservation = [
   },
 ];
 
+const validateGetKostReservations = [
+  param("kostId")
+    .notEmpty()
+    .withMessage("Kost ID tidak boleh kosong")
+    .isUUID()
+    .withMessage("Kost ID harus berupa UUID yang valid"),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    next();
+  },
+];
+
 module.exports = {
   validateCreateReservation,
   validateUpdateReservationStatus,
   validateExtendReservation,
+  validateGetKostReservations,
 };
