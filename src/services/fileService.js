@@ -26,6 +26,7 @@ class FileService {
                 `${this.uploadPath}/laundry_menu`,
                 `${this.uploadPath}/catering`,
                 `${this.uploadPath}/laundry`,
+                `${this.uploadPath}/reservation_payment`,
                 `${this.uploadPath}/temp`
             ];
 
