@@ -4645,4 +4645,702 @@
   level: 'error',
   service: 'kosan-api',
   timestamp: '2025-06-17 11:48:19'
+}{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:04:26'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:04:26'
+}
+{
+  message: 'User logged in: pengelola2@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:06:09'
+}
+{
+  message: {
+    error: 'pengelolaDashboardService is not defined',
+    stack: 'ReferenceError: pengelolaDashboardService is not defined\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/controllers/reservasiController.js:175:7\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/middleware/errorHandler.js:22:25\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at handleValidationErrors (/Users/bimadharmawan/Documents/kostkita-be/src/middleware/validation.js:32:5)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at Route.dispatch (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:119:3)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/index.js:284:15',
+    url: '/api/v1/reservasi/pengelola/75187e0f-ad45-4b91-8e66-40819ad2f27c',
+    method: 'GET',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:06:24'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:06:48'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:06:48'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:09:19'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:09:19'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:09:40'
+}
+{
+  message: {
+    error: 'reservasiService.getReservations is not a function',
+    stack: 'TypeError: reservasiService.getReservations is not a function\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/controllers/reservasiController.js:78:49\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/middleware/errorHandler.js:22:25\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at handleValidationErrors (/Users/bimadharmawan/Documents/kostkita-be/src/middleware/validation.js:32:5)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at Route.dispatch (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:119:3)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/index.js:284:15',
+    url: '/api/v1/reservasi/penghuni',
+    method: 'GET',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:09:54'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:10:24'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:10:24'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:10:24'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:10:24'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:20:21'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:20:21'
+}
+{
+  message: 'User logged in: pengelola2@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:20:28'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:27:18'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:27:18'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:27:41'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:27:41'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:32:45'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:35:00'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:35:00'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:35:01'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:35:02'
+}
+{
+  message: {
+    error: 'ReservasiStatus is not defined',
+    stack: 'ReferenceError: ReservasiStatus is not defined\n' +
+      '    at KostService.getKostById (/Users/bimadharmawan/Documents/kostkita-be/src/services/kostService.js:197:17)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/controllers/kostController.js:25:40\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/middleware/errorHandler.js:22:25\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/middleware/validation.js:70:9\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at Route.dispatch (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:119:3)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)',
+    url: '/api/v1/kost/75187e0f-ad45-4b91-8e66-40819ad2f27c',
+    method: 'GET',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:35:04'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:35:32'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:35:32'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:35:34'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:35:34'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:35:36'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:35:36'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:35:37'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:35:37'
+}
+{
+  message: {
+    error: '\n' +
+      '\x1B[31mInvalid \x1B[1m`prisma.kost.findUnique()`\x1B[22m invocation in\x1B[39m\n' +
+      '\x1B[4m/Users/bimadharmawan/Documents/kostkita-be/src/services/kostService.js:218:36\x1B[24m\n' +
+      '\n' +
+      '  \x1B[2m\x1B[90m215\x1B[39m \x1B[34m}\x1B[39m\x1B[34m)\x1B[39m\x1B[34m;\x1B[39m\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m216\x1B[39m \x1B[90m// --- AKHIR Pembaruan Status ON-DEMAND ---\x1B[39m\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m217\x1B[39m \x1B[22m\n' +
+      '\x1B[1m\x1B[31m→\x1B[39m\x1B[22m \x1B[2m\x1B[90m218\x1B[39m \x1B[36mconst\x1B[39m kost = \x1B[36mawait\x1B[39m prisma\x1B[34m.\x1B[39mkost\x1B[34m.\x1B[39m\x1B[36mfindUnique\x1B[39m\x1B[34m(\x1B[39m\x1B[22m{\n' +
+      '        where: {\n' +
+      '          kost_id: "75187e0f-ad45-4b91-8e66-40819ad2f27c"\n' +
+      '        },\n' +
+      '        include: {\n' +
+      '          pengelola: {\n' +
+      '            select: {\n' +
+      '              full_name: true,\n' +
+      '              phone: true,\n' +
+      '              whatsapp_number: true\n' +
+      '            }\n' +
+      '          },\n' +
+      '          kost_fasilitas: {\n' +
+      '            include: {\n' +
+      '              fasilitas: true\n' +
+      '            }\n' +
+      '          },\n' +
+      '          tipe: {\n' +
+      '            select: {\n' +
+      '              nama_tipe: true,\n' +
+      '              ukuran: true,\n' +
+      '              kapasitas: true\n' +
+      '            }\n' +
+      '          },\n' +
+      '          reservasi: {\n' +
+      '            where: {\n' +
+      '              status: "APPROVED",\n' +
+      '              status_penghunian: {\n' +
+      '                in: [\n' +
+      '                  null,\n' +
+      '                  "AKTIF"\n' +
+      '                ]\n' +
+      '                \x1B[31m~~~~~~~~~\x1B[39m\n' +
+      '              },\n' +
+      '              OR: [\n' +
+      '                {\n' +
+      '                  tanggal_keluar: null\n' +
+      '                },\n' +
+      '                {\n' +
+      '                  tanggal_keluar: {\n' +
+      '                    gt: new Date("2025-06-17T17:00:00.000Z")\n' +
+      '                  }\n' +
+      '                }\n' +
+      '              ]\n' +
+      '            },\n' +
+      '            select: {\n' +
+      '              reservasi_id: true\n' +
+      '            }\n' +
+      '          }\n' +
+      '        }\n' +
+      '      }\x1B[2m)\x1B[22m\n' +
+      '\n' +
+      'Argument `\x1B[1min\x1B[22m`: Invalid value provided. Expected \x1B[32mListEnumPenghuniStatusFieldRefInput\x1B[39m or \x1B[32mNull\x1B[39m, provided \x1B[31m(Null, String)\x1B[39m.',
+    stack: 'PrismaClientValidationError: \n' +
+      '\x1B[31mInvalid \x1B[1m`prisma.kost.findUnique()`\x1B[22m invocation in\x1B[39m\n' +
+      '\x1B[4m/Users/bimadharmawan/Documents/kostkita-be/src/services/kostService.js:218:36\x1B[24m\n' +
+      '\n' +
+      '  \x1B[2m\x1B[90m215\x1B[39m \x1B[34m}\x1B[39m\x1B[34m)\x1B[39m\x1B[34m;\x1B[39m\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m216\x1B[39m \x1B[90m// --- AKHIR Pembaruan Status ON-DEMAND ---\x1B[39m\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m217\x1B[39m \x1B[22m\n' +
+      '\x1B[1m\x1B[31m→\x1B[39m\x1B[22m \x1B[2m\x1B[90m218\x1B[39m \x1B[36mconst\x1B[39m kost = \x1B[36mawait\x1B[39m prisma\x1B[34m.\x1B[39mkost\x1B[34m.\x1B[39m\x1B[36mfindUnique\x1B[39m\x1B[34m(\x1B[39m\x1B[22m{\n' +
+      '        where: {\n' +
+      '          kost_id: "75187e0f-ad45-4b91-8e66-40819ad2f27c"\n' +
+      '        },\n' +
+      '        include: {\n' +
+      '          pengelola: {\n' +
+      '            select: {\n' +
+      '              full_name: true,\n' +
+      '              phone: true,\n' +
+      '              whatsapp_number: true\n' +
+      '            }\n' +
+      '          },\n' +
+      '          kost_fasilitas: {\n' +
+      '            include: {\n' +
+      '              fasilitas: true\n' +
+      '            }\n' +
+      '          },\n' +
+      '          tipe: {\n' +
+      '            select: {\n' +
+      '              nama_tipe: true,\n' +
+      '              ukuran: true,\n' +
+      '              kapasitas: true\n' +
+      '            }\n' +
+      '          },\n' +
+      '          reservasi: {\n' +
+      '            where: {\n' +
+      '              status: "APPROVED",\n' +
+      '              status_penghunian: {\n' +
+      '                in: [\n' +
+      '                  null,\n' +
+      '                  "AKTIF"\n' +
+      '                ]\n' +
+      '                \x1B[31m~~~~~~~~~\x1B[39m\n' +
+      '              },\n' +
+      '              OR: [\n' +
+      '                {\n' +
+      '                  tanggal_keluar: null\n' +
+      '                },\n' +
+      '                {\n' +
+      '                  tanggal_keluar: {\n' +
+      '                    gt: new Date("2025-06-17T17:00:00.000Z")\n' +
+      '                  }\n' +
+      '                }\n' +
+      '              ]\n' +
+      '            },\n' +
+      '            select: {\n' +
+      '              reservasi_id: true\n' +
+      '            }\n' +
+      '          }\n' +
+      '        }\n' +
+      '      }\x1B[2m)\x1B[22m\n' +
+      '\n' +
+      'Argument `\x1B[1min\x1B[22m`: Invalid value provided. Expected \x1B[32mListEnumPenghuniStatusFieldRefInput\x1B[39m or \x1B[32mNull\x1B[39m, provided \x1B[31m(Null, String)\x1B[39m.\n' +
+      '    at wn (/Users/bimadharmawan/Documents/kostkita-be/node_modules/@prisma/client/runtime/library.js:29:1363)\n' +
+      '    at $n.handleRequestError (/Users/bimadharmawan/Documents/kostkita-be/node_modules/@prisma/client/runtime/library.js:121:6958)\n' +
+      '    at $n.handleAndLogRequestError (/Users/bimadharmawan/Documents/kostkita-be/node_modules/@prisma/client/runtime/library.js:121:6623)\n' +
+      '    at $n.request (/Users/bimadharmawan/Documents/kostkita-be/node_modules/@prisma/client/runtime/library.js:121:6307)\n' +
+      '    at async l (/Users/bimadharmawan/Documents/kostkita-be/node_modules/@prisma/client/runtime/library.js:130:9633)\n' +
+      '    at async KostService.getKostById (/Users/bimadharmawan/Documents/kostkita-be/src/services/kostService.js:218:18)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/kostController.js:25:22',
+    url: '/api/v1/kost/75187e0f-ad45-4b91-8e66-40819ad2f27c',
+    method: 'GET',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:35:53'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:36:43'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:36:43'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:36:43'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:36:43'
+}
+{
+  message: {
+    error: '\n' +
+      '\x1B[31mInvalid \x1B[1m`prisma.kost.findUnique()`\x1B[22m invocation in\x1B[39m\n' +
+      '\x1B[4m/Users/bimadharmawan/Documents/kostkita-be/src/services/kostService.js:219:36\x1B[24m\n' +
+      '\n' +
+      '  \x1B[2m\x1B[90m216\x1B[39m \x1B[34m}\x1B[39m\x1B[34m)\x1B[39m\x1B[34m;\x1B[39m\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m217\x1B[39m \x1B[90m// --- AKHIR Pembaruan Status ON-DEMAND ---\x1B[39m\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m218\x1B[39m \x1B[22m\n' +
+      '\x1B[1m\x1B[31m→\x1B[39m\x1B[22m \x1B[2m\x1B[90m219\x1B[39m \x1B[36mconst\x1B[39m kost = \x1B[36mawait\x1B[39m prisma\x1B[34m.\x1B[39mkost\x1B[34m.\x1B[39m\x1B[36mfindUnique\x1B[39m\x1B[34m(\x1B[39m\x1B[22m{\n' +
+      '        where: {\n' +
+      '          kost_id: "75187e0f-ad45-4b91-8e66-40819ad2f27c"\n' +
+      '        },\n' +
+      '        include: {\n' +
+      '          pengelola: {\n' +
+      '            select: {\n' +
+      '              full_name: true,\n' +
+      '              phone: true,\n' +
+      '              whatsapp_number: true\n' +
+      '            }\n' +
+      '          },\n' +
+      '          kost_fasilitas: {\n' +
+      '            include: {\n' +
+      '              fasilitas: true\n' +
+      '            }\n' +
+      '          },\n' +
+      '          tipe: {\n' +
+      '            select: {\n' +
+      '              nama_tipe: true,\n' +
+      '              ukuran: true,\n' +
+      '              kapasitas: true\n' +
+      '            }\n' +
+      '          },\n' +
+      '          reservasi: {\n' +
+      '            where: {\n' +
+      '              status: "APPROVED",\n' +
+      '              status_penghunian: {\n' +
+      '                in: [\n' +
+      '                  null,\n' +
+      '                  "AKTIF"\n' +
+      '                ]\n' +
+      '                \x1B[31m~~~~~~~~~\x1B[39m\n' +
+      '              },\n' +
+      '              OR: [\n' +
+      '                {\n' +
+      '                  tanggal_keluar: null\n' +
+      '                },\n' +
+      '                {\n' +
+      '                  tanggal_keluar: {\n' +
+      '                    gt: new Date("2025-06-17T17:00:00.000Z")\n' +
+      '                  }\n' +
+      '                }\n' +
+      '              ]\n' +
+      '            },\n' +
+      '            select: {\n' +
+      '              reservasi_id: true\n' +
+      '            }\n' +
+      '          }\n' +
+      '        }\n' +
+      '      }\x1B[2m)\x1B[22m\n' +
+      '\n' +
+      'Argument `\x1B[1min\x1B[22m`: Invalid value provided. Expected \x1B[32mListEnumPenghuniStatusFieldRefInput\x1B[39m or \x1B[32mNull\x1B[39m, provided \x1B[31m(Null, String)\x1B[39m.',
+    stack: 'PrismaClientValidationError: \n' +
+      '\x1B[31mInvalid \x1B[1m`prisma.kost.findUnique()`\x1B[22m invocation in\x1B[39m\n' +
+      '\x1B[4m/Users/bimadharmawan/Documents/kostkita-be/src/services/kostService.js:219:36\x1B[24m\n' +
+      '\n' +
+      '  \x1B[2m\x1B[90m216\x1B[39m \x1B[34m}\x1B[39m\x1B[34m)\x1B[39m\x1B[34m;\x1B[39m\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m217\x1B[39m \x1B[90m// --- AKHIR Pembaruan Status ON-DEMAND ---\x1B[39m\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m218\x1B[39m \x1B[22m\n' +
+      '\x1B[1m\x1B[31m→\x1B[39m\x1B[22m \x1B[2m\x1B[90m219\x1B[39m \x1B[36mconst\x1B[39m kost = \x1B[36mawait\x1B[39m prisma\x1B[34m.\x1B[39mkost\x1B[34m.\x1B[39m\x1B[36mfindUnique\x1B[39m\x1B[34m(\x1B[39m\x1B[22m{\n' +
+      '        where: {\n' +
+      '          kost_id: "75187e0f-ad45-4b91-8e66-40819ad2f27c"\n' +
+      '        },\n' +
+      '        include: {\n' +
+      '          pengelola: {\n' +
+      '            select: {\n' +
+      '              full_name: true,\n' +
+      '              phone: true,\n' +
+      '              whatsapp_number: true\n' +
+      '            }\n' +
+      '          },\n' +
+      '          kost_fasilitas: {\n' +
+      '            include: {\n' +
+      '              fasilitas: true\n' +
+      '            }\n' +
+      '          },\n' +
+      '          tipe: {\n' +
+      '            select: {\n' +
+      '              nama_tipe: true,\n' +
+      '              ukuran: true,\n' +
+      '              kapasitas: true\n' +
+      '            }\n' +
+      '          },\n' +
+      '          reservasi: {\n' +
+      '            where: {\n' +
+      '              status: "APPROVED",\n' +
+      '              status_penghunian: {\n' +
+      '                in: [\n' +
+      '                  null,\n' +
+      '                  "AKTIF"\n' +
+      '                ]\n' +
+      '                \x1B[31m~~~~~~~~~\x1B[39m\n' +
+      '              },\n' +
+      '              OR: [\n' +
+      '                {\n' +
+      '                  tanggal_keluar: null\n' +
+      '                },\n' +
+      '                {\n' +
+      '                  tanggal_keluar: {\n' +
+      '                    gt: new Date("2025-06-17T17:00:00.000Z")\n' +
+      '                  }\n' +
+      '                }\n' +
+      '              ]\n' +
+      '            },\n' +
+      '            select: {\n' +
+      '              reservasi_id: true\n' +
+      '            }\n' +
+      '          }\n' +
+      '        }\n' +
+      '      }\x1B[2m)\x1B[22m\n' +
+      '\n' +
+      'Argument `\x1B[1min\x1B[22m`: Invalid value provided. Expected \x1B[32mListEnumPenghuniStatusFieldRefInput\x1B[39m or \x1B[32mNull\x1B[39m, provided \x1B[31m(Null, String)\x1B[39m.\n' +
+      '    at wn (/Users/bimadharmawan/Documents/kostkita-be/node_modules/@prisma/client/runtime/library.js:29:1363)\n' +
+      '    at $n.handleRequestError (/Users/bimadharmawan/Documents/kostkita-be/node_modules/@prisma/client/runtime/library.js:121:6958)\n' +
+      '    at $n.handleAndLogRequestError (/Users/bimadharmawan/Documents/kostkita-be/node_modules/@prisma/client/runtime/library.js:121:6623)\n' +
+      '    at $n.request (/Users/bimadharmawan/Documents/kostkita-be/node_modules/@prisma/client/runtime/library.js:121:6307)\n' +
+      '    at async l (/Users/bimadharmawan/Documents/kostkita-be/node_modules/@prisma/client/runtime/library.js:130:9633)\n' +
+      '    at async KostService.getKostById (/Users/bimadharmawan/Documents/kostkita-be/src/services/kostService.js:219:18)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/kostController.js:25:22',
+    url: '/api/v1/kost/75187e0f-ad45-4b91-8e66-40819ad2f27c',
+    method: 'GET',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:36:53'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:38:32'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:38:32'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:38:57'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:38:57'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:39:01'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:39:01'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:39:06'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:39:06'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:39:08'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:39:08'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:39:11'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:39:11'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:39:13'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:39:13'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:39:16'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:39:16'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:39:18'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:39:18'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:39:22'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:39:22'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:39:28'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:39:28'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 17:40:36'
 }

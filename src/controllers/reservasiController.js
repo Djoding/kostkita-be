@@ -75,7 +75,7 @@ module.exports = {
       );
     }
 
-    const reservations = await reservasiService.getReservations(
+    const reservations = await reservasiService.getKostandReservedData(
       userId,
       filters
     );
@@ -151,5 +151,36 @@ module.exports = {
     } catch (error) {
       throw error;
     }
+  }),
+  getManagedKostReservations: asyncHandler(async (req, res) => {
+    const { kostId } = req.params;
+    const pengelolaId = req.user.user_id;
+    const userRole = req.user.role; 
+
+    if (userRole !== "PENGELOLA" && userRole !== "ADMIN") {
+      throw new AppError(
+        "Akses ditolak. Anda tidak memiliki izin untuk melihat data ini.",
+        403
+      );
+    }
+
+    if (!pengelolaId) {
+      throw new AppError(
+        "User ID pengelola tidak ditemukan. Pastikan Anda sudah login.",
+        401
+      );
+    }
+
+    const kostReservationsData =
+      await reservasiService.getManagedKostReservations(
+        kostId,
+        pengelolaId,
+        userRole
+      );
+
+    res.status(200).json({
+      message: `Data reservasi untuk Kost '${kostReservationsData.nama_kost}' berhasil diambil.`,
+      data: kostReservationsData,
+    });
   }),
 };

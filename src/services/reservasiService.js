@@ -630,9 +630,179 @@ const extendReservation = async (
   }
 };
 
+const getManagedKostReservations = async (kostId, pengelolaId, userRole) => {
+  try {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    // Pembaruan Status OTOMATIS (tetap di sini)
+    await prisma.reservasi.updateMany({
+      where: {
+        status: ReservasiStatus.APPROVED,
+        tanggal_check_in: { lte: today },
+        status_penghunian: { not: PenghuniStatus.AKTIF },
+        OR: [{ tanggal_keluar: null }, { tanggal_keluar: { gt: today } }],
+      },
+      data: { status_penghunian: PenghuniStatus.AKTIF, updated_at: new Date() },
+    });
+
+    await prisma.reservasi.updateMany({
+      where: {
+        status: ReservasiStatus.APPROVED,
+        status_penghunian: PenghuniStatus.AKTIF,
+        tanggal_keluar: { lte: today },
+      },
+      data: {
+        status_penghunian: PenghuniStatus.KELUAR,
+        updated_at: new Date(),
+      },
+    });
+
+    const kost = await prisma.kost.findUnique({
+      where: {
+        kost_id: kostId,
+      },
+      include: {
+        tipe: {
+          select: {
+            nama_tipe: true,
+          },
+        },
+        pengelola: {
+          select: {
+            user_id: true,
+          },
+        },
+        reservasi: {
+          include: {
+            user: {
+              select: {
+                user_id: true,
+                full_name: true,
+                email: true,
+                phone: true,
+              },
+            },
+          },
+          orderBy: {
+            created_at: "desc",
+          },
+        },
+      },
+    });
+
+    if (!kost) {
+      throw new AppError("Kost tidak ditemukan.", 404);
+    }
+
+    if (userRole === "PENGELOLA" && kost.pengelola.user_id !== pengelolaId) {
+      throw new AppError("Akses ditolak. Anda tidak mengelola kost ini.", 403);
+    }
+
+    const pendingUpcomingReservations = [];
+    const activeReservations = [];
+    const historyReservations = [];
+    let totalOccupiedRoomsCount = 0; // Inisialisasi counter baru untuk occupied rooms
+
+    for (const res of kost.reservasi) {
+      const reservasiData = {
+        reservasi_id: res.reservasi_id,
+        user: res.user,
+        status_reservasi: res.status,
+        status_penghunian: res.status_penghunian,
+        tanggal_check_in: res.tanggal_check_in.toISOString().split("T")[0],
+        tanggal_keluar: res.tanggal_keluar
+          ? res.tanggal_keluar.toISOString().split("T")[0]
+          : null,
+        total_harga: res.total_harga,
+        deposit_amount: res.deposit_amount,
+        catatan: res.catatan,
+        bukti_bayar: res.bukti_bayar
+          ? fileService.generateFileUrl(res.bukti_bayar)
+          : null,
+      };
+
+      const resTanggalCheckIn = new Date(res.tanggal_check_in);
+      resTanggalCheckIn.setHours(0, 0, 0, 0);
+      const resTanggalKeluar = res.tanggal_keluar
+        ? new Date(res.tanggal_keluar)
+        : null;
+      if (resTanggalKeluar) resTanggalKeluar.setHours(0, 0, 0, 0);
+
+      const isCheckInDateReached = resTanggalCheckIn <= today;
+      const isCheckOutDatePassed = resTanggalKeluar && resTanggalKeluar < today;
+
+      // Kategori: Belum Aktif / Mendatang
+      if (
+        res.status === ReservasiStatus.PENDING ||
+        (res.status === ReservasiStatus.APPROVED && !isCheckInDateReached)
+      ) {
+        pendingUpcomingReservations.push(reservasiData);
+      }
+      // Kategori: Aktif Saat Ini
+      else if (
+        res.status === ReservasiStatus.APPROVED &&
+        res.status_penghunian === PenghuniStatus.AKTIF &&
+        isCheckInDateReached &&
+        !isCheckOutDatePassed
+      ) {
+        activeReservations.push(reservasiData);
+      }
+      // Kategori: Riwayat / Selesai
+      else if (
+        res.status === ReservasiStatus.REJECTED ||
+        (res.status === ReservasiStatus.APPROVED &&
+          res.status_penghunian === PenghuniStatus.KELUAR) ||
+        (res.status === ReservasiStatus.APPROVED && isCheckOutDatePassed)
+      ) {
+        historyReservations.push(reservasiData);
+      }
+
+      // --- Logika untuk total_occupied_rooms ---
+      // Reservasi yang sudah APPROVED dan belum KELUAR dianggap occupied
+      if (
+        res.status === ReservasiStatus.APPROVED &&
+        (res.status_penghunian === null ||
+          res.status_penghunian === PenghuniStatus.AKTIF) &&
+        (!resTanggalKeluar || resTanggalKeluar >= today) // Tanggal keluar belum lewat atau belum ditentukan
+      ) {
+        totalOccupiedRoomsCount++;
+      }
+      // --- Akhir Logika untuk total_occupied_rooms ---
+    }
+
+    // Menggunakan totalOccupiedRoomsCount yang baru dihitung
+    const availableRooms = kost.total_kamar - totalOccupiedRoomsCount;
+
+    return {
+      kost_id: kost.kost_id,
+      nama_kost: kost.nama_kost,
+      alamat: kost.alamat,
+      foto_kost: kost.foto_kost
+        ? kost.foto_kost.map((url) => fileService.generateFileUrl(url))
+        : [],
+      total_kamar: kost.total_kamar,
+      tipe_kost: kost.tipe.nama_tipe,
+      total_occupied_rooms: totalOccupiedRoomsCount, // Menggunakan counter baru
+      available_rooms: availableRooms,
+      reservations: {
+        pending_upcoming: pendingUpcomingReservations,
+        active: activeReservations,
+        history: historyReservations,
+      },
+    };
+  } catch (error) {
+    console.error("Error in getManagedKostReservations:", error);
+    throw new AppError(
+      `Gagal mengambil data reservasi kost: ${error.message}`,
+      500
+    );
+  }
+};
 module.exports = {
   createReservation,
   getKostandReservedData,
   updateReservationStatus,
   extendReservation,
+  getManagedKostReservations,
 };
