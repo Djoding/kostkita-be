@@ -5,9 +5,6 @@ const logger = require("../config/logger");
 const { ReservasiStatus, PenghuniStatus, Prisma } = require("@prisma/client");
 
 class KostService {
-  /**
-   * Get All Kost
-   */
   async getAllKost(nama_kost) {
     const where = {};
     if (nama_kost) {
@@ -41,9 +38,6 @@ class KostService {
     return kost;
   }
 
-  /**
-   * Create Kost
-   */
   async createKost(data) {
     const {
       pengelola_id,
@@ -65,8 +59,10 @@ class KostService {
       rekening_info,
       harga_bulanan,
       deposit,
-      harga_final, // ✅ tambahkan ini
-      tipe_id, // ✅ jangan lupa, karena ini field relasi wajib juga
+      harga_final,
+      tipe_id,
+      fasilitas_ids = [],
+      peraturan_data = [],
     } = data;
 
     const pengelola = await prisma.users.findFirst({
@@ -76,102 +72,222 @@ class KostService {
       },
     });
 
-    if (!pengelola) {
-      throw new AppError("Pengelola not found or invalid role", 404);
+    if (!pengelola) throw new AppError("Pengelola not found or invalid role", 404);
+
+    const tipeKamar = await prisma.masterTipeKamar.findFirst({
+      where: {
+        tipe_id,
+        is_active: true,
+      },
+    });
+    if (!tipeKamar) throw new AppError("Tipe kamar not found or inactive", 404);
+
+    if (fasilitas_ids.length > 0) {
+      const fasilitasCount = await prisma.masterFasilitas.count({
+        where: {
+          fasilitas_id: { in: fasilitas_ids },
+          is_active: true,
+        },
+      });
+      if (fasilitasCount !== fasilitas_ids.length) {
+        throw new AppError("Some fasilitas not found or inactive", 400);
+      }
+    }
+
+    if (peraturan_data.length > 0) {
+      const peraturanIds = peraturan_data.map((p) => p.peraturan_id);
+      const peraturanCount = await prisma.masterPeraturan.count({
+        where: {
+          peraturan_id: { in: peraturanIds },
+          is_active: true,
+        },
+      });
+      if (peraturanCount !== peraturanIds.length) {
+        throw new AppError("Some peraturan not found or inactive", 400);
+      }
     }
 
     const existingKost = await prisma.kost.findFirst({
       where: {
         nama_kost,
         alamat,
+        pengelola_id,
       },
     });
 
     if (existingKost) {
-      throw new AppError("Kost already exists at this location", 409);
+      throw new AppError("Kost with same name and address already exists", 409);
     }
 
-    const kost = await prisma.kost.create({
-      data: {
-        pengelola_id,
-        tipe_id, // ✅ relasi ke MasterTipeKamar
-        nama_kost,
-        alamat,
-        gmaps_link,
-        deskripsi,
-        total_kamar,
-        daya_listrik,
-        sumber_air,
-        wifi_speed,
-        kapasitas_parkir_motor: kapasitas_parkir_motor || 0,
-        kapasitas_parkir_mobil: kapasitas_parkir_mobil || 0,
-        kapasitas_parkir_sepeda: kapasitas_parkir_sepeda || 0,
-        biaya_tambahan: biaya_tambahan
-          ? new Prisma.Decimal(biaya_tambahan)
-          : undefined,
-        jam_survey,
-        foto_kost: foto_kost || [],
-        qris_image,
-        rekening_info,
-        harga_bulanan: new Prisma.Decimal(harga_bulanan), // ✅ konversi ke Decimal
-        deposit: deposit ? new Prisma.Decimal(deposit) : undefined, // optional
-        harga_final: new Prisma.Decimal(harga_final),
-        is_approved: false,
-      },
-      include: {
-        pengelola: {
-          select: {
-            full_name: true,
-            phone: true,
+    const result = await prisma.$transaction(async (tx) => {
+      const kost = await tx.kost.create({
+        data: {
+          pengelola_id,
+          tipe_id,
+          nama_kost,
+          alamat,
+          gmaps_link,
+          deskripsi,
+          total_kamar,
+          daya_listrik,
+          sumber_air,
+          wifi_speed,
+          kapasitas_parkir_motor: kapasitas_parkir_motor || 0,
+          kapasitas_parkir_mobil: kapasitas_parkir_mobil || 0,
+          kapasitas_parkir_sepeda: kapasitas_parkir_sepeda || 0,
+          biaya_tambahan: biaya_tambahan ? new Prisma.Decimal(biaya_tambahan) : null,
+          jam_survey,
+          foto_kost: foto_kost || [],
+          qris_image,
+          rekening_info,
+          harga_bulanan: new Prisma.Decimal(harga_bulanan),
+          deposit: deposit ? new Prisma.Decimal(deposit) : null,
+          harga_final: new Prisma.Decimal(harga_final),
+          is_approved: false,
+        },
+      });
+
+      if (fasilitas_ids.length > 0) {
+        await tx.kostFasilitas.createMany({
+          data: fasilitas_ids.map((id) => ({ kost_id: kost.kost_id, fasilitas_id: id })),
+        });
+      }
+
+      if (peraturan_data.length > 0) {
+        await tx.kostPeraturan.createMany({
+          data: peraturan_data.map((p) => ({
+            kost_id: kost.kost_id,
+            peraturan_id: p.peraturan_id,
+            keterangan_tambahan: p.keterangan_tambahan || null,
+          })),
+        });
+      }
+
+      return await tx.kost.findUnique({
+        where: { kost_id: kost.kost_id },
+        include: {
+          pengelola: { select: { full_name: true, phone: true, whatsapp_number: true } },
+          tipe: { select: { nama_tipe: true, ukuran: true, kapasitas: true } },
+          kost_fasilitas: {
+            include: {
+              fasilitas: true,
+            },
+          },
+          kost_peraturan: {
+            include: {
+              peraturan: true,
+            },
           },
         },
-      },
+      });
     });
 
     logger.info(`New kost created: ${nama_kost} by ${pengelola.full_name}`);
-    return kost;
+    return result;
   }
 
-  /**
-   * Update Kost
-   */
   async updateKost(kostId, data) {
-    const kost = await prisma.kost.findUnique({
-      where: { kost_id: kostId },
-    });
+    const kost = await prisma.kost.findUnique({ where: { kost_id: kostId } });
+    if (!kost) throw new AppError("Kost not found", 404);
 
-    if (!kost) {
-      throw new AppError("Kost not found", 404);
-    }
+    const {
+      nama_kost,
+      alamat,
+      gmaps_link,
+      deskripsi,
+      total_kamar,
+      daya_listrik,
+      sumber_air,
+      wifi_speed,
+      kapasitas_parkir_motor,
+      kapasitas_parkir_mobil,
+      kapasitas_parkir_sepeda,
+      biaya_tambahan,
+      jam_survey,
+      foto_kost,
+      qris_image,
+      rekening_info,
+      harga_bulanan,
+      deposit,
+      harga_final,
+      tipe_id,
+      fasilitas_ids,
+      peraturan_data,
+    } = data;
 
-    const updatedKost = await prisma.kost.update({
-      where: { kost_id: kostId },
-      data,
-      include: {
-        pengelola: {
-          select: {
-            full_name: true,
-            phone: true,
-          },
+    const result = await prisma.$transaction(async (tx) => {
+      const updateData = {
+        ...(nama_kost && { nama_kost }),
+        ...(alamat && { alamat }),
+        ...(gmaps_link && { gmaps_link }),
+        ...(deskripsi && { deskripsi }),
+        ...(total_kamar !== undefined && { total_kamar }),
+        ...(daya_listrik && { daya_listrik }),
+        ...(sumber_air && { sumber_air }),
+        ...(wifi_speed && { wifi_speed }),
+        ...(kapasitas_parkir_motor !== undefined && { kapasitas_parkir_motor }),
+        ...(kapasitas_parkir_mobil !== undefined && { kapasitas_parkir_mobil }),
+        ...(kapasitas_parkir_sepeda !== undefined && { kapasitas_parkir_sepeda }),
+        ...(biaya_tambahan !== undefined && {
+          biaya_tambahan: biaya_tambahan ? new Prisma.Decimal(biaya_tambahan) : null,
+        }),
+        ...(jam_survey && { jam_survey }),
+        ...(foto_kost && { foto_kost }),
+        ...(qris_image && { qris_image }),
+        ...(rekening_info && { rekening_info }),
+        ...(harga_bulanan && { harga_bulanan: new Prisma.Decimal(harga_bulanan) }),
+        ...(deposit !== undefined && {
+          deposit: deposit ? new Prisma.Decimal(deposit) : null,
+        }),
+        ...(harga_final && { harga_final: new Prisma.Decimal(harga_final) }),
+        ...(tipe_id && { tipe_id }),
+      };
+
+      await tx.kost.update({
+        where: { kost_id: kostId },
+        data: updateData,
+      });
+
+      if (fasilitas_ids !== undefined) {
+        await tx.kostFasilitas.deleteMany({ where: { kost_id: kostId } });
+        if (fasilitas_ids.length > 0) {
+          await tx.kostFasilitas.createMany({
+            data: fasilitas_ids.map((id) => ({ kost_id: kostId, fasilitas_id: id })),
+          });
+        }
+      }
+
+      if (peraturan_data !== undefined) {
+        await tx.kostPeraturan.deleteMany({ where: { kost_id: kostId } });
+        if (peraturan_data.length > 0) {
+          await tx.kostPeraturan.createMany({
+            data: peraturan_data.map((p) => ({
+              kost_id: kostId,
+              peraturan_id: p.peraturan_id,
+              keterangan_tambahan: p.keterangan_tambahan || null,
+            })),
+          });
+        }
+      }
+
+      return await tx.kost.findUnique({
+        where: { kost_id: kostId },
+        include: {
+          pengelola: { select: { full_name: true, phone: true, whatsapp_number: true } },
+          tipe: { select: { nama_tipe: true, ukuran: true, kapasitas: true } },
+          kost_fasilitas: { include: { fasilitas: true } },
+          kost_peraturan: { include: { peraturan: true } },
         },
-      },
+      });
     });
 
     logger.info(`Kost updated: ${kostId}`);
-    return updatedKost;
+    return result;
   }
 
-  /**
-   * Delete Kost
-   */
   async deleteKost(kostId) {
-    const kost = await prisma.kost.findUnique({
-      where: { kost_id: kostId },
-    });
-
-    if (!kost) {
-      throw new AppError("Kost not found", 404);
-    }
+    const kost = await prisma.kost.findUnique({ where: { kost_id: kostId } });
+    if (!kost) throw new AppError("Kost not found", 404);
 
     await prisma.kost.update({
       where: { kost_id: kostId },
@@ -182,9 +298,6 @@ class KostService {
     return true;
   }
 
-  /**
-   * Get Kost by ID
-   */
   async getKostById(kostId) {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -196,7 +309,10 @@ class KostService {
         status_penghunian: { not: PenghuniStatus.AKTIF },
         OR: [{ tanggal_keluar: null }, { tanggal_keluar: { gt: today } }],
       },
-      data: { status_penghunian: PenghuniStatus.AKTIF, updated_at: new Date() },
+      data: {
+        status_penghunian: PenghuniStatus.AKTIF,
+        updated_at: new Date(),
+      },
     });
 
     await prisma.reservasi.updateMany({
@@ -215,23 +331,13 @@ class KostService {
       where: { kost_id: kostId },
       include: {
         pengelola: {
-          select: {
-            full_name: true,
-            phone: true,
-            whatsapp_number: true,
-          },
+          select: { full_name: true, phone: true, whatsapp_number: true },
         },
         kost_fasilitas: {
-          include: {
-            fasilitas: true,
-          },
+          include: { fasilitas: true },
         },
         tipe: {
-          select: {
-            nama_tipe: true,
-            ukuran: true,
-            kapasitas: true,
-          },
+          select: { nama_tipe: true, ukuran: true, kapasitas: true },
         },
         reservasi: {
           where: {
@@ -254,18 +360,13 @@ class KostService {
       },
     });
 
-    if (!kost) {
-      throw new AppError("Kost not found", 404);
-    }
+    if (!kost) throw new AppError("Kost not found", 404);
 
     const totalOccupiedRooms = kost.reservasi.length;
     const availableRooms = kost.total_kamar - totalOccupiedRooms;
 
     const { reservasi, ...kostWithoutReservations } = kost;
-
-    const formattedFotoKost = kost.foto_kost
-      ? kost.foto_kost.map((url) => fileService.generateFileUrl(url))
-      : [];
+    const formattedFotoKost = kost.foto_kost?.map((url) => fileService.generateFileUrl(url)) || [];
 
     return {
       ...kostWithoutReservations,
@@ -275,12 +376,8 @@ class KostService {
     };
   }
 
-  /**
-   * Get Kost by Owner (Pengelola)
-   */
-
   async getKostByOwner(user_id, query) {
-    const { nama_kost } = query; // ambil dari query string jika ada
+    const { nama_kost } = query;
     const where = {
       pengelola_id: user_id,
     };
@@ -292,26 +389,18 @@ class KostService {
       };
     }
 
-    const kost = await prisma.kost.findMany({
+    return prisma.kost.findMany({
       where,
       include: {
         pengelola: {
-          select: {
-            full_name: true,
-            phone: true,
-            whatsapp_number: true,
-          },
+          select: { full_name: true, phone: true, whatsapp_number: true },
         },
         kost_fasilitas: {
-          include: {
-            fasilitas: true,
-          },
+          include: { fasilitas: true },
         },
       },
       orderBy: [{ nama_kost: "asc" }, { alamat: "asc" }],
     });
-
-    return kost;
   }
 }
 
