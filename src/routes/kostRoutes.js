@@ -7,6 +7,20 @@ const kostValidator = require('../validators/kostValidator');
 const router = express.Router();
 
 router.get('/', kostController.getAllKost);
+
+router.get(
+    '/:kost_id/fasilitas',
+    validateUUID('kost_id'),
+    kostController.getFasilitasByKostId
+  );
+
+
+
+router.get('/:kost_id/peraturan',
+  validateUUID('kost_id'),
+  kostController.getPeraturanByKostId
+);
+
 router.get('/owner',
     authenticateJWT,
     authorize('PENGELOLA'),
