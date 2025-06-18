@@ -402,6 +402,51 @@ class KostService {
       orderBy: [{ nama_kost: "asc" }, { alamat: "asc" }],
     });
   }
+
+  /* ---------- NEW: LIST FASILITAS BY KOST ---------- */
+  async getFasilitasByKostId(kost_id) {
+    const kost = await prisma.kost.findUnique({
+      where: { kost_id },
+      include: {
+        kost_fasilitas: {
+          include: {
+            fasilitas: true
+          }
+        }
+      }
+    });
+  
+    if (!kost) throw new AppError('Kost not found', 404);
+  
+    return {
+      nama_kost: kost.nama_kost,
+      fasilitas: kost.kost_fasilitas.map((kf) => kf.fasilitas)
+    };
+  }
+
+  async getPeraturanByKostId(kost_id) {
+    const kost = await prisma.kost.findUnique({
+      where: { kost_id },
+      include: {
+        kost_peraturan: {
+          include: {
+            peraturan: true
+          }
+        }
+      }
+    });
+  
+    if (!kost) throw new AppError('Kost not found', 404);
+  
+    return {
+      nama_kost: kost.nama_kost,
+      peraturan: kost.kost_peraturan.map((kp) => ({
+        ...kp.peraturan,
+        keterangan_tambahan: kp.keterangan_tambahan || null
+      }))
+    };
+  }
+  
 }
 
 module.exports = new KostService();
