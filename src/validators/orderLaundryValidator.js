@@ -1,6 +1,6 @@
 const { query, body, validationResult } = require("express-validator");
 
-const validateGetCateringHistory = [
+const validateGetLaundryHistory = [
   query("kostId")
     .optional()
     .isUUID()
@@ -14,29 +14,32 @@ const validateGetCateringHistory = [
   },
 ];
 
-const validateCreateCateringOrderWithPayment = [
+const validateCreateLaundryOrderWithPayment = [
   body("items")
     .notEmpty()
-    .withMessage("Daftar menu tidak boleh kosong")
+    .withMessage("Daftar layanan laundry tidak boleh kosong")
     .isArray({ min: 1 })
-    .withMessage("Daftar menu harus berupa array dengan minimal satu item"),
+    .withMessage(
+      "Daftar layanan laundry harus berupa array dengan minimal satu item"
+    ),
 
-  body("items.*.menu_id")
+  body("items.*.layanan_id")
     .notEmpty()
-    .withMessage("Menu ID setiap item tidak boleh kosong")
+    .withMessage("Layanan ID setiap item tidak boleh kosong")
     .isUUID()
-    .withMessage("Menu ID setiap item harus berupa UUID yang valid"),
-  body("items.*.jumlah_porsi")
+    .withMessage("Layanan ID setiap item harus berupa UUID yang valid"),
+  body("items.*.jumlah_satuan")
     .notEmpty()
-    .withMessage("Jumlah porsi setiap item tidak boleh kosong")
+    .withMessage("Jumlah satuan setiap item tidak boleh kosong")
     .isInt({ min: 1 })
-    .withMessage("Jumlah porsi setiap item harus berupa angka dan minimal 1"),
+    .withMessage("Jumlah satuan setiap item harus berupa angka dan minimal 1"),
 
   body("metode_bayar")
     .notEmpty()
     .withMessage("Metode bayar tidak boleh kosong")
     .isIn(["QRIS", "TRANSFER"])
     .withMessage("Metode bayar tidak valid"),
+
   body("catatan")
     .optional()
     .isString()
@@ -52,6 +55,6 @@ const validateCreateCateringOrderWithPayment = [
 ];
 
 module.exports = {
-  validateGetCateringHistory,
-  validateCreateCateringOrderWithPayment,
+  validateGetLaundryHistory,
+  validateCreateLaundryOrderWithPayment,
 };

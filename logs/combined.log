@@ -3670,3 +3670,979 @@
   service: 'kosan-api',
   timestamp: '2025-06-17 10:52:49'
 }
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 21:33:33'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 21:33:33'
+}
+{
+  message: {
+    error: '\n' +
+      '\x1B[31mInvalid \x1B[1m`prisma.kost.findUnique()`\x1B[22m invocation in\x1B[39m\n' +
+      '\x1B[4mC:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\services\\kostService.js:169:40\x1B[24m\n' +
+      '\n' +
+      '  \x1B[2m\x1B[90m166\x1B[39m  * Get Kost by ID\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m167\x1B[39m  */\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m168\x1B[39m \x1B[36masync\x1B[39m \x1B[36mgetKostById\x1B[39m\x1B[34m(\x1B[39mkostId\x1B[34m)\x1B[39m \x1B[34m{\x1B[39m\x1B[22m\n' +
+      '\x1B[1m\x1B[31m→\x1B[39m\x1B[22m \x1B[2m\x1B[90m169\x1B[39m     \x1B[36mconst\x1B[39m kost = \x1B[36mawait\x1B[39m prisma\x1B[34m.\x1B[39mkost\x1B[34m.\x1B[39m\x1B[36mfindUnique\x1B[39m\x1B[34m(\x1B[39m\x1B[22m{\n' +
+      '            where: {\n' +
+      '              kost_id: "47e9935d-15fd-4e3b-9c4c-00a0edf83abb"\n' +
+      '            },\n' +
+      '            include: {\n' +
+      '              pengelola: {\n' +
+      '                select: {\n' +
+      '                  full_name: true,\n' +
+      '                  phone: true,\n' +
+      '                  whatsapp_number: true\n' +
+      '                }\n' +
+      '              },\n' +
+      '              kost_fasilitas: {\n' +
+      '                include: {\n' +
+      '                  fasilitas: true\n' +
+      '                }\n' +
+      '              },\n' +
+      '              \x1B[31mkamar\x1B[39m: {\n' +
+      '              \x1B[31m~~~~~\x1B[39m\n' +
+      '                include: {\n' +
+      '                  tipe: true\n' +
+      '                }\n' +
+      '              },\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mtipe\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mcatering\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mlaundry\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mkost_peraturan\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mreservasi\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m\n' +
+      '            }\n' +
+      '          }\x1B[2m)\x1B[22m\n' +
+      '\n' +
+      'Unknown field \x1B[31m`kamar`\x1B[39m for \x1B[1minclude\x1B[22m statement on model \x1B[1m`Kost`\x1B[22m. Available options are listed in \x1B[32mgreen\x1B[39m.',
+    stack: 'PrismaClientValidationError: \n' +
+      '\x1B[31mInvalid \x1B[1m`prisma.kost.findUnique()`\x1B[22m invocation in\x1B[39m\n' +
+      '\x1B[4mC:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\services\\kostService.js:169:40\x1B[24m\n' +
+      '\n' +
+      '  \x1B[2m\x1B[90m166\x1B[39m  * Get Kost by ID\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m167\x1B[39m  */\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m168\x1B[39m \x1B[36masync\x1B[39m \x1B[36mgetKostById\x1B[39m\x1B[34m(\x1B[39mkostId\x1B[34m)\x1B[39m \x1B[34m{\x1B[39m\x1B[22m\n' +
+      '\x1B[1m\x1B[31m→\x1B[39m\x1B[22m \x1B[2m\x1B[90m169\x1B[39m     \x1B[36mconst\x1B[39m kost = \x1B[36mawait\x1B[39m prisma\x1B[34m.\x1B[39mkost\x1B[34m.\x1B[39m\x1B[36mfindUnique\x1B[39m\x1B[34m(\x1B[39m\x1B[22m{\n' +
+      '            where: {\n' +
+      '              kost_id: "47e9935d-15fd-4e3b-9c4c-00a0edf83abb"\n' +
+      '            },\n' +
+      '            include: {\n' +
+      '              pengelola: {\n' +
+      '                select: {\n' +
+      '                  full_name: true,\n' +
+      '                  phone: true,\n' +
+      '                  whatsapp_number: true\n' +
+      '                }\n' +
+      '              },\n' +
+      '              kost_fasilitas: {\n' +
+      '                include: {\n' +
+      '                  fasilitas: true\n' +
+      '                }\n' +
+      '              },\n' +
+      '              \x1B[31mkamar\x1B[39m: {\n' +
+      '              \x1B[31m~~~~~\x1B[39m\n' +
+      '                include: {\n' +
+      '                  tipe: true\n' +
+      '                }\n' +
+      '              },\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mtipe\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mcatering\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mlaundry\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mkost_peraturan\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mreservasi\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m\n' +
+      '            }\n' +
+      '          }\x1B[2m)\x1B[22m\n' +
+      '\n' +
+      'Unknown field \x1B[31m`kamar`\x1B[39m for \x1B[1minclude\x1B[22m statement on model \x1B[1m`Kost`\x1B[22m. Available options are listed in \x1B[32mgreen\x1B[39m.\n' +
+      '    at wn (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:29:1363)\n' +
+      '    at $n.handleRequestError (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:121:6958)\n' +
+      '    at $n.handleAndLogRequestError (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:121:6623)\n' +
+      '    at $n.request (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:121:6307)\n' +
+      '    at async l (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:130:9633)\n' +
+      '    at async KostService.getKostById (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\services\\kostService.js:169:22)\n' +
+      '    at async C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\controllers\\kostController.js:25:22',
+    url: '/api/v1/kost/47e9935d-15fd-4e3b-9c4c-00a0edf83abb',
+  timestamp: '2025-06-17 11:00:45'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:00:46'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:11:18'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:11:18'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:11:32'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:12:32'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:12:32'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:12:43'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:12:43'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:12:49'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:12:49'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:12:51'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:12:51'
+}
+{
+  message: {
+    error: 'Penghuni tidak memiliki reservasi aktif di kost ini atau kostId tidak valid.',
+    stack: 'Error: Penghuni tidak memiliki reservasi aktif di kost ini atau kostId tidak valid.\n' +
+      '    at Object.getLaundryHistoryForTenant (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:20:15)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:17:21',
+    url: '/api/v1/order/laundry?kostId=e328531f-6544-4898-b950-4b5a5507e1ef',
+    method: 'GET',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:10:54'
+}
+{
+  message: {
+    error: '\n' +
+      '\x1B[31mInvalid \x1B[1m`prisma.kost.findUnique()`\x1B[22m invocation in\x1B[39m\n' +
+      '\x1B[4mC:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\services\\kostService.js:169:40\x1B[24m\n' +
+      '\n' +
+      '  \x1B[2m\x1B[90m166\x1B[39m  * Get Kost by ID\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m167\x1B[39m  */\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m168\x1B[39m \x1B[36masync\x1B[39m \x1B[36mgetKostById\x1B[39m\x1B[34m(\x1B[39mkostId\x1B[34m)\x1B[39m \x1B[34m{\x1B[39m\x1B[22m\n' +
+      '\x1B[1m\x1B[31m→\x1B[39m\x1B[22m \x1B[2m\x1B[90m169\x1B[39m     \x1B[36mconst\x1B[39m kost = \x1B[36mawait\x1B[39m prisma\x1B[34m.\x1B[39mkost\x1B[34m.\x1B[39m\x1B[36mfindUnique\x1B[39m\x1B[34m(\x1B[39m\x1B[22m{\n' +
+      '            where: {\n' +
+      '              kost_id: "5a718afc-5fc8-48ed-959f-c5932e7a6d74"\n' +
+      '            },\n' +
+      '            include: {\n' +
+      '              pengelola: {\n' +
+      '                select: {\n' +
+      '                  full_name: true,\n' +
+      '                  phone: true,\n' +
+      '                  whatsapp_number: true\n' +
+      '                }\n' +
+      '              },\n' +
+      '              kost_fasilitas: {\n' +
+      '                include: {\n' +
+      '                  fasilitas: true\n' +
+      '                }\n' +
+      '              },\n' +
+      '              \x1B[31mkamar\x1B[39m: {\n' +
+      '              \x1B[31m~~~~~\x1B[39m\n' +
+      '                include: {\n' +
+      '                  tipe: true\n' +
+      '                }\n' +
+      '              },\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mtipe\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mcatering\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mlaundry\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mkost_peraturan\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mreservasi\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m\n' +
+      '            }\n' +
+      '          }\x1B[2m)\x1B[22m\n' +
+      '\n' +
+      'Unknown field \x1B[31m`kamar`\x1B[39m for \x1B[1minclude\x1B[22m statement on model \x1B[1m`Kost`\x1B[22m. Available options are listed in \x1B[32mgreen\x1B[39m.',
+    stack: 'PrismaClientValidationError: \n' +
+      '\x1B[31mInvalid \x1B[1m`prisma.kost.findUnique()`\x1B[22m invocation in\x1B[39m\n' +
+      '\x1B[4mC:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\services\\kostService.js:169:40\x1B[24m\n' +
+      '\n' +
+      '  \x1B[2m\x1B[90m166\x1B[39m  * Get Kost by ID\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m167\x1B[39m  */\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m168\x1B[39m \x1B[36masync\x1B[39m \x1B[36mgetKostById\x1B[39m\x1B[34m(\x1B[39mkostId\x1B[34m)\x1B[39m \x1B[34m{\x1B[39m\x1B[22m\n' +
+      '\x1B[1m\x1B[31m→\x1B[39m\x1B[22m \x1B[2m\x1B[90m169\x1B[39m     \x1B[36mconst\x1B[39m kost = \x1B[36mawait\x1B[39m prisma\x1B[34m.\x1B[39mkost\x1B[34m.\x1B[39m\x1B[36mfindUnique\x1B[39m\x1B[34m(\x1B[39m\x1B[22m{\n' +
+      '            where: {\n' +
+      '              kost_id: "5a718afc-5fc8-48ed-959f-c5932e7a6d74"\n' +
+      '            },\n' +
+      '            include: {\n' +
+      '              pengelola: {\n' +
+      '                select: {\n' +
+      '                  full_name: true,\n' +
+      '                  phone: true,\n' +
+      '                  whatsapp_number: true\n' +
+      '                }\n' +
+      '              },\n' +
+      '              kost_fasilitas: {\n' +
+      '                include: {\n' +
+      '                  fasilitas: true\n' +
+      '                }\n' +
+      '              },\n' +
+      '              \x1B[31mkamar\x1B[39m: {\n' +
+      '              \x1B[31m~~~~~\x1B[39m\n' +
+      '                include: {\n' +
+      '                  tipe: true\n' +
+      '                }\n' +
+      '              },\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mtipe\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mcatering\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mlaundry\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mkost_peraturan\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m   \x1B[32mreservasi\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m\n' +
+      '            }\n' +
+      '          }\x1B[2m)\x1B[22m\n' +
+      '\n' +
+      'Unknown field \x1B[31m`kamar`\x1B[39m for \x1B[1minclude\x1B[22m statement on model \x1B[1m`Kost`\x1B[22m. Available options are listed in \x1B[32mgreen\x1B[39m.\n' +
+      '    at wn (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:29:1363)\n' +
+      '    at $n.handleRequestError (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:121:6958)\n' +
+      '    at $n.handleAndLogRequestError (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:121:6623)\n' +
+      '    at $n.request (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:121:6307)\n' +
+      '    at async l (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:130:9633)\n' +
+      '    at async KostService.getKostById (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\services\\kostService.js:169:22)\n' +
+      '    at async C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\controllers\\kostController.js:25:22',
+    url: '/api/v1/kost/5a718afc-5fc8-48ed-959f-c5932e7a6d74',
+    method: 'GET',
+    
+    
+    
+  timestamp: '2025-06-17 11:13:34'
+}
+{
+  message: {
+    error: `Unexpected token 'o', "[object Obj"... is not valid JSON`,
+    stack: `SyntaxError: Unexpected token 'o', "[object Obj"... is not valid JSON\n` +
+      '    at JSON.parse (<anonymous>)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:32\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/middleware/errorHandler.js:22:25\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at handleValidationErrors (/Users/bimadharmawan/Documents/kostkita-be/src/middleware/validation.js:32:5)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at validateCreateLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/validators/orderLaundryValidator.js:53:5)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)',
+    url: '/api/v1/order/laundry',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:22:52'
+}
+{
+  message: {
+    error: `Unexpected token 'o', "[object Obj"... is not valid JSON`,
+    stack: `SyntaxError: Unexpected token 'o', "[object Obj"... is not valid JSON\n` +
+      '    at JSON.parse (<anonymous>)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:32\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/middleware/errorHandler.js:22:25\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at handleValidationErrors (/Users/bimadharmawan/Documents/kostkita-be/src/middleware/validation.js:32:5)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at validateCreateLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/validators/orderLaundryValidator.js:53:5)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)',
+    url: '/api/v1/order/laundry',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+
+  timestamp: '2025-06-17 22:11:31'
+  timestamp: '2025-06-17 11:24:00'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:26:11'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:26:11'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+
+  timestamp: '2025-06-17 22:18:05'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:18:05'
+}
+{
+  service: 'kosan-api',
+  path: '/login',
+  method: 'POST',
+  errors: [
+    {
+      field: 'email',
+      message: 'Please provide a valid email',
+      value: undefined,
+      location: 'body'
+    },
+    {
+      field: 'password',
+      message: 'Password is required',
+      value: undefined,
+      location: 'body'
+    }
+  ],
+  body: { email: '@' },
+  level: 'warn',
+  message: 'Validation errors:',
+  timestamp: '2025-06-17 22:20:18'
+}
+{
+  message: 'User logged in: pengelola1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:25:36'
+}
+{
+  message: 'User logged in: pengelola1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:29:30'
+}
+{
+  service: 'kosan-api',
+  path: '/',
+  method: 'POST',
+  errors: [
+    {
+      field: 'pengelola_id',
+      message: 'Valid pengelola ID required',
+      value: undefined,
+      location: 'body'
+    }
+  ],
+  body: {
+    nama_kost: 'Kost Mawar',
+    alamat: 'Jl. Mawar No. 1',
+    total_kamar: 10,
+    gmaps_link: 'https://maps.google.com/example',
+    deskripsi: 'Kost strategis dekat kampus',
+    kapasitas_parkir_motor: 5,
+    kapasitas_parkir_mobil: 2,
+    biaya_tambahan: 100000,
+    daya_listrik: '1300 VA',
+    sumber_air: 'PDAM',
+    wifi_speed: '30 Mbps',
+    jam_survey: '08:00 - 16:00',
+    foto_kost: [
+      'https://example.com/foto1.jpg',
+      'https://example.com/foto2.jpg'
+    ],
+    qris_image: 'https://example.com/qris.png',
+    rekening_info: { bank: 'BCA', nomor: '1234567890', nama: 'Nama Pemilik' },
+    tipe_id: '1a44be6b-5289-45d6-9de4-076a4a1aa787',
+    harga_bulanan: 800000,
+    deposit: 500000,
+    harga_final: 1300000
+  },
+  level: 'warn',
+  message: 'Validation errors:',
+  timestamp: '2025-06-17 22:29:45'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:32:40'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:32:40'
+}
+{
+  message: {
+    error: '\n' +
+      '\x1B[31mInvalid \x1B[1m`prisma.kost.create()`\x1B[22m invocation in\x1B[39m\n' +
+      '\x1B[4mC:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\services\\kostService.js:80:40\x1B[24m\n' +
+      '\n' +
+      "  \x1B[2m\x1B[90m77\x1B[39m     \x1B[36mthrow\x1B[39m \x1B[36mnew\x1B[39m AppError\x1B[34m(\x1B[39m\x1B[1m\x1B[32m'Kost already exists at this location'\x1B[39m\x1B[22m\x1B[2m\x1B[34m,\x1B[39m \x1B[36m409\x1B[39m\x1B[34m)\x1B[39m\x1B[34m;\x1B[39m\x1B[22m\n" +
+      '  \x1B[2m\x1B[90m78\x1B[39m \x1B[34m}\x1B[39m\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m79\x1B[39m \x1B[22m\n' +
+      '\x1B[1m\x1B[31m→\x1B[39m\x1B[22m \x1B[2m\x1B[90m80\x1B[39m \x1B[36mconst\x1B[39m kost = \x1B[36mawait\x1B[39m prisma\x1B[34m.\x1B[39mkost\x1B[34m.\x1B[39m\x1B[36mcreate\x1B[39m\x1B[34m(\x1B[39m\x1B[22m{\n' +
+      '       data: {\n' +
+      '         pengelola_id: "417d9c15-98a1-4d85-bb70-827bc441f2c1",\n' +
+      '         nama_kost: "Kost Mawar",\n' +
+      '         alamat: "Jl. Mawar No. 1",\n' +
+      '         gmaps_link: "https://maps.google.com/example",\n' +
+      '         deskripsi: "Kost strategis dekat kampus",\n' +
+      '         total_kamar: 10,\n' +
+      '         daya_listrik: "1300 VA",\n' +
+      '         sumber_air: "PDAM",\n' +
+      '         wifi_speed: "30 Mbps",\n' +
+      '         kapasitas_parkir_motor: 5,\n' +
+      '         kapasitas_parkir_mobil: 2,\n' +
+      '         kapasitas_parkir_sepeda: 0,\n' +
+      '         biaya_tambahan: 100000,\n' +
+      '         jam_survey: "08:00 - 16:00",\n' +
+      '         foto_kost: [\n' +
+      '           "https://example.com/foto1.jpg",\n' +
+      '           "https://example.com/foto2.jpg"\n' +
+      '         ],\n' +
+      '         qris_image: "https://example.com/qris.png",\n' +
+      '         rekening_info: {\n' +
+      '           bank: "BCA",\n' +
+      '           nomor: "1234567890",\n' +
+      '           nama: "Nama Pemilik"\n' +
+      '         },\n' +
+      '         is_approved: false,\n' +
+      '     \x1B[32m+\x1B[39m   \x1B[32mharga_bulanan\x1B[39m\x1B[32m: \x1B[39m\x1B[32mDecimal\x1B[39m\n' +
+      '       },\n' +
+      '       include: {\n' +
+      '         pengelola: {\n' +
+      '           select: {\n' +
+      '             full_name: true,\n' +
+      '             phone: true\n' +
+      '           }\n' +
+      '         }\n' +
+      '       }\n' +
+      '     }\x1B[2m)\x1B[22m\n' +
+      '\n' +
+      'Argument `\x1B[32mharga_bulanan\x1B[39m` is missing.',
+    stack: 'PrismaClientValidationError: \n' +
+      '\x1B[31mInvalid \x1B[1m`prisma.kost.create()`\x1B[22m invocation in\x1B[39m\n' +
+      '\x1B[4mC:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\services\\kostService.js:80:40\x1B[24m\n' +
+      '\n' +
+      "  \x1B[2m\x1B[90m77\x1B[39m     \x1B[36mthrow\x1B[39m \x1B[36mnew\x1B[39m AppError\x1B[34m(\x1B[39m\x1B[1m\x1B[32m'Kost already exists at this location'\x1B[39m\x1B[22m\x1B[2m\x1B[34m,\x1B[39m \x1B[36m409\x1B[39m\x1B[34m)\x1B[39m\x1B[34m;\x1B[39m\x1B[22m\n" +
+      '  \x1B[2m\x1B[90m78\x1B[39m \x1B[34m}\x1B[39m\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m79\x1B[39m \x1B[22m\n' +
+      '\x1B[1m\x1B[31m→\x1B[39m\x1B[22m \x1B[2m\x1B[90m80\x1B[39m \x1B[36mconst\x1B[39m kost = \x1B[36mawait\x1B[39m prisma\x1B[34m.\x1B[39mkost\x1B[34m.\x1B[39m\x1B[36mcreate\x1B[39m\x1B[34m(\x1B[39m\x1B[22m{\n' +
+      '       data: {\n' +
+      '         pengelola_id: "417d9c15-98a1-4d85-bb70-827bc441f2c1",\n' +
+      '         nama_kost: "Kost Mawar",\n' +
+      '         alamat: "Jl. Mawar No. 1",\n' +
+      '         gmaps_link: "https://maps.google.com/example",\n' +
+      '         deskripsi: "Kost strategis dekat kampus",\n' +
+      '         total_kamar: 10,\n' +
+      '         daya_listrik: "1300 VA",\n' +
+      '         sumber_air: "PDAM",\n' +
+      '         wifi_speed: "30 Mbps",\n' +
+      '         kapasitas_parkir_motor: 5,\n' +
+      '         kapasitas_parkir_mobil: 2,\n' +
+      '         kapasitas_parkir_sepeda: 0,\n' +
+      '         biaya_tambahan: 100000,\n' +
+      '         jam_survey: "08:00 - 16:00",\n' +
+      '         foto_kost: [\n' +
+      '           "https://example.com/foto1.jpg",\n' +
+      '           "https://example.com/foto2.jpg"\n' +
+      '         ],\n' +
+      '         qris_image: "https://example.com/qris.png",\n' +
+      '         rekening_info: {\n' +
+      '           bank: "BCA",\n' +
+      '           nomor: "1234567890",\n' +
+      '           nama: "Nama Pemilik"\n' +
+      '         },\n' +
+      '         is_approved: false,\n' +
+      '     \x1B[32m+\x1B[39m   \x1B[32mharga_bulanan\x1B[39m\x1B[32m: \x1B[39m\x1B[32mDecimal\x1B[39m\n' +
+      '       },\n' +
+      '       include: {\n' +
+      '         pengelola: {\n' +
+      '           select: {\n' +
+      '             full_name: true,\n' +
+      '             phone: true\n' +
+      '           }\n' +
+      '         }\n' +
+      '       }\n' +
+      '     }\x1B[2m)\x1B[22m\n' +
+      '\n' +
+      'Argument `\x1B[32mharga_bulanan\x1B[39m` is missing.\n' +
+      '    at wn (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:29:1363)\n' +
+      '    at $n.handleRequestError (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:121:6958)\n' +
+      '    at $n.handleAndLogRequestError (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:121:6623)\n' +
+      '    at $n.request (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:121:6307)\n' +
+      '    at async l (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\@prisma\\client\\runtime\\library.js:130:9633)\n' +
+      '    at async KostService.createKost (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\services\\kostService.js:80:22)\n' +
+      '    at async C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\controllers\\kostController.js:43:22',
+    url: '/api/v1/kost',
+  timestamp: '2025-06-17 11:26:15'
+}
+{
+  message: 'File deleted: ./uploads/laundry_payment/3ecbfbe4-9f82-4eb1-83b9-b6c265672b2f_1750134379183_processed.jpeg',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:26:19'
+}
+{
+  service: 'kosan-api',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'unlink',
+  path: './uploads/laundry_payment/3ecbfbe4-9f82-4eb1-83b9-b6c265672b2f_1750134379183_processed.jpeg',
+  level: 'warn',
+  message: "Failed to delete file: uploads/laundry_payment/3ecbfbe4-9f82-4eb1-83b9-b6c265672b2f_1750134379183_processed.jpeg ENOENT: no such file or directory, unlink './uploads/laundry_payment/3ecbfbe4-9f82-4eb1-83b9-b6c265672b2f_1750134379183_processed.jpeg'",
+  stack: "Error: ENOENT: no such file or directory, unlink './uploads/laundry_payment/3ecbfbe4-9f82-4eb1-83b9-b6c265672b2f_1750134379183_processed.jpeg'\n" +
+    '    at async Object.unlink (node:internal/fs/promises:1060:10)\n' +
+    '    at async FileService.deleteFile (/Users/bimadharmawan/Documents/kostkita-be/src/services/fileService.js:120:13)\n' +
+    '    at async Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:327:7)\n' +
+    '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+  timestamp: '2025-06-17 11:26:19'
+}
+{
+  message: {
+    error: 'Salah satu atau lebih layanan laundry tidak ditemukan atau tidak tersedia: .',
+    stack: 'Error: Salah satu atau lebih layanan laundry tidak ditemukan atau tidak tersedia: .\n' +
+      '    at Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:185:13)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+    url: '/api/v1/order/laundry',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:26:19'
+}
+{
+  message: 'File deleted: ./uploads/laundry_payment/2e6395b9-c60c-4beb-ba7a-5034e0a4ebf9_1750134490558_processed.jpeg',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:28:10'
+}
+{
+  service: 'kosan-api',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'unlink',
+  path: './uploads/laundry_payment/2e6395b9-c60c-4beb-ba7a-5034e0a4ebf9_1750134490558_processed.jpeg',
+  level: 'warn',
+  message: "Failed to delete file: uploads/laundry_payment/2e6395b9-c60c-4beb-ba7a-5034e0a4ebf9_1750134490558_processed.jpeg ENOENT: no such file or directory, unlink './uploads/laundry_payment/2e6395b9-c60c-4beb-ba7a-5034e0a4ebf9_1750134490558_processed.jpeg'",
+  stack: "Error: ENOENT: no such file or directory, unlink './uploads/laundry_payment/2e6395b9-c60c-4beb-ba7a-5034e0a4ebf9_1750134490558_processed.jpeg'\n" +
+    '    at async Object.unlink (node:internal/fs/promises:1060:10)\n' +
+    '    at async FileService.deleteFile (/Users/bimadharmawan/Documents/kostkita-be/src/services/fileService.js:120:13)\n' +
+    '    at async Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:327:7)\n' +
+    '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+  timestamp: '2025-06-17 11:28:10'
+}
+{
+  message: {
+    error: 'Salah satu atau lebih layanan laundry tidak ditemukan atau tidak tersedia: .',
+    stack: 'Error: Salah satu atau lebih layanan laundry tidak ditemukan atau tidak tersedia: .\n' +
+      '    at Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:185:13)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+    url: '/api/v1/order/laundry',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:28:10'
+}
+{
+  message: 'File deleted: ./uploads/laundry_payment/addab2aa-4509-4033-99bc-fa9095ccb543_1750134687947_processed.jpeg',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:31:28'
+}
+{
+  service: 'kosan-api',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'unlink',
+  path: './uploads/laundry_payment/addab2aa-4509-4033-99bc-fa9095ccb543_1750134687947_processed.jpeg',
+  level: 'warn',
+  message: "Failed to delete file: uploads/laundry_payment/addab2aa-4509-4033-99bc-fa9095ccb543_1750134687947_processed.jpeg ENOENT: no such file or directory, unlink './uploads/laundry_payment/addab2aa-4509-4033-99bc-fa9095ccb543_1750134687947_processed.jpeg'",
+  stack: "Error: ENOENT: no such file or directory, unlink './uploads/laundry_payment/addab2aa-4509-4033-99bc-fa9095ccb543_1750134687947_processed.jpeg'\n" +
+    '    at async Object.unlink (node:internal/fs/promises:1060:10)\n' +
+    '    at async FileService.deleteFile (/Users/bimadharmawan/Documents/kostkita-be/src/services/fileService.js:120:13)\n' +
+    '    at async Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:327:7)\n' +
+    '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+  timestamp: '2025-06-17 11:31:28'
+}
+{
+  message: {
+    error: 'Salah satu atau lebih layanan laundry tidak ditemukan atau tidak tersedia: .',
+    stack: 'Error: Salah satu atau lebih layanan laundry tidak ditemukan atau tidak tersedia: .\n' +
+      '    at Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:185:13)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+    url: '/api/v1/order/laundry',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+
+  timestamp: '2025-06-17 22:32:46'
+
+  timestamp: '2025-06-17 11:31:28'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+
+  timestamp: '2025-06-17 22:37:04'
+
+  timestamp: '2025-06-17 11:36:33'
+
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+
+  timestamp: '2025-06-17 22:37:04'
+}
+{
+  message: 'New kost created: Kost Mawar by Budi Santoso',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:37:09'
+}
+{
+  message: 'Kost updated: b0090f90-1478-4c6f-9c35-df8c38e44ec3',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:40:11'
+}
+{
+  message: 'User logged in: admin@kosan.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:42:26'
+}
+{
+  message: 'Kost soft deleted: b0090f90-1478-4c6f-9c35-df8c38e44ec3',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:42:43'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:52:49'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:52:49'
+
+  timestamp: '2025-06-17 11:36:33'
+}
+{
+  message: 'File deleted: ./uploads/laundry_payment/8138482e-24b8-44a5-aeef-2d03264d46ec_1750135002572_processed.jpeg',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:36:42'
+}
+{
+  service: 'kosan-api',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'unlink',
+  path: './uploads/laundry_payment/8138482e-24b8-44a5-aeef-2d03264d46ec_1750135002572_processed.jpeg',
+  level: 'warn',
+  message: "Failed to delete file: uploads/laundry_payment/8138482e-24b8-44a5-aeef-2d03264d46ec_1750135002572_processed.jpeg ENOENT: no such file or directory, unlink './uploads/laundry_payment/8138482e-24b8-44a5-aeef-2d03264d46ec_1750135002572_processed.jpeg'",
+  stack: "Error: ENOENT: no such file or directory, unlink './uploads/laundry_payment/8138482e-24b8-44a5-aeef-2d03264d46ec_1750135002572_processed.jpeg'\n" +
+    '    at async Object.unlink (node:internal/fs/promises:1060:10)\n' +
+    '    at async FileService.deleteFile (/Users/bimadharmawan/Documents/kostkita-be/src/services/fileService.js:120:13)\n' +
+    '    at async Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:351:7)\n' +
+    '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+  timestamp: '2025-06-17 11:36:42'
+}
+{
+  message: {
+    error: 'Anda tidak memiliki reservasi aktif di kost yang menyediakan layanan laundry ini.',
+    stack: 'Error: Anda tidak memiliki reservasi aktif di kost yang menyediakan layanan laundry ini.\n' +
+      '    at Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:293:13)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+    url: '/api/v1/order/laundry',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:36:42'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:37:01'
+}
+{
+  message: 'File deleted: ./uploads/laundry_payment/ad8bb030-a909-42ee-a63b-07b0ab8799a7_1750135034480_processed.jpeg',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:37:14'
+}
+{
+  service: 'kosan-api',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'unlink',
+  path: './uploads/laundry_payment/ad8bb030-a909-42ee-a63b-07b0ab8799a7_1750135034480_processed.jpeg',
+  level: 'warn',
+  message: "Failed to delete file: uploads/laundry_payment/ad8bb030-a909-42ee-a63b-07b0ab8799a7_1750135034480_processed.jpeg ENOENT: no such file or directory, unlink './uploads/laundry_payment/ad8bb030-a909-42ee-a63b-07b0ab8799a7_1750135034480_processed.jpeg'",
+  stack: "Error: ENOENT: no such file or directory, unlink './uploads/laundry_payment/ad8bb030-a909-42ee-a63b-07b0ab8799a7_1750135034480_processed.jpeg'\n" +
+    '    at async Object.unlink (node:internal/fs/promises:1060:10)\n' +
+    '    at async FileService.deleteFile (/Users/bimadharmawan/Documents/kostkita-be/src/services/fileService.js:120:13)\n' +
+    '    at async Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:351:7)\n' +
+    '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+  timestamp: '2025-06-17 11:37:14'
+}
+{
+  message: {
+    error: 'Anda tidak memiliki reservasi aktif di kost yang menyediakan layanan laundry ini.',
+    stack: 'Error: Anda tidak memiliki reservasi aktif di kost yang menyediakan layanan laundry ini.\n' +
+      '    at Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:293:13)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+    url: '/api/v1/order/laundry',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:37:14'
+}
+{
+  message: 'File deleted: ./uploads/laundry_payment/a0230814-bdc9-4b1d-b4d8-28efd4c6e62f_1750135123579_processed.jpeg',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:38:43'
+}
+{
+  service: 'kosan-api',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'unlink',
+  path: './uploads/laundry_payment/a0230814-bdc9-4b1d-b4d8-28efd4c6e62f_1750135123579_processed.jpeg',
+  level: 'warn',
+  message: "Failed to delete file: uploads/laundry_payment/a0230814-bdc9-4b1d-b4d8-28efd4c6e62f_1750135123579_processed.jpeg ENOENT: no such file or directory, unlink './uploads/laundry_payment/a0230814-bdc9-4b1d-b4d8-28efd4c6e62f_1750135123579_processed.jpeg'",
+  stack: "Error: ENOENT: no such file or directory, unlink './uploads/laundry_payment/a0230814-bdc9-4b1d-b4d8-28efd4c6e62f_1750135123579_processed.jpeg'\n" +
+    '    at async Object.unlink (node:internal/fs/promises:1060:10)\n' +
+    '    at async FileService.deleteFile (/Users/bimadharmawan/Documents/kostkita-be/src/services/fileService.js:120:13)\n' +
+    '    at async Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:351:7)\n' +
+    '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+  timestamp: '2025-06-17 11:38:43'
+}
+{
+  message: {
+    error: 'Anda tidak memiliki reservasi aktif di kost yang menyediakan layanan laundry ini.',
+    stack: 'Error: Anda tidak memiliki reservasi aktif di kost yang menyediakan layanan laundry ini.\n' +
+      '    at Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:293:13)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+    url: '/api/v1/order/laundry',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:38:43'
+}
+{
+  message: 'File deleted: ./uploads/laundry_payment/751af0f5-5f7c-4f12-97c9-72aabac82541_1750135435301_processed.jpeg',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:43:55'
+}
+{
+  service: 'kosan-api',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'unlink', 
+  path: './uploads/laundry_payment/751af0f5-5f7c-4f12-97c9-72aabac82541_1750135435301_processed.jpeg',
+  level: 'warn',
+  message: "Failed to delete file: uploads/laundry_payment/751af0f5-5f7c-4f12-97c9-72aabac82541_1750135435301_processed.jpeg ENOENT: no such file or directory, unlink './uploads/laundry_payment/751af0f5-5f7c-4f12-97c9-72aabac82541_1750135435301_processed.jpeg'",
+  stack: "Error: ENOENT: no such file or directory, unlink './uploads/laundry_payment/751af0f5-5f7c-4f12-97c9-72aabac82541_1750135435301_processed.jpeg'\n" +
+    '    at async Object.unlink (node:internal/fs/promises:1060:10)\n' +
+    '    at async FileService.deleteFile (/Users/bimadharmawan/Documents/kostkita-be/src/services/fileService.js:120:13)\n' +
+    '    at async Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:351:7)\n' +
+    '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+  timestamp: '2025-06-17 11:43:55'
+}
+{
+  message: {
+    error: 'Anda tidak memiliki reservasi aktif di kost yang menyediakan layanan laundry ini.',
+    stack: 'Error: Anda tidak memiliki reservasi aktif di kost yang menyediakan layanan laundry ini.\n' +
+      '    at Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:293:13)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+    url: '/api/v1/order/laundry',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:43:55'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+
+  timestamp: '2025-06-17 22:53:55'
+ 
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+
+  timestamp: '2025-06-17 22:53:55'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:53:57'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:53:57'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:54:26'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 22:54:26'
+}
+{
+  message: 'File deleted: ./uploads/laundry_payment/dfb766d7-336a-4445-ac41-bc1b6790de0d_1750135653371_processed.jpeg',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:47:33'
+}
+{
+  service: 'kosan-api',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'unlink',
+  path: './uploads/laundry_payment/dfb766d7-336a-4445-ac41-bc1b6790de0d_1750135653371_processed.jpeg',
+  level: 'warn',
+  message: "Failed to delete file: uploads/laundry_payment/dfb766d7-336a-4445-ac41-bc1b6790de0d_1750135653371_processed.jpeg ENOENT: no such file or directory, unlink './uploads/laundry_payment/dfb766d7-336a-4445-ac41-bc1b6790de0d_1750135653371_processed.jpeg'",
+  stack: "Error: ENOENT: no such file or directory, unlink './uploads/laundry_payment/dfb766d7-336a-4445-ac41-bc1b6790de0d_1750135653371_processed.jpeg'\n" +
+    '    at async Object.unlink (node:internal/fs/promises:1060:10)\n' +
+    '    at async FileService.deleteFile (/Users/bimadharmawan/Documents/kostkita-be/src/services/fileService.js:120:13)\n' +
+    '    at async Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:351:7)\n' +
+    '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+  timestamp: '2025-06-17 11:47:33'
+}
+{
+  message: {
+    error: 'Anda tidak memiliki reservasi aktif di kost yang menyediakan layanan laundry ini.',
+    stack: 'Error: Anda tidak memiliki reservasi aktif di kost yang menyediakan layanan laundry ini.\n' +
+      '    at Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:293:13)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+    url: '/api/v1/order/laundry',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:47:33'
+}
+{
+  message: 'File deleted: ./uploads/laundry_payment/c484e1b6-d63d-4058-a564-ab1c38153e37_1750135699381_processed.jpeg',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:48:19'
+}
+{
+  service: 'kosan-api',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'unlink',
+  path: './uploads/laundry_payment/c484e1b6-d63d-4058-a564-ab1c38153e37_1750135699381_processed.jpeg',
+  level: 'warn',
+  message: "Failed to delete file: uploads/laundry_payment/c484e1b6-d63d-4058-a564-ab1c38153e37_1750135699381_processed.jpeg ENOENT: no such file or directory, unlink './uploads/laundry_payment/c484e1b6-d63d-4058-a564-ab1c38153e37_1750135699381_processed.jpeg'",
+  stack: "Error: ENOENT: no such file or directory, unlink './uploads/laundry_payment/c484e1b6-d63d-4058-a564-ab1c38153e37_1750135699381_processed.jpeg'\n" +
+    '    at async Object.unlink (node:internal/fs/promises:1060:10)\n' +
+    '    at async FileService.deleteFile (/Users/bimadharmawan/Documents/kostkita-be/src/services/fileService.js:120:13)\n' +
+    '    at async Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:351:7)\n' +
+    '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+  timestamp: '2025-06-17 11:48:19'
+}
+{
+  message: {
+    error: 'Anda tidak memiliki reservasi aktif di kost yang menyediakan layanan laundry ini.',
+    stack: 'Error: Anda tidak memiliki reservasi aktif di kost yang menyediakan layanan laundry ini.\n' +
+      '    at Object.createLaundryOrderWithPayment (/Users/bimadharmawan/Documents/kostkita-be/src/services/orderLaundryService.js:293:13)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/orderLaundryController.js:54:22',
+    url: '/api/v1/order/laundry',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-17 11:48:19'
+}
