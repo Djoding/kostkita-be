@@ -7,6 +7,11 @@ const kostValidator = require('../validators/kostValidator');
 const router = express.Router();
 
 router.get('/', kostController.getAllKost);
+router.get('/owner',
+    authenticateJWT,
+    authorize('PENGELOLA'),
+    kostController.getKostByOwner
+);
 router.get('/:kost_id',
     validateUUID('kost_id'),
     kostController.getKostById
@@ -36,5 +41,8 @@ router.delete('/:kost_id',
     validateUUID('kost_id'),
     kostController.deleteKost
 );
+
+
+
 
 module.exports = router;

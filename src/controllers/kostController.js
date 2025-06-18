@@ -77,6 +77,24 @@ class KostController {
             message: 'Kost deleted successfully'
         });
     });
+
+    /**
+     * Get Kost for current Pengelola (owner)
+     */
+    async getKostByOwner(req, res, next) {
+        try {
+            const userId = req.user.user_id;
+            const kost = await kostService.getKostByOwner(userId, req.query);
+            res.status(200).json({
+                success: true,
+                message: 'Kost by owner fetched successfully',
+                data: kost
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+    
 }
 
 module.exports = new KostController();

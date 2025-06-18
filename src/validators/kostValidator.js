@@ -2,6 +2,7 @@ const { body, query } = require('express-validator');
 
 const createKost = [
     body('pengelola_id')
+        .optional() // hilangkan error jika tidak dikirim manual
         .isUUID()
         .withMessage('Valid pengelola ID required'),
 
