@@ -399,6 +399,7 @@
       '    at async KostService.getKostById (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\services\\kostService.js:169:22)\n' +
       '    at async C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\src\\controllers\\kostController.js:25:22',
     url: '/api/v1/kost/47e9935d-15fd-4e3b-9c4c-00a0edf83abb',
+
     method: 'GET',
     ip: '::1',
     userAgent: 'PostmanRuntime/7.44.0'
@@ -654,6 +655,7 @@
       '    at strategy.success (C:\\Users\\Public\\Rizi\\kostkita-project\\kostkita-be\\node_modules\\passport\\lib\\middleware\\authenticate.js:222:18)',
     url: '/api/v1/kost/owner',
     method: 'GET',
+
     ip: '::1',
     userAgent: 'PostmanRuntime/7.44.0'
   },

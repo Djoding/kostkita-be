@@ -3,6 +3,7 @@ const { Prisma } = require("@prisma/client");
 const fileService = require("./fileService");
 const { AppError } = require("../middleware/errorHandler");
 const path = require("path");
+
 const getCateringHistoryForTenant = async (userId, kostId) => {
   try {
     if (kostId) {
@@ -297,7 +298,7 @@ const createCateringOrderWithPayment = async (
               menu_id: true,
               nama_menu: true,
               kategori: true,
-              foto_menu: true, 
+              foto_menu: true,
               catering: {
                 select: {
                   catering_id: true,
