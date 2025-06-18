@@ -1,0 +1,638 @@
+const prisma = require("../config/database");
+const { Prisma } = require("@prisma/client");
+const fileService = require("./fileService");
+const { AppError } = require("../middleware/errorHandler");
+const path = require("path");
+const { ReservasiStatus, PenghuniStatus } = require("@prisma/client");
+
+const createReservation = async (
+  userId,
+  reservationDetails,
+  buktiBayarFile
+) => {
+  const { kost_id, tanggal_check_in, durasi_bulan, metode_bayar, catatan } =
+    reservationDetails;
+  const parsedDurasiBulan = parseInt(durasi_bulan, 10);
+  if (isNaN(parsedDurasiBulan) || parsedDurasiBulan < 1) {
+    throw new AppError("Durasi bulan harus berupa angka positif.", 400);
+  }
+  try {
+    const processedFilePath = await fileService.processImage(
+      buktiBayarFile.path,
+      {
+        width: 1024,
+        height: 768,
+        quality: 85,
+        format: "jpeg",
+      }
+    );
+
+    resultFileMove = await fileService.moveFile(
+      processedFilePath,
+      "reservation_payment"
+    );
+    buktiBayarUrl = resultFileMove.url;
+
+    const kost = await prisma.kost.findUnique({
+      where: { kost_id: kost_id },
+      select: {
+        total_kamar: true,
+        harga_bulanan: true,
+        deposit: true,
+        harga_final: true,
+        is_approved: true,
+      },
+    });
+
+    if (!kost) {
+      if (resultFileMove && resultFileMove.filename) {
+        await fileService.deleteFile(
+          path.join(
+            fileService.uploadPath,
+            "reservation_payment",
+            resultFileMove.filename
+          )
+        );
+      }
+      throw new AppError("Kost tidak ditemukan.", 404);
+    }
+
+    if (!kost.is_approved) {
+      if (resultFileMove && resultFileMove.filename) {
+        await fileService.deleteFile(
+          path.join(
+            fileService.uploadPath,
+            "reservation_payment",
+            resultFileMove.filename
+          )
+        );
+      }
+      throw new AppError(
+        "Kost belum disetujui atau tidak aktif untuk reservasi.",
+        400
+      );
+    }
+
+    const total_harga = new Prisma.Decimal(kost.harga_final).mul(
+      parsedDurasiBulan
+    );
+    const deposit_amount = kost.deposit;
+
+    const tanggalCheckInDate = new Date(tanggal_check_in);
+    const tanggalKeluarDate = new Date(tanggalCheckInDate);
+    tanggalKeluarDate.setMonth(
+      tanggalKeluarDate.getMonth() + parsedDurasiBulan
+    );
+
+    const activeReservationsCount = await prisma.reservasi.count({
+      where: {
+        kost_id: kost_id,
+        status: {
+          in: ["PENDING", "APPROVED"],
+        },
+        status_penghunian: "AKTIF",
+      },
+    });
+
+    if (activeReservationsCount >= kost.total_kamar) {
+      if (resultFileMove && resultFileMove.filename) {
+        await fileService.deleteFile(
+          path.join(
+            fileService.uploadPath,
+            "reservation_payment",
+            resultFileMove.filename
+          )
+        );
+      }
+      throw new AppError("Tidak ada kamar tersedia untuk kost ini.", 409);
+    }
+
+    const existingActiveReservation = await prisma.reservasi.findFirst({
+      where: {
+        user_id: userId,
+        kost_id: kost_id,
+        status: "APPROVED",
+        status_penghunian: "AKTIF",
+      },
+    });
+
+    if (existingActiveReservation) {
+      if (resultFileMove && resultFileMove.filename) {
+        await fileService.deleteFile(
+          path.join(
+            fileService.uploadPath,
+            "reservation_payment",
+            resultFileMove.filename
+          )
+        );
+      }
+      throw new AppError(
+        "Anda sudah memiliki reservasi aktif di kost ini.",
+        409
+      );
+    }
+
+    const newReservation = await prisma.$transaction(async (tx) => {
+      const reservation = await tx.reservasi.create({
+        data: {
+          user_id: userId,
+          kost_id: kost_id,
+          tanggal_check_in: new Date(tanggal_check_in),
+          durasi_bulan: parsedDurasiBulan,
+          total_harga: total_harga,
+          bukti_bayar: buktiBayarUrl,
+          status: "PENDING",
+          metode_bayar: metode_bayar,
+          catatan: catatan,
+          tanggal_keluar: tanggalKeluarDate,
+          deposit_amount: deposit_amount,
+        },
+      });
+      return reservation;
+    });
+
+    return newReservation;
+  } catch (error) {
+    if (resultFileMove && resultFileMove.filename) {
+      await fileService.deleteFile(
+        path.join(
+          fileService.uploadPath,
+          "reservation_payment",
+          resultFileMove.filename
+        )
+      );
+    }
+    console.error("Error in createReservation:", error);
+    if (error instanceof AppError) {
+      throw error;
+    }
+    throw new AppError(`Gagal membuat reservasi kost: ${error.message}`, 500);
+  }
+};
+
+const getKostandReservedData = async (userId) => {
+  try {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const activatedReservations = await prisma.reservasi.updateMany({
+      where: {
+        status: ReservasiStatus.APPROVED,
+        tanggal_check_in: {
+          lte: today,
+        },
+        status_penghunian: {
+          not: PenghuniStatus.AKTIF,
+        },
+        OR: [{ tanggal_keluar: null }, { tanggal_keluar: { gt: today } }],
+      },
+      data: {
+        status_penghunian: PenghuniStatus.AKTIF,
+        updated_at: new Date(),
+      },
+    });
+    if (activatedReservations.count > 0) {
+      console.log(
+        `[ON-DEMAND UPDATE] Activated ${activatedReservations.count} reservations.`
+      );
+    }
+
+    const deactivatedReservations = await prisma.reservasi.updateMany({
+      where: {
+        status: ReservasiStatus.APPROVED,
+        status_penghunian: PenghuniStatus.AKTIF,
+        tanggal_keluar: {
+          lte: today,
+        },
+      },
+      data: {
+        status_penghunian: PenghuniStatus.KELUAR,
+        updated_at: new Date(),
+      },
+    });
+    if (deactivatedReservations.count > 0) {
+      console.log(
+        `[ON-DEMAND UPDATE] Deactivated ${deactivatedReservations.count} reservations.`
+      );
+    }
+
+    const allApprovedKost = await prisma.kost.findMany({
+      where: {
+        is_approved: true,
+      },
+      select: {
+        kost_id: true,
+        nama_kost: true,
+        alamat: true,
+        foto_kost: true,
+        harga_bulanan: true,
+        harga_final: true,
+        tipe: {
+          select: {
+            nama_tipe: true,
+          },
+        },
+      },
+    });
+
+    const formattedAllApprovedKost = allApprovedKost.map((kost) => ({
+      ...kost,
+      foto_kost: kost.foto_kost
+        ? kost.foto_kost.map((url) => fileService.generateFileUrl(url))
+        : [],
+    }));
+
+    const userReservations = await prisma.reservasi.findMany({
+      where: {
+        user_id: userId,
+      },
+      include: {
+        kost: {
+          select: {
+            kost_id: true,
+            nama_kost: true,
+            alamat: true,
+            foto_kost: true,
+            harga_bulanan: true,
+            harga_final: true,
+            tipe: {
+              select: {
+                nama_tipe: true,
+              },
+            },
+          },
+        },
+      },
+      orderBy: {
+        created_at: "desc",
+      },
+    });
+
+    const pendingUpcomingKost = [];
+    const activeKost = [];
+    const historyKost = [];
+
+    for (const res of userReservations) {
+      const kostData = {
+        reservasi_id: res.reservasi_id,
+        status_reservasi: res.status,
+        status_penghunian: res.status_penghunian,
+        tanggal_check_in: res.tanggal_check_in.toISOString().split("T")[0],
+        tanggal_keluar: res.tanggal_keluar
+          ? res.tanggal_keluar.toISOString().split("T")[0]
+          : null,
+        total_harga: res.total_harga,
+        deposit_amount: res.deposit_amount,
+        catatan: res.catatan,
+        ...res.kost,
+        foto_kost: res.kost.foto_kost
+          ? res.kost.foto_kost.map((url) => fileService.generateFileUrl(url))
+          : [],
+      };
+
+      const resTanggalCheckIn = new Date(res.tanggal_check_in);
+      resTanggalCheckIn.setHours(0, 0, 0, 0);
+      const resTanggalKeluar = res.tanggal_keluar
+        ? new Date(res.tanggal_keluar)
+        : null;
+      if (resTanggalKeluar) resTanggalKeluar.setHours(0, 0, 0, 0);
+
+      const isCheckInDateReached = resTanggalCheckIn <= today;
+      const isCheckOutDatePassed = resTanggalKeluar && resTanggalKeluar < today;
+
+      if (
+        res.status === ReservasiStatus.PENDING ||
+        (res.status === ReservasiStatus.APPROVED && !isCheckInDateReached)
+      ) {
+        pendingUpcomingKost.push(kostData);
+      } else if (
+        res.status === ReservasiStatus.APPROVED &&
+        res.status_penghunian === PenghuniStatus.AKTIF &&
+        isCheckInDateReached &&
+        !isCheckOutDatePassed
+      ) {
+        activeKost.push(kostData);
+      } else if (
+        res.status === ReservasiStatus.REJECTED ||
+        (res.status === ReservasiStatus.APPROVED &&
+          res.status_penghunian === PenghuniStatus.KELUAR) ||
+        (res.status === ReservasiStatus.APPROVED && isCheckOutDatePassed)
+      ) {
+        historyKost.push(kostData);
+      }
+    }
+
+    return {
+      all_kost: formattedAllApprovedKost,
+      pending_upcoming_reservations: pendingUpcomingKost,
+      active_reservations: activeKost,
+      history_reservations: historyKost,
+    };
+  } catch (error) {
+    console.error("Error in getHomeDashboardData:", error);
+    throw new AppError(`Gagal mengambil data dashboard: ${error.message}`, 500);
+  }
+};
+
+const updateReservationStatus = async (
+  reservasiId,
+  newStatus,
+  validatedByUserId,
+  rejectionReason = null
+) => {
+  try {
+    const existingReservation = await prisma.reservasi.findUnique({
+      where: { reservasi_id: reservasiId },
+      select: {
+        status: true,
+        kost_id: true,
+        user_id: true,
+      },
+    });
+
+    if (!existingReservation) {
+      throw new AppError("Reservasi tidak ditemukan.", 404);
+    }
+
+    const validatorUser = await prisma.users.findUnique({
+      where: { user_id: validatedByUserId },
+      select: { role: true, kost_managed: { select: { kost_id: true } } },
+    });
+
+    if (
+      !validatorUser ||
+      (validatorUser.role !== "PENGELOLA" && validatorUser.role !== "ADMIN")
+    ) {
+      throw new AppError(
+        "Akses ditolak. Hanya pengelola atau admin yang dapat memperbarui status reservasi.",
+        403
+      );
+    }
+
+    if (validatorUser.role === "PENGELOLA") {
+      const managesThisKost = validatorUser.kost_managed.some(
+        (kost) => kost.kost_id === existingReservation.kost_id
+      );
+      if (!managesThisKost) {
+        throw new AppError(
+          "Anda tidak memiliki izin untuk mengelola reservasi di kost ini.",
+          403
+        );
+      }
+    }
+
+    if (existingReservation.status !== ReservasiStatus.PENDING) {
+      throw new AppError(
+        `Status reservasi sudah ${existingReservation.status}. Hanya reservasi PENDING yang bisa diubah.`,
+        400
+      );
+    }
+
+    const updatedReservation = await prisma.$transaction(async (tx) => {
+      const dataToUpdate = {
+        status: newStatus,
+        validated_by: validatedByUserId,
+        validated_at: new Date(),
+        updated_at: new Date(),
+      };
+
+      if (newStatus === ReservasiStatus.REJECTED) {
+        dataToUpdate.rejection_reason =
+          rejectionReason || "Tidak ada alasan spesifik.";
+        dataToUpdate.status_penghunian = null;
+      } else if (newStatus === ReservasiStatus.APPROVED) {
+        dataToUpdate.rejection_reason = null;
+      }
+
+      const res = await tx.reservasi.update({
+        where: { reservasi_id: reservasiId },
+        data: dataToUpdate,
+        select: {
+          reservasi_id: true,
+          user_id: true,
+          kost_id: true,
+          status: true,
+          status_penghunian: true,
+          tanggal_check_in: true,
+          tanggal_keluar: true,
+          total_harga: true,
+          metode_bayar: true,
+          bukti_bayar: true,
+          rejection_reason: true,
+          validated_by: true,
+          validated_at: true,
+          catatan: true,
+          created_at: true,
+          updated_at: true,
+          kost: {
+            select: {
+              nama_kost: true,
+            },
+          },
+          user: {
+            select: {
+              full_name: true,
+              email: true,
+            },
+          },
+        },
+      });
+      return res;
+    });
+
+    const buktiBayarFullUrl = updatedReservation.bukti_bayar
+      ? fileService.generateFileUrl(updatedReservation.bukti_bayar)
+      : null;
+
+    return {
+      ...updatedReservation,
+      bukti_bayar_url: buktiBayarFullUrl,
+      tanggal_check_in: updatedReservation.tanggal_check_in
+        .toISOString()
+        .split("T")[0],
+      tanggal_keluar: updatedReservation.tanggal_keluar
+        ? updatedReservation.tanggal_keluar.toISOString().split("T")[0]
+        : null,
+    };
+  } catch (error) {
+    console.error("Error in updateReservationStatus:", error);
+    if (error instanceof AppError) {
+      throw error;
+    }
+    throw new AppError(
+      `Gagal memperbarui status reservasi: ${error.message}`,
+      500
+    );
+  }
+};
+
+const extendReservation = async (
+  reservasiId,
+  userId,
+  extensionDetails,
+  buktiBayarFile
+) => {
+  const { durasi_perpanjangan_bulan, metode_bayar, catatan } = extensionDetails;
+  let buktiBayarUrl = null;
+  let resultFileMove = null;
+
+  try {
+    const existingReservation = await prisma.reservasi.findUnique({
+      where: { reservasi_id: reservasiId },
+      include: {
+        kost: {
+          select: {
+            harga_final: true,
+            kost_id: true,
+            nama_kost: true,
+          },
+        },
+      },
+    });
+
+    if (!existingReservation) {
+      throw new AppError("Reservasi tidak ditemukan.", 404);
+    }
+
+    if (existingReservation.user_id !== userId) {
+      throw new AppError(
+        "Akses ditolak. Anda tidak memiliki reservasi ini.",
+        403
+      );
+    }
+
+    if (existingReservation.status !== ReservasiStatus.APPROVED) {
+      throw new AppError(
+        `Reservasi harus berstatus APPROVED untuk diperpanjang. Status saat ini: ${existingReservation.status}.`,
+        400
+      );
+    }
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const existingTanggalKeluar = existingReservation.tanggal_keluar
+      ? new Date(existingReservation.tanggal_keluar)
+      : null;
+    if (existingTanggalKeluar && existingTanggalKeluar < today) {
+      throw new AppError(
+        "Reservasi ini sudah berakhir dan tidak bisa diperpanjang.",
+        400
+      );
+    }
+
+    const processedFilePath = await fileService.processImage(
+      buktiBayarFile.path,
+      {
+        width: 1024,
+        height: 768,
+        quality: 85,
+        format: "jpeg",
+      }
+    );
+
+    resultFileMove = await fileService.moveFile(
+      processedFilePath,
+      "reservation_payment"
+    );
+    buktiBayarUrl = resultFileMove.url;
+
+    const currentTanggalKeluar =
+      existingReservation.tanggal_keluar ||
+      existingReservation.tanggal_check_in;
+    const newTanggalKeluar = new Date(currentTanggalKeluar);
+    newTanggalKeluar.setMonth(
+      newTanggalKeluar.getMonth() + durasi_perpanjangan_bulan
+    );
+
+    const pricePerMonth = existingReservation.kost.harga_final;
+    const additionalCost = pricePerMonth.mul(durasi_perpanjangan_bulan);
+
+    const newTotalHarga = new Prisma.Decimal(
+      existingReservation.total_harga
+    ).add(additionalCost);
+
+    const updatedReservation = await prisma.$transaction(async (tx) => {
+      const res = await tx.reservasi.update({
+        where: { reservasi_id: reservasiId },
+        data: {
+          durasi_bulan:
+            existingReservation.durasi_bulan + durasi_perpanjangan_bulan,
+          total_harga: newTotalHarga,
+          tanggal_keluar: newTanggalKeluar,
+          bukti_bayar: buktiBayarUrl,
+          metode_bayar: metode_bayar,
+          catatan: catatan,
+          updated_at: new Date(),
+        },
+        select: {
+          reservasi_id: true,
+          user_id: true,
+          kost_id: true,
+          status: true,
+          status_penghunian: true,
+          tanggal_check_in: true,
+          tanggal_keluar: true,
+          durasi_bulan: true,
+          total_harga: true,
+          metode_bayar: true,
+          bukti_bayar: true,
+          rejection_reason: true,
+          validated_by: true,
+          validated_at: true,
+          catatan: true,
+          created_at: true,
+          updated_at: true,
+          kost: {
+            select: {
+              nama_kost: true,
+            },
+          },
+          user: {
+            select: {
+              full_name: true,
+              email: true,
+            },
+          },
+        },
+      });
+      return res;
+    });
+
+    const buktiBayarFullUrl = updatedReservation.bukti_bayar
+      ? fileService.generateFileUrl(updatedReservation.bukti_bayar)
+      : null;
+
+    return {
+      ...updatedReservation,
+      bukti_bayar_url: buktiBayarFullUrl,
+      tanggal_check_in: updatedReservation.tanggal_check_in
+        .toISOString()
+        .split("T")[0],
+      tanggal_keluar: updatedReservation.tanggal_keluar
+        ? updatedReservation.tanggal_keluar.toISOString().split("T")[0]
+        : null,
+    };
+  } catch (error) {
+    if (resultFileMove && resultFileMove.filename) {
+      await fileService.deleteFile(
+        path.join(
+          fileService.uploadPath,
+          "reservation_payment",
+          resultFileMove.filename
+        )
+      );
+    }
+    console.error("Error in extendReservation:", error);
+    if (error instanceof AppError) {
+      throw error;
+    }
+    throw new AppError(`Gagal memperpanjang reservasi: ${error.message}`, 500);
+  }
+};
+
+module.exports = {
+  createReservation,
+  getKostandReservedData,
+  updateReservationStatus,
+  extendReservation,
+};
