@@ -5422,3 +5422,257 @@
   service: 'kosan-api',
   timestamp: '2025-06-18 22:50:40'
 }
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 22:57:29'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 22:57:29'
+}
+{
+  service: 'kosan-api',
+  name: 'PrismaClientValidationError',
+  clientVersion: '5.22.0',
+  level: 'error',
+  message: 'Google mobile auth error: \n' +
+    '\x1B[31mInvalid \x1B[1m`prisma.users.findUnique()`\x1B[22m invocation in\x1B[39m\n' +
+    '\x1B[4m/Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/services/authService.js:194:53\x1B[24m\n' +
+    '\n' +
+    '  \x1B[2m\x1B[90m191\x1B[39m         \x1B[34m}\x1B[39m\x1B[22m\n' +
+    '  \x1B[2m\x1B[90m192\x1B[39m     \x1B[34m}\x1B[39m\x1B[34m)\x1B[39m\x1B[34m;\x1B[39m\x1B[22m\n' +
+    '  \x1B[2m\x1B[90m193\x1B[39m \x1B[34m}\x1B[39m \x1B[36melse\x1B[39m \x1B[34m{\x1B[39m\x1B[22m\n' +
+    '\x1B[1m\x1B[31m→\x1B[39m\x1B[22m \x1B[2m\x1B[90m194\x1B[39m     \x1B[36mconst\x1B[39m existingUser = \x1B[36mawait\x1B[39m prisma\x1B[34m.\x1B[39musers\x1B[34m.\x1B[39m\x1B[36mfindUnique\x1B[39m\x1B[34m(\x1B[39m\x1B[22m{\n' +
+    '            where: {\n' +
+    '              email: undefined,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32muser_id\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mString\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32musername\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mString\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mgoogle_id\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mString\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mAND\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mUsersWhereInput | UsersWhereInput[]\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mOR\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mUsersWhereInput[]\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mNOT\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mUsersWhereInput | UsersWhereInput[]\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mpassword\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mStringNullableFilter | String | Null\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mrole\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mEnumUserRoleFilter | UserRole\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mfull_name\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mStringFilter | String\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mphone\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mStringNullableFilter | String | Null\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mwhatsapp_number\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mStringNullableFilter | String | Null\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mis_approved\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mBoolFilter | Boolean\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mis_guest\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mBoolFilter | Boolean\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mavatar\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mStringNullableFilter | String | Null\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32memail_verified\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mBoolFilter | Boolean\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mhas_manual_password\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mBoolFilter | Boolean\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mlast_login\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mDateTimeNullableFilter | DateTime | Null\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mcreated_at\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mDateTimeFilter | DateTime\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mupdated_at\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mDateTimeFilter | DateTime\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mkost_managed\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mKostListRelationFilter\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mreservasi\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mReservasiListRelationFilter\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mpesanan_catering\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mPesananCateringListRelationFilter\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mpesanan_laundry\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mPesananLaundryListRelationFilter\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mvalidated_reservasi\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mReservasiListRelationFilter\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mverified_pembayaran_catering\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mPembayaranCateringListRelationFilter\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mverified_pembayaran_laundry\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mPembayaranLaundryListRelationFilter\x1B[39m\n' +
+    '            }\n' +
+    '          }\x1B[2m)\x1B[22m\n' +
+    '\n' +
+    'Argument `\x1B[1mwhere\x1B[22m` of type \x1B[1mUsersWhereUniqueInput\x1B[22m needs \x1B[32mat least one of\x1B[39m `\x1B[1muser_id\x1B[22m`, `\x1B[1memail\x1B[22m`, `\x1B[1musername\x1B[22m` or `\x1B[1mgoogle_id\x1B[22m` arguments. Available options are listed in \x1B[32mgreen\x1B[39m.',
+  stack: 'PrismaClientValidationError: \n' +
+    '\x1B[31mInvalid \x1B[1m`prisma.users.findUnique()`\x1B[22m invocation in\x1B[39m\n' +
+    '\x1B[4m/Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/services/authService.js:194:53\x1B[24m\n' +
+    '\n' +
+    '  \x1B[2m\x1B[90m191\x1B[39m         \x1B[34m}\x1B[39m\x1B[22m\n' +
+    '  \x1B[2m\x1B[90m192\x1B[39m     \x1B[34m}\x1B[39m\x1B[34m)\x1B[39m\x1B[34m;\x1B[39m\x1B[22m\n' +
+    '  \x1B[2m\x1B[90m193\x1B[39m \x1B[34m}\x1B[39m \x1B[36melse\x1B[39m \x1B[34m{\x1B[39m\x1B[22m\n' +
+    '\x1B[1m\x1B[31m→\x1B[39m\x1B[22m \x1B[2m\x1B[90m194\x1B[39m     \x1B[36mconst\x1B[39m existingUser = \x1B[36mawait\x1B[39m prisma\x1B[34m.\x1B[39musers\x1B[34m.\x1B[39m\x1B[36mfindUnique\x1B[39m\x1B[34m(\x1B[39m\x1B[22m{\n' +
+    '            where: {\n' +
+    '              email: undefined,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32muser_id\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mString\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32musername\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mString\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mgoogle_id\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mString\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mAND\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mUsersWhereInput | UsersWhereInput[]\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mOR\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mUsersWhereInput[]\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mNOT\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mUsersWhereInput | UsersWhereInput[]\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mpassword\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mStringNullableFilter | String | Null\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mrole\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mEnumUserRoleFilter | UserRole\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mfull_name\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mStringFilter | String\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mphone\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mStringNullableFilter | String | Null\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mwhatsapp_number\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mStringNullableFilter | String | Null\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mis_approved\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mBoolFilter | Boolean\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mis_guest\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mBoolFilter | Boolean\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mavatar\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mStringNullableFilter | String | Null\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32memail_verified\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mBoolFilter | Boolean\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mhas_manual_password\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mBoolFilter | Boolean\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mlast_login\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mDateTimeNullableFilter | DateTime | Null\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mcreated_at\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mDateTimeFilter | DateTime\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mupdated_at\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mDateTimeFilter | DateTime\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mkost_managed\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mKostListRelationFilter\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mreservasi\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mReservasiListRelationFilter\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mpesanan_catering\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mPesananCateringListRelationFilter\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mpesanan_laundry\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mPesananLaundryListRelationFilter\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mvalidated_reservasi\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mReservasiListRelationFilter\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mverified_pembayaran_catering\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mPembayaranCateringListRelationFilter\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mverified_pembayaran_laundry\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mPembayaranLaundryListRelationFilter\x1B[39m\n' +
+    '            }\n' +
+    '          }\x1B[2m)\x1B[22m\n' +
+    '\n' +
+    'Argument `\x1B[1mwhere\x1B[22m` of type \x1B[1mUsersWhereUniqueInput\x1B[22m needs \x1B[32mat least one of\x1B[39m `\x1B[1muser_id\x1B[22m`, `\x1B[1memail\x1B[22m`, `\x1B[1musername\x1B[22m` or `\x1B[1mgoogle_id\x1B[22m` arguments. Available options are listed in \x1B[32mgreen\x1B[39m.\n' +
+    '    at wn (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/@prisma/client/runtime/library.js:29:1363)\n' +
+    '    at $n.handleRequestError (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/@prisma/client/runtime/library.js:121:6958)\n' +
+    '    at $n.handleAndLogRequestError (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/@prisma/client/runtime/library.js:121:6623)\n' +
+    '    at $n.request (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/@prisma/client/runtime/library.js:121:6307)\n' +
+    '    at async l (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/@prisma/client/runtime/library.js:130:9633)\n' +
+    '    at async AuthService.googleAuth (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/services/authService.js:194:34)\n' +
+    '    at async /Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/controllers/authController.js:128:28',
+  timestamp: '2025-06-18 23:01:14'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 23:01:32'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 23:01:37'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 23:01:37'
+}
+{
+  service: 'kosan-api',
+  name: 'PrismaClientValidationError',
+  clientVersion: '5.22.0',
+  level: 'error',
+  message: 'Google mobile auth error: \n' +
+    '\x1B[31mInvalid \x1B[1m`prisma.users.findUnique()`\x1B[22m invocation in\x1B[39m\n' +
+    '\x1B[4m/Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/services/authService.js:194:53\x1B[24m\n' +
+    '\n' +
+    '  \x1B[2m\x1B[90m191\x1B[39m         \x1B[34m}\x1B[39m\x1B[22m\n' +
+    '  \x1B[2m\x1B[90m192\x1B[39m     \x1B[34m}\x1B[39m\x1B[34m)\x1B[39m\x1B[34m;\x1B[39m\x1B[22m\n' +
+    '  \x1B[2m\x1B[90m193\x1B[39m \x1B[34m}\x1B[39m \x1B[36melse\x1B[39m \x1B[34m{\x1B[39m\x1B[22m\n' +
+    '\x1B[1m\x1B[31m→\x1B[39m\x1B[22m \x1B[2m\x1B[90m194\x1B[39m     \x1B[36mconst\x1B[39m existingUser = \x1B[36mawait\x1B[39m prisma\x1B[34m.\x1B[39musers\x1B[34m.\x1B[39m\x1B[36mfindUnique\x1B[39m\x1B[34m(\x1B[39m\x1B[22m{\n' +
+    '            where: {\n' +
+    '              email: undefined,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32muser_id\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mString\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32musername\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mString\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mgoogle_id\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mString\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mAND\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mUsersWhereInput | UsersWhereInput[]\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mOR\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mUsersWhereInput[]\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mNOT\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mUsersWhereInput | UsersWhereInput[]\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mpassword\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mStringNullableFilter | String | Null\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mrole\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mEnumUserRoleFilter | UserRole\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mfull_name\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mStringFilter | String\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mphone\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mStringNullableFilter | String | Null\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mwhatsapp_number\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mStringNullableFilter | String | Null\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mis_approved\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mBoolFilter | Boolean\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mis_guest\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mBoolFilter | Boolean\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mavatar\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mStringNullableFilter | String | Null\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32memail_verified\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mBoolFilter | Boolean\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mhas_manual_password\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mBoolFilter | Boolean\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mlast_login\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mDateTimeNullableFilter | DateTime | Null\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mcreated_at\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mDateTimeFilter | DateTime\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mupdated_at\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mDateTimeFilter | DateTime\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mkost_managed\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mKostListRelationFilter\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mreservasi\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mReservasiListRelationFilter\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mpesanan_catering\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mPesananCateringListRelationFilter\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mpesanan_laundry\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mPesananLaundryListRelationFilter\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mvalidated_reservasi\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mReservasiListRelationFilter\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mverified_pembayaran_catering\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mPembayaranCateringListRelationFilter\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mverified_pembayaran_laundry\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mPembayaranLaundryListRelationFilter\x1B[39m\n' +
+    '            }\n' +
+    '          }\x1B[2m)\x1B[22m\n' +
+    '\n' +
+    'Argument `\x1B[1mwhere\x1B[22m` of type \x1B[1mUsersWhereUniqueInput\x1B[22m needs \x1B[32mat least one of\x1B[39m `\x1B[1muser_id\x1B[22m`, `\x1B[1memail\x1B[22m`, `\x1B[1musername\x1B[22m` or `\x1B[1mgoogle_id\x1B[22m` arguments. Available options are listed in \x1B[32mgreen\x1B[39m.',
+  stack: 'PrismaClientValidationError: \n' +
+    '\x1B[31mInvalid \x1B[1m`prisma.users.findUnique()`\x1B[22m invocation in\x1B[39m\n' +
+    '\x1B[4m/Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/services/authService.js:194:53\x1B[24m\n' +
+    '\n' +
+    '  \x1B[2m\x1B[90m191\x1B[39m         \x1B[34m}\x1B[39m\x1B[22m\n' +
+    '  \x1B[2m\x1B[90m192\x1B[39m     \x1B[34m}\x1B[39m\x1B[34m)\x1B[39m\x1B[34m;\x1B[39m\x1B[22m\n' +
+    '  \x1B[2m\x1B[90m193\x1B[39m \x1B[34m}\x1B[39m \x1B[36melse\x1B[39m \x1B[34m{\x1B[39m\x1B[22m\n' +
+    '\x1B[1m\x1B[31m→\x1B[39m\x1B[22m \x1B[2m\x1B[90m194\x1B[39m     \x1B[36mconst\x1B[39m existingUser = \x1B[36mawait\x1B[39m prisma\x1B[34m.\x1B[39musers\x1B[34m.\x1B[39m\x1B[36mfindUnique\x1B[39m\x1B[34m(\x1B[39m\x1B[22m{\n' +
+    '            where: {\n' +
+    '              email: undefined,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32muser_id\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mString\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32musername\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mString\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mgoogle_id\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mString\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mAND\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mUsersWhereInput | UsersWhereInput[]\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mOR\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mUsersWhereInput[]\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mNOT\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mUsersWhereInput | UsersWhereInput[]\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mpassword\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mStringNullableFilter | String | Null\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mrole\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mEnumUserRoleFilter | UserRole\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mfull_name\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mStringFilter | String\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mphone\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mStringNullableFilter | String | Null\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mwhatsapp_number\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mStringNullableFilter | String | Null\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mis_approved\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mBoolFilter | Boolean\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mis_guest\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mBoolFilter | Boolean\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mavatar\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mStringNullableFilter | String | Null\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32memail_verified\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mBoolFilter | Boolean\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mhas_manual_password\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mBoolFilter | Boolean\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mlast_login\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mDateTimeNullableFilter | DateTime | Null\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mcreated_at\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mDateTimeFilter | DateTime\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mupdated_at\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mDateTimeFilter | DateTime\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mkost_managed\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mKostListRelationFilter\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mreservasi\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mReservasiListRelationFilter\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mpesanan_catering\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mPesananCateringListRelationFilter\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mpesanan_laundry\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mPesananLaundryListRelationFilter\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mvalidated_reservasi\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mReservasiListRelationFilter\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mverified_pembayaran_catering\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mPembayaranCateringListRelationFilter\x1B[39m,\n' +
+    '          \x1B[32m?\x1B[39m   \x1B[32mverified_pembayaran_laundry\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mPembayaranLaundryListRelationFilter\x1B[39m\n' +
+    '            }\n' +
+    '          }\x1B[2m)\x1B[22m\n' +
+    '\n' +
+    'Argument `\x1B[1mwhere\x1B[22m` of type \x1B[1mUsersWhereUniqueInput\x1B[22m needs \x1B[32mat least one of\x1B[39m `\x1B[1muser_id\x1B[22m`, `\x1B[1memail\x1B[22m`, `\x1B[1musername\x1B[22m` or `\x1B[1mgoogle_id\x1B[22m` arguments. Available options are listed in \x1B[32mgreen\x1B[39m.\n' +
+    '    at wn (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/@prisma/client/runtime/library.js:29:1363)\n' +
+    '    at $n.handleRequestError (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/@prisma/client/runtime/library.js:121:6958)\n' +
+    '    at $n.handleAndLogRequestError (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/@prisma/client/runtime/library.js:121:6623)\n' +
+    '    at $n.request (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/@prisma/client/runtime/library.js:121:6307)\n' +
+    '    at async l (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/@prisma/client/runtime/library.js:130:9633)\n' +
+    '    at async AuthService.googleAuth (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/services/authService.js:194:34)\n' +
+    '    at async /Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/controllers/authController.js:128:28',
+  timestamp: '2025-06-18 23:02:02'
+}
+{
+  message: 'Cleaned temp file: 2770dc46-324a-4f7f-aa3d-7cec59dac27b_1750066377396.png',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 00:01:37'
+}
+{
+  message: 'Cleaned temp file: 293f8015-776e-4488-ade0-b27ae2b638e0_1750066179267.png',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 00:01:37'
+}
+{
+  message: 'Cleaned temp file: 44486f79-c6f6-473c-8f4d-295ae02a1f12_1750066212456.png',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 00:01:37'
+}
+{
+  message: 'Cleaned temp file: b79e1054-0da7-4296-a543-7a06505bd278_1750134172208.png',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 00:01:37'
+}
+{
+  message: 'Cleaned temp file: c304accb-49bc-4269-bb08-ef27fc7517f3_1750134240870.png',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 00:01:37'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 09:50:46'
+}
