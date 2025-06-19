@@ -5344,3 +5344,1586 @@
   service: 'kosan-api',
   timestamp: '2025-06-18 17:40:36'
 }
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 23:02:34'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 23:02:34'
+}
+{
+  message: 'New Google user registered: bimadharmawan6@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 23:06:29'
+}
+{
+  message: 'Cleaned temp file: 2770dc46-324a-4f7f-aa3d-7cec59dac27b_1750066377396.png',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 00:02:34'
+}
+{
+  message: 'Cleaned temp file: 293f8015-776e-4488-ade0-b27ae2b638e0_1750066179267.png',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 00:02:34'
+}
+{
+  message: 'Cleaned temp file: 44486f79-c6f6-473c-8f4d-295ae02a1f12_1750066212456.png',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 00:02:34'
+}
+{
+  message: 'Cleaned temp file: b79e1054-0da7-4296-a543-7a06505bd278_1750134172208.png',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 00:02:34'
+}
+{
+  message: 'Cleaned temp file: c304accb-49bc-4269-bb08-ef27fc7517f3_1750134240870.png',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 00:02:34'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 01:31:55'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 01:47:06'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 01:47:06'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 01:47:09'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 02:37:19'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 02:41:41'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 05:29:28'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 07:39:06'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 11:08:21'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 11:08:21'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 11:08:52'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 11:22:02'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 11:47:02'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 11:47:02'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 12:02:32'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 12:02:33'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 12:03:06'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 12:03:06'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 12:03:22'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 12:03:22'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 12:03:38'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 12:03:38'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 12:03:45'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 12:03:45'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 12:04:11'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 13:13:16'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 13:42:17'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 13:42:17'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 13:42:20'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 13:42:20'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 13:51:10'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 13:51:10'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 13:53:13'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:05:28'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:05:59'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:05:59'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:08:04'
+}
+{
+  message: {
+    error: 'Invalid email or password',
+    stack: 'Error: Invalid email or password\n' +
+      '    at AuthService.login (/Users/bimadharmawan/Documents/kostkita-be/src/services/authService.js:127:19)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/authController.js:33:24',
+    url: '/api/v1/auth/login',
+    method: 'POST',
+    ip: '::ffff:127.0.0.1',
+    userAgent: 'Dart/3.8 (dart:io)'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:22:56'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:23:05'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:29:40'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:29:40'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:29:42'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:29:42'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:29:51'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:29:51'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:30:18'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:30:18'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:30:25'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:30:25'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:30:34'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:30:34'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:30:52'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:30:52'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:30:54'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:30:54'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:30:56'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:30:56'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:30:59'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:30:59'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:31:02'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:31:02'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:31:06'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:31:06'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:31:10'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:31:10'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:31:12'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:31:12'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:31:14'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:31:14'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:31:19'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:31:19'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:31:23'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:31:23'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:31:24'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:31:24'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:36:16'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:36:16'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:36:20'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:36:20'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:36:23'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:36:23'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:36:25'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:36:25'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:36:29'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:36:29'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:36:33'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:36:33'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:36:53'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:36:53'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:36:56'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:36:56'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:37:04'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:37:04'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:37:05'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:37:05'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:39:43'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:39:43'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:39:52'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:41:45'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:41:45'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:55:35'
+}
+{
+  message: {
+    error: 'ID Kost tidak valid.',
+    stack: 'Error: ID Kost tidak valid.\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/controllers/reservasiController.js:199:13\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/middleware/errorHandler.js:22:25\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at handleValidationErrors (/Users/bimadharmawan/Documents/kostkita-be/src/middleware/validation.js:32:5)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at Route.dispatch (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:119:3)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/index.js:284:15',
+    url: '/api/v1/reservasi/penghuni',
+    method: 'GET',
+    ip: '::ffff:127.0.0.1',
+    userAgent: 'Dart/3.8 (dart:io)'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:55:35'
+}
+{
+  message: {
+    error: 'ID Kost tidak valid.',
+    stack: 'Error: ID Kost tidak valid.\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/controllers/reservasiController.js:199:13\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/middleware/errorHandler.js:22:25\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at handleValidationErrors (/Users/bimadharmawan/Documents/kostkita-be/src/middleware/validation.js:32:5)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at Route.dispatch (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:119:3)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/index.js:284:15',
+    url: '/api/v1/reservasi/penghuni',
+    method: 'GET',
+    ip: '::ffff:127.0.0.1',
+    userAgent: 'Dart/3.8 (dart:io)'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:55:37'
+}
+{
+  message: {
+    error: 'ID Kost tidak valid.',
+    stack: 'Error: ID Kost tidak valid.\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/controllers/reservasiController.js:199:13\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/middleware/errorHandler.js:22:25\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at handleValidationErrors (/Users/bimadharmawan/Documents/kostkita-be/src/middleware/validation.js:32:5)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at Route.dispatch (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:119:3)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/index.js:284:15',
+    url: '/api/v1/reservasi/penghuni',
+    method: 'GET',
+    ip: '::ffff:127.0.0.1',
+    userAgent: 'Dart/3.8 (dart:io)'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:55:38'
+}
+{
+  message: {
+    error: 'ID Kost tidak valid.',
+    stack: 'Error: ID Kost tidak valid.\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/controllers/reservasiController.js:199:13\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/middleware/errorHandler.js:22:25\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at handleValidationErrors (/Users/bimadharmawan/Documents/kostkita-be/src/middleware/validation.js:32:5)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at Route.dispatch (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:119:3)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/index.js:284:15',
+    url: '/api/v1/reservasi/penghuni',
+    method: 'GET',
+    ip: '::ffff:127.0.0.1',
+    userAgent: 'Dart/3.8 (dart:io)'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:56:26'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:56:44'
+}
+{
+  message: {
+    error: 'ID Kost tidak valid.',
+    stack: 'Error: ID Kost tidak valid.\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/controllers/reservasiController.js:199:13\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/middleware/errorHandler.js:22:25\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at handleValidationErrors (/Users/bimadharmawan/Documents/kostkita-be/src/middleware/validation.js:32:5)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at Route.dispatch (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:119:3)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/index.js:284:15',
+    url: '/api/v1/reservasi/penghuni',
+    method: 'GET',
+    ip: '::ffff:127.0.0.1',
+    userAgent: 'Dart/3.8 (dart:io)'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:56:44'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:57:04'
+}
+{
+  message: {
+    error: 'ID Kost tidak valid.',
+    stack: 'Error: ID Kost tidak valid.\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/controllers/reservasiController.js:199:13\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/middleware/errorHandler.js:22:25\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at handleValidationErrors (/Users/bimadharmawan/Documents/kostkita-be/src/middleware/validation.js:32:5)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at Route.dispatch (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:119:3)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/index.js:284:15',
+    url: '/api/v1/reservasi/penghuni',
+    method: 'GET',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:57:13'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:57:43'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:57:43'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:57:45'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:57:45'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:58:27'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-19 23:59:40'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:06:19'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:17:05'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:25:25'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:31:18'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:31:18'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:31:22'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:31:22'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:31:28'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:31:28'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:31:48'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:31:48'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:31:51'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:31:51'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:33:12'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:33:12'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:33:17'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:33:17'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:33:40'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:33:40'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:33:41'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:33:41'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:34:06'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:34:06'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:34:10'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:34:10'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:34:13'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:34:13'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:34:15'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:34:15'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:34:17'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:34:17'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:34:23'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:34:23'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:34:25'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:34:25'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:34:31'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:34:31'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:34:59'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:34:59'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:35:00'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:35:00'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:35:03'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:35:03'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:35:27'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:35:27'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:35:29'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:35:29'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:35:37'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:35:37'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:35:40'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:35:40'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:35:54'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:35:54'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:36:01'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:36:01'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:36:26'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:36:26'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:36:29'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:36:29'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:36:32'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:36:32'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:36:33'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:36:33'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:36:37'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:36:37'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:36:40'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:36:40'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:57:34'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 00:59:00'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 01:00:01'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 01:00:59'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 01:00:59'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 01:01:05'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 01:01:05'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 01:01:06'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 01:01:06'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 01:01:12'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 01:01:12'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 01:13:56'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 01:15:15'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 01:15:16'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 01:15:20'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 01:15:20'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 01:15:21'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 01:15:21'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 01:15:23'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 01:15:23'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 01:15:26'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 01:15:26'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 01:28:10'
+}
+{
+  service: 'kosan-api',
+  name: 'MulterError',
+  message: 'Upload error: Unexpected field',
+  code: 'LIMIT_UNEXPECTED_FILE',
+  field: 'buktiBayarFile',
+  storageErrors: [],
+  level: 'error',
+  stack: 'MulterError: Unexpected field\n' +
+    '    at wrappedFileFilter (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/index.js:40:19)\n' +
+    '    at Multipart.<anonymous> (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/make-middleware.js:109:7)\n' +
+    '    at Multipart.emit (node:events:507:28)\n' +
+    '    at HeaderParser.cb (/Users/bimadharmawan/Documents/kostkita-be/node_modules/busboy/lib/types/multipart.js:358:14)\n' +
+    '    at HeaderParser.push (/Users/bimadharmawan/Documents/kostkita-be/node_modules/busboy/lib/types/multipart.js:162:20)\n' +
+    '    at SBMH.ssCb [as _cb] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/busboy/lib/types/multipart.js:394:37)\n' +
+    '    at feed (/Users/bimadharmawan/Documents/kostkita-be/node_modules/streamsearch/lib/sbmh.js:248:10)\n' +
+    '    at SBMH.push (/Users/bimadharmawan/Documents/kostkita-be/node_modules/streamsearch/lib/sbmh.js:104:16)\n' +
+    '    at Multipart._write (/Users/bimadharmawan/Documents/kostkita-be/node_modules/busboy/lib/types/multipart.js:567:19)\n' +
+    '    at writeOrBuffer (node:internal/streams/writable:570:12)',
+  timestamp: '2025-06-20 01:38:33'
+}
+{
+  message: {
+    error: 'Unexpected field',
+    stack: 'Error: Unexpected field\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/middleware/upload.js:21:33\n' +
+      '    at done (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/make-middleware.js:47:7)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/make-middleware.js:67:11\n' +
+      '    at removeUploadedFiles (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/remove-uploaded-files.js:5:28)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/make-middleware.js:63:9\n' +
+      '    at Counter.onceZero (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/counter.js:23:29)\n' +
+      '    at abortWithError (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/make-middleware.js:58:21)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/make-middleware.js:112:18\n' +
+      '    at wrappedFileFilter (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/index.js:40:16)\n' +
+      '    at Multipart.<anonymous> (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/make-middleware.js:109:7)',
+    url: '/api/v1/reservasi/55585818-ec94-4657-8018-4c2b7b6f7d8d/extend',
+    method: 'PUT',
+    ip: '::ffff:127.0.0.1',
+    userAgent: 'Dart/3.8 (dart:io)'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 01:38:33'
+}
+{
+  service: 'kosan-api',
+  name: 'MulterError',
+  message: 'Upload error: Unexpected field',
+  code: 'LIMIT_UNEXPECTED_FILE',
+  field: 'buktiBayarFile',
+  storageErrors: [],
+  level: 'error',
+  stack: 'MulterError: Unexpected field\n' +
+    '    at wrappedFileFilter (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/index.js:40:19)\n' +
+    '    at Multipart.<anonymous> (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/make-middleware.js:109:7)\n' +
+    '    at Multipart.emit (node:events:507:28)\n' +
+    '    at HeaderParser.cb (/Users/bimadharmawan/Documents/kostkita-be/node_modules/busboy/lib/types/multipart.js:358:14)\n' +
+    '    at HeaderParser.push (/Users/bimadharmawan/Documents/kostkita-be/node_modules/busboy/lib/types/multipart.js:162:20)\n' +
+    '    at SBMH.ssCb [as _cb] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/busboy/lib/types/multipart.js:394:37)\n' +
+    '    at feed (/Users/bimadharmawan/Documents/kostkita-be/node_modules/streamsearch/lib/sbmh.js:248:10)\n' +
+    '    at SBMH.push (/Users/bimadharmawan/Documents/kostkita-be/node_modules/streamsearch/lib/sbmh.js:104:16)\n' +
+    '    at Multipart._write (/Users/bimadharmawan/Documents/kostkita-be/node_modules/busboy/lib/types/multipart.js:567:19)\n' +
+    '    at writeOrBuffer (node:internal/streams/writable:570:12)',
+  timestamp: '2025-06-20 01:42:26'
+}
+{
+  message: {
+    error: 'Unexpected field',
+    stack: 'Error: Unexpected field\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/middleware/upload.js:21:33\n' +
+      '    at done (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/make-middleware.js:47:7)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/make-middleware.js:67:11\n' +
+      '    at removeUploadedFiles (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/remove-uploaded-files.js:5:28)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/make-middleware.js:63:9\n' +
+      '    at Counter.onceZero (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/counter.js:23:29)\n' +
+      '    at abortWithError (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/make-middleware.js:58:21)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/make-middleware.js:112:18\n' +
+      '    at wrappedFileFilter (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/index.js:40:16)\n' +
+      '    at Multipart.<anonymous> (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/make-middleware.js:109:7)',
+    url: '/api/v1/reservasi/55585818-ec94-4657-8018-4c2b7b6f7d8d/extend',
+    method: 'PUT',
+    ip: '::ffff:127.0.0.1',
+    userAgent: 'Dart/3.8 (dart:io)'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 01:42:26'
+}
+{
+  service: 'kosan-api',
+  name: 'MulterError',
+  message: 'Upload error: Unexpected field',
+  code: 'LIMIT_UNEXPECTED_FILE',
+  field: 'buktiBayarFile',
+  storageErrors: [],
+  level: 'error',
+  stack: 'MulterError: Unexpected field\n' +
+    '    at wrappedFileFilter (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/index.js:40:19)\n' +
+    '    at Multipart.<anonymous> (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/make-middleware.js:109:7)\n' +
+    '    at Multipart.emit (node:events:507:28)\n' +
+    '    at HeaderParser.cb (/Users/bimadharmawan/Documents/kostkita-be/node_modules/busboy/lib/types/multipart.js:358:14)\n' +
+    '    at HeaderParser.push (/Users/bimadharmawan/Documents/kostkita-be/node_modules/busboy/lib/types/multipart.js:162:20)\n' +
+    '    at SBMH.ssCb [as _cb] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/busboy/lib/types/multipart.js:394:37)\n' +
+    '    at feed (/Users/bimadharmawan/Documents/kostkita-be/node_modules/streamsearch/lib/sbmh.js:219:14)\n' +
+    '    at SBMH.push (/Users/bimadharmawan/Documents/kostkita-be/node_modules/streamsearch/lib/sbmh.js:104:16)\n' +
+    '    at Multipart._write (/Users/bimadharmawan/Documents/kostkita-be/node_modules/busboy/lib/types/multipart.js:567:19)\n' +
+    '    at writeOrBuffer (node:internal/streams/writable:570:12)',
+  timestamp: '2025-06-20 01:42:43'
+}
+{
+  message: {
+    error: 'Unexpected field',
+    stack: 'Error: Unexpected field\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/middleware/upload.js:21:33\n' +
+      '    at done (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/make-middleware.js:47:7)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/make-middleware.js:67:11\n' +
+      '    at removeUploadedFiles (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/remove-uploaded-files.js:5:28)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/make-middleware.js:63:9\n' +
+      '    at Counter.onceZero (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/counter.js:23:29)\n' +
+      '    at abortWithError (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/make-middleware.js:58:21)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/make-middleware.js:112:18\n' +
+      '    at wrappedFileFilter (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/index.js:40:16)\n' +
+      '    at Multipart.<anonymous> (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/make-middleware.js:109:7)',
+    url: '/api/v1/reservasi/55585818-ec94-4657-8018-4c2b7b6f7d8d/extend',
+    method: 'PUT',
+    ip: '::ffff:127.0.0.1',
+    userAgent: 'Dart/3.8 (dart:io)'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 01:42:43'
+}
+{
+  service: 'kosan-api',
+  statusCode: 400,
+  isOperational: true,
+  status: 'fail',
+  storageErrors: [],
+  level: 'error',
+  message: 'Upload error: File type application/octet-stream not allowed',
+  stack: 'Error: File type application/octet-stream not allowed\n' +
+    '    at fileFilter (/Users/bimadharmawan/Documents/kostkita-be/src/services/fileService.js:58:20)\n' +
+    '    at wrappedFileFilter (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/index.js:44:7)\n' +
+    '    at Multipart.<anonymous> (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/make-middleware.js:109:7)\n' +
+    '    at Multipart.emit (node:events:507:28)\n' +
+    '    at HeaderParser.cb (/Users/bimadharmawan/Documents/kostkita-be/node_modules/busboy/lib/types/multipart.js:358:14)\n' +
+    '    at HeaderParser.push (/Users/bimadharmawan/Documents/kostkita-be/node_modules/busboy/lib/types/multipart.js:162:20)\n' +
+    '    at SBMH.ssCb [as _cb] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/busboy/lib/types/multipart.js:394:37)\n' +
+    '    at feed (/Users/bimadharmawan/Documents/kostkita-be/node_modules/streamsearch/lib/sbmh.js:219:14)\n' +
+    '    at SBMH.push (/Users/bimadharmawan/Documents/kostkita-be/node_modules/streamsearch/lib/sbmh.js:104:16)\n' +
+    '    at Multipart._write (/Users/bimadharmawan/Documents/kostkita-be/node_modules/busboy/lib/types/multipart.js:567:19)',
+  timestamp: '2025-06-20 01:44:42'
+}
+{
+  message: {
+    error: 'File type application/octet-stream not allowed',
+    stack: 'Error: File type application/octet-stream not allowed\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/middleware/upload.js:21:33\n' +
+      '    at done (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/make-middleware.js:47:7)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/make-middleware.js:67:11\n' +
+      '    at removeUploadedFiles (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/remove-uploaded-files.js:5:28)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/make-middleware.js:63:9\n' +
+      '    at Counter.onceZero (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/counter.js:23:29)\n' +
+      '    at abortWithError (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/make-middleware.js:58:21)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/lib/make-middleware.js:112:18\n' +
+      '    at fileFilter (/Users/bimadharmawan/Documents/kostkita-be/src/services/fileService.js:58:17)\n' +
+      '    at wrappedFileFilter (/Users/bimadharmawan/Documents/kostkita-be/node_modules/multer/index.js:44:7)',
+    url: '/api/v1/reservasi/55585818-ec94-4657-8018-4c2b7b6f7d8d/extend',
+    method: 'PUT',
+    ip: '::ffff:127.0.0.1',
+    userAgent: 'Dart/3.8 (dart:io)'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 01:44:42'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 02:05:41'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 02:07:04'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 02:08:09'
+}

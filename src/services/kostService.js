@@ -72,7 +72,8 @@ class KostService {
       },
     });
 
-    if (!pengelola) throw new AppError("Pengelola not found or invalid role", 404);
+    if (!pengelola)
+      throw new AppError("Pengelola not found or invalid role", 404);
 
     const tipeKamar = await prisma.masterTipeKamar.findFirst({
       where: {
@@ -135,7 +136,9 @@ class KostService {
           kapasitas_parkir_motor: kapasitas_parkir_motor || 0,
           kapasitas_parkir_mobil: kapasitas_parkir_mobil || 0,
           kapasitas_parkir_sepeda: kapasitas_parkir_sepeda || 0,
-          biaya_tambahan: biaya_tambahan ? new Prisma.Decimal(biaya_tambahan) : null,
+          biaya_tambahan: biaya_tambahan
+            ? new Prisma.Decimal(biaya_tambahan)
+            : null,
           jam_survey,
           foto_kost: foto_kost || [],
           qris_image,
@@ -149,7 +152,10 @@ class KostService {
 
       if (fasilitas_ids.length > 0) {
         await tx.kostFasilitas.createMany({
-          data: fasilitas_ids.map((id) => ({ kost_id: kost.kost_id, fasilitas_id: id })),
+          data: fasilitas_ids.map((id) => ({
+            kost_id: kost.kost_id,
+            fasilitas_id: id,
+          })),
         });
       }
 
@@ -166,7 +172,9 @@ class KostService {
       return await tx.kost.findUnique({
         where: { kost_id: kost.kost_id },
         include: {
-          pengelola: { select: { full_name: true, phone: true, whatsapp_number: true } },
+          pengelola: {
+            select: { full_name: true, phone: true, whatsapp_number: true },
+          },
           tipe: { select: { nama_tipe: true, ukuran: true, kapasitas: true } },
           kost_fasilitas: {
             include: {
@@ -227,15 +235,21 @@ class KostService {
         ...(wifi_speed && { wifi_speed }),
         ...(kapasitas_parkir_motor !== undefined && { kapasitas_parkir_motor }),
         ...(kapasitas_parkir_mobil !== undefined && { kapasitas_parkir_mobil }),
-        ...(kapasitas_parkir_sepeda !== undefined && { kapasitas_parkir_sepeda }),
+        ...(kapasitas_parkir_sepeda !== undefined && {
+          kapasitas_parkir_sepeda,
+        }),
         ...(biaya_tambahan !== undefined && {
-          biaya_tambahan: biaya_tambahan ? new Prisma.Decimal(biaya_tambahan) : null,
+          biaya_tambahan: biaya_tambahan
+            ? new Prisma.Decimal(biaya_tambahan)
+            : null,
         }),
         ...(jam_survey && { jam_survey }),
         ...(foto_kost && { foto_kost }),
         ...(qris_image && { qris_image }),
         ...(rekening_info && { rekening_info }),
-        ...(harga_bulanan && { harga_bulanan: new Prisma.Decimal(harga_bulanan) }),
+        ...(harga_bulanan && {
+          harga_bulanan: new Prisma.Decimal(harga_bulanan),
+        }),
         ...(deposit !== undefined && {
           deposit: deposit ? new Prisma.Decimal(deposit) : null,
         }),
@@ -252,7 +266,10 @@ class KostService {
         await tx.kostFasilitas.deleteMany({ where: { kost_id: kostId } });
         if (fasilitas_ids.length > 0) {
           await tx.kostFasilitas.createMany({
-            data: fasilitas_ids.map((id) => ({ kost_id: kostId, fasilitas_id: id })),
+            data: fasilitas_ids.map((id) => ({
+              kost_id: kostId,
+              fasilitas_id: id,
+            })),
           });
         }
       }
@@ -273,7 +290,9 @@ class KostService {
       return await tx.kost.findUnique({
         where: { kost_id: kostId },
         include: {
-          pengelola: { select: { full_name: true, phone: true, whatsapp_number: true } },
+          pengelola: {
+            select: { full_name: true, phone: true, whatsapp_number: true },
+          },
           tipe: { select: { nama_tipe: true, ukuran: true, kapasitas: true } },
           kost_fasilitas: { include: { fasilitas: true } },
           kost_peraturan: { include: { peraturan: true } },
@@ -357,6 +376,7 @@ class KostService {
           },
           select: { reservasi_id: true },
         },
+        kost_peraturan: { include: { peraturan: true } },
       },
     });
 
@@ -366,7 +386,8 @@ class KostService {
     const availableRooms = kost.total_kamar - totalOccupiedRooms;
 
     const { reservasi, ...kostWithoutReservations } = kost;
-    const formattedFotoKost = kost.foto_kost?.map((url) => fileService.generateFileUrl(url)) || [];
+    const formattedFotoKost =
+      kost.foto_kost?.map((url) => fileService.generateFileUrl(url)) || [];
 
     return {
       ...kostWithoutReservations,

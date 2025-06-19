@@ -152,10 +152,11 @@ module.exports = {
       throw error;
     }
   }),
+
   getManagedKostReservations: asyncHandler(async (req, res) => {
     const { kostId } = req.params;
     const pengelolaId = req.user.user_id;
-    const userRole = req.user.role; 
+    const userRole = req.user.role;
 
     if (userRole !== "PENGELOLA" && userRole !== "ADMIN") {
       throw new AppError(
@@ -182,5 +183,70 @@ module.exports = {
       message: `Data reservasi untuk Kost '${kostReservationsData.nama_kost}' berhasil diambil.`,
       data: kostReservationsData,
     });
+  }),
+
+  getReservationsForSpecificKostByUser: asyncHandler(async (req, res) => {
+    const { kostId } = req.params;
+    const userId = req.user.user_id;
+
+    if (!kostId) {
+      throw new AppError("ID Kost diperlukan.", 400);
+    }
+
+    if (
+      !/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/i.test(kostId)
+    ) {
+      throw new AppError("ID Kost tidak valid.", 400);
+    }
+
+    try {
+      const reservations = await reservasiService.getReservationsByKostAndUser(
+        kostId,
+        userId
+      );
+
+      if (reservations.length === 0) {
+        return res.status(404).json({
+          message:
+            "Tidak ditemukan reservasi untuk kost ini oleh pengguna Anda.",
+          data: [],
+        });
+      }
+
+      res.status(200).json({
+        message: "Data reservasi berhasil diambil.",
+        data: reservations,
+      });
+    } catch (error) {
+      throw error;
+    }
+  }),
+
+  getReservationDetailById: asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const userId = req.user.user_id;
+    const userRole = req.user.role;
+
+    if (
+      !id ||
+      !/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/i.test(id)
+    ) {
+      throw new AppError("ID Reservasi tidak valid.", 400);
+    }
+
+    try {
+      const reservationDetail = await reservasiService.getReservationDetailById(
+        id,
+        userId,
+        userRole
+      );
+
+      res.status(200).json({
+        message: "Detail reservasi berhasil diambil.",
+        data: reservationDetail,
+      });
+    } catch (error) {
+      throw error;
+    }
   }),
 };
