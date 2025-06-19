@@ -143,7 +143,7 @@ class KostService {
                     harga_bulanan: new Prisma.Decimal(harga_bulanan),
                     deposit: deposit ? new Prisma.Decimal(deposit) : null,
                     harga_final: new Prisma.Decimal(harga_final),
-                    is_approved: false,
+                    is_approved: true,
                 },
             });
 
@@ -380,6 +380,7 @@ class KostService {
         const { nama_kost } = query;
         const where = {
             pengelola_id: user_id,
+            is_approved: true
         };
 
         if (nama_kost) {
