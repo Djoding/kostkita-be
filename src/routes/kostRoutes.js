@@ -12,13 +12,11 @@ router.get(
     '/:kost_id/fasilitas',
     validateUUID('kost_id'),
     kostController.getFasilitasByKostId
-  );
-
-
+);
 
 router.get('/:kost_id/peraturan',
-  validateUUID('kost_id'),
-  kostController.getPeraturanByKostId
+    validateUUID('kost_id'),
+    kostController.getPeraturanByKostId
 );
 
 router.get('/owner',
@@ -51,12 +49,9 @@ router.put('/:kost_id',
 );
 
 router.delete('/:kost_id',
-    authorize('ADMIN'),
+    authorize('PENGELOLA', 'ADMIN'),
     validateUUID('kost_id'),
     kostController.deleteKost
 );
-
-
-
 
 module.exports = router;

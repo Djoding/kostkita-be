@@ -36,5 +36,12 @@ Thumbs.db
 # ======================
 # Logs
 # ======================
+
 logs/
+logs/combined.log
+logs/error.log
+logs/*.log
 *.log
+*.log/combined.log
+*.log/error.log
+# ======================
