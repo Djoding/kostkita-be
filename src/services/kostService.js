@@ -72,7 +72,8 @@ class KostService {
             },
         });
 
-        if (!pengelola) throw new AppError("Pengelola not found or invalid role", 404);
+        if (!pengelola)
+            throw new AppError("Pengelola not found or invalid role", 404);
 
         const tipeKamar = await prisma.masterTipeKamar.findFirst({
             where: {
@@ -80,6 +81,7 @@ class KostService {
                 is_active: true,
             },
         });
+
         if (!tipeKamar) throw new AppError("Tipe kamar not found or inactive", 404);
 
         if (fasilitas_ids.length > 0) {
@@ -168,16 +170,8 @@ class KostService {
                 include: {
                     pengelola: { select: { full_name: true, phone: true, whatsapp_number: true } },
                     tipe: { select: { nama_tipe: true, ukuran: true, kapasitas: true } },
-                    kost_fasilitas: {
-                        include: {
-                            fasilitas: true,
-                        },
-                    },
-                    kost_peraturan: {
-                        include: {
-                            peraturan: true,
-                        },
-                    },
+                    kost_fasilitas: { include: { fasilitas: true } },
+                    kost_peraturan: { include: { peraturan: true } },
                 },
             });
         });
@@ -336,6 +330,9 @@ class KostService {
                 kost_fasilitas: {
                     include: { fasilitas: true },
                 },
+                kost_peraturan: {
+                    include: { peraturan: true },
+                },
                 tipe: {
                     select: { nama_tipe: true, ukuran: true, kapasitas: true },
                 },
@@ -380,7 +377,7 @@ class KostService {
         const { nama_kost } = query;
         const where = {
             pengelola_id: user_id,
-            is_approved: true
+            is_approved: true,
         };
 
         if (nama_kost) {
@@ -404,24 +401,23 @@ class KostService {
         });
     }
 
-    /* ---------- NEW: LIST FASILITAS BY KOST ---------- */
     async getFasilitasByKostId(kost_id) {
         const kost = await prisma.kost.findUnique({
             where: { kost_id },
             include: {
                 kost_fasilitas: {
                     include: {
-                        fasilitas: true
-                    }
-                }
-            }
+                        fasilitas: true,
+                    },
+                },
+            },
         });
 
-        if (!kost) throw new AppError('Kost not found', 404);
+        if (!kost) throw new AppError("Kost not found", 404);
 
         return {
             nama_kost: kost.nama_kost,
-            fasilitas: kost.kost_fasilitas.map((kf) => kf.fasilitas)
+            fasilitas: kost.kost_fasilitas.map((kf) => kf.fasilitas),
         };
     }
 
@@ -431,23 +427,22 @@ class KostService {
             include: {
                 kost_peraturan: {
                     include: {
-                        peraturan: true
-                    }
-                }
-            }
+                        peraturan: true,
+                    },
+                },
+            },
         });
 
-        if (!kost) throw new AppError('Kost not found', 404);
+        if (!kost) throw new AppError("Kost not found", 404);
 
         return {
             nama_kost: kost.nama_kost,
             peraturan: kost.kost_peraturan.map((kp) => ({
                 ...kp.peraturan,
-                keterangan_tambahan: kp.keterangan_tambahan || null
-            }))
+                keterangan_tambahan: kp.keterangan_tambahan || null,
+            })),
         };
     }
-
 }
 
 module.exports = new KostService();
