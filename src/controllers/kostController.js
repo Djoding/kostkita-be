@@ -94,7 +94,25 @@ class KostController {
             next(error);
         }
     }
-    
+
+    /* ---------- NEW: FASILITAS BY KOST ---------- */
+    getFasilitasByKostId = asyncHandler(async (req, res) => {
+        const data = await kostService.getFasilitasByKostId(req.params.kost_id);
+        res.json({
+            success: true,
+            message: `Fasilitas for kost ${data.nama_kost} retrieved successfully`,
+            data
+        });
+    });
+
+    getPeraturanByKostId = asyncHandler(async (req, res) => {
+        const data = await kostService.getPeraturanByKostId(req.params.kost_id);
+        res.json({
+            success: true,
+            message: `Peraturan for kost ${data.nama_kost} retrieved successfully`,
+            data
+        });
+    });
 }
 
 module.exports = new KostController();

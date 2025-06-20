@@ -68,6 +68,8 @@ router.get("/docs", (req, res) => {
           routes: [
             "GET /kost - Get all kost (Public)",
             "GET /kost/:id - Get kost by ID (Public)",
+            'GET /kost/:id/fasilitas - Get kost fasilitas (Public)',
+            'GET /kost/:kost_id/peraturan - Get kost peraturan (Public)',
             "GET /kost/owner - Get kost by logged-in owner (Pengelola only)",
             "POST /kost - Create kost (Pengelola/Admin)",
             "PUT /kost/:id - Update kost (Pengelola/Admin)",

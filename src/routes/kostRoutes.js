@@ -11,12 +11,26 @@ const kostValidator = require("../validators/kostValidator");
 const router = express.Router();
 
 router.get("/", kostController.getAllKost);
+
+router.get(
+  "/:kost_id/fasilitas",
+  validateUUID("kost_id"),
+  kostController.getFasilitasByKostId
+);
+
+router.get(
+  "/:kost_id/peraturan",
+  validateUUID("kost_id"),
+  kostController.getPeraturanByKostId
+);
+
 router.get(
   "/owner",
   authenticateJWT,
   authorize("PENGELOLA"),
   kostController.getKostByOwner
 );
+
 router.get(
   "/:kost_id/tamu",
   validateUUID("kost_id"),
@@ -25,7 +39,11 @@ router.get(
 
 router.use(authenticateJWT);
 
-router.get("/:kost_id", validateUUID("kost_id"), kostController.getKostById);
+router.get(
+  "/:kost_id",
+  validateUUID("kost_id"),
+  kostController.getKostById
+);
 
 router.post(
   "/",
@@ -48,7 +66,7 @@ router.put(
 
 router.delete(
   "/:kost_id",
-  authorize("ADMIN"),
+  authorize("PENGELOLA", "ADMIN"),
   validateUUID("kost_id"),
   kostController.deleteKost
 );
