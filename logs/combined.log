@@ -5676,3 +5676,362 @@
   service: 'kosan-api',
   timestamp: '2025-06-19 09:50:46'
 }
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:06:24'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:06:24'
+}
+{
+  message: 'User logged in: admin@kosan.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:14:31'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:19:14'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:19:14'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:19:42'
+}
+{
+  message: {
+    error: 'Bukti pembayaran reservasi wajib diunggah.',
+    stack: 'Error: Bukti pembayaran reservasi wajib diunggah.\n' +
+      '    at /Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/controllers/reservasiController.js:12:13\n' +
+      '    at /Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/middleware/errorHandler.js:22:25\n' +
+      '    at Layer.handle [as handle_request] (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at handleValidationErrors (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/middleware/validation.js:32:5)\n' +
+      '    at Layer.handle [as handle_request] (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at validateCreateReservation (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/validators/reservasiValidator.js:42:5)\n' +
+      '    at Layer.handle [as handle_request] (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/route.js:149:13)',
+    url: '/api/v1/reservasi',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.1'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:20:51'
+}
+{
+  message: 'File deleted: ./uploads/reservation_payment/fe63d52f-8445-4446-9d77-e6184f2057ef_1750436472546_processed.jpeg',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:21:12'
+}
+{
+  service: 'kosan-api',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'unlink',
+  path: './uploads/reservation_payment/fe63d52f-8445-4446-9d77-e6184f2057ef_1750436472546_processed.jpeg',
+  level: 'warn',
+  message: "Failed to delete file: uploads/reservation_payment/fe63d52f-8445-4446-9d77-e6184f2057ef_1750436472546_processed.jpeg ENOENT: no such file or directory, unlink './uploads/reservation_payment/fe63d52f-8445-4446-9d77-e6184f2057ef_1750436472546_processed.jpeg'",
+  stack: "Error: ENOENT: no such file or directory, unlink './uploads/reservation_payment/fe63d52f-8445-4446-9d77-e6184f2057ef_1750436472546_processed.jpeg'\n" +
+    '    at async Object.unlink (node:internal/fs/promises:1060:10)\n' +
+    '    at async FileService.deleteFile (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/services/fileService.js:121:13)\n' +
+    '    at async Object.createReservation (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/services/reservasiService.js:157:7)\n' +
+    '    at async /Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/controllers/reservasiController.js:26:30',
+  timestamp: '2025-06-20 23:21:12'
+}
+{
+  message: {
+    error: 'Kost tidak ditemukan.',
+    stack: 'Error: Kost tidak ditemukan.\n' +
+      '    at Object.createReservation (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/services/reservasiService.js:57:13)\n' +
+      '    at async /Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/controllers/reservasiController.js:26:30',
+    url: '/api/v1/reservasi',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.1'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:21:12'
+}
+{
+  message: 'File deleted: ./uploads/reservation_payment/62bf5e6f-9c01-468c-8e2d-188f4e36f6bc_1750436523543_processed.jpeg',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:22:03'
+}
+{
+  service: 'kosan-api',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'unlink',
+  path: './uploads/reservation_payment/62bf5e6f-9c01-468c-8e2d-188f4e36f6bc_1750436523543_processed.jpeg',
+  level: 'warn',
+  message: "Failed to delete file: uploads/reservation_payment/62bf5e6f-9c01-468c-8e2d-188f4e36f6bc_1750436523543_processed.jpeg ENOENT: no such file or directory, unlink './uploads/reservation_payment/62bf5e6f-9c01-468c-8e2d-188f4e36f6bc_1750436523543_processed.jpeg'",
+  stack: "Error: ENOENT: no such file or directory, unlink './uploads/reservation_payment/62bf5e6f-9c01-468c-8e2d-188f4e36f6bc_1750436523543_processed.jpeg'\n" +
+    '    at async Object.unlink (node:internal/fs/promises:1060:10)\n' +
+    '    at async FileService.deleteFile (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/services/fileService.js:121:13)\n' +
+    '    at async Object.createReservation (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/services/reservasiService.js:157:7)\n' +
+    '    at async /Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/controllers/reservasiController.js:26:30',
+  timestamp: '2025-06-20 23:22:03'
+}
+{
+  message: {
+    error: 'Anda sudah memiliki reservasi aktif di kost ini.',
+    stack: 'Error: Anda sudah memiliki reservasi aktif di kost ini.\n' +
+      '    at Object.createReservation (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/services/reservasiService.js:129:13)\n' +
+      '    at async /Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/controllers/reservasiController.js:26:30',
+    url: '/api/v1/reservasi',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.1'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:22:03'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:59:24'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:59:24'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:59:42'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:59:42'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:59:48'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:59:48'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:59:50'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:59:50'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:59:53'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:59:53'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:59:54'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:59:54'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:59:57'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:59:57'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:59:57'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:59:57'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 00:00:08'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 00:00:08'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 00:00:12'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 00:00:12'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 00:00:18'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 00:00:18'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 00:00:20'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 00:00:20'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 00:00:21'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 00:00:21'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 00:00:24'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 00:00:24'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 00:00:28'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 00:00:28'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 00:00:29'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 00:00:29'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 00:00:34'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 00:09:43'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 00:09:43'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 00:09:44'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 00:10:16'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 00:11:46'
+}

@@ -1196,3 +1196,56 @@
     '    at async /Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/controllers/authController.js:128:28',
   timestamp: '2025-06-18 23:02:02'
 }
+{
+  message: {
+    error: 'Bukti pembayaran reservasi wajib diunggah.',
+    stack: 'Error: Bukti pembayaran reservasi wajib diunggah.\n' +
+      '    at /Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/controllers/reservasiController.js:12:13\n' +
+      '    at /Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/middleware/errorHandler.js:22:25\n' +
+      '    at Layer.handle [as handle_request] (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at handleValidationErrors (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/middleware/validation.js:32:5)\n' +
+      '    at Layer.handle [as handle_request] (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at validateCreateReservation (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/validators/reservasiValidator.js:42:5)\n' +
+      '    at Layer.handle [as handle_request] (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/node_modules/express/lib/router/route.js:149:13)',
+    url: '/api/v1/reservasi',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.1'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:20:51'
+}
+{
+  message: {
+    error: 'Kost tidak ditemukan.',
+    stack: 'Error: Kost tidak ditemukan.\n' +
+      '    at Object.createReservation (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/services/reservasiService.js:57:13)\n' +
+      '    at async /Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/controllers/reservasiController.js:26:30',
+    url: '/api/v1/reservasi',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.1'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:21:12'
+}
+{
+  message: {
+    error: 'Anda sudah memiliki reservasi aktif di kost ini.',
+    stack: 'Error: Anda sudah memiliki reservasi aktif di kost ini.\n' +
+      '    at Object.createReservation (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/services/reservasiService.js:129:13)\n' +
+      '    at async /Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/controllers/reservasiController.js:26:30',
+    url: '/api/v1/reservasi',
+    method: 'POST',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.1'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 23:22:03'
+}

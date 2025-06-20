@@ -135,6 +135,72 @@ const MASTER_DATA = {
       is_approved: true,
       email_verified: true
     }
+  ],
+
+  catering: [
+    {
+      nama_catering: "Warung Bu Tini",
+      alamat: "Jl. Merdeka Raya No. 125, Jakarta Pusat",
+      whatsapp_number: "081234567896",
+      is_partner: true,
+      is_active: true
+    },
+    {
+      nama_catering: "Dapur Sehat Mama",
+      alamat: "Jl. Sudirman No. 458, Jakarta Selatan",
+      whatsapp_number: "081234567897",
+      is_partner: false,
+      is_active: true
+    }
+  ],
+
+  cateringMenus: [
+    [
+      { nama_menu: "Nasi Gudeg", kategori: "MAKANAN_BERAT", harga: 15000 },
+      { nama_menu: "Nasi Ayam Bakar", kategori: "MAKANAN_BERAT", harga: 18000 },
+      { nama_menu: "Gado-gado", kategori: "MAKANAN_BERAT", harga: 12000 },
+      { nama_menu: "Es Teh Manis", kategori: "MINUMAN", harga: 5000 },
+      { nama_menu: "Kerupuk", kategori: "SNACK", harga: 3000 }
+    ],
+    [
+      { nama_menu: "Salmon Bowl", kategori: "MAKANAN_BERAT", harga: 25000 },
+      { nama_menu: "Caesar Salad", kategori: "MAKANAN_BERAT", harga: 20000 },
+      { nama_menu: "Smoothie Bowl", kategori: "SNACK", harga: 15000 },
+      { nama_menu: "Orange Juice", kategori: "MINUMAN", harga: 8000 },
+      { nama_menu: "Green Tea Latte", kategori: "MINUMAN", harga: 10000 }
+    ]
+  ],
+
+  laundry: [
+    {
+      nama_laundry: "Laundry Express 24",
+      alamat: "Jl. Merdeka Raya No. 127, Jakarta Pusat",
+      whatsapp_number: "081234567898",
+      is_partner: true,
+      is_active: true
+    },
+    {
+      nama_laundry: "Premium Clean",
+      alamat: "Jl. Sudirman No. 460, Jakarta Selatan",
+      whatsapp_number: "081234567899",
+      is_partner: false,
+      is_active: true
+    }
+  ],
+
+  laundryHarga: [
+    [
+      { layanan_index: 0, harga: 8000 },   
+      { layanan_index: 1, harga: 12000 },  
+      { layanan_index: 2, harga: 5000 },
+      { layanan_index: 4, harga: 15000 }
+    ],
+    [
+      { layanan_index: 0, harga: 12000 },  
+      { layanan_index: 1, harga: 18000 },
+      { layanan_index: 3, harga: 25000 },  
+      { layanan_index: 5, harga: 20000 }   
+    ]
   ]
 };
 
@@ -143,7 +209,6 @@ async function createMasterData() {
 
   const results = {};
 
-  // Create all master data
   results.fasilitas = await prisma.masterFasilitas.createMany({
     data: MASTER_DATA.fasilitas
   });
@@ -233,7 +298,7 @@ async function linkKostFasilitas(kosts) {
   console.log("🔗 Linking Kost Fasilitas...");
 
   const fasilitas = await prisma.masterFasilitas.findMany();
-  const basicFasilitas = fasilitas.slice(0, 8); // First 8 facilities
+  const basicFasilitas = fasilitas.slice(0, 8); 
 
   for (const kost of kosts) {
     await prisma.kostFasilitas.createMany({
@@ -251,7 +316,7 @@ async function linkKostPeraturan(kosts) {
   console.log("📋 Linking Kost Peraturan...");
 
   const peraturan = await prisma.masterPeraturan.findMany();
-  const basicPeraturan = peraturan.slice(0, 5); // First 5 rules
+  const basicPeraturan = peraturan.slice(0, 5); 
 
   for (const kost of kosts) {
     await prisma.kostPeraturan.createMany({
@@ -294,6 +359,190 @@ async function createSampleReservasi(users, kosts) {
   return reservasi;
 }
 
+async function createCateringServices(kosts) {
+  console.log("🍽️ Creating Catering Services...");
+
+  const caterings = [];
+  for (let i = 0; i < MASTER_DATA.catering.length; i++) {
+    const cateringData = {
+      ...MASTER_DATA.catering[i],
+      kost_id: kosts[i].kost_id,
+      qris_image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400",
+      rekening_info: {
+        bank: i === 0 ? "BRI" : "BCA",
+        nomor: i === 0 ? "1111222233334444" : "5555666677778888",
+        atas_nama: MASTER_DATA.catering[i].nama_catering
+      }
+    };
+
+    const catering = await prisma.catering.create({ data: cateringData });
+    caterings.push(catering);
+  }
+
+  console.log(`✅ Created ${caterings.length} catering services`);
+  return caterings;
+}
+
+async function createCateringMenus(caterings) {
+  console.log("📋 Creating Catering Menus...");
+
+  let totalMenus = 0;
+  for (let i = 0; i < caterings.length; i++) {
+    const menuData = MASTER_DATA.cateringMenus[i].map(menu => ({
+      ...menu,
+      catering_id: caterings[i].catering_id,
+      foto_menu: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400",
+      is_available: true
+    }));
+
+    await prisma.cateringMenu.createMany({ data: menuData });
+    totalMenus += menuData.length;
+  }
+
+  console.log(`✅ Created ${totalMenus} catering menu items`);
+}
+
+async function createLaundryServices(kosts) {
+  console.log("🧺 Creating Laundry Services...");
+
+  const laundries = [];
+  for (let i = 0; i < MASTER_DATA.laundry.length; i++) {
+    const laundryData = {
+      ...MASTER_DATA.laundry[i],
+      kost_id: kosts[i].kost_id,
+      qris_image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400",
+      rekening_info: {
+        bank: i === 0 ? "Mandiri" : "BCA",
+        nomor: i === 0 ? "9999888877776666" : "3333444455556666",
+        atas_nama: MASTER_DATA.laundry[i].nama_laundry
+      }
+    };
+
+    const laundry = await prisma.laundry.create({ data: laundryData });
+    laundries.push(laundry);
+  }
+
+  console.log(`✅ Created ${laundries.length} laundry services`);
+  return laundries;
+}
+
+async function createLaundryPricing(laundries) {
+  console.log("💰 Creating Laundry Pricing...");
+
+  const layananLaundry = await prisma.masterLayananLaundry.findMany();
+  let totalPricing = 0;
+
+  for (let i = 0; i < laundries.length; i++) {
+    const pricingData = MASTER_DATA.laundryHarga[i].map(pricing => ({
+      laundry_id: laundries[i].laundry_id,
+      layanan_id: layananLaundry[pricing.layanan_index].layanan_id,
+      harga_per_satuan: pricing.harga,
+      is_available: true
+    }));
+
+    await prisma.laundryHarga.createMany({ data: pricingData });
+    totalPricing += pricingData.length;
+  }
+
+  console.log(`✅ Created ${totalPricing} laundry pricing items`);
+}
+
+async function createSampleOrders(users, kosts) {
+  console.log("📦 Creating Sample Orders...");
+
+  const penghuni = users.filter(u => u.role === 'PENGHUNI');
+  const admin = users.find(u => u.role === 'ADMIN');
+
+  const cateringMenus = await prisma.cateringMenu.findMany({
+    take: 2,
+    orderBy: { harga: 'asc' } 
+  });
+
+  const totalCateringHarga = cateringMenus.reduce((sum, menu) => sum + menu.harga, 0);
+
+  console.log(`Total catering harga: ${totalCateringHarga}`);
+
+  if (totalCateringHarga <= 99999) {
+    const pesananCatering = await prisma.pesananCatering.create({
+      data: {
+        user_id: penghuni[0].user_id,
+        total_harga: totalCateringHarga,
+        status: "DITERIMA",
+        catatan: "Pesanan untuk makan siang",
+        detail_pesanan: {
+          create: cateringMenus.map(menu => ({
+            menu_id: menu.menu_id,
+            jumlah_porsi: 1,
+            harga_satuan: menu.harga
+          }))
+        }
+      }
+    });
+
+    await prisma.pembayaranCatering.create({
+      data: {
+        pesanan_id: pesananCatering.pesanan_id,
+        jumlah: totalCateringHarga,
+        metode: "QRIS",
+        status: "VERIFIED",
+        verified_by: admin.user_id,
+        verified_at: new Date()
+      }
+    });
+
+    console.log("✅ Created sample catering order");
+  } else {
+    console.log("⚠️ Skipping catering order - total too high");
+  }
+
+  const laundryHarga = await prisma.laundryHarga.findMany({
+    take: 2,
+    orderBy: { harga_per_satuan: 'asc' } 
+  });
+
+  const totalLaundryHarga = laundryHarga.reduce((sum, harga) => sum + (harga.harga_per_satuan * 2), 0);
+
+  console.log(`Total laundry harga: ${totalLaundryHarga}`);
+
+  if (totalLaundryHarga <= 99999 && laundryHarga.length > 0) {
+    const pesananLaundry = await prisma.pesananLaundry.create({
+      data: {
+        user_id: penghuni[0].user_id,
+        laundry_id: laundryHarga[0].laundry_id,
+        total_estimasi: totalLaundryHarga,
+        total_final: totalLaundryHarga,
+        berat_actual: 3.0,
+        tanggal_antar: new Date(),
+        estimasi_selesai: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000), 
+        status: "PROSES",
+        catatan: "Cuci bersih saja",
+        detail_pesanan_laundry: {
+          create: laundryHarga.map(harga => ({
+            layanan_id: harga.layanan_id,
+            jumlah_satuan: 2,
+            harga_per_satuan: harga.harga_per_satuan
+          }))
+        }
+      }
+    });
+
+    await prisma.pembayaranLaundry.create({
+      data: {
+        pesanan_id: pesananLaundry.pesanan_id,
+        jumlah: totalLaundryHarga,
+        metode: "TRANSFER",
+        status: "VERIFIED",
+        verified_by: admin.user_id,
+        verified_at: new Date()
+      }
+    });
+
+    console.log("✅ Created sample laundry order");
+  } else {
+    console.log("⚠️ Skipping laundry order - total too high or no pricing data");
+  }
+}
+
 async function main() {
   console.log("🌱 Starting efficient database seeding...");
 
@@ -309,14 +558,25 @@ async function main() {
 
     await createSampleReservasi(users, kosts);
 
+    const caterings = await createCateringServices(kosts);
+    await createCateringMenus(caterings);
+
+    const laundries = await createLaundryServices(kosts);
+    await createLaundryPricing(laundries);
+
+    await createSampleOrders(users, kosts);
+
     console.log("\n🎉 Database seeding completed successfully!");
     console.log("\n📊 Summary:");
     console.log(`   👥 Users: ${MASTER_DATA.users.length}`);
     console.log(`   🏠 Kost: ${kosts.length}`);
+    console.log(`   🍽️ Catering: ${caterings.length} with menus`);
+    console.log(`   🧺 Laundry: ${laundries.length} with pricing`);
     console.log(`   📋 Master Fasilitas: ${MASTER_DATA.fasilitas.length}`);
     console.log(`   📋 Master Tipe Kamar: ${MASTER_DATA.tipeKamar.length}`);
     console.log(`   📋 Master Peraturan: ${MASTER_DATA.peraturan.length}`);
     console.log(`   📋 Master Layanan Laundry: ${MASTER_DATA.layananLaundry.length}`);
+    console.log(`   📦 Sample orders: Catering & Laundry with payments`);
 
     console.log("\n🔑 Login Credentials:");
     console.log("   Admin: admin@kosan.com / Admin123!");
