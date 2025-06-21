@@ -88,7 +88,7 @@ module.exports = {
           filename: result.newPayment.bukti_bayar.split("/").pop(),
           url: buktiBayarFullUrl,
           size: req.file.size,
-          mimetype: req.file.mimetype, 
+          mimetype: req.file.mimetype,
         },
       });
     } catch (error) {
