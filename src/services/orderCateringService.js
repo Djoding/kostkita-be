@@ -12,7 +12,6 @@ const getCateringHistoryForTenant = async (userId, kostId) => {
           user_id: userId,
           kost_id: kostId,
           status: "APPROVED",
-          status_penghunian: "AKTIF",
         },
       });
 
@@ -27,7 +26,6 @@ const getCateringHistoryForTenant = async (userId, kostId) => {
         where: {
           user_id: userId,
           status: "APPROVED",
-          status_penghunian: "AKTIF",
         },
         select: {
           kost_id: true,
@@ -134,11 +132,16 @@ const createCateringOrderWithPayment = async (
   orderDetails,
   buktiBayarFile
 ) => {
-  const { items, catatan, metode_bayar } = orderDetails;
+  const { items, catatan, metode_bayar, reservasi_id, catering_id } =
+    orderDetails;
   let buktiBayarUrl = null;
   let resultFileMove = null;
 
   try {
+
+    if (!buktiBayarFile) {
+      throw new AppError("Bukti pembayaran harus diunggah.", 400);
+    }
     const processedFilePath = await fileService.processImage(
       buktiBayarFile.path,
       {
@@ -163,12 +166,14 @@ const createCateringOrderWithPayment = async (
       where: {
         menu_id: { in: menuIds },
         is_available: true,
+        catering_id: catering_id, 
       },
       select: {
         menu_id: true,
         harga: true,
         catering: {
           select: {
+            catering_id: true, 
             kost_id: true,
             is_active: true,
           },
@@ -178,7 +183,9 @@ const createCateringOrderWithPayment = async (
 
     if (menusInOrder.length !== menuIds.length) {
       const foundMenuIds = new Set(menusInOrder.map((m) => m.menu_id));
-      const missingMenuIds = menuIds.filter((id) => !foundMenuIds.has(id));
+      const missingOrInvalidCateringMenuIds = menuIds.filter(
+        (id) => !foundMenuIds.has(id)
+      );
 
       if (resultFileMove && resultFileMove.filename) {
         await fileService.deleteFile(
@@ -190,7 +197,7 @@ const createCateringOrderWithPayment = async (
         );
       }
       throw new AppError(
-        `Salah satu atau lebih menu tidak ditemukan atau tidak tersedia: ${missingMenuIds.join(
+        `Salah satu atau lebih menu tidak ditemukan, tidak tersedia, atau bukan dari catering_id yang diberikan: ${missingOrInvalidCateringMenuIds.join(
           ", "
         )}.`,
         404
@@ -198,6 +205,8 @@ const createCateringOrderWithPayment = async (
     }
 
     let kostIdForOrder = null;
+    let actualCateringId = null;
+
     for (const item of items) {
       const menu = menusInOrder.find((m) => m.menu_id === item.menu_id);
 
@@ -213,6 +222,24 @@ const createCateringOrderWithPayment = async (
         }
         throw new AppError(
           `Catering untuk menu ${menu.menu_id} tidak aktif.`,
+          400
+        );
+      }
+
+      if (actualCateringId === null) {
+        actualCateringId = menu.catering.catering_id;
+      } else if (actualCateringId !== menu.catering.catering_id) {
+        if (resultFileMove && resultFileMove.filename) {
+          await fileService.deleteFile(
+            path.join(
+              fileService.uploadPath,
+              "catering_payment",
+              resultFileMove.filename
+            )
+          );
+        }
+        throw new AppError(
+          "Semua menu dalam satu pesanan harus berasal dari satu catering yang sama.",
           400
         );
       }
@@ -251,6 +278,9 @@ const createCateringOrderWithPayment = async (
         status: "APPROVED",
         status_penghunian: "AKTIF",
       },
+      select: {
+        reservasi_id: true, 
+      },
     });
 
     if (!activeReservation) {
@@ -269,10 +299,26 @@ const createCateringOrderWithPayment = async (
       );
     }
 
+    if (reservasi_id && activeReservation.reservasi_id !== reservasi_id) {
+      if (resultFileMove && resultFileMove.filename) {
+        await fileService.deleteFile(
+          path.join(
+            fileService.uploadPath,
+            "catering_payment",
+            resultFileMove.filename
+          )
+        );
+      }
+      throw new AppError(
+        "ID Reservasi tidak sesuai dengan reservasi aktif pengguna di kost ini.",
+        400
+      );
+    }
     const transactionResult = await prisma.$transaction(async (tx) => {
       const newOrder = await tx.pesananCatering.create({
         data: {
           user_id: userId,
+          reservasi_id: activeReservation.reservasi_id,
           total_harga: calculatedTotalPrice,
           status: "PENDING",
           catatan: catatan,
