@@ -90,6 +90,9 @@ router.get("/docs", (req, res) => {
           "GET /catering/orders - Get user orders (Pengelola only)",
           "GET /catering/orders/:id - Get user order detail (Pengelola only)",
           "PATCH /catering/orders/:id/status - Update order status (Pengelola only)",
+          "GET /order/catering/:id - Get catering order detail (Authenticated)",
+          "PATCH /order/catering/:id/status - Update order status (Pengelola only)",
+          "POST /order/catering/:id/cancel - Cancel order (Penghuni only)",
         ],
       },
       laundry: {
@@ -105,6 +108,10 @@ router.get("/docs", (req, res) => {
           "GET /laundry/orders - Get all user orders (Pengelola only)",
           "GET /laundry/orders/:id - Get user order detail (Pengelola only)",
           "PATCH /laundry/orders/:id/status - Update order status (Pengelola only)",
+          "GET /order/laundry/:id - Get laundry order detail (Authenticated)",
+          "PATCH /order/laundry/:id/status - Update order status (Pengelola only)",
+          "POST /order/laundry/:id/cancel - Cancel order (Penghuni only)",
+          "POST /order/laundry/:id/pickup - Mark as picked up (Pengelola only)",
         ],
       },
       history: {

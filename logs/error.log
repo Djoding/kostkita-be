@@ -240,3 +240,18 @@
   service: 'kosan-api',
   timestamp: '2025-06-21 09:10:22'
 }
+{
+  message: {
+    error: "Order not found or you don't have access",
+    stack: "Error: Order not found or you don't have access\n" +
+      '    at DetailOrderLaundryService.getLaundryOrderDetail (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/services/detailOrderLaundryService.js:80:19)\n' +
+      '    at async /Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/controllers/detailOrderLaundryController.js:13:29',
+    url: '/api/v1/order/laundry/92fa36ea-bdd5-49d4-ab9f-b708f9e5f9f1',
+    method: 'GET',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.1'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:29:11'
+}

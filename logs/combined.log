@@ -1110,3 +1110,210 @@
   service: 'kosan-api',
   timestamp: '2025-06-21 09:15:58'
 }
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:25:57'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:25:57'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:25:57'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:25:57'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:26:30'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:26:30'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:26:33'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:26:33'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:26:34'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:26:34'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:26:41'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:26:41'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:26:45'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:26:45'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:26:55'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:26:55'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:27:45'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:27:45'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:27:49'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:27:49'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:27:51'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:27:51'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:27:53'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:27:53'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:28:02'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:28:02'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:28:07'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:28:07'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:28:08'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:28:08'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:29:01'
+}
+{
+  message: {
+    error: "Order not found or you don't have access",
+    stack: "Error: Order not found or you don't have access\n" +
+      '    at DetailOrderLaundryService.getLaundryOrderDetail (/Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/services/detailOrderLaundryService.js:80:19)\n' +
+      '    at async /Users/dervaag/Documents/projects/kost-kita/kosan-backend/src/controllers/detailOrderLaundryController.js:13:29',
+    url: '/api/v1/order/laundry/92fa36ea-bdd5-49d4-ab9f-b708f9e5f9f1',
+    method: 'GET',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.1'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:29:11'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 20:30:16'
+}
