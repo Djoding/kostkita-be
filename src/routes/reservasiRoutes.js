@@ -27,6 +27,18 @@ router.get(
   reservasiController.getReservations
 );
 
+router.get(
+  "/:kostId",
+  handleValidationErrors,
+  reservasiController.getReservationsForSpecificKostByUser
+);
+
+router.get(
+  "/detail/:id",
+  handleValidationErrors,
+  reservasiController.getReservationDetailById
+);
+
 router.patch(
   "/:id/status",
   validateUpdateReservationStatus,

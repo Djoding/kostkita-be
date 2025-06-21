@@ -183,6 +183,8 @@ model Reservasi {
 
   user      Users  @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
   kost      Kost   @relation(fields: [kost_id], references: [kost_id], onDelete: Cascade)
+  pesanan_catering PesananCatering[]
+  pesanan_laundry  PesananLaundry[]
   validator Users? @relation("ValidatedBy", fields: [validated_by], references: [user_id])
 
   @@map("reservasi")
@@ -227,6 +229,7 @@ model CateringMenu {
 model PesananCatering {
   pesanan_id  String                @id @default(uuid()) @db.Uuid
   user_id     String                @db.Uuid
+  reservasi_id     String?              @db.Uuid
   total_harga Decimal               @db.Decimal(8, 2)
   status      PesananCateringStatus @default(PENDING)
   catatan     String?               @db.Text
@@ -234,6 +237,7 @@ model PesananCatering {
   updated_at  DateTime              @updatedAt
 
   user       Users               @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+  reservasi  Reservasi?         @relation(fields: [reservasi_id], references: [reservasi_id])
   pembayaran PembayaranCatering?
 
   detail_pesanan DetailPesananCatering[]
@@ -312,6 +316,7 @@ model PesananLaundry {
   pesanan_id       String               @id @default(uuid()) @db.Uuid
   user_id          String               @db.Uuid
   laundry_id       String               @db.Uuid
+  reservasi_id     String?              @db.Uuid
   total_estimasi   Decimal              @db.Decimal(8, 2)
   total_final      Decimal?             @db.Decimal(8, 2)
   berat_actual     Decimal?             @db.Decimal(5, 2)
@@ -324,6 +329,7 @@ model PesananLaundry {
 
   user       Users              @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
   laundry    Laundry            @relation(fields: [laundry_id], references: [laundry_id], onDelete: Cascade)
+  reservasi  Reservasi?         @relation(fields: [reservasi_id], references: [reservasi_id])
   pembayaran PembayaranLaundry?
 
   detail_pesanan_laundry DetailPesananLaundry[]
