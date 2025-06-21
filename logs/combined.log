@@ -5422,3 +5422,39 @@
   service: 'kosan-api',
   timestamp: '2025-06-18 22:50:40'
 }
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 23:29:53'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 23:29:53'
+}
+{
+  message: 'User logged in: pengelola1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 23:31:44'
+}
+{
+  message: 'Kost updated: 4089d0c0-aea6-41ab-8591-1cc536cc42b7',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 23:32:58'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 23:37:11'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-18 23:37:11'
+}
