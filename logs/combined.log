@@ -886,3 +886,227 @@
   service: 'kosan-api',
   timestamp: '2025-06-20 17:14:22'
 }
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 07:56:49'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 07:56:49'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 07:57:27'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 07:59:31'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 07:59:31'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 07:59:35'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:00:50'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:02:49'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:02:49'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:06:33'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:15:59'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:15:59'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:16:05'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:16:05'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:16:08'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:16:08'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:16:15'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:16:15'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:16:19'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:16:19'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:16:29'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:16:40'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:16:40'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:19:12'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:21:36'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:22:19'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 09:08:13'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 09:08:13'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 09:08:28'
+}
+{
+  message: {
+    error: 'Akses ditolak. Anda tidak memiliki izin untuk melihat data ini.',
+    stack: 'Error: Akses ditolak. Anda tidak memiliki izin untuk melihat data ini.\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/controllers/reservasiController.js:162:13\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/middleware/errorHandler.js:22:25\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at handleValidationErrors (/Users/bimadharmawan/Documents/kostkita-be/src/middleware/validation.js:32:5)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at Route.dispatch (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:119:3)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/index.js:284:15',
+    url: '/api/v1/reservasi/pengelola/75187e0f-ad45-4b91-8e66-40819ad2f27c',
+    method: 'GET',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 09:09:16'
+}
+{
+  message: {
+    error: 'Detail reservasi tidak ditemukan.',
+    stack: 'Error: Detail reservasi tidak ditemukan.\n' +
+      '    at Object.getReservationDetailById (/Users/bimadharmawan/Documents/kostkita-be/src/services/reservasiService.js:939:13)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/reservasiController.js:238:33',
+    url: '/api/v1/reservasi/detail/ea226b68-7229-4f43-8288-75c3b1c9ca33',
+    method: 'GET',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 09:10:22'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 09:12:21'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 09:15:58'
+}
