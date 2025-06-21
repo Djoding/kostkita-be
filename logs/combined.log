@@ -1,0 +1,1112 @@
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 10:24:39'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 10:24:39'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 10:26:38'
+}
+{
+  message: 'Cleaned temp file: d0addaed-083b-43ab-ba56-d509332732b2_1750359140574.jpg',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 11:24:39'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 12:22:39'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 13:00:12'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 13:35:05'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 13:42:30'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 13:42:30'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 13:54:17'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 13:55:13'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 13:55:13'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 13:55:16'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 13:55:16'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 13:55:25'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 13:55:25'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 13:55:28'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 13:55:28'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:08:10'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:23:30'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:34:36'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:34:36'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:34:39'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:34:39'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:34:41'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:34:41'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:34:43'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:34:43'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:34:46'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:34:46'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:34:48'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:34:48'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:34:50'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:34:50'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:34:53'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:34:53'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:34:55'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:34:55'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:34:57'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:34:57'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:35:00'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:35:00'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:35:03'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:35:03'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:35:06'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:35:06'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:35:22'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:35:22'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:35:43'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:35:43'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:35:59'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:35:59'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:03'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:03'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:05'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:05'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:07'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:07'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:10'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:10'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:12'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:12'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:14'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:14'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:18'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:18'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:20'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:20'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:22'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:22'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:24'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:24'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:27'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:27'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:32'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:32'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:35'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:35'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:38'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:38'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:41'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:41'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:43'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:43'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:46'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:46'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:52'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:36:52'
+}
+{
+  message: {
+    error: 'Gagal mengambil detail reservasi: \n' +
+      '\x1B[31mInvalid \x1B[1m`prisma.reservasi.findUnique()`\x1B[22m invocation in\x1B[39m\n' +
+      '\x1B[4m/Users/bimadharmawan/Documents/kostkita-be/src/services/reservasiService.js:803:48\x1B[24m\n' +
+      '\n' +
+      '  \x1B[2m\x1B[90m800\x1B[39m \x1B[22m\n' +
+      '  \x1B[2m\x1B[90m801\x1B[39m \x1B[36mconst\x1B[39m getReservationsByKostAndUser = \x1B[36masync\x1B[39m \x1B[34m(\x1B[39mreservasiId,[object Object], userId\x1B[34m)\x1B[39m => \x1B[34m{\x1B[39m\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m802\x1B[39m   \x1B[36mtry\x1B[39m \x1B[34m{\x1B[39m\x1B[22m\n' +
+      '\x1B[1m\x1B[31m→\x1B[39m\x1B[22m \x1B[2m\x1B[90m803\x1B[39m     \x1B[36mconst\x1B[39m reservation = \x1B[36mawait\x1B[39m prisma\x1B[34m.\x1B[39mreservasi\x1B[34m.\x1B[39m\x1B[36mfindUnique\x1B[39m\x1B[34m(\x1B[39m\x1B[22m{\n' +
+      '            where: {\n' +
+      '              reservasi_id: "ea226b68-7229-4f43-8288-75c3b1c9ca33",\n' +
+      '              user_id: "8a8154bc-a5d3-40dc-9e33-47bac1ad8fed"\n' +
+      '            },\n' +
+      '            include: {\n' +
+      '              kost: {\n' +
+      '                select: {\n' +
+      '                  kost_id: true,\n' +
+      '                  nama_kost: true,\n' +
+      '                  alamat: true,\n' +
+      '                  foto_kost: true,\n' +
+      '                  harga_bulanan: true,\n' +
+      '                  harga_final: true,\n' +
+      '                  deposit: true,\n' +
+      '                  qris_image: true,\n' +
+      '                  rekening_info: true,\n' +
+      '                  total_kamar: true,\n' +
+      '                  \x1B[31mavailable_rooms\x1B[39m: true,\n' +
+      '                  \x1B[31m~~~~~~~~~~~~~~~\x1B[39m\n' +
+      '                  tipe: {\n' +
+      '                    select: {\n' +
+      '                      nama_tipe: true,\n' +
+      '                      ukuran: true,\n' +
+      '                      kapasitas: true\n' +
+      '                    }\n' +
+      '                  },\n' +
+      '                  pengelola: {\n' +
+      '                    select: {\n' +
+      '                      user_id: true,\n' +
+      '                      full_name: true,\n' +
+      '                      email: true,\n' +
+      '                      phone: true\n' +
+      '                    }\n' +
+      '                  },\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mpengelola_id\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mgmaps_link\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mdeskripsi\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mdaya_listrik\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32msumber_air\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mwifi_speed\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mkapasitas_parkir_motor\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mkapasitas_parkir_mobil\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mkapasitas_parkir_sepeda\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mbiaya_tambahan\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mjam_survey\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mis_approved\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mcreated_at\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mupdated_at\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mtipe_id\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mcatering\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mlaundry\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mkost_fasilitas\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mkost_peraturan\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mreservasi\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32m_count\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m\n' +
+      '                }\n' +
+      '              },\n' +
+      '              user: {\n' +
+      '                select: {\n' +
+      '                  user_id: true,\n' +
+      '                  full_name: true,\n' +
+      '                  email: true,\n' +
+      '                  phone: true\n' +
+      '                }\n' +
+      '              },\n' +
+      '              validator: {\n' +
+      '                select: {\n' +
+      '                  user_id: true,\n' +
+      '                  full_name: true,\n' +
+      '                  email: true\n' +
+      '                }\n' +
+      '              }\n' +
+      '            }\n' +
+      '          }\x1B[2m)\x1B[22m\n' +
+      '\n' +
+      'Unknown field \x1B[31m`available_rooms`\x1B[39m for \x1B[1mselect\x1B[22m statement on model \x1B[1m`Kost`\x1B[22m. Available options are listed in \x1B[32mgreen\x1B[39m.',
+    stack: 'Error: Gagal mengambil detail reservasi: \n' +
+      '\x1B[31mInvalid \x1B[1m`prisma.reservasi.findUnique()`\x1B[22m invocation in\x1B[39m\n' +
+      '\x1B[4m/Users/bimadharmawan/Documents/kostkita-be/src/services/reservasiService.js:803:48\x1B[24m\n' +
+      '\n' +
+      '  \x1B[2m\x1B[90m800\x1B[39m \x1B[22m\n' +
+      '  \x1B[2m\x1B[90m801\x1B[39m \x1B[36mconst\x1B[39m getReservationsByKostAndUser = \x1B[36masync\x1B[39m \x1B[34m(\x1B[39mreservasiId,[object Object], userId\x1B[34m)\x1B[39m => \x1B[34m{\x1B[39m\x1B[22m\n' +
+      '  \x1B[2m\x1B[90m802\x1B[39m   \x1B[36mtry\x1B[39m \x1B[34m{\x1B[39m\x1B[22m\n' +
+      '\x1B[1m\x1B[31m→\x1B[39m\x1B[22m \x1B[2m\x1B[90m803\x1B[39m     \x1B[36mconst\x1B[39m reservation = \x1B[36mawait\x1B[39m prisma\x1B[34m.\x1B[39mreservasi\x1B[34m.\x1B[39m\x1B[36mfindUnique\x1B[39m\x1B[34m(\x1B[39m\x1B[22m{\n' +
+      '            where: {\n' +
+      '              reservasi_id: "ea226b68-7229-4f43-8288-75c3b1c9ca33",\n' +
+      '              user_id: "8a8154bc-a5d3-40dc-9e33-47bac1ad8fed"\n' +
+      '            },\n' +
+      '            include: {\n' +
+      '              kost: {\n' +
+      '                select: {\n' +
+      '                  kost_id: true,\n' +
+      '                  nama_kost: true,\n' +
+      '                  alamat: true,\n' +
+      '                  foto_kost: true,\n' +
+      '                  harga_bulanan: true,\n' +
+      '                  harga_final: true,\n' +
+      '                  deposit: true,\n' +
+      '                  qris_image: true,\n' +
+      '                  rekening_info: true,\n' +
+      '                  total_kamar: true,\n' +
+      '                  \x1B[31mavailable_rooms\x1B[39m: true,\n' +
+      '                  \x1B[31m~~~~~~~~~~~~~~~\x1B[39m\n' +
+      '                  tipe: {\n' +
+      '                    select: {\n' +
+      '                      nama_tipe: true,\n' +
+      '                      ukuran: true,\n' +
+      '                      kapasitas: true\n' +
+      '                    }\n' +
+      '                  },\n' +
+      '                  pengelola: {\n' +
+      '                    select: {\n' +
+      '                      user_id: true,\n' +
+      '                      full_name: true,\n' +
+      '                      email: true,\n' +
+      '                      phone: true\n' +
+      '                    }\n' +
+      '                  },\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mpengelola_id\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mgmaps_link\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mdeskripsi\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mdaya_listrik\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32msumber_air\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mwifi_speed\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mkapasitas_parkir_motor\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mkapasitas_parkir_mobil\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mkapasitas_parkir_sepeda\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mbiaya_tambahan\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mjam_survey\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mis_approved\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mcreated_at\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mupdated_at\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mtipe_id\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mcatering\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mlaundry\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mkost_fasilitas\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mkost_peraturan\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32mreservasi\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m,\n' +
+      '          \x1B[32m?\x1B[39m       \x1B[32m_count\x1B[39m\x1B[32m?\x1B[39m\x1B[32m: \x1B[39m\x1B[32mtrue\x1B[39m\n' +
+      '                }\n' +
+      '              },\n' +
+      '              user: {\n' +
+      '                select: {\n' +
+      '                  user_id: true,\n' +
+      '                  full_name: true,\n' +
+      '                  email: true,\n' +
+      '                  phone: true\n' +
+      '                }\n' +
+      '              },\n' +
+      '              validator: {\n' +
+      '                select: {\n' +
+      '                  user_id: true,\n' +
+      '                  full_name: true,\n' +
+      '                  email: true\n' +
+      '                }\n' +
+      '              }\n' +
+      '            }\n' +
+      '          }\x1B[2m)\x1B[22m\n' +
+      '\n' +
+      'Unknown field \x1B[31m`available_rooms`\x1B[39m for \x1B[1mselect\x1B[22m statement on model \x1B[1m`Kost`\x1B[22m. Available options are listed in \x1B[32mgreen\x1B[39m.\n' +
+      '    at Object.getReservationsByKostAndUser (/Users/bimadharmawan/Documents/kostkita-be/src/services/reservasiService.js:912:11)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/reservasiController.js:205:27',
+    url: '/api/v1/reservasi/ea226b68-7229-4f43-8288-75c3b1c9ca33',
+    method: 'GET',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:37:26'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:38:14'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:38:14'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:38:15'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:38:15'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:38:50'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:38:50'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:38:51'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:38:51'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:38:53'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:38:53'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:38:55'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:38:55'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:38:56'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:38:56'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:38:57'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:38:57'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:39:30'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:39:30'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 14:40:09'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 16:41:42'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 16:41:42'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 16:43:56'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 16:51:48'
+}
+{
+  message: {
+    error: 'Akses ditolak. Anda tidak memiliki izin untuk melihat data ini.',
+    stack: 'Error: Akses ditolak. Anda tidak memiliki izin untuk melihat data ini.\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/controllers/reservasiController.js:162:13\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/middleware/errorHandler.js:22:25\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at handleValidationErrors (/Users/bimadharmawan/Documents/kostkita-be/src/middleware/validation.js:32:5)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at Route.dispatch (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:119:3)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/index.js:284:15',
+    url: '/api/v1/reservasi/pengelola/75187e0f-ad45-4b91-8e66-40819ad2f27c',
+    method: 'GET',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 16:52:14'
+}
+{
+  message: 'User logged in: pengelola2@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 16:52:24'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 16:57:54'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-20 17:14:22'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 07:56:49'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 07:56:49'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 07:57:27'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 07:59:31'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 07:59:31'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 07:59:35'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:00:50'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:02:49'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:02:49'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:06:33'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:15:59'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:15:59'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:16:05'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:16:05'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:16:08'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:16:08'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:16:15'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:16:15'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:16:19'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:16:19'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:16:29'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:16:40'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:16:40'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:19:12'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:21:36'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 08:22:19'
+}
+{
+  message: 'Server running on port 3000 in development mode',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 09:08:13'
+}
+{
+  message: 'Upload directories initialized',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 09:08:13'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 09:08:28'
+}
+{
+  message: {
+    error: 'Akses ditolak. Anda tidak memiliki izin untuk melihat data ini.',
+    stack: 'Error: Akses ditolak. Anda tidak memiliki izin untuk melihat data ini.\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/controllers/reservasiController.js:162:13\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/src/middleware/errorHandler.js:22:25\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at handleValidationErrors (/Users/bimadharmawan/Documents/kostkita-be/src/middleware/validation.js:32:5)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at next (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:149:13)\n' +
+      '    at Route.dispatch (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/route.js:119:3)\n' +
+      '    at Layer.handle [as handle_request] (/Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/layer.js:95:5)\n' +
+      '    at /Users/bimadharmawan/Documents/kostkita-be/node_modules/express/lib/router/index.js:284:15',
+    url: '/api/v1/reservasi/pengelola/75187e0f-ad45-4b91-8e66-40819ad2f27c',
+    method: 'GET',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 09:09:16'
+}
+{
+  message: {
+    error: 'Detail reservasi tidak ditemukan.',
+    stack: 'Error: Detail reservasi tidak ditemukan.\n' +
+      '    at Object.getReservationDetailById (/Users/bimadharmawan/Documents/kostkita-be/src/services/reservasiService.js:939:13)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/reservasiController.js:238:33',
+    url: '/api/v1/reservasi/detail/ea226b68-7229-4f43-8288-75c3b1c9ca33',
+    method: 'GET',
+    ip: '::1',
+    userAgent: 'PostmanRuntime/7.44.0'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 09:10:22'
+}
+{
+  message: 'User logged in: penghuni1@gmail.com',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 09:12:21'
+}
+{
+  message: 'SIGINT received. Shutting down gracefully...',
+  level: 'info',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 09:15:58'
+}
