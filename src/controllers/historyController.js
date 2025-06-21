@@ -3,19 +3,35 @@ const { asyncHandler } = require('../middleware/errorHandler');
 
 class HistoryController {
     /**
-     * Get user's reservation history
+     * Get user's reservation history with orders
      */
     getReservationHistory = asyncHandler(async (req, res) => {
         const userId = req.user.user_id;
         const pagination = req.pagination;
 
-        const result = await historyService.getReservationHistory(userId, pagination);
+        const result = await historyService.getReservationHistoryWithOrders(userId, pagination);
 
         res.json({
             success: true,
-            message: 'Reservation history retrieved successfully',
+            message: 'Reservation history with orders retrieved successfully',
             data: result.reservations,
             pagination: result.pagination
+        });
+    });
+
+    /**
+     * Get reservation detail with all orders
+     */
+    getReservationDetail = asyncHandler(async (req, res) => {
+        const userId = req.user.user_id;
+        const { reservasiId } = req.params;
+
+        const reservation = await historyService.getReservationDetail(userId, reservasiId);
+
+        res.json({
+            success: true,
+            message: 'Reservation detail retrieved successfully',
+            data: reservation
         });
     });
 
@@ -82,6 +98,21 @@ class HistoryController {
             success: true,
             message: 'History statistics retrieved successfully',
             data: stats
+        });
+    });
+
+    /**
+     * Get user's active reservation
+     */
+    getActiveReservation = asyncHandler(async (req, res) => {
+        const userId = req.user.user_id;
+
+        const activeReservation = await historyService.getActiveReservation(userId);
+
+        res.json({
+            success: true,
+            message: activeReservation ? 'Active reservation found' : 'No active reservation',
+            data: activeReservation
         });
     });
 }

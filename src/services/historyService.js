@@ -3,9 +3,34 @@ const { AppError } = require('../middleware/errorHandler');
 
 class HistoryService {
     /**
-     * Get user's reservation history
+     * Get active reservation for a user
      */
-    async getReservationHistory(userId, pagination = {}) {
+    async getActiveReservation(userId) {
+        const currentDate = new Date();
+
+        const activeReservation = await prisma.reservasi.findFirst({
+            where: {
+                user_id: userId,
+                status: 'APPROVED',
+                tanggal_check_in: {
+                    lte: currentDate
+                },
+                OR: [
+                    { tanggal_keluar: null },
+                    { tanggal_keluar: { gte: currentDate } },
+                    { status_penghunian: 'AKTIF' }
+                ]
+            },
+            orderBy: { tanggal_check_in: 'desc' }
+        });
+
+        return activeReservation;
+    }
+
+    /**
+     * Get user's reservation history with orders grouped by reservation
+     */
+    async getReservationHistoryWithOrders(userId, pagination = {}) {
         const { page = 1, limit = 10, offset = 0 } = pagination;
 
         const [reservations, total] = await Promise.all([
@@ -23,6 +48,61 @@ class HistoryService {
                         select: {
                             full_name: true
                         }
+                    },
+                    pesanan_catering: {
+                        include: {
+                            detail_pesanan: {
+                                include: {
+                                    menu: {
+                                        select: {
+                                            nama_menu: true,
+                                            kategori: true,
+                                            catering: {
+                                                select: {
+                                                    nama_catering: true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            pembayaran: {
+                                select: {
+                                    metode: true,
+                                    status: true,
+                                    verified_at: true
+                                }
+                            }
+                        },
+                        orderBy: { created_at: 'desc' }
+                    },
+                    pesanan_laundry: {
+                        include: {
+                            laundry: {
+                                select: {
+                                    nama_laundry: true,
+                                    alamat: true
+                                }
+                            },
+                            detail_pesanan_laundry: {
+                                include: {
+                                    layanan: {
+                                        select: {
+                                            nama_layanan: true,
+                                            satuan: true
+                                        }
+                                    }
+                                }
+                            },
+                            pembayaran: {
+                                select: {
+                                    metode: true,
+                                    status: true,
+                                    verified_at: true
+                                }
+                            }
+                        },
+                        orderBy: { created_at: 'desc' }
                     }
                 },
                 orderBy: { created_at: 'desc' },
@@ -34,8 +114,18 @@ class HistoryService {
             })
         ]);
 
+        const formattedReservations = reservations.map(reservation => ({
+            ...reservation,
+            order_summary: {
+                total_catering_orders: reservation.pesanan_catering.length,
+                total_laundry_orders: reservation.pesanan_laundry.length,
+                total_catering_spent: reservation.pesanan_catering.reduce((sum, order) => sum + Number(order.total_harga), 0),
+                total_laundry_spent: reservation.pesanan_laundry.reduce((sum, order) => sum + Number(order.total_final || order.total_estimasi), 0)
+            }
+        }));
+
         return {
-            reservations,
+            reservations: formattedReservations,
             pagination: {
                 page,
                 limit,
@@ -43,6 +133,106 @@ class HistoryService {
                 totalPages: Math.ceil(total / limit)
             }
         };
+    }
+
+    /**
+     * Get detailed reservation with all orders
+     */
+    async getReservationDetail(userId, reservasiId) {
+        const reservation = await prisma.reservasi.findFirst({
+            where: {
+                reservasi_id: reservasiId,
+                user_id: userId
+            },
+            include: {
+                kost: {
+                    select: {
+                        nama_kost: true,
+                        alamat: true,
+                        foto_kost: true,
+                        pengelola: {
+                            select: {
+                                full_name: true,
+                                phone: true,
+                                whatsapp_number: true
+                            }
+                        }
+                    }
+                },
+                validator: {
+                    select: {
+                        full_name: true
+                    }
+                },
+                pesanan_catering: {
+                    include: {
+                        detail_pesanan: {
+                            include: {
+                                menu: {
+                                    select: {
+                                        nama_menu: true,
+                                        kategori: true,
+                                        foto_menu: true,
+                                        catering: {
+                                            select: {
+                                                nama_catering: true,
+                                                alamat: true,
+                                                whatsapp_number: true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        pembayaran: {
+                            select: {
+                                metode: true,
+                                status: true,
+                                verified_at: true,
+                                bukti_bayar: true
+                            }
+                        }
+                    },
+                    orderBy: { created_at: 'desc' }
+                },
+                pesanan_laundry: {
+                    include: {
+                        laundry: {
+                            select: {
+                                nama_laundry: true,
+                                alamat: true,
+                                whatsapp_number: true
+                            }
+                        },
+                        detail_pesanan_laundry: {
+                            include: {
+                                layanan: {
+                                    select: {
+                                        nama_layanan: true,
+                                        satuan: true
+                                    }
+                                }
+                            }
+                        },
+                        pembayaran: {
+                            select: {
+                                metode: true,
+                                status: true,
+                                verified_at: true,
+                                bukti_bayar: true
+                            }
+                        }
+                    },
+                    orderBy: { created_at: 'desc' }
+                }
+            }
+        });
+
+        if (!reservation) {
+            throw new AppError('Reservation not found', 404);
+        }
+
+        return reservation;
     }
 
     /**
@@ -55,6 +245,16 @@ class HistoryService {
             prisma.pesananCatering.findMany({
                 where: { user_id: userId },
                 include: {
+                    reservasi: {
+                        select: {
+                            reservasi_id: true,
+                            kost: {
+                                select: {
+                                    nama_kost: true
+                                }
+                            }
+                        }
+                    },
                     detail_pesanan: {
                         include: {
                             menu: {
@@ -110,6 +310,16 @@ class HistoryService {
             prisma.pesananLaundry.findMany({
                 where: { user_id: userId },
                 include: {
+                    reservasi: {
+                        select: {
+                            reservasi_id: true,
+                            kost: {
+                                select: {
+                                    nama_kost: true
+                                }
+                            }
+                        }
+                    },
                     laundry: {
                         select: {
                             nama_laundry: true,
@@ -155,12 +365,11 @@ class HistoryService {
     }
 
     /**
-     * Get complete user history (all activities)
+     * Get complete user history
      */
     async getCompleteHistory(userId, pagination = {}) {
         const { page = 1, limit = 20, offset = 0 } = pagination;
 
-        // Get all histories in parallel
         const [reservations, cateringOrders, laundryOrders] = await Promise.all([
             prisma.reservasi.findMany({
                 where: { user_id: userId },
@@ -183,9 +392,19 @@ class HistoryService {
                 where: { user_id: userId },
                 select: {
                     pesanan_id: true,
+                    reservasi_id: true,
                     status: true,
                     total_harga: true,
                     created_at: true,
+                    reservasi: {
+                        select: {
+                            kost: {
+                                select: {
+                                    nama_kost: true
+                                }
+                            }
+                        }
+                    },
                     detail_pesanan: {
                         select: {
                             menu: {
@@ -208,10 +427,20 @@ class HistoryService {
                 where: { user_id: userId },
                 select: {
                     pesanan_id: true,
+                    reservasi_id: true,
                     status: true,
                     total_estimasi: true,
                     total_final: true,
                     created_at: true,
+                    reservasi: {
+                        select: {
+                            kost: {
+                                select: {
+                                    nama_kost: true
+                                }
+                            }
+                        }
+                    },
                     laundry: {
                         select: {
                             nama_laundry: true
@@ -222,10 +451,8 @@ class HistoryService {
             })
         ]);
 
-        // Combine and format all activities
         const activities = [];
 
-        // Add reservations
         reservations.forEach(item => {
             activities.push({
                 id: item.reservasi_id,
@@ -234,6 +461,7 @@ class HistoryService {
                 status: item.status,
                 amount: item.total_harga,
                 date: item.created_at,
+                reservation_id: item.reservasi_id,
                 details: {
                     check_in: item.tanggal_check_in,
                     check_out: item.tanggal_keluar,
@@ -242,7 +470,6 @@ class HistoryService {
             });
         });
 
-        // Add catering orders
         cateringOrders.forEach(item => {
             const firstMenu = item.detail_pesanan[0]?.menu;
             activities.push({
@@ -252,14 +479,15 @@ class HistoryService {
                 status: item.status,
                 amount: item.total_harga,
                 date: item.created_at,
+                reservation_id: item.reservasi_id,
                 details: {
                     menu: firstMenu?.nama_menu,
-                    catering_name: firstMenu?.catering.nama_catering
+                    catering_name: firstMenu?.catering.nama_catering,
+                    kost_name: item.reservasi?.kost?.nama_kost
                 }
             });
         });
 
-        // Add laundry orders
         laundryOrders.forEach(item => {
             activities.push({
                 id: item.pesanan_id,
@@ -268,13 +496,14 @@ class HistoryService {
                 status: item.status,
                 amount: item.total_final || item.total_estimasi,
                 date: item.created_at,
+                reservation_id: item.reservasi_id,
                 details: {
-                    laundry_name: item.laundry.nama_laundry
+                    laundry_name: item.laundry.nama_laundry,
+                    kost_name: item.reservasi?.kost?.nama_kost
                 }
             });
         });
 
-        // Sort by date and paginate
         activities.sort((a, b) => new Date(b.date) - new Date(a.date));
         const paginatedActivities = activities.slice(offset, offset + limit);
 
@@ -298,7 +527,8 @@ class HistoryService {
             totalCateringOrders,
             totalLaundryOrders,
             totalSpent,
-            recentActivity
+            recentActivity,
+            activeReservation
         ] = await Promise.all([
             prisma.reservasi.count({
                 where: { user_id: userId }
@@ -332,7 +562,8 @@ class HistoryService {
                         }
                     }
                 }
-            })
+            }),
+            this.getActiveReservation(userId)
         ]);
 
         const totalSpentAmount = totalSpent[0] ?
@@ -345,7 +576,13 @@ class HistoryService {
             totalCateringOrders,
             totalLaundryOrders,
             totalSpent: totalSpentAmount,
-            recentActivity
+            recentActivity,
+            activeReservation: activeReservation ? {
+                reservasi_id: activeReservation.reservasi_id,
+                kost_name: activeReservation.kost?.nama_kost,
+                check_in: activeReservation.tanggal_check_in,
+                status: activeReservation.status
+            } : null
         };
     }
 }
