@@ -1,13 +1,23 @@
 const express = require("express");
 const router = express.Router();
 const laundryController = require("../controllers/orderLaundryController");
-const { authenticateJWT } = require("../middleware/auth");
+const detailOrderLaundryController = require("../controllers/detailOrderLaundryController");
+
+const { authenticateJWT, authorize } = require("../middleware/auth");
 const upload = require("../middleware/upload");
 const { handleValidationErrors } = require("../middleware/validation");
+
 const {
   validateGetLaundryHistory,
   validateCreateLaundryOrderWithPayment,
 } = require("../validators/orderLaundryValidator");
+
+const {
+  orderIdValidator,
+  updateLaundryOrderStatusValidator,
+  cancelLaundryOrderValidator,
+  markAsPickedUpValidator,
+} = require("../validators/detailOrderLaundryValidator");
 
 const parseItemsMiddleware = (req, res, next) => {
   if (req.body.items && typeof req.body.items === "string") {
@@ -36,6 +46,37 @@ router.post(
   validateCreateLaundryOrderWithPayment,
   handleValidationErrors,
   laundryController.createLaundryOrderAndPayment
+);
+
+router.get(
+  "/:id",
+  orderIdValidator,
+  handleValidationErrors,
+  detailOrderLaundryController.getLaundryOrderDetail
+);
+
+router.patch(
+  "/:id/status",
+  authorize("PENGELOLA"),
+  updateLaundryOrderStatusValidator,
+  handleValidationErrors,
+  detailOrderLaundryController.updateOrderStatus
+);
+
+router.post(
+  "/:id/cancel",
+  authorize("PENGHUNI"),
+  cancelLaundryOrderValidator,
+  handleValidationErrors,
+  detailOrderLaundryController.cancelOrder
+);
+
+router.post(
+  "/:id/pickup",
+  authorize("PENGELOLA"),
+  markAsPickedUpValidator,
+  handleValidationErrors,
+  detailOrderLaundryController.markAsPickedUp
 );
 
 module.exports = router;
