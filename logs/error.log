@@ -381,3 +381,18 @@
   service: 'kosan-api',
   timestamp: '2025-06-21 14:32:01'
 }
+{
+  message: {
+    error: 'Invalid email or password',
+    stack: 'Error: Invalid email or password\n' +
+      '    at AuthService.login (/Users/bimadharmawan/Documents/kostkita-be/src/services/authService.js:127:19)\n' +
+      '    at async /Users/bimadharmawan/Documents/kostkita-be/src/controllers/authController.js:33:24',
+    url: '/api/v1/auth/login',
+    method: 'POST',
+    ip: '::ffff:127.0.0.1',
+    userAgent: 'Dart/3.8 (dart:io)'
+  },
+  level: 'error',
+  service: 'kosan-api',
+  timestamp: '2025-06-21 17:42:10'
+}

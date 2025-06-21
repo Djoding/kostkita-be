@@ -34,7 +34,8 @@ module.exports = {
 
   createCateringOrderAndPayment: asyncHandler(async (req, res) => {
     const userIdFromToken = req.user.user_id;
-    const { items, catatan, metode_bayar } = req.body;
+    const { items, catatan, metode_bayar, reservasi_id, catering_id } =
+      req.body;
 
     if (!req.file) {
       throw new AppError("Bukti pembayaran wajib diunggah.", 400);
@@ -53,7 +54,7 @@ module.exports = {
 
       const result = await cateringService.createCateringOrderWithPayment(
         userIdFromToken,
-        { items: items, catatan, metode_bayar },
+        { items: items, catatan, metode_bayar, reservasi_id, catering_id },
         buktiBayarFile
       );
 
