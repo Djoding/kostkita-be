@@ -272,6 +272,8 @@ const getKostandReservedData = async (userId) => {
     const activeKost = [];
     const historyKost = [];
 
+    const reservedKostIds = new Set();
+
     for (const res of userReservations) {
       const kostData = {
         reservasi_id: res.reservasi_id,
@@ -305,6 +307,7 @@ const getKostandReservedData = async (userId) => {
         (res.status === ReservasiStatus.APPROVED && !isCheckInDateReached)
       ) {
         pendingUpcomingKost.push(kostData);
+        reservedKostIds.add(res.kost.kost_id);
       } else if (
         res.status === ReservasiStatus.APPROVED &&
         res.status_penghunian === PenghuniStatus.AKTIF &&
@@ -312,6 +315,7 @@ const getKostandReservedData = async (userId) => {
         !isCheckOutDatePassed
       ) {
         activeKost.push(kostData);
+        reservedKostIds.add(res.kost.kost_id);
       } else if (
         res.status === ReservasiStatus.REJECTED ||
         (res.status === ReservasiStatus.APPROVED &&
@@ -322,8 +326,12 @@ const getKostandReservedData = async (userId) => {
       }
     }
 
+    const availableKost = formattedAllApprovedKost.filter(
+      (kost) => !reservedKostIds.has(kost.kost_id)
+    );
+
     return {
-      all_kost: formattedAllApprovedKost,
+      all_kost: availableKost,
       pending_upcoming_reservations: pendingUpcomingKost,
       active_reservations: activeKost,
       history_reservations: historyKost,
@@ -702,7 +710,7 @@ const getManagedKostReservations = async (kostId, pengelolaId, userRole) => {
     const pendingUpcomingReservations = [];
     const activeReservations = [];
     const historyReservations = [];
-    let totalOccupiedRoomsCount = 0; // Inisialisasi counter baru untuk occupied rooms
+    let totalOccupiedRoomsCount = 0;
 
     for (const res of kost.reservasi) {
       const reservasiData = {
@@ -732,24 +740,19 @@ const getManagedKostReservations = async (kostId, pengelolaId, userRole) => {
       const isCheckInDateReached = resTanggalCheckIn <= today;
       const isCheckOutDatePassed = resTanggalKeluar && resTanggalKeluar < today;
 
-      // Kategori: Belum Aktif / Mendatang
       if (
         res.status === ReservasiStatus.PENDING ||
         (res.status === ReservasiStatus.APPROVED && !isCheckInDateReached)
       ) {
         pendingUpcomingReservations.push(reservasiData);
-      }
-      // Kategori: Aktif Saat Ini
-      else if (
+      } else if (
         res.status === ReservasiStatus.APPROVED &&
         res.status_penghunian === PenghuniStatus.AKTIF &&
         isCheckInDateReached &&
         !isCheckOutDatePassed
       ) {
         activeReservations.push(reservasiData);
-      }
-      // Kategori: Riwayat / Selesai
-      else if (
+      } else if (
         res.status === ReservasiStatus.REJECTED ||
         (res.status === ReservasiStatus.APPROVED &&
           res.status_penghunian === PenghuniStatus.KELUAR) ||
@@ -757,21 +760,16 @@ const getManagedKostReservations = async (kostId, pengelolaId, userRole) => {
       ) {
         historyReservations.push(reservasiData);
       }
-
-      // --- Logika untuk total_occupied_rooms ---
-      // Reservasi yang sudah APPROVED dan belum KELUAR dianggap occupied
       if (
         res.status === ReservasiStatus.APPROVED &&
         (res.status_penghunian === null ||
           res.status_penghunian === PenghuniStatus.AKTIF) &&
-        (!resTanggalKeluar || resTanggalKeluar >= today) // Tanggal keluar belum lewat atau belum ditentukan
+        (!resTanggalKeluar || resTanggalKeluar >= today)
       ) {
         totalOccupiedRoomsCount++;
       }
-      // --- Akhir Logika untuk total_occupied_rooms ---
     }
 
-    // Menggunakan totalOccupiedRoomsCount yang baru dihitung
     const availableRooms = kost.total_kamar - totalOccupiedRoomsCount;
 
     return {
@@ -783,7 +781,7 @@ const getManagedKostReservations = async (kostId, pengelolaId, userRole) => {
         : [],
       total_kamar: kost.total_kamar,
       tipe_kost: kost.tipe.nama_tipe,
-      total_occupied_rooms: totalOccupiedRoomsCount, // Menggunakan counter baru
+      total_occupied_rooms: totalOccupiedRoomsCount,
       available_rooms: availableRooms,
       reservations: {
         pending_upcoming: pendingUpcomingReservations,
@@ -799,10 +797,269 @@ const getManagedKostReservations = async (kostId, pengelolaId, userRole) => {
     );
   }
 };
+
+const getReservationsByKostAndUser = async (kostId, userId) => {
+  try {
+    const reservations = await prisma.reservasi.findMany({
+      where: {
+        kost_id: kostId,
+        user_id: userId,
+      },
+      include: {
+        kost: {
+          select: {
+            kost_id: true,
+            nama_kost: true,
+            alamat: true,
+            foto_kost: true,
+            harga_bulanan: true,
+            harga_final: true,
+            tipe: {
+              select: {
+                nama_tipe: true,
+              },
+            },
+          },
+        },
+        user: {
+          select: {
+            user_id: true,
+            full_name: true,
+            email: true,
+            phone: true,
+          },
+        },
+      },
+      orderBy: {
+        created_at: "desc",
+      },
+    });
+
+    const formattedReservations = reservations.map((res) => ({
+      reservasi_id: res.reservasi_id,
+      status_reservasi: res.status,
+      status_penghunian: res.status_penghunian,
+      tanggal_check_in: res.tanggal_check_in.toISOString().split("T")[0],
+      tanggal_keluar: res.tanggal_keluar
+        ? res.tanggal_keluar.toISOString().split("T")[0]
+        : null,
+      durasi_bulan: res.durasi_bulan,
+      total_harga: res.total_harga,
+      deposit_amount: res.deposit_amount,
+      metode_bayar: res.metode_bayar,
+      catatan: res.catatan,
+      bukti_bayar: res.bukti_bayar
+        ? fileService.generateFileUrl(res.bukti_bayar)
+        : null,
+      rejection_reason: res.rejection_reason,
+      validated_by: res.validated_by,
+      validated_at: res.validated_at,
+      created_at: res.created_at,
+      updated_at: res.updated_at,
+      kost: {
+        kost_id: res.kost.kost_id,
+        nama_kost: res.kost.nama_kost,
+        alamat: res.kost.alamat,
+        foto_kost: res.kost.foto_kost
+          ? res.kost.foto_kost.map((url) => fileService.generateFileUrl(url))
+          : [],
+        harga_bulanan: res.kost.harga_bulanan,
+        harga_final: res.kost.harga_final,
+        tipe_kost: res.kost.tipe.nama_tipe,
+      },
+      user: res.user,
+    }));
+
+    return formattedReservations;
+  } catch (error) {
+    console.error("Error in getReservationsByKostAndUser:", error);
+    throw new AppError(
+      `Gagal mengambil data reservasi untuk kost dan user ini: ${error.message}`,
+      500
+    );
+  }
+};
+
+const getReservationDetailById = async (
+  reservasiId,
+  userId = null,
+  userRole = null
+) => {
+  try {
+    const reservation = await prisma.reservasi.findUnique({
+      where: { reservasi_id: reservasiId },
+      include: {
+        kost: {
+          select: {
+            kost_id: true,
+            nama_kost: true,
+            alamat: true,
+            foto_kost: true,
+            harga_bulanan: true,
+            harga_final: true,
+            deposit: true,
+            total_kamar: true,
+            qris_image: true,
+            rekening_info: true,
+            biaya_tambahan: true,
+            tipe: {
+              select: {
+                nama_tipe: true,
+              },
+            },
+            pengelola: {
+              select: {
+                user_id: true,
+                full_name: true,
+                email: true,
+                phone: true,
+              },
+            },
+            catering: {
+              select: {
+                catering_id: true,
+                nama_catering: true,
+                alamat: true,
+                whatsapp_number: true,
+                is_partner: true,
+                is_active: true,
+                qris_image: true,
+                rekening_info: true,
+              },
+            },
+            laundry: {
+              select: {
+                laundry_id: true,
+                nama_laundry: true,
+                alamat: true,
+                whatsapp_number: true,
+                is_partner: true,
+                is_active: true,
+                qris_image: true,
+                rekening_info: true,
+              },
+            },
+          },
+        },
+        user: {
+          select: {
+            user_id: true,
+            full_name: true,
+            email: true,
+            phone: true,
+          },
+        },
+        validator: {
+          select: {
+            user_id: true,
+            full_name: true,
+            email: true,
+          },
+        },
+      },
+    });
+
+    if (!reservation) {
+      throw new AppError("Detail reservasi tidak ditemukan.", 404);
+    }
+
+    const isOwner = userId && reservation.user_id === userId;
+    const isRelatedPengelola =
+      userId &&
+      userRole === "PENGELOLA" &&
+      reservation.kost.pengelola.user_id === userId;
+    const isAdmin = userRole === "ADMIN";
+
+    if (!isOwner && !isRelatedPengelola && !isAdmin) {
+      throw new AppError(
+        "Akses ditolak. Anda tidak memiliki izin untuk melihat detail reservasi ini.",
+        403
+      );
+    }
+
+    const formattedReservation = {
+      reservasi_id: reservation.reservasi_id,
+      status_reservasi: reservation.status,
+      status_penghunian: reservation.status_penghunian,
+      tanggal_check_in: reservation.tanggal_check_in
+        .toISOString()
+        .split("T")[0],
+      tanggal_keluar: reservation.tanggal_keluar
+        ? reservation.tanggal_keluar.toISOString().split("T")[0]
+        : null,
+      durasi_bulan: reservation.durasi_bulan,
+      total_harga: reservation.total_harga,
+      deposit_amount: reservation.deposit_amount,
+      metode_bayar: reservation.metode_bayar,
+      catatan: reservation.catatan,
+      bukti_bayar: reservation.bukti_bayar
+        ? fileService.generateFileUrl(reservation.bukti_bayar)
+        : null,
+      rejection_reason: reservation.rejection_reason,
+      validated_by: reservation.validated_by,
+      validated_at: reservation.validated_at,
+      created_at: reservation.created_at,
+      updated_at: reservation.updated_at,
+      kost: {
+        kost_id: reservation.kost.kost_id,
+        nama_kost: reservation.kost.nama_kost,
+        alamat: reservation.kost.alamat,
+        foto_kost: reservation.kost.foto_kost
+          ? reservation.kost.foto_kost.map((url) =>
+              fileService.generateFileUrl(url)
+            )
+          : [],
+        qris_image: reservation.kost.qris_image
+          ? fileService.generateFileUrl(reservation.kost.qris_image)
+          : null,
+        rekening_info: reservation.kost.rekening_info,
+        biaya_tambahan: reservation.kost.biaya_tambahan,
+        harga_bulanan: reservation.kost.harga_bulanan,
+        harga_final: reservation.kost.harga_final,
+        deposit: reservation.kost.deposit,
+        total_kamar: reservation.kost.total_kamar,
+        tipe_kost: reservation.kost.tipe.nama_tipe,
+        pengelola: reservation.kost.pengelola,
+        catering_services: reservation.kost.catering
+          ? reservation.kost.catering.map((c) => ({
+              ...c,
+              qris_image: c.qris_image
+                ? fileService.generateFileUrl(c.qris_image)
+                : null,
+            }))
+          : [],
+        laundry_services: reservation.kost.laundry
+          ? reservation.kost.laundry.map((l) => ({
+              ...l,
+              qris_image: l.qris_image
+                ? fileService.generateFileUrl(l.qris_image)
+                : null,
+            }))
+          : [],
+      },
+      user: reservation.user,
+      validator: reservation.validator,
+    };
+
+    return formattedReservation;
+  } catch (error) {
+    console.error("Error in getReservationDetailById:", error);
+    if (error instanceof AppError) {
+      throw error;
+    }
+    throw new AppError(
+      `Gagal mengambil detail reservasi: ${error.message}`,
+      500
+    );
+  }
+};
+
 module.exports = {
   createReservation,
   getKostandReservedData,
   updateReservationStatus,
   extendReservation,
   getManagedKostReservations,
+  getReservationsByKostAndUser,
+  getReservationDetailById,
 };
