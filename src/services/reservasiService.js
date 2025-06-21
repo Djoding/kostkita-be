@@ -901,6 +901,7 @@ const getReservationDetailById = async (
             total_kamar: true,
             qris_image: true,
             rekening_info: true,
+            biaya_tambahan: true,
             tipe: {
               select: {
                 nama_tipe: true,
@@ -988,6 +989,7 @@ const getReservationDetailById = async (
           ? fileService.generateFileUrl(reservation.kost.qris_image)
           : null,
         rekening_info: reservation.kost.rekening_info,
+        biaya_tambahan: reservation.kost.biaya_tambahan,
         harga_bulanan: reservation.kost.harga_bulanan,
         harga_final: reservation.kost.harga_final,
         deposit: reservation.kost.deposit,
