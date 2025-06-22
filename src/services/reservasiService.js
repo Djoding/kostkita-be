@@ -915,6 +915,30 @@ const getReservationDetailById = async (
                 phone: true,
               },
             },
+            catering: {
+              select: {
+                catering_id: true,
+                nama_catering: true,
+                alamat: true,
+                whatsapp_number: true,
+                is_partner: true,
+                is_active: true,
+                qris_image: true,
+                rekening_info: true,
+              },
+            },
+            laundry: {
+              select: {
+                laundry_id: true,
+                nama_laundry: true,
+                alamat: true,
+                whatsapp_number: true,
+                is_partner: true,
+                is_active: true,
+                qris_image: true,
+                rekening_info: true,
+              },
+            },
           },
         },
         user: {
@@ -996,6 +1020,22 @@ const getReservationDetailById = async (
         total_kamar: reservation.kost.total_kamar,
         tipe_kost: reservation.kost.tipe.nama_tipe,
         pengelola: reservation.kost.pengelola,
+        catering_services: reservation.kost.catering
+          ? reservation.kost.catering.map((c) => ({
+              ...c,
+              qris_image: c.qris_image
+                ? fileService.generateFileUrl(c.qris_image)
+                : null,
+            }))
+          : [],
+        laundry_services: reservation.kost.laundry
+          ? reservation.kost.laundry.map((l) => ({
+              ...l,
+              qris_image: l.qris_image
+                ? fileService.generateFileUrl(l.qris_image)
+                : null,
+            }))
+          : [],
       },
       user: reservation.user,
       validator: reservation.validator,
