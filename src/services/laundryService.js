@@ -5,6 +5,168 @@ const fileService = require("./fileService");
 
 class LaundryService {
   /**
+     * Create laundry - Pengelola only
+     */
+  async createLaundry(data, pengelolaId) {
+    const {
+      kost_id,
+      nama_laundry,
+      alamat,
+      whatsapp_number,
+      qris_image,
+      rekening_info,
+      is_partner,
+    } = data;
+
+    // Verify pengelola owns the kost
+    const kost = await prisma.kost.findFirst({
+      where: {
+        kost_id,
+        pengelola_id: pengelolaId,
+      },
+    });
+
+    if (!kost) {
+      throw new AppError(
+        "You are not authorized to add laundry to this kost",
+        403
+      );
+    }
+
+    // Check if laundry with same name exists in this kost
+    const existingLaundry = await prisma.laundry.findFirst({
+      where: {
+        kost_id,
+        nama_laundry,
+        is_active: true,
+      },
+    });
+
+    if (existingLaundry) {
+      throw new AppError(
+        "Laundry with this name already exists in this kost",
+        409
+      );
+    }
+
+    const isPartnerBoolean =
+      is_partner !== undefined ? is_partner === "true" : false;
+
+
+    const laundry = await prisma.laundry.create({
+      data: {
+        kost_id,
+        nama_laundry,
+        alamat,
+        whatsapp_number,
+        qris_image,
+        rekening_info,
+        is_partner: isPartnerBoolean,
+        is_active: true,
+      },
+      include: {
+        kost: {
+          select: {
+            kost_id: true,
+            nama_kost: true,
+          },
+        },
+      },
+    });
+
+    logger.info(`New laundry created: ${nama_laundry} for kost: ${kost_id}`);
+
+    return {
+      ...laundry,
+      qris_image_url: laundry.qris_image
+        ? fileService.generateFileUrl(laundry.qris_image)
+        : null,
+    };
+  }
+
+  /**
+     * Get laundry orders for pengelola
+     */
+  async getLaundryOrders(pengelolaId, filters = {}) {
+    const { status, laundry_id, start_date, end_date, kost_id } = filters;
+
+    const where = {
+      laundry: {
+        kost: {
+          pengelola_id: pengelolaId,
+        },
+      },
+    };
+
+    if (kost_id) {
+      where.laundry.kost.kost_id = kost_id;
+    }
+    if (status) where.status = status;
+    if (laundry_id) where.laundry_id = laundry_id;
+    if (start_date || end_date) {
+      where.created_at = {};
+      if (start_date) where.created_at.gte = new Date(start_date);
+      if (end_date) where.created_at.lte = new Date(end_date);
+    }
+
+    const orders = await prisma.pesananLaundry.findMany({
+      where,
+      include: {
+        user: {
+          select: {
+            user_id: true,
+            full_name: true,
+            phone: true,
+            whatsapp_number: true,
+          },
+        },
+        laundry: {
+          select: {
+            laundry_id: true,
+            nama_laundry: true,
+            alamat: true,
+            whatsapp_number: true,
+          },
+        },
+        detail_pesanan_laundry: {
+          include: {
+            layanan: {
+              select: {
+                layanan_id: true,
+                nama_layanan: true,
+                satuan: true,
+              },
+            },
+          },
+        },
+        pembayaran: {
+          select: {
+            pembayaran_id: true,
+            jumlah: true,
+            metode: true,
+            bukti_bayar: true,
+            status: true,
+            verified_at: true,
+          },
+        },
+      },
+      orderBy: { created_at: "desc" },
+    });
+
+    return orders.map((order) => ({
+      ...order,
+      pembayaran: order.pembayaran
+        ? {
+          ...order.pembayaran,
+          bukti_bayar_url: order.pembayaran.bukti_bayar
+            ? fileService.generateFileUrl(order.pembayaran.bukti_bayar)
+            : null,
+        }
+        : null,
+    }));
+  }
+
+  /**
    * Get laundry list by kost - accessible by both Pengelola & Penghuni
    */
   async getLaundrysByKost(kostId, userRole, userId) {
@@ -89,7 +251,6 @@ class LaundryService {
       is_partner,
     } = data;
 
-    // Verify pengelola owns the kost
     const kost = await prisma.kost.findFirst({
       where: {
         kost_id,
@@ -104,7 +265,6 @@ class LaundryService {
       );
     }
 
-    // Check if laundry with same name exists in this kost
     const existingLaundry = await prisma.laundry.findFirst({
       where: {
         kost_id,
@@ -172,7 +332,6 @@ class LaundryService {
       throw new AppError("Laundry not found", 404);
     }
 
-    // Verify user has access
     if (userRole === "PENGELOLA") {
       if (laundry.kost.pengelola_id !== userId) {
         throw new AppError(
@@ -250,7 +409,6 @@ class LaundryService {
 
     const { layanan_id, harga_per_satuan, is_available } = serviceData;
 
-    // Check if layanan exists
     const layanan = await prisma.masterLayananLaundry.findUnique({
       where: { layanan_id },
     });
@@ -259,7 +417,6 @@ class LaundryService {
       throw new AppError(`Layanan with ID ${layanan_id} not found`, 404);
     }
 
-    // Check if service already exists for this laundry
     const existingService = await prisma.laundryHarga.findFirst({
       where: {
         laundry_id: laundryId,
@@ -271,7 +428,6 @@ class LaundryService {
       throw new AppError("Service already exists for this laundry", 409);
     }
 
-    // Create the service pricing
     const result = await prisma.laundryHarga.create({
       data: {
         laundry_id: laundryId,
@@ -314,7 +470,6 @@ class LaundryService {
       throw new AppError("Laundry not found or you are not authorized", 403);
     }
 
-    // Check if layanan exists
     const layanan = await prisma.masterLayananLaundry.findUnique({
       where: { layanan_id: layananId },
     });
@@ -323,7 +478,6 @@ class LaundryService {
       throw new AppError(`Layanan with ID ${layananId} not found`, 404);
     }
 
-    // Check if service exists for this laundry
     const existingService = await prisma.laundryHarga.findFirst({
       where: {
         laundry_id: laundryId,
@@ -337,7 +491,6 @@ class LaundryService {
 
     const { harga_per_satuan, is_available } = serviceData;
 
-    // Update the service pricing
     const result = await prisma.laundryHarga.update({
       where: { harga_id: existingService.harga_id },
       data: {
@@ -391,7 +544,6 @@ class LaundryService {
       throw new AppError("Service not found", 404);
     }
 
-    // Soft delete by setting is_available to false
     await prisma.laundryHarga.update({
       where: { harga_id: service.harga_id },
       data: {
@@ -474,11 +626,11 @@ class LaundryService {
       ...order,
       pembayaran: order.pembayaran
         ? {
-            ...order.pembayaran,
-            bukti_bayar_url: order.pembayaran.bukti_bayar
-              ? fileService.generateFileUrl(order.pembayaran.bukti_bayar)
-              : null,
-          }
+          ...order.pembayaran,
+          bukti_bayar_url: order.pembayaran.bukti_bayar
+            ? fileService.generateFileUrl(order.pembayaran.bukti_bayar)
+            : null,
+        }
         : null,
     }));
   }
@@ -537,11 +689,11 @@ class LaundryService {
       ...order,
       pembayaran: order.pembayaran
         ? {
-            ...order.pembayaran,
-            bukti_bayar_url: order.pembayaran.bukti_bayar
-              ? fileService.generateFileUrl(order.pembayaran.bukti_bayar)
-              : null,
-          }
+          ...order.pembayaran,
+          bukti_bayar_url: order.pembayaran.bukti_bayar
+            ? fileService.generateFileUrl(order.pembayaran.bukti_bayar)
+            : null,
+        }
         : null,
     };
   }
@@ -552,7 +704,6 @@ class LaundryService {
   async updateOrderStatus(orderId, statusData, pengelolaId) {
     const { status, total_final, berat_actual, estimasi_selesai } = statusData;
 
-    // Verify order belongs to pengelola's laundry
     const order = await prisma.pesananLaundry.findFirst({
       where: {
         pesanan_id: orderId,
@@ -570,7 +721,6 @@ class LaundryService {
 
     const updateData = { status };
 
-    // Only allow setting final values when status is PROSES or DITERIMA
     if (status === "PROSES" || status === "DITERIMA") {
       if (total_final !== undefined) updateData.total_final = total_final;
       if (berat_actual !== undefined) updateData.berat_actual = berat_actual;
