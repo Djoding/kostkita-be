@@ -8,6 +8,7 @@ const {
 } = require("../middleware/validation");
 const uploadMiddleware = require("../middleware/upload");
 const laundryValidator = require("../validators/laundryValidator");
+const parseJsonFields = require("../middleware/parseJsonFields");
 
 const router = express.Router();
 
@@ -98,6 +99,18 @@ router.delete(
   laundryValidator.deleteServiceValidator,
   handleValidationErrors,
   laundryController.deleteLaundryService
+);
+
+// POST /api/v1/laundry - Create laundry (Pengelola only)
+router.post(
+  "/",
+  authorize("PENGELOLA"),
+  uploadMiddleware.single("qris_image", "temp"),
+  parseJsonFields(["rekening_info"]), // <-- TAMBAHKAN BARIS INI!
+  sanitizeInput,
+  laundryValidator.createLaundryValidator,
+  handleValidationErrors,
+  laundryController.createLaundry
 );
 
 module.exports = router;
