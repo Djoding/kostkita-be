@@ -333,6 +333,7 @@ class AuthController {
             }
         }
 
+        // Only allow specific fields to be updated 
         const allowedFields = ['full_name', 'phone', 'whatsapp_number'];
 
         allowedFields.forEach(field => {
