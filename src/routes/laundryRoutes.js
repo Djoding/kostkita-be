@@ -24,16 +24,16 @@ router.get(
   laundryController.getLaundrysByKost
 );
 
-// POST /api/v1/laundry - Create laundry (Pengelola only)
-router.post(
-  "/",
-  authorize("PENGELOLA"),
-  uploadMiddleware.single("qris_image", "temp"),
-  sanitizeInput,
-  laundryValidator.createLaundryValidator,
-  handleValidationErrors,
-  laundryController.createLaundry
-);
+// // POST /api/v1/laundry - Create laundry (Pengelola only)
+// router.post(
+//   "/",
+//   authorize("PENGELOLA"),
+//   uploadMiddleware.single("qris_image", "temp"),
+//   sanitizeInput,
+//   laundryValidator.createLaundryValidator,
+//   handleValidationErrors,
+//   laundryController.createLaundry
+// );
 
 // GET /api/v1/laundry/orders - Get all user orders (Pengelola only)
 router.get(

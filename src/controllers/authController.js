@@ -67,9 +67,7 @@ class AuthController {
 
         const clientIds = [
             '493320600420-86og9e4gofabhq4lrsoscgnt9s0de946.apps.googleusercontent.com',
-
             process.env.GOOGLE_CLIENT_ID,
-
             '407408718192.apps.googleusercontent.com',
         ].filter(Boolean);
 
