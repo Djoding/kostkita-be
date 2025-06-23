@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs');
 
 passport.use(new JwtStrategy({
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: process.env.JWT_SECRET,
+    secretOrKey: process.env.JWT_SECRET || 'kostkitaluarbiasajokicodingpunya', 
     issuer: 'kosan-api',
     audience: 'kosan-client'
 }, async (payload, done) => {
