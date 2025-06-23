@@ -89,22 +89,14 @@ class CateringService {
       is_partner,
     } = data;
 
-    // Verify pengelola owns the kost
     const kost = await prisma.kost.findFirst({
-      where: {
-        kost_id,
-        pengelola_id: pengelolaId,
-      },
+      where: { kost_id, pengelola_id: pengelolaId },
     });
 
     if (!kost) {
-      throw new AppError(
-        "You are not authorized to add catering to this kost",
-        403
-      );
+      throw new AppError("You are not authorized to add catering to this kost", 403);
     }
 
-    // Check if catering with same name exists in this kost
     const existingCatering = await prisma.catering.findFirst({
       where: {
         kost_id,
@@ -114,10 +106,7 @@ class CateringService {
     });
 
     if (existingCatering) {
-      throw new AppError(
-        "Catering with this name already exists in this kost",
-        409
-      );
+      throw new AppError("Catering with this name already exists in this kost", 409);
     }
 
     const catering = await prisma.catering.create({
@@ -126,7 +115,7 @@ class CateringService {
         nama_catering,
         alamat,
         whatsapp_number,
-        qris_image,
+        qris_image, // save path directly
         rekening_info,
         is_partner: is_partner || false,
         is_active: true,
@@ -142,13 +131,7 @@ class CateringService {
     });
 
     logger.info(`New catering created: ${nama_catering} for kost: ${kost_id}`);
-
-    return {
-      ...catering,
-      qris_image_url: catering.qris_image
-        ? fileService.generateFileUrl(catering.qris_image)
-        : null,
-    };
+    return catering;
   }
 
   /**
@@ -168,17 +151,11 @@ class CateringService {
       },
     });
 
-    if (!catering) {
-      throw new AppError("Catering not found", 404);
-    }
+    if (!catering) throw new AppError("Catering not found", 404);
 
-    // Verify user has access
     if (userRole === "PENGELOLA") {
       if (catering.kost.pengelola_id !== userId) {
-        throw new AppError(
-          "You are not authorized to access this catering",
-          403
-        );
+        throw new AppError("You are not authorized to access this catering", 403);
       }
     } else if (userRole === "PENGHUNI") {
       const activeReservation = await prisma.reservasi.findFirst({
@@ -191,10 +168,7 @@ class CateringService {
       });
 
       if (!activeReservation) {
-        throw new AppError(
-          "You do not have active reservation in this kost",
-          403
-        );
+        throw new AppError("You do not have active reservation in this kost", 403);
       }
     }
 
@@ -207,18 +181,8 @@ class CateringService {
     });
 
     return {
-      catering: {
-        ...catering,
-        qris_image_url: catering.qris_image
-          ? fileService.generateFileUrl(catering.qris_image)
-          : null,
-      },
-      menus: menus.map((menu) => ({
-        ...menu,
-        foto_menu_url: menu.foto_menu
-          ? fileService.generateFileUrl(menu.foto_menu)
-          : null,
-      })),
+      catering,
+      menus,
     };
   }
 
@@ -420,11 +384,11 @@ class CateringService {
       })),
       pembayaran: order.pembayaran
         ? {
-            ...order.pembayaran,
-            bukti_bayar_url: order.pembayaran.bukti_bayar
-              ? fileService.generateFileUrl(order.pembayaran.bukti_bayar)
-              : null,
-          }
+          ...order.pembayaran,
+          bukti_bayar_url: order.pembayaran.bukti_bayar
+            ? fileService.generateFileUrl(order.pembayaran.bukti_bayar)
+            : null,
+        }
         : null,
     }));
   }
@@ -495,11 +459,11 @@ class CateringService {
       })),
       pembayaran: order.pembayaran
         ? {
-            ...order.pembayaran,
-            bukti_bayar_url: order.pembayaran.bukti_bayar
-              ? fileService.generateFileUrl(order.pembayaran.bukti_bayar)
-              : null,
-          }
+          ...order.pembayaran,
+          bukti_bayar_url: order.pembayaran.bukti_bayar
+            ? fileService.generateFileUrl(order.pembayaran.bukti_bayar)
+            : null,
+        }
         : null,
     };
   }
