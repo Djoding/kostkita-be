@@ -7,9 +7,7 @@ class DetailOrderCateringService {
      * Get catering order detail by order ID
      */
     async getCateringOrderDetail(orderId, userId, userRole) {
-        const whereClause = {
-            pesanan_id: orderId,
-        };
+        const whereClause = { pesanan_id: orderId };
 
         if (userRole === "PENGHUNI") {
             whereClause.user_id = userId;
@@ -85,44 +83,20 @@ class DetailOrderCateringService {
             },
         });
 
-        if (!order) {
-            throw new AppError("Order not found or you don't have access", 404);
-        }
+        if (!order) throw new AppError("Order not found or you don't have access", 404);
 
-        const formattedOrder = {
+        return {
             ...order,
             detail_pesanan: order.detail_pesanan.map((detail) => ({
                 ...detail,
                 subtotal: detail.jumlah_porsi * detail.harga_satuan,
-                menu: {
-                    ...detail.menu,
-                    foto_menu_url: detail.menu.foto_menu
-                        ? fileService.generateFileUrl(detail.menu.foto_menu)
-                        : null,
-                    catering: {
-                        ...detail.menu.catering,
-                        qris_image_url: detail.menu.catering.qris_image
-                            ? fileService.generateFileUrl(detail.menu.catering.qris_image)
-                            : null,
-                    },
-                },
             })),
-            pembayaran: order.pembayaran
-                ? {
-                    ...order.pembayaran,
-                    bukti_bayar_url: order.pembayaran.bukti_bayar
-                        ? fileService.generateFileUrl(order.pembayaran.bukti_bayar)
-                        : null,
-                }
-                : null,
             item_count: order.detail_pesanan.length,
             total_items: order.detail_pesanan.reduce(
                 (sum, detail) => sum + detail.jumlah_porsi,
                 0
             ),
         };
-
-        return formattedOrder;
     }
 
     /**
