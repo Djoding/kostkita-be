@@ -65,12 +65,24 @@ class AuthController {
 
         const { OAuth2Client } = require('google-auth-library');
 
-        const clientIds = [
-            process.env.IOS_CLIENT_ID,
-            process.env.GOOGLE_CLIENT_ID,
-            process.env.ANDROID_CLIENT_ID,
-            '407408718192.apps.googleusercontent.com',
-        ].filter(Boolean);
+        const clientIds = [];
+
+        // Gunakan client ID berdasarkan platform untuk keakuratan verifikasi
+        if (platform === 'android') {
+            if (process.env.ANDROID_CLIENT_ID) {
+                clientIds.push(process.env.ANDROID_CLIENT_ID);
+            }
+        } else if (platform === 'ios') {
+            if (process.env.IOS_CLIENT_ID) {
+                clientIds.push(process.env.IOS_CLIENT_ID);
+            }
+        }
+
+        // Fallback: masukkan client ID global & Android legacy
+        if (process.env.GOOGLE_CLIENT_ID) {
+            clientIds.push(process.env.GOOGLE_CLIENT_ID);
+        }
+        clientIds.push('407408718192.apps.googleusercontent.com');
 
         let profile;
         let verified = false;
