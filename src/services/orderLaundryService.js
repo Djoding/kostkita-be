@@ -110,11 +110,11 @@ const createLaundryOrderWithPayment = async (userId, orderDetails) => {
       where: {
         layanan_id: { in: layananIds },
         laundry_id: laundry_id,
-        is_available: true, 
+        is_available: true,
       },
       select: {
         layanan_id: true,
-        harga_per_satuan: true, 
+        harga_per_satuan: true,
       },
     });
 
@@ -152,10 +152,12 @@ const createLaundryOrderWithPayment = async (userId, orderDetails) => {
       });
     }
     const today = new Date();
-    const tanggalAntar = new Date(today);
+    const tanggalAntar = new Date(
+      today.toLocaleString("id-ID", { timeZone: "Asia/Jakarta" })
+    );
 
-    const estimasiSelesai = new Date(today);
-    estimasiSelesai.setDate(today.getDate() + 2);
+    const estimasiSelesai = new Date(tanggalAntar);
+    estimasiSelesai.setDate(tanggalAntar.getDate() + 2);
 
     const newOrder = await prisma.pesananLaundry.create({
       data: {
@@ -163,7 +165,7 @@ const createLaundryOrderWithPayment = async (userId, orderDetails) => {
         laundry_id: laundry_id,
         reservasi_id: reservasi_id,
         total_estimasi: totalEstimasiDecimal,
-        tanggal_antar: tanggalAntar, 
+        tanggal_antar: tanggalAntar,
         estimasi_selesai: estimasiSelesai,
         status: "PENDING",
         catatan: catatan,
