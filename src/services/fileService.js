@@ -102,6 +102,10 @@ class FileService {
             const fileName = filename || path.basename(sourcePath);
             const destinationPath = `${this.uploadPath}/${destinationFolder}/${fileName}`;
 
+            console.log('[moveFile] Attempting to move file:');
+            console.log('  Source:', sourcePath);
+            console.log('  Destination:', destinationPath);
+
             await fs.rename(sourcePath, destinationPath);
 
             return {
@@ -110,7 +114,7 @@ class FileService {
                 filename: fileName
             };
         } catch (error) {
-            logger.error('File move failed:', error);
+            console.error(`[moveFile] Failed to move file from ${sourcePath} to ${destinationFolder}:`, error);
             throw new AppError('Failed to save file', 500);
         }
     }
