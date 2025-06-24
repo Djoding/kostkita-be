@@ -9,9 +9,10 @@ const { AppError } = require('../middleware/errorHandler');
 class FileService {
     constructor() {
         this.uploadPath = process.env.UPLOAD_PATH || './uploads';
-        this.maxFileSize = parseInt(process.env.MAX_FILE_SIZE) || 10 * 1024 * 1024; // 10MB
+        this.maxFileSize = parseInt(process.env.MAX_FILE_SIZE) || 10 * 1024 * 1024;
         this.allowedTypes = (process.env.ALLOWED_FILE_TYPES || 'image/jpeg,image/jpg,image/png,image/webp').split(',');
-        this.initializeUploadDirectory();
+
+        this.initPromise = this.initializeUploadDirectory();
     }
 
     async initializeUploadDirectory() {
@@ -31,7 +32,7 @@ class FileService {
             ];
 
             for (const dir of directories) {
-                await fs.mkdir(dir, { recursive: true });
+                await fs.mkdir(path.resolve(dir), { recursive: true });
             }
 
             logger.info('Upload directories initialized');
@@ -43,7 +44,7 @@ class FileService {
     getMulterConfig(destination = 'temp') {
         const storage = multer.diskStorage({
             destination: (req, file, cb) => {
-                cb(null, `${this.uploadPath}/${destination}`);
+                cb(null, path.resolve(`${this.uploadPath}/${destination}`));
             },
             filename: (req, file, cb) => {
                 const uniqueName = `${uuidv4()}_${Date.now()}${path.extname(file.originalname)}`;
@@ -99,14 +100,18 @@ class FileService {
 
     async moveFile(sourcePath, destinationFolder, filename = null) {
         try {
+            await this.initPromise;
+
             const fileName = filename || path.basename(sourcePath);
-            const destinationPath = `${this.uploadPath}/${destinationFolder}/${fileName}`;
+            const destinationPath = path.resolve(`${this.uploadPath}/${destinationFolder}/${fileName}`);
+            const fullSourcePath = path.resolve(sourcePath);
 
             console.log('[moveFile] Attempting to move file:');
-            console.log('  Source:', sourcePath);
+            console.log('  Source:', fullSourcePath);
             console.log('  Destination:', destinationPath);
 
-            await fs.rename(sourcePath, destinationPath);
+            await fs.access(fullSourcePath); // Pastikan file ada
+            await fs.rename(fullSourcePath, destinationPath);
 
             return {
                 path: destinationPath,
@@ -121,7 +126,7 @@ class FileService {
 
     async deleteFile(filePath) {
         try {
-            const fullPath = filePath.startsWith('./') ? filePath : `./${filePath}`;
+            const fullPath = path.resolve(filePath.startsWith('./') ? filePath : `./${filePath}`);
             await fs.unlink(fullPath);
             logger.info(`File deleted: ${fullPath}`);
         } catch (error) {
@@ -131,7 +136,7 @@ class FileService {
 
     async getFileInfo(filePath) {
         try {
-            const stats = await fs.stat(filePath);
+            const stats = await fs.stat(path.resolve(filePath));
             return {
                 exists: true,
                 size: stats.size,
@@ -145,10 +150,7 @@ class FileService {
 
     generateFileUrl(relativePath) {
         if (!relativePath) return null;
-
-        if (/^https?:\/\//.test(relativePath)) {
-            return relativePath;
-        }
+        if (/^https?:\/\//.test(relativePath)) return relativePath;
 
         const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
         return `${baseUrl}${relativePath}`;
@@ -156,12 +158,12 @@ class FileService {
 
     async cleanTempFiles() {
         try {
-            const tempDir = `${this.uploadPath}/temp`;
+            const tempDir = path.resolve(`${this.uploadPath}/temp`);
             const files = await fs.readdir(tempDir);
             const oneHourAgo = Date.now() - (60 * 60 * 1000);
 
             for (const file of files) {
-                const filePath = `${tempDir}/${file}`;
+                const filePath = path.join(tempDir, file);
                 const stats = await fs.stat(filePath);
 
                 if (stats.mtime.getTime() < oneHourAgo) {
