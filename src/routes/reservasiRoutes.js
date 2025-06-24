@@ -9,7 +9,7 @@ const {
 } = require("../validators/reservasiValidator");
 const { authenticateJWT } = require("../middleware/auth");
 const upload = require("../middleware/upload");
-const { handleValidationErrors } = require("../middleware/validation");
+const { handleValidationErrors, validateUUID } = require("../middleware/validation");
 
 router.use(authenticateJWT);
 
