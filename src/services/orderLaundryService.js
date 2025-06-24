@@ -106,14 +106,15 @@ const createLaundryOrderWithPayment = async (userId, orderDetails) => {
 
   try {
     const layananIds = items.map((item) => item.layanan_id);
-    const layananDetails = await prisma.masterLayananLaundry.findMany({
+    const layananDetails = await prisma.laundryHarga.findMany({
       where: {
         layanan_id: { in: layananIds },
         laundry_id: laundry_id,
+        is_available: true, 
       },
       select: {
         layanan_id: true,
-        harga_per_satuan: true,
+        harga_per_satuan: true, 
       },
     });
 
