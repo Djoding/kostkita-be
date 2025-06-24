@@ -140,7 +140,14 @@ class FileService {
     }
 
     generateFileUrl(relativePath) {
-        return `${process.env.BASE_URL || 'http://localhost:3000'}${relativePath}`;
+        if (!relativePath) return null;
+
+        if (/^https?:\/\//.test(relativePath)) {
+            return relativePath;
+        }
+
+        const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
+        return `${baseUrl}${relativePath}`;
     }
 
     async cleanTempFiles() {
