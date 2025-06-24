@@ -114,33 +114,97 @@ const createCateringOrderWithPayment = async (userId, orderDetails) => {
     catering_id,
     bukti_bayar,
   } = orderDetails;
+  try {
+    const menuIds = items.map((item) => item.menu_id);
+    const menus = await prisma.cateringMenu.findMany({
+      where: {
+        menu_id: { in: menuIds },
+        catering_id: catering_id,
+      },
+      select: {
+        menu_id: true,
+        harga: true,
+      },
+    });
 
-  const newOrder = await prisma.pesananCatering.create({
-    data: {
-      user_id: userId,
-      reservasi_id,
-      catering_id,
-      catatan,
-    },
-  });
+    if (menus.length !== menuIds.length) {
+      throw new AppError(
+        "Satu atau lebih menu tidak ditemukan atau bukan bagian dari catering yang dipilih.",
+        400
+      );
+    }
 
-  const newDetailOrders = await prisma.detailPesananCatering.createMany({
-    data: items.map((item) => ({
+    let totalHargaDecimal = new Prisma.Decimal(0);
+    const detailOrderData = [];
+
+    for (const item of items) {
+      const menu = menus.find((m) => m.menu_id === item.menu_id);
+      if (!menu) {
+        throw new AppError(
+          `Menu dengan ID ${item.menu_id} tidak ditemukan.`,
+          400
+        );
+      }
+
+      const quantity = new Prisma.Decimal(item.jumlah_porsi);
+      const hargaPerPorsi = new Prisma.Decimal(menu.harga);
+
+      const subtotal = quantity.mul(hargaPerPorsi);
+      totalHargaDecimal = totalHargaDecimal.plus(subtotal);
+
+      detailOrderData.push({
+        menu_id: item.menu_id,
+        quantity: item.jumlah_porsi,
+        subtotal: subtotal,
+      });
+    }
+
+    const newOrder = await prisma.pesananCatering.create({
+      data: {
+        user_id: userId,
+        reservasi_id,
+        catering_id,
+        catatan,
+        total_harga: totalHargaDecimal, 
+        status: "PENDING", 
+      },
+    });
+
+    const finalDetailOrderData = detailOrderData.map((detail) => ({
+      ...detail,
       catering_order_id: newOrder.id,
-      menu_id: item.menu_id,
-      quantity: item.quantity,
-    })),
-  });
+    }));
 
-  const newPayment = await prisma.pembayaranCatering.create({
-    data: {
-      catering_order_id: newOrder.id,
-      metode_bayar,
-      bukti_bayar: bukti_bayar,
-    },
-  });
+    await prisma.detailPesananCatering.createMany({
+      data: finalDetailOrderData,
+    });
 
-  return { newOrder, newDetailOrders, newPayment };
+    const newDetailOrders = await prisma.detailPesananCatering.findMany({
+      where: {
+        catering_order_id: newOrder.id,
+      },
+      include: {
+        menu: true,
+      },
+    });
+
+    const newPayment = await prisma.pembayaranCatering.create({
+      data: {
+        catering_order_id: newOrder.id,
+        metode_bayar,
+        bukti_bayar: bukti_bayar,
+      },
+    });
+
+    return { newOrder, newDetailOrders, newPayment };
+  } catch (error) {
+    throw error instanceof AppError
+      ? error
+      : new AppError(
+          `Gagal membuat pesanan catering dan pembayaran: ${error.message}`,
+          500
+        );
+  }
 };
 
 module.exports = {
