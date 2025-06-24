@@ -191,11 +191,6 @@ const getKostandReservedData = async (userId) => {
         updated_at: new Date(),
       },
     });
-    if (activatedReservations.count > 0) {
-      console.log(
-        `[ON-DEMAND UPDATE] Activated ${activatedReservations.count} reservations.`
-      );
-    }
 
     const deactivatedReservations = await prisma.reservasi.updateMany({
       where: {
@@ -210,11 +205,6 @@ const getKostandReservedData = async (userId) => {
         updated_at: new Date(),
       },
     });
-    if (deactivatedReservations.count > 0) {
-      console.log(
-        `[ON-DEMAND UPDATE] Deactivated ${deactivatedReservations.count} reservations.`
-      );
-    }
 
     const allApprovedKost = await prisma.kost.findMany({
       where: {
@@ -237,15 +227,11 @@ const getKostandReservedData = async (userId) => {
 
     const formattedAllApprovedKost = allApprovedKost.map((kost) => ({
       ...kost,
-      foto_kost: kost.foto_kost
-        ? kost.foto_kost.map((url) => fileService.generateFileUrl(url))
-        : [],
+      foto_kost: kost.foto_kost?.map((path) => fileService.generateFileUrl(path)) || [],
     }));
 
     const userReservations = await prisma.reservasi.findMany({
-      where: {
-        user_id: userId,
-      },
+      where: { user_id: userId },
       include: {
         kost: {
           select: {
@@ -256,22 +242,17 @@ const getKostandReservedData = async (userId) => {
             harga_bulanan: true,
             harga_final: true,
             tipe: {
-              select: {
-                nama_tipe: true,
-              },
+              select: { nama_tipe: true },
             },
           },
         },
       },
-      orderBy: {
-        created_at: "desc",
-      },
+      orderBy: { created_at: "desc" },
     });
 
     const pendingUpcomingKost = [];
     const activeKost = [];
     const historyKost = [];
-
     const reservedKostIds = new Set();
 
     for (const res of userReservations) {
@@ -287,41 +268,30 @@ const getKostandReservedData = async (userId) => {
         deposit_amount: res.deposit_amount,
         catatan: res.catatan,
         ...res.kost,
-        foto_kost: res.kost.foto_kost
-          ? res.kost.foto_kost.map((url) => fileService.generateFileUrl(url))
-          : [],
+        foto_kost: res.kost.foto_kost?.map((path) => fileService.generateFileUrl(path)) || [],
       };
 
-      const resTanggalCheckIn = new Date(res.tanggal_check_in);
-      resTanggalCheckIn.setHours(0, 0, 0, 0);
-      const resTanggalKeluar = res.tanggal_keluar
-        ? new Date(res.tanggal_keluar)
-        : null;
-      if (resTanggalKeluar) resTanggalKeluar.setHours(0, 0, 0, 0);
+      const checkIn = new Date(res.tanggal_check_in).setHours(0, 0, 0, 0);
+      const checkOut = res.tanggal_keluar ? new Date(res.tanggal_keluar).setHours(0, 0, 0, 0) : null;
 
-      const isCheckInDateReached = resTanggalCheckIn <= today;
-      const isCheckOutDatePassed = resTanggalKeluar && resTanggalKeluar < today;
+      const isCheckInReached = checkIn <= today;
+      const isCheckOutPassed = checkOut && checkOut < today;
 
       if (
         res.status === ReservasiStatus.PENDING ||
-        (res.status === ReservasiStatus.APPROVED && !isCheckInDateReached)
+        (res.status === ReservasiStatus.APPROVED && !isCheckInReached)
       ) {
         pendingUpcomingKost.push(kostData);
         reservedKostIds.add(res.kost.kost_id);
       } else if (
         res.status === ReservasiStatus.APPROVED &&
         res.status_penghunian === PenghuniStatus.AKTIF &&
-        isCheckInDateReached &&
-        !isCheckOutDatePassed
+        isCheckInReached &&
+        !isCheckOutPassed
       ) {
         activeKost.push(kostData);
         reservedKostIds.add(res.kost.kost_id);
-      } else if (
-        res.status === ReservasiStatus.REJECTED ||
-        (res.status === ReservasiStatus.APPROVED &&
-          res.status_penghunian === PenghuniStatus.KELUAR) ||
-        (res.status === ReservasiStatus.APPROVED && isCheckOutDatePassed)
-      ) {
+      } else {
         historyKost.push(kostData);
       }
     }
@@ -337,7 +307,7 @@ const getKostandReservedData = async (userId) => {
       history_reservations: historyKost,
     };
   } catch (error) {
-    console.error("Error in getHomeDashboardData:", error);
+    console.error("Error in getKostandReservedData:", error);
     throw new AppError(`Gagal mengambil data dashboard: ${error.message}`, 500);
   }
 };
@@ -1006,8 +976,8 @@ const getReservationDetailById = async (
         alamat: reservation.kost.alamat,
         foto_kost: reservation.kost.foto_kost
           ? reservation.kost.foto_kost.map((url) =>
-              fileService.generateFileUrl(url)
-            )
+            fileService.generateFileUrl(url)
+          )
           : [],
         qris_image: reservation.kost.qris_image
           ? fileService.generateFileUrl(reservation.kost.qris_image)
@@ -1022,19 +992,19 @@ const getReservationDetailById = async (
         pengelola: reservation.kost.pengelola,
         catering_services: reservation.kost.catering
           ? reservation.kost.catering.map((c) => ({
-              ...c,
-              qris_image: c.qris_image
-                ? fileService.generateFileUrl(c.qris_image)
-                : null,
-            }))
+            ...c,
+            qris_image: c.qris_image
+              ? fileService.generateFileUrl(c.qris_image)
+              : null,
+          }))
           : [],
         laundry_services: reservation.kost.laundry
           ? reservation.kost.laundry.map((l) => ({
-              ...l,
-              qris_image: l.qris_image
-                ? fileService.generateFileUrl(l.qris_image)
-                : null,
-            }))
+            ...l,
+            qris_image: l.qris_image
+              ? fileService.generateFileUrl(l.qris_image)
+              : null,
+          }))
           : [],
       },
       user: reservation.user,

@@ -7,18 +7,12 @@ class DetailOrderLaundryService {
      * Get laundry order detail by order ID
      */
     async getLaundryOrderDetail(orderId, userId, userRole) {
-        const whereClause = {
-            pesanan_id: orderId,
-        };
+        const whereClause = { pesanan_id: orderId };
 
         if (userRole === "PENGHUNI") {
             whereClause.user_id = userId;
         } else if (userRole === "PENGELOLA") {
-            whereClause.laundry = {
-                kost: {
-                    pengelola_id: userId,
-                },
-            };
+            whereClause.laundry = { kost: { pengelola_id: userId } };
         }
 
         const order = await prisma.pesananLaundry.findFirst({
@@ -76,18 +70,10 @@ class DetailOrderLaundryService {
             },
         });
 
-        if (!order) {
-            throw new AppError("Order not found or you don't have access", 404);
-        }
+        if (!order) throw new AppError("Order not found or you don't have access", 404);
 
-        const formattedOrder = {
+        return {
             ...order,
-            laundry: {
-                ...order.laundry,
-                qris_image_url: order.laundry.qris_image
-                    ? fileService.generateFileUrl(order.laundry.qris_image)
-                    : null,
-            },
             detail_pesanan_laundry: order.detail_pesanan_laundry.map((detail) => ({
                 ...detail,
                 subtotal_estimasi: detail.jumlah_satuan * detail.harga_per_satuan,
@@ -95,14 +81,6 @@ class DetailOrderLaundryService {
                     ? (detail.jumlah_satuan * detail.harga_per_satuan * (order.berat_actual / order.detail_pesanan_laundry.reduce((sum, d) => sum + d.jumlah_satuan, 0)))
                     : null,
             })),
-            pembayaran: order.pembayaran
-                ? {
-                    ...order.pembayaran,
-                    bukti_bayar_url: order.pembayaran.bukti_bayar
-                        ? fileService.generateFileUrl(order.pembayaran.bukti_bayar)
-                        : null,
-                }
-                : null,
             service_count: order.detail_pesanan_laundry.length,
             total_satuan: order.detail_pesanan_laundry.reduce(
                 (sum, detail) => sum + detail.jumlah_satuan,
@@ -112,8 +90,6 @@ class DetailOrderLaundryService {
                 ? order.estimasi_selesai.toISOString().split("T")[0]
                 : null,
         };
-
-        return formattedOrder;
     }
 
     /**
