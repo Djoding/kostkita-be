@@ -1,6 +1,8 @@
+// controllers/laundryController.js
 const laundryService = require("../services/laundryService");
 const { asyncHandler } = require("../middleware/errorHandler");
 const fileService = require("../services/fileService");
+const { AppError } = require("../middleware/errorHandler"); // Pastikan AppError diimpor
 
 class LaundryController {
   /**
@@ -70,6 +72,68 @@ class LaundryController {
           url: laundryData.qris_image,
         },
       }),
+    });
+  });
+
+  /**
+   * PUT /api/v1/laundry/:id
+   * Update laundry
+   */
+  updateLaundry = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const { user_id } = req.user;
+    let updateData = req.body;
+
+    // Handle file upload if present
+    if (req.file) {
+      try {
+        const processedPath = await fileService.processImage(req.file.path, {
+          width: 800,
+          height: 600,
+          quality: 80,
+          format: "jpeg",
+        });
+
+        const result = await fileService.moveFile(processedPath, "laundry");
+        updateData.qris_image = result.url;
+      } catch (error) {
+        await fileService.deleteFile(req.file.path);
+        throw new AppError("Failed to process QRIS image", 500);
+      }
+    } else if (req.body.qris_image === "") {
+      // If qris_image is explicitly set to empty string, it means delete existing
+      updateData.qris_image = null;
+    }
+
+    const laundry = await laundryService.updateLaundry(id, updateData, user_id);
+
+    res.json({
+      success: true,
+      message: "Laundry updated successfully",
+      data: laundry,
+      ...(req.file && {
+        uploaded_file: {
+          original_name: req.file.originalname,
+          size: req.file.size,
+          url: laundryData.qris_image,
+        },
+      }),
+    });
+  });
+
+  /**
+   * DELETE /api/v1/laundry/:id
+   * Delete laundry (soft delete)
+   */
+  deleteLaundry = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const { user_id } = req.user;
+
+    await laundryService.deleteLaundry(id, user_id);
+
+    res.json({
+      success: true,
+      message: "Laundry deleted successfully",
     });
   });
 

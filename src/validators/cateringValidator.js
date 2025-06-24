@@ -1,3 +1,4 @@
+// validators/cateringValidator.js
 const { body, query, param } = require("express-validator");
 
 const createCateringValidator = [
@@ -31,6 +32,50 @@ const createCateringValidator = [
     .optional()
     .isBoolean()
     .withMessage("is_partner must be a boolean value"),
+];
+
+const updateCateringValidator = [
+  param("id").isUUID().withMessage("Valid catering ID (UUID) is required"), // Added for update
+
+  body("nama_catering")
+    .optional()
+    .notEmpty()
+    .withMessage("Nama catering cannot be empty")
+    .isLength({ min: 2, max: 255 })
+    .withMessage("Nama catering must be between 2 and 255 characters")
+    .trim(),
+
+  body("alamat")
+    .optional()
+    .notEmpty()
+    .withMessage("Alamat cannot be empty")
+    .isLength({ min: 5, max: 500 })
+    .withMessage("Alamat must be between 5 and 500 characters")
+    .trim(),
+
+  body("whatsapp_number")
+    .optional({ nullable: true }) // Allow null for optional field update
+    .matches(/^(\+62|0)[0-9]{8,13}$/)
+    .withMessage("Please provide a valid Indonesian WhatsApp number"),
+
+  body("rekening_info")
+    .optional({ nullable: true }) // Allow null for optional field update
+    .isObject()
+    .withMessage("Rekening info must be a valid object"),
+
+  body("is_partner")
+    .optional()
+    .isBoolean()
+    .withMessage("is_partner must be a boolean value"),
+
+  body("is_active") // For soft delete/activate
+    .optional()
+    .isBoolean()
+    .withMessage("is_active must be a boolean value"),
+];
+
+const deleteCateringValidator = [
+  param("id").isUUID().withMessage("Valid catering ID (UUID) is required"), // Added for delete
 ];
 
 const getCateringByKostValidator = [
@@ -142,6 +187,8 @@ const updateOrderStatusValidator = [
 
 module.exports = {
   createCateringValidator,
+  updateCateringValidator, // Export new validator
+  deleteCateringValidator, // Export new validator
   getCateringByKostValidator,
   cateringIdValidator,
   addMenuItemValidator,
