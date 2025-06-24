@@ -152,9 +152,7 @@ const createLaundryOrderWithPayment = async (userId, orderDetails) => {
       });
     }
     const today = new Date();
-    const tanggalAntar = new Date(
-      today.toLocaleString("id-ID", { timeZone: "Asia/Jakarta" })
-    );
+    const tanggalAntar = new Date(today.getTime() + 7 * 60 * 60 * 1000);
 
     const estimasiSelesai = new Date(tanggalAntar);
     estimasiSelesai.setDate(tanggalAntar.getDate() + 2);
