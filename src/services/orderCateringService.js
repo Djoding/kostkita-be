@@ -190,7 +190,7 @@ const createCateringOrderWithPayment = async (userId, orderDetails) => {
     const newPayment = await prisma.pembayaranCatering.create({
       data: {
         pesanan_id: newOrder.pesanan_id,
-        metode_bayar,
+        metode: metode_bayar,
         jumlah: totalHargaDecimal,
         bukti_bayar: bukti_bayar,
       },

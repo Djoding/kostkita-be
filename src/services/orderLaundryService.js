@@ -104,33 +104,105 @@ const createLaundryOrderWithPayment = async (userId, orderDetails) => {
     bukti_bayar,
   } = orderDetails;
 
-  const newOrder = await prisma.pesananLaundry.create({
-    data: {
-      user_id: userId,
-      reservasi_id,
-      laundry_id,
-      catatan,
-    },
-  });
+  try {
+    const layananIds = items.map((item) => item.layanan_id);
+    const layananDetails = await prisma.masterLayananLaundry.findMany({
+      where: {
+        layanan_id: { in: layananIds },
+        laundry_id: laundry_id,
+      },
+      select: {
+        layanan_id: true,
+        harga_per_satuan: true,
+      },
+    });
 
-  const newDetailOrders = await prisma.detailPesananLaundry.createMany({
-    data: items.map((item) => ({
-      laundry_order_id: newOrder.id,
-      item_name: item.name,
-      quantity: item.quantity,
-      price: item.price,
-    })),
-  });
+    if (layananDetails.length !== layananIds.length) {
+      throw new AppError(
+        "Satu atau lebih layanan laundry tidak ditemukan atau bukan bagian dari laundry yang dipilih.",
+        400
+      );
+    }
 
-  const newPayment = await prisma.pembayaranLaundry.create({
-    data: {
-      laundry_order_id: newOrder.id,
-      metode_bayar,
-      bukti_bayar: bukti_bayar,
-    },
-  });
+    let totalEstimasiDecimal = new Prisma.Decimal(0);
+    const detailOrderRawData = [];
 
-  return { newOrder, newDetailOrders, newPayment };
+    for (const item of items) {
+      const layanan = layananDetails.find(
+        (ld) => ld.layanan_id === item.layanan_id
+      );
+      if (!layanan) {
+        throw new AppError(
+          `Layanan dengan ID ${item.layanan_id} tidak ditemukan.`,
+          400
+        );
+      }
+
+      const jumlahSatuanValue = new Prisma.Decimal(item.jumlah_satuan);
+      const hargaPerSatuanValue = new Prisma.Decimal(layanan.harga_per_satuan);
+
+      const subtotal = jumlahSatuanValue.mul(hargaPerSatuanValue);
+      totalEstimasiDecimal = totalEstimasiDecimal.plus(subtotal);
+
+      detailOrderRawData.push({
+        layanan_id: item.layanan_id,
+        jumlah_satuan: item.jumlah_satuan,
+        harga_per_satuan: hargaPerSatuanValue,
+      });
+    }
+    const today = new Date();
+    const tanggalAntar = new Date(today);
+
+    const estimasiSelesai = new Date(today);
+    estimasiSelesai.setDate(today.getDate() + 2);
+
+    const newOrder = await prisma.pesananLaundry.create({
+      data: {
+        user_id: userId,
+        laundry_id: laundry_id,
+        reservasi_id: reservasi_id,
+        total_estimasi: totalEstimasiDecimal,
+        tanggal_antar: tanggalAntar, 
+        estimasi_selesai: estimasiSelesai,
+        status: "PENDING",
+        catatan: catatan,
+      },
+    });
+
+    const finalDetailOrderData = detailOrderRawData.map((detail) => ({
+      ...detail,
+      pesanan_id: newOrder.pesanan_id,
+    }));
+
+    await prisma.detailPesananLaundry.createMany({
+      data: finalDetailOrderData,
+    });
+
+    const newDetailOrders = await prisma.detailPesananLaundry.findMany({
+      where: {
+        pesanan_id: newOrder.pesanan_id,
+      },
+      include: {
+        layanan: true,
+      },
+    });
+
+    const newPayment = await prisma.pembayaranLaundry.create({
+      data: {
+        pesanan_id: newOrder.pesanan_id,
+        jumlah: totalEstimasiDecimal,
+        metode: metode_bayar,
+        bukti_bayar: bukti_bayar,
+        status: "PENDING",
+      },
+    });
+
+    return { newOrder, newDetailOrders, newPayment };
+  } catch (error) {
+    throw error instanceof AppError
+      ? error
+      : new AppError(`Gagal membuat pesanan laundry: ${error.message}`, 500);
+  }
 };
 
 module.exports = {
