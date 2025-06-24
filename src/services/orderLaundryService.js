@@ -88,10 +88,8 @@ const getLaundryHistoryForTenant = async (userId, kostId) => {
   }
 };
 
-const createLaundryOrderWithPayment = async (userId, orderDetails, buktiBayarPath) => {
+const createLaundryOrderWithPayment = async (userId, orderDetails, buktiBayarFile) => {
   const { items, catatan, metode_bayar, reservasi_id, laundry_id } = orderDetails;
-
-  const resultFileMove = await fileService.moveFile(buktiBayarPath, "laundry_payment");
 
   const newOrder = await prisma.laundryOrder.create({
     data: {
@@ -115,7 +113,7 @@ const createLaundryOrderWithPayment = async (userId, orderDetails, buktiBayarPat
     data: {
       laundry_order_id: newOrder.id,
       metode_bayar,
-      bukti_bayar: resultFileMove.url,
+      bukti_bayar: buktiBayarFile.path, 
     },
   });
 

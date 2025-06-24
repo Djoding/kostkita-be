@@ -5,7 +5,7 @@ const { AppError } = require("../middleware/errorHandler");
 const path = require("path");
 const { ReservasiStatus, PenghuniStatus } = require("@prisma/client");
 
-const createReservation = async (userId, reservationDetails, buktiBayarPath) => {
+const createReservation = async (userId, reservationDetails, buktiBayarFile) => {
   const { kost_id, tanggal_check_in, durasi_bulan, metode_bayar, catatan } = reservationDetails;
   const parsedDurasiBulan = parseInt(durasi_bulan, 10);
 
@@ -13,12 +13,7 @@ const createReservation = async (userId, reservationDetails, buktiBayarPath) => 
     throw new AppError("Durasi bulan harus berupa angka positif.", 400);
   }
 
-  let resultFileMove;
-
   try {
-    resultFileMove = await fileService.moveFile(buktiBayarPath, "reservation_payment");
-    const buktiBayarUrl = resultFileMove.url;
-
     const kost = await prisma.kost.findUnique({
       where: { kost_id },
       select: {
@@ -73,7 +68,7 @@ const createReservation = async (userId, reservationDetails, buktiBayarPath) => 
         durasi_bulan: parsedDurasiBulan,
         total_harga,
         deposit_amount,
-        bukti_bayar: buktiBayarUrl,
+        bukti_bayar: buktiBayarFile.path,
         metode_bayar,
         catatan,
         status: "PENDING",
@@ -83,19 +78,12 @@ const createReservation = async (userId, reservationDetails, buktiBayarPath) => 
 
     return newReservation;
   } catch (error) {
-    if (resultFileMove?.filename) {
-      await fileService.deleteFile(
-        path.join(fileService.uploadPath, "reservation_payment", resultFileMove.filename)
-      );
-    }
     throw error instanceof AppError ? error : new AppError(`Gagal membuat reservasi kost: ${error.message}`, 500);
   }
 };
 
-const extendReservation = async (reservasiId, userId, extensionDetails, buktiBayarPath) => {
+const extendReservation = async (reservasiId, userId, extensionDetails, buktiBayarFile) => {
   const { durasi_perpanjangan_bulan, metode_bayar, catatan } = extensionDetails;
-
-  let resultFileMove;
 
   try {
     const existing = await prisma.reservasi.findUnique({
@@ -109,8 +97,6 @@ const extendReservation = async (reservasiId, userId, extensionDetails, buktiBay
     if (new Date(existing.tanggal_keluar || Date.now()) < new Date()) {
       throw new AppError("Reservasi sudah berakhir.", 400);
     }
-
-    resultFileMove = await fileService.moveFile(buktiBayarPath, "reservation_payment");
 
     const currentTanggalKeluar = existing.tanggal_keluar || existing.tanggal_check_in;
     const newTanggalKeluar = new Date(currentTanggalKeluar);
@@ -126,7 +112,7 @@ const extendReservation = async (reservasiId, userId, extensionDetails, buktiBay
         durasi_bulan: existing.durasi_bulan + durasi_perpanjangan_bulan,
         total_harga: newTotalHarga,
         tanggal_keluar: newTanggalKeluar,
-        bukti_bayar: resultFileMove.url,
+        bukti_bayar: buktiBayarFile.path, // URL langsung
         metode_bayar,
         catatan,
         updated_at: new Date(),
@@ -135,11 +121,6 @@ const extendReservation = async (reservasiId, userId, extensionDetails, buktiBay
 
     return updated;
   } catch (error) {
-    if (resultFileMove?.filename) {
-      await fileService.deleteFile(
-        path.join(fileService.uploadPath, "reservation_payment", resultFileMove.filename)
-      );
-    }
     throw error instanceof AppError ? error : new AppError(`Gagal memperpanjang reservasi: ${error.message}`, 500);
   }
 };

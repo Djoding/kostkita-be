@@ -99,10 +99,8 @@ const getCateringHistoryForTenant = async (userId, kostId) => {
   }
 };
 
-const createCateringOrderWithPayment = async (userId, orderDetails, buktiBayarPath) => {
+const createCateringOrderWithPayment = async (userId, orderDetails, buktiBayarFile) => {
   const { items, catatan, metode_bayar, reservasi_id, catering_id } = orderDetails;
-
-  const resultFileMove = await fileService.moveFile(buktiBayarPath, "catering_payment");
 
   const newOrder = await prisma.cateringOrder.create({
     data: {
@@ -125,7 +123,7 @@ const createCateringOrderWithPayment = async (userId, orderDetails, buktiBayarPa
     data: {
       catering_order_id: newOrder.id,
       metode_bayar,
-      bukti_bayar: resultFileMove.url,
+      bukti_bayar: buktiBayarFile.path, // ⬅️ langsung URL final
     },
   });
 
