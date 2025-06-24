@@ -104,7 +104,7 @@ const createLaundryOrderWithPayment = async (userId, orderDetails) => {
     bukti_bayar,
   } = orderDetails;
 
-  const newOrder = await prisma.laundryOrder.create({
+  const newOrder = await prisma.pesananLaundry.create({
     data: {
       user_id: userId,
       reservasi_id,
@@ -113,7 +113,7 @@ const createLaundryOrderWithPayment = async (userId, orderDetails) => {
     },
   });
 
-  const newDetailOrders = await prisma.laundryOrderDetail.createMany({
+  const newDetailOrders = await prisma.detailPesananLaundry.createMany({
     data: items.map((item) => ({
       laundry_order_id: newOrder.id,
       item_name: item.name,
@@ -122,7 +122,7 @@ const createLaundryOrderWithPayment = async (userId, orderDetails) => {
     })),
   });
 
-  const newPayment = await prisma.laundryPayment.create({
+  const newPayment = await prisma.pembayaranLaundry.create({
     data: {
       laundry_order_id: newOrder.id,
       metode_bayar,
