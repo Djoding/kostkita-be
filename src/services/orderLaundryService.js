@@ -8,11 +8,7 @@ const getLaundryHistoryForTenant = async (userId, kostId) => {
   try {
     if (kostId) {
       const active = await prisma.reservasi.findFirst({
-        where: {
-          user_id: userId,
-          kost_id: kostId,
-          status: "APPROVED",
-        },
+        where: { user_id: userId, kost_id: kostId, status: "APPROVED" },
       });
       if (!active) {
         throw new AppError("Penghuni tidak memiliki reservasi aktif di kost ini.", 403);
@@ -75,13 +71,13 @@ const getLaundryHistoryForTenant = async (userId, kostId) => {
       orderBy: { created_at: "desc" },
     });
 
-    return orders.map((o) => ({
-      ...o,
-      pembayaran: o.pembayaran
+    return orders.map((order) => ({
+      ...order,
+      pembayaran: order.pembayaran
         ? {
-          ...o.pembayaran,
-          bukti_bayar_url: o.pembayaran.bukti_bayar
-            ? fileService.generateFileUrl(o.pembayaran.bukti_bayar)
+          ...order.pembayaran,
+          bukti_bayar_url: order.pembayaran.bukti_bayar
+            ? fileService.generateFileUrl(order.pembayaran.bukti_bayar)
             : null,
         }
         : null,
@@ -97,8 +93,7 @@ const createLaundryOrderWithPayment = async (
   orderDetails,
   buktiBayarFile
 ) => {
-  const { items, catatan, metode_bayar, reservasi_id, laundry_id } =
-    orderDetails;
+  const { items, catatan, metode_bayar, reservasi_id, laundry_id } = orderDetails;
   let buktiBayarUrl = null;
   let resultFileMove = null;
 
@@ -106,20 +101,15 @@ const createLaundryOrderWithPayment = async (
     if (!buktiBayarFile) {
       throw new AppError("Bukti pembayaran harus diunggah.", 400);
     }
-    const processedFilePath = await fileService.processImage(
-      buktiBayarFile.path,
-      {
-        width: 800,
-        height: 600,
-        quality: 80,
-        format: "jpeg",
-      }
-    );
 
-    resultFileMove = await fileService.moveFile(
-      processedFilePath,
-      "laundry_payment"
-    );
+    const processedFilePath = await fileService.processImage(buktiBayarFile.path, {
+      width: 800,
+      height: 600,
+      quality: 80,
+      format: "jpeg",
+    });
+
+    resultFileMove = await fileService.moveFile(processedFilePath, "laundry_payment");
     buktiBayarUrl = resultFileMove.url;
 
     let calculatedTotalEstimasi = new Prisma.Decimal(0);
@@ -136,114 +126,33 @@ const createLaundryOrderWithPayment = async (
         },
       },
       include: {
-        laundry: {
-          select: {
-            laundry_id: true,
-            kost_id: true,
-            is_active: true,
-            nama_laundry: true,
-          },
-        },
-        layanan: {
-          select: {
-            layanan_id: true,
-            nama_layanan: true,
-            satuan: true,
-          },
-        },
+        laundry: true,
+        layanan: true,
       },
     });
 
     if (laundryHargaItems.length !== uniqueLayananIds.length) {
-      const foundLayananIds = new Set(
-        laundryHargaItems.map((lh) => lh.layanan_id)
-      );
-      const missingOrInvalidLayananIds = uniqueLayananIds.filter(
-        (id) => !foundLayananIds.has(id)
-      );
-
-      if (resultFileMove && resultFileMove.filename) {
-        await fileService.deleteFile(
-          path.join(
-            fileService.uploadPath,
-            "laundry_payment",
-            resultFileMove.filename
-          )
-        );
+      const foundLayananIds = new Set(laundryHargaItems.map((lh) => lh.layanan_id));
+      const missing = uniqueLayananIds.filter(id => !foundLayananIds.has(id));
+      if (resultFileMove?.filename) {
+        await fileService.deleteFile(path.join(fileService.uploadPath, "laundry_payment", resultFileMove.filename));
       }
-      throw new AppError(
-        `Salah satu atau lebih layanan laundry tidak ditemukan, tidak tersedia, atau bukan dari laundry_id yang diberikan: ${missingOrInvalidLayananIds.join(
-          ", "
-        )}.`,
-        404
-      );
+      throw new AppError(`Layanan laundry tidak valid: ${missing.join(", ")}.`, 404);
     }
 
-    const laundryHargaMap = new Map(
-      laundryHargaItems.map((lh) => [lh.layanan_id, lh])
-    );
+    const laundryHargaMap = new Map(laundryHargaItems.map((lh) => [lh.layanan_id, lh]));
 
     let laundryIdFromItems = null;
     let kostIdForOrder = null;
 
     for (const item of items) {
       const hargaItem = laundryHargaMap.get(item.layanan_id);
+      if (!hargaItem.laundry.is_active) throw new AppError("Laundry tidak aktif", 400);
 
-      if (!hargaItem.laundry.is_active) {
-        if (resultFileMove && resultFileMove.filename) {
-          await fileService.deleteFile(
-            path.join(
-              fileService.uploadPath,
-              "laundry_payment",
-              resultFileMove.filename
-            )
-          );
-        }
-        throw new AppError(
-          `Penyedia laundry (${hargaItem.laundry.nama_laundry}) tidak aktif.`,
-          400
-        );
-      }
+      laundryIdFromItems = laundryIdFromItems || hargaItem.laundry.laundry_id;
+      kostIdForOrder = kostIdForOrder || hargaItem.laundry.kost_id;
 
-      if (laundryIdFromItems === null) {
-        laundryIdFromItems = hargaItem.laundry.laundry_id;
-      } else if (laundryIdFromItems !== hargaItem.laundry.laundry_id) {
-        if (resultFileMove && resultFileMove.filename) {
-          await fileService.deleteFile(
-            path.join(
-              fileService.uploadPath,
-              "laundry_payment",
-              resultFileMove.filename
-            )
-          );
-        }
-        throw new AppError(
-          "Semua layanan dalam satu pesanan laundry harus berasal dari satu penyedia laundry yang sama.",
-          400
-        );
-      }
-
-      if (kostIdForOrder === null) {
-        kostIdForOrder = hargaItem.laundry.kost_id;
-      } else if (kostIdForOrder !== hargaItem.laundry.kost_id) {
-        if (resultFileMove && resultFileMove.filename) {
-          await fileService.deleteFile(
-            path.join(
-              fileService.uploadPath,
-              "laundry_payment",
-              resultFileMove.filename
-            )
-          );
-        }
-        throw new AppError(
-          "Semua layanan dalam satu pesanan laundry harus berasal dari kost yang sama.",
-          400
-        );
-      }
-
-      const itemEstimasiHarga = hargaItem.harga_per_satuan.mul(
-        item.jumlah_satuan
-      );
+      const itemEstimasiHarga = hargaItem.harga_per_satuan.mul(item.jumlah_satuan);
       calculatedTotalEstimasi = calculatedTotalEstimasi.add(itemEstimasiHarga);
 
       serviceDetailsToCreate.push({
@@ -253,38 +162,6 @@ const createLaundryOrderWithPayment = async (
       });
     }
 
-    if (serviceDetailsToCreate.length === 0) {
-      if (resultFileMove && resultFileMove.filename) {
-        await fileService.deleteFile(
-          path.join(
-            fileService.uploadPath,
-            "laundry_payment",
-            resultFileMove.filename
-          )
-        );
-      }
-      throw new AppError(
-        "Tidak ada layanan valid yang ditemukan untuk dipesan.",
-        400
-      );
-    }
-
-    if (!laundryIdFromItems || !kostIdForOrder) {
-      if (resultFileMove && resultFileMove.filename) {
-        await fileService.deleteFile(
-          path.join(
-            fileService.uploadPath,
-            "laundry_payment",
-            resultFileMove.filename
-          )
-        );
-      }
-      throw new AppError(
-        "Gagal menentukan penyedia laundry atau kost terkait dari layanan yang dipesan.",
-        400
-      );
-    }
-
     const activeReservation = await prisma.reservasi.findFirst({
       where: {
         user_id: userId,
@@ -292,56 +169,21 @@ const createLaundryOrderWithPayment = async (
         status: "APPROVED",
         status_penghunian: "AKTIF",
       },
-      select: {
-        reservasi_id: true,
-      },
     });
 
     if (!activeReservation) {
-      if (resultFileMove && resultFileMove.filename) {
-        await fileService.deleteFile(
-          path.join(
-            fileService.uploadPath,
-            "laundry_payment",
-            resultFileMove.filename
-          )
-        );
+      if (resultFileMove?.filename) {
+        await fileService.deleteFile(path.join(fileService.uploadPath, "laundry_payment", resultFileMove.filename));
       }
-      throw new AppError(
-        "Anda tidak memiliki reservasi aktif di kost yang menyediakan layanan laundry ini.",
-        403
-      );
+      throw new AppError("Tidak ada reservasi aktif di kost ini.", 403);
     }
 
     if (reservasi_id && activeReservation.reservasi_id !== reservasi_id) {
-      if (resultFileMove && resultFileMove.filename) {
-        await fileService.deleteFile(
-          path.join(
-            fileService.uploadPath,
-            "laundry_payment",
-            resultFileMove.filename
-          )
-        );
-      }
-      throw new AppError(
-        "ID Reservasi tidak sesuai dengan reservasi aktif pengguna di kost ini.",
-        400
-      );
+      throw new AppError("ID Reservasi tidak cocok dengan reservasi aktif.", 400);
     }
+
     if (laundry_id && laundryIdFromItems !== laundry_id) {
-      if (resultFileMove && resultFileMove.filename) {
-        await fileService.deleteFile(
-          path.join(
-            fileService.uploadPath,
-            "laundry_payment",
-            resultFileMove.filename
-          )
-        );
-      }
-      throw new AppError(
-        "ID Laundry tidak sesuai dengan layanan yang dipesan.",
-        400
-      );
+      throw new AppError("ID Laundry tidak sesuai dengan layanan yang dipesan.", 400);
     }
 
     const transactionResult = await prisma.$transaction(async (tx) => {
@@ -354,34 +196,15 @@ const createLaundryOrderWithPayment = async (
           status: "PENDING",
           catatan: catatan,
           tanggal_antar: new Date(),
-          estimasi_selesai: new Date(
-            new Date().setDate(new Date().getDate() + 2)
-          ),
+          estimasi_selesai: new Date(Date.now() + 2 * 86400000),
         },
       });
-
-      const detailOrderData = serviceDetailsToCreate.map((detail) => ({
-        ...detail,
-        pesanan_id: newOrder.pesanan_id,
-      }));
 
       await tx.detailPesananLaundry.createMany({
-        data: detailOrderData,
-      });
-
-      const fetchedDetailOrders = await tx.detailPesananLaundry.findMany({
-        where: {
+        data: serviceDetailsToCreate.map(detail => ({
+          ...detail,
           pesanan_id: newOrder.pesanan_id,
-        },
-        include: {
-          layanan: {
-            select: {
-              layanan_id: true,
-              nama_layanan: true,
-              satuan: true,
-            },
-          },
-        },
+        })),
       });
 
       const newPayment = await tx.pembayaranLaundry.create({
@@ -394,31 +217,21 @@ const createLaundryOrderWithPayment = async (
         },
       });
 
-      return { newOrder, newDetailOrders: fetchedDetailOrders, newPayment };
+      return {
+        newOrder,
+        newDetailOrders: serviceDetailsToCreate,
+        newPayment,
+      };
     });
 
     return transactionResult;
   } catch (error) {
-    if (resultFileMove && resultFileMove.filename) {
-      await fileService.deleteFile(
-        path.join(
-          fileService.uploadPath,
-          "laundry_payment",
-          resultFileMove.filename
-        )
-      );
+    if (resultFileMove?.filename) {
+      await fileService.deleteFile(path.join(fileService.uploadPath, "laundry_payment", resultFileMove.filename));
     }
-    console.error(
-      "Error in createLaundryOrderWithPayment (multi-service):",
-      error
-    );
-    if (error instanceof AppError) {
-      throw error;
-    }
-    throw new AppError(
-      `Gagal membuat pesanan laundry dan pembayaran: ${error.message}`,
-      500
-    );
+    console.error("Error in createLaundryOrderWithPayment:", error);
+    if (error instanceof AppError) throw error;
+    throw new AppError("Terjadi kesalahan saat membuat pesanan laundry.", 500);
   }
 };
 

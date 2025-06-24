@@ -8,11 +8,7 @@ const getCateringHistoryForTenant = async (userId, kostId) => {
   try {
     if (kostId) {
       const active = await prisma.reservasi.findFirst({
-        where: {
-          user_id: userId,
-          kost_id: kostId,
-          status: "APPROVED",
-        },
+        where: { user_id: userId, kost_id: kostId, status: "APPROVED" },
       });
       if (!active) {
         throw new AppError("Penghuni tidak memiliki reservasi aktif di kost ini.", 403);
@@ -77,22 +73,22 @@ const getCateringHistoryForTenant = async (userId, kostId) => {
       orderBy: { created_at: "desc" },
     });
 
-    return orders.map((o) => ({
-      ...o,
-      pembayaran: o.pembayaran
+    return orders.map((order) => ({
+      ...order,
+      pembayaran: order.pembayaran
         ? {
-          ...o.pembayaran,
-          bukti_bayar_url: o.pembayaran.bukti_bayar
-            ? fileService.generateFileUrl(o.pembayaran.bukti_bayar)
+          ...order.pembayaran,
+          bukti_bayar_url: order.pembayaran.bukti_bayar
+            ? fileService.generateFileUrl(order.pembayaran.bukti_bayar)
             : null,
         }
         : null,
-      detail_pesanan: o.detail_pesanan.map((d) => ({
-        ...d,
+      detail_pesanan: order.detail_pesanan.map((detail) => ({
+        ...detail,
         menu: {
-          ...d.menu,
-          foto_menu_url: d.menu.foto_menu
-            ? fileService.generateFileUrl(d.menu.foto_menu)
+          ...detail.menu,
+          foto_menu_url: detail.menu.foto_menu
+            ? fileService.generateFileUrl(detail.menu.foto_menu)
             : null,
         },
       })),
@@ -110,14 +106,15 @@ const createCateringOrderWithPayment = async (
 ) => {
   const { items, catatan, metode_bayar, reservasi_id, catering_id } =
     orderDetails;
+
   let buktiBayarUrl = null;
   let resultFileMove = null;
 
   try {
-
     if (!buktiBayarFile) {
       throw new AppError("Bukti pembayaran harus diunggah.", 400);
     }
+
     const processedFilePath = await fileService.processImage(
       buktiBayarFile.path,
       {
@@ -159,23 +156,16 @@ const createCateringOrderWithPayment = async (
 
     if (menusInOrder.length !== menuIds.length) {
       const foundMenuIds = new Set(menusInOrder.map((m) => m.menu_id));
-      const missingOrInvalidCateringMenuIds = menuIds.filter(
-        (id) => !foundMenuIds.has(id)
-      );
+      const missingMenuIds = menuIds.filter((id) => !foundMenuIds.has(id));
 
-      if (resultFileMove && resultFileMove.filename) {
+      if (resultFileMove?.filename) {
         await fileService.deleteFile(
-          path.join(
-            fileService.uploadPath,
-            "catering_payment",
-            resultFileMove.filename
-          )
+          path.join(fileService.uploadPath, "catering_payment", resultFileMove.filename)
         );
       }
+
       throw new AppError(
-        `Salah satu atau lebih menu tidak ditemukan, tidak tersedia, atau bukan dari catering_id yang diberikan: ${missingOrInvalidCateringMenuIds.join(
-          ", "
-        )}.`,
+        `Beberapa menu tidak valid atau tidak tersedia: ${missingMenuIds.join(", ")}`,
         404
       );
     }
@@ -187,35 +177,14 @@ const createCateringOrderWithPayment = async (
       const menu = menusInOrder.find((m) => m.menu_id === item.menu_id);
 
       if (!menu.catering.is_active) {
-        if (resultFileMove && resultFileMove.filename) {
-          await fileService.deleteFile(
-            path.join(
-              fileService.uploadPath,
-              "catering_payment",
-              resultFileMove.filename
-            )
-          );
-        }
-        throw new AppError(
-          `Catering untuk menu ${menu.menu_id} tidak aktif.`,
-          400
-        );
+        throw new AppError(`Catering tidak aktif untuk menu ${menu.menu_id}`, 400);
       }
 
       if (actualCateringId === null) {
         actualCateringId = menu.catering.catering_id;
       } else if (actualCateringId !== menu.catering.catering_id) {
-        if (resultFileMove && resultFileMove.filename) {
-          await fileService.deleteFile(
-            path.join(
-              fileService.uploadPath,
-              "catering_payment",
-              resultFileMove.filename
-            )
-          );
-        }
         throw new AppError(
-          "Semua menu dalam satu pesanan harus berasal dari satu catering yang sama.",
+          "Semua menu dalam satu pesanan harus berasal dari catering yang sama.",
           400
         );
       }
@@ -223,23 +192,15 @@ const createCateringOrderWithPayment = async (
       if (kostIdForOrder === null) {
         kostIdForOrder = menu.catering.kost_id;
       } else if (kostIdForOrder !== menu.catering.kost_id) {
-        if (resultFileMove && resultFileMove.filename) {
-          await fileService.deleteFile(
-            path.join(
-              fileService.uploadPath,
-              "catering_payment",
-              resultFileMove.filename
-            )
-          );
-        }
         throw new AppError(
-          "Semua menu dalam satu pesanan harus berasal dari kost yang sama.",
+          "Semua menu harus berasal dari kost yang sama.",
           400
         );
       }
 
-      const itemPrice = menu.harga.mul(item.jumlah_porsi);
-      calculatedTotalPrice = calculatedTotalPrice.add(itemPrice);
+      const itemTotal = menu.harga.mul(item.jumlah_porsi);
+      calculatedTotalPrice = calculatedTotalPrice.add(itemTotal);
+
       menuDetailsToCreate.push({
         menu_id: item.menu_id,
         jumlah_porsi: item.jumlah_porsi,
@@ -260,36 +221,19 @@ const createCateringOrderWithPayment = async (
     });
 
     if (!activeReservation) {
-      if (resultFileMove && resultFileMove.filename) {
-        await fileService.deleteFile(
-          path.join(
-            fileService.uploadPath,
-            "catering_payment",
-            resultFileMove.filename
-          )
-        );
-      }
       throw new AppError(
-        "Anda tidak memiliki reservasi aktif di kost yang menyediakan menu ini.",
+        "Anda tidak memiliki reservasi aktif di kost ini.",
         403
       );
     }
 
     if (reservasi_id && activeReservation.reservasi_id !== reservasi_id) {
-      if (resultFileMove && resultFileMove.filename) {
-        await fileService.deleteFile(
-          path.join(
-            fileService.uploadPath,
-            "catering_payment",
-            resultFileMove.filename
-          )
-        );
-      }
       throw new AppError(
-        "ID Reservasi tidak sesuai dengan reservasi aktif pengguna di kost ini.",
+        "ID reservasi tidak cocok dengan reservasi aktif Anda.",
         400
       );
     }
+
     const transactionResult = await prisma.$transaction(async (tx) => {
       const newOrder = await tx.pesananCatering.create({
         data: {
@@ -310,34 +254,6 @@ const createCateringOrderWithPayment = async (
         data: detailOrderData,
       });
 
-      const fetchedDetailOrders = await tx.detailPesananCatering.findMany({
-        where: {
-          pesanan_id: newOrder.pesanan_id,
-        },
-        include: {
-          menu: {
-            select: {
-              menu_id: true,
-              nama_menu: true,
-              kategori: true,
-              foto_menu: true,
-              catering: {
-                select: {
-                  catering_id: true,
-                  nama_catering: true,
-                  kost: {
-                    select: {
-                      kost_id: true,
-                      nama_kost: true,
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-      });
-
       const newPayment = await tx.pembayaranCatering.create({
         data: {
           pesanan_id: newOrder.pesanan_id,
@@ -348,31 +264,22 @@ const createCateringOrderWithPayment = async (
         },
       });
 
-      return { newOrder, newDetailOrders: fetchedDetailOrders, newPayment };
+      return {
+        newOrder,
+        newPayment,
+      };
     });
 
     return transactionResult;
   } catch (error) {
-    if (resultFileMove && resultFileMove.filename) {
+    if (resultFileMove?.filename) {
       await fileService.deleteFile(
-        path.join(
-          fileService.uploadPath,
-          "catering_payment",
-          resultFileMove.filename
-        )
+        path.join(fileService.uploadPath, "catering_payment", resultFileMove.filename)
       );
     }
-    console.error(
-      "Error in createCateringOrderWithPayment (multi-menu):",
-      error
-    );
-    if (error instanceof AppError) {
-      throw error;
-    }
-    throw new AppError(
-      `Gagal membuat pesanan catering dan pembayaran: ${error.message}`,
-      500
-    );
+    console.error("Error in createCateringOrderWithPayment:", error);
+    if (error instanceof AppError) throw error;
+    throw new AppError("Gagal membuat pesanan catering: " + error.message, 500);
   }
 };
 

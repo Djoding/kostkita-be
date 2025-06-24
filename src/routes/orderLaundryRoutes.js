@@ -39,9 +39,10 @@ const parseItemsMiddleware = (req, res, next) => {
 router.use(authenticateJWT);
 
 router.get("/", validateGetLaundryHistory, laundryController.getLaundryHistory);
+
 router.post(
   "/",
-  upload.single("bukti_bayar", "temp"),
+  upload.single("bukti_bayar", "laundry_payment"),
   parseItemsMiddleware,
   validateCreateLaundryOrderWithPayment,
   handleValidationErrors,

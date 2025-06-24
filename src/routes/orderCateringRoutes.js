@@ -44,7 +44,7 @@ router.get(
 
 router.post(
   "/",
-  upload.single("bukti_bayar", "temp"),
+  upload.single("bukti_bayar", "catering_payment"),
   parseItemsMiddleware,
   validateCreateCateringOrderWithPayment,
   handleValidationErrors,

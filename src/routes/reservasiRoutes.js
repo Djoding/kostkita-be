@@ -15,11 +15,20 @@ router.use(authenticateJWT);
 
 router.post(
   "/",
-  upload.single("bukti_bayar", "temp"),
+  upload.single("bukti_bayar", "reservation_payment"),
   validateCreateReservation,
   handleValidationErrors,
   reservasiController.createReservation
 );
+
+router.put(
+  "/:id/extend",
+  upload.single("bukti_bayar", "reservation_payment"),
+  validateExtendReservation,
+  handleValidationErrors,
+  reservasiController.extendReservation
+);
+
 
 router.get(
   "/penghuni",
@@ -44,14 +53,6 @@ router.patch(
   validateUpdateReservationStatus,
   handleValidationErrors,
   reservasiController.updateReservationStatus
-);
-
-router.put(
-  "/:id/extend",
-  upload.single("bukti_bayar", "temp"),
-  validateExtendReservation,
-  handleValidationErrors,
-  reservasiController.extendReservation
 );
 
 router.get(
