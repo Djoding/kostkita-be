@@ -9,13 +9,13 @@ const {
 } = require("../validators/reservasiValidator");
 const { authenticateJWT } = require("../middleware/auth");
 const upload = require("../middleware/upload");
-const { handleValidationErrors, validateUUID } = require("../middleware/validation");
+const { handleValidationErrors, validateUUID, sanitizeInput } = require("../middleware/validation");
 
 router.use(authenticateJWT);
 
 router.post(
   "/",
-  upload.single("bukti_bayar", "reservation_payment"),
+  sanitizeInput,
   validateCreateReservation,
   handleValidationErrors,
   reservasiController.createReservation
@@ -23,7 +23,7 @@ router.post(
 
 router.put(
   "/:id/extend",
-  upload.single("bukti_bayar", "reservation_payment"),
+  sanitizeInput,
   validateExtendReservation,
   handleValidationErrors,
   reservasiController.extendReservation

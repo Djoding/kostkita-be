@@ -5,48 +5,58 @@ const { asyncHandler, AppError } = require("../middleware/errorHandler");
 module.exports = {
   createReservation: asyncHandler(async (req, res) => {
     const userIdFromToken = req.user.user_id;
-    const { kost_id, tanggal_check_in, durasi_bulan, metode_bayar, catatan } = req.body;
+    const {
+      kost_id,
+      tanggal_check_in,
+      durasi_bulan,
+      metode_bayar,
+      catatan,
+      bukti_bayar,
+    } = req.body;
 
-    if (!req.file) {
-      throw new AppError("Bukti pembayaran reservasi wajib diunggah.", 400);
+    if (!bukti_bayar) {
+      throw new new AppError(
+        "Bukti pembayaran reservasi wajib disertakan (berupa URL atau data Base64).",
+        400
+      )();
     }
 
-    const buktiBayarFile = req.file;
+    if (!userIdFromToken) {
+      throw new AppError(
+        "User ID tidak ditemukan dari token. Pastikan Anda sudah login.",
+        401
+      );
+    }
+
+    const reservationData = {
+      kost_id,
+      tanggal_check_in,
+      durasi_bulan,
+      metode_bayar,
+      catatan,
+      bukti_bayar,
+    };
 
     try {
-      if (!userIdFromToken) {
-        await fileService.deleteFile(buktiBayarFile.path);
-        throw new AppError("User ID tidak ditemukan dari token. Pastikan Anda sudah login.", 401);
-      }
-
       const newReservation = await reservasiService.createReservation(
         userIdFromToken,
-        { kost_id, tanggal_check_in, durasi_bulan, metode_bayar, catatan },
-        buktiBayarFile
+        reservationData
       );
 
-      const buktiBayarFullUrl = newReservation.bukti_bayar
-        ? fileService.generateFileUrl(newReservation.bukti_bayar)
-        : null;
-
       res.status(201).json({
-        message: "Reservasi kost berhasil dibuat. Menunggu konfirmasi pengelola.",
+        message:
+          "Reservasi kost berhasil dibuat. Menunggu konfirmasi pengelola.",
         data: {
           reservation: {
             ...newReservation,
-            bukti_bayar_url: buktiBayarFullUrl,
-            tanggal_check_in: newReservation.tanggal_check_in.toISOString().split("T")[0],
+            bukti_bayar_url: bukti_bayar,
+            tanggal_check_in: newReservation.tanggal_check_in
+              .toISOString()
+              .split("T")[0],
             tanggal_keluar: newReservation.tanggal_keluar
               ? newReservation.tanggal_keluar.toISOString().split("T")[0]
               : null,
           },
-        },
-        uploaded_file_info: {
-          original_name: req.file.originalname,
-          filename: newReservation.bukti_bayar.split("/").pop(),
-          url: buktiBayarFullUrl,
-          size: req.file.size,
-          mimetype: req.file.mimetype,
         },
       });
     } catch (error) {
@@ -111,44 +121,53 @@ module.exports = {
   extendReservation: asyncHandler(async (req, res) => {
     const { id } = req.params;
     const userId = req.user.user_id;
-    const { durasi_perpanjangan_bulan, metode_bayar, catatan } = req.body;
+    const {
+      durasi_perpanjangan_bulan,
+      metode_bayar,
+      catatan,
+      bukti_bayar_perpanjangan,
+    } = req.body;
 
-    if (!id || !/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/i.test(id)) {
+    if (
+      !id ||
+      !/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/i.test(id)
+    ) {
       throw new AppError("ID Reservasi tidak valid.", 400);
     }
-
-    if (!req.file) {
-      throw new AppError("Bukti pembayaran perpanjangan wajib diunggah.", 400);
+    if (!bukti_bayar_perpanjangan) {
+      throw new AppError(
+        "Bukti pembayaran perpanjangan wajib disertakan (berupa URL atau data Base64).",
+        400
+      );
     }
-
-    const buktiBayarFile = req.file;
-
     try {
+      const extensionData = {
+        durasi_perpanjangan_bulan: parseInt(durasi_perpanjangan_bulan, 10),
+        metode_bayar,
+        catatan,
+        bukti_bayar_perpanjangan,
+      };
+
       const updatedReservation = await reservasiService.extendReservation(
         id,
         userId,
-        {
-          durasi_perpanjangan_bulan: parseInt(durasi_perpanjangan_bulan, 10),
-          metode_bayar,
-          catatan,
-        },
-        buktiBayarFile
+        extensionData
       );
 
-      const buktiBayarFullUrl = updatedReservation.bukti_bayar
-        ? fileService.generateFileUrl(updatedReservation.bukti_bayar)
-        : null;
 
       res.status(200).json({
         message: `Reservasi berhasil diperpanjang. Durasi baru: ${updatedReservation.durasi_bulan} bulan.`,
         data: {
           ...updatedReservation,
-          bukti_bayar_url: buktiBayarFullUrl,
-          tanggal_check_in: updatedReservation.tanggal_check_in.toISOString().split("T")[0],
+          bukti_bayar_url: bukti_bayar_perpanjangan,
+          tanggal_check_in: updatedReservation.tanggal_check_in
+            .toISOString()
+            .split("T")[0],
           tanggal_keluar: updatedReservation.tanggal_keluar
             ? updatedReservation.tanggal_keluar.toISOString().split("T")[0]
             : null,
         },
+        // Hapus uploaded_file_info yang bergantung pada req.file
       });
     } catch (error) {
       throw error;
@@ -229,7 +248,10 @@ module.exports = {
     const userId = req.user.user_id;
     const userRole = req.user.role;
 
-    if (!id || !/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/i.test(id)) {
+    if (
+      !id ||
+      !/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/i.test(id)
+    ) {
       throw new AppError("ID Reservasi tidak valid.", 400);
     }
 
