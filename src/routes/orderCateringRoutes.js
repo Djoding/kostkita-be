@@ -5,7 +5,7 @@ const detailOrderCateringController = require("../controllers/detailOrderCaterin
 
 const { authenticateJWT, authorize } = require("../middleware/auth");
 const upload = require("../middleware/upload");
-const { handleValidationErrors } = require("../middleware/validation");
+const { handleValidationErrors, sanitizeInput } = require("../middleware/validation");
 
 const {
   validateGetCateringHistory,
@@ -44,7 +44,7 @@ router.get(
 
 router.post(
   "/",
-  upload.single("bukti_bayar", "catering_payment"),
+  sanitizeInput,
   parseItemsMiddleware,
   validateCreateCateringOrderWithPayment,
   handleValidationErrors,

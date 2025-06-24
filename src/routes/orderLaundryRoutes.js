@@ -5,7 +5,7 @@ const detailOrderLaundryController = require("../controllers/detailOrderLaundryC
 
 const { authenticateJWT, authorize } = require("../middleware/auth");
 const upload = require("../middleware/upload");
-const { handleValidationErrors } = require("../middleware/validation");
+const { handleValidationErrors, sanitizeInput } = require("../middleware/validation");
 
 const {
   validateGetLaundryHistory,
@@ -42,7 +42,7 @@ router.get("/", validateGetLaundryHistory, laundryController.getLaundryHistory);
 
 router.post(
   "/",
-  upload.single("bukti_bayar", "laundry_payment"),
+  sanitizeInput,
   parseItemsMiddleware,
   validateCreateLaundryOrderWithPayment,
   handleValidationErrors,

@@ -11,7 +11,10 @@ const getLaundryHistoryForTenant = async (userId, kostId) => {
         where: { user_id: userId, kost_id: kostId, status: "APPROVED" },
       });
       if (!active) {
-        throw new AppError("Penghuni tidak memiliki reservasi aktif di kost ini.", 403);
+        throw new AppError(
+          "Penghuni tidak memiliki reservasi aktif di kost ini.",
+          403
+        );
       }
     } else {
       const active = await prisma.reservasi.findMany({
@@ -19,7 +22,10 @@ const getLaundryHistoryForTenant = async (userId, kostId) => {
         select: { kost_id: true },
       });
       if (active.length === 0) {
-        throw new AppError("Penghuni tidak memiliki reservasi aktif di kost manapun.", 404);
+        throw new AppError(
+          "Penghuni tidak memiliki reservasi aktif di kost manapun.",
+          404
+        );
       }
     }
 
@@ -75,11 +81,11 @@ const getLaundryHistoryForTenant = async (userId, kostId) => {
       ...order,
       pembayaran: order.pembayaran
         ? {
-          ...order.pembayaran,
-          bukti_bayar_url: order.pembayaran.bukti_bayar
-            ? fileService.generateFileUrl(order.pembayaran.bukti_bayar)
-            : null,
-        }
+            ...order.pembayaran,
+            bukti_bayar_url: order.pembayaran.bukti_bayar
+              ? fileService.generateFileUrl(order.pembayaran.bukti_bayar)
+              : null,
+          }
         : null,
     }));
   } catch (error) {
@@ -88,8 +94,15 @@ const getLaundryHistoryForTenant = async (userId, kostId) => {
   }
 };
 
-const createLaundryOrderWithPayment = async (userId, orderDetails, buktiBayarFile) => {
-  const { items, catatan, metode_bayar, reservasi_id, laundry_id } = orderDetails;
+const createLaundryOrderWithPayment = async (userId, orderDetails) => {
+  const {
+    items,
+    catatan,
+    metode_bayar,
+    reservasi_id,
+    laundry_id,
+    bukti_bayar,
+  } = orderDetails;
 
   const newOrder = await prisma.laundryOrder.create({
     data: {
@@ -113,7 +126,7 @@ const createLaundryOrderWithPayment = async (userId, orderDetails, buktiBayarFil
     data: {
       laundry_order_id: newOrder.id,
       metode_bayar,
-      bukti_bayar: buktiBayarFile.path, 
+      bukti_bayar: bukti_bayar,
     },
   });
 
