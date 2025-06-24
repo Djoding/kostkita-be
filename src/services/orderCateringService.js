@@ -163,16 +163,15 @@ const createCateringOrderWithPayment = async (userId, orderDetails) => {
       data: {
         user_id: userId,
         reservasi_id,
-        catering_id,
         catatan,
-        total_harga: totalHargaDecimal, 
-        status: "PENDING", 
+        total_harga: totalHargaDecimal,
+        status: "PENDING",
       },
     });
 
     const finalDetailOrderData = detailOrderData.map((detail) => ({
       ...detail,
-      catering_order_id: newOrder.id,
+      pesanan_id: newOrder.id,
     }));
 
     await prisma.detailPesananCatering.createMany({
@@ -181,7 +180,7 @@ const createCateringOrderWithPayment = async (userId, orderDetails) => {
 
     const newDetailOrders = await prisma.detailPesananCatering.findMany({
       where: {
-        catering_order_id: newOrder.id,
+        pesanan_id: newOrder.id,
       },
       include: {
         menu: true,
@@ -190,7 +189,7 @@ const createCateringOrderWithPayment = async (userId, orderDetails) => {
 
     const newPayment = await prisma.pembayaranCatering.create({
       data: {
-        catering_order_id: newOrder.id,
+        pesanan_id: newOrder.id,
         metode_bayar,
         bukti_bayar: bukti_bayar,
       },
