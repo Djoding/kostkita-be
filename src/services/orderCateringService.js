@@ -146,16 +146,16 @@ const createCateringOrderWithPayment = async (userId, orderDetails) => {
         );
       }
 
-      const quantity = new Prisma.Decimal(item.jumlah_porsi);
+      const quantityValue = new Prisma.Decimal(item.jumlah_porsi);
       const hargaPerPorsi = new Prisma.Decimal(menu.harga);
 
-      const subtotal = quantity.mul(hargaPerPorsi);
+      const subtotal = quantityValue.mul(hargaPerPorsi);
       totalHargaDecimal = totalHargaDecimal.plus(subtotal);
 
       detailOrderData.push({
         menu_id: item.menu_id,
-        quantity: item.jumlah_porsi,
-        subtotal: subtotal,
+        jumlah_porsi: item.jumlah_porsi,
+        harga_satuan: hargaPerPorsi,
       });
     }
 
@@ -191,6 +191,7 @@ const createCateringOrderWithPayment = async (userId, orderDetails) => {
       data: {
         pesanan_id: newOrder.pesanan_id,
         metode_bayar,
+        jumlah: totalHargaDecimal,
         bukti_bayar: bukti_bayar,
       },
     });
