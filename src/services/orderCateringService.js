@@ -7,50 +7,33 @@ const path = require("path");
 const getCateringHistoryForTenant = async (userId, kostId) => {
   try {
     if (kostId) {
-      const activeReservation = await prisma.reservasi.findFirst({
+      const active = await prisma.reservasi.findFirst({
         where: {
           user_id: userId,
           kost_id: kostId,
           status: "APPROVED",
         },
       });
-
-      if (!activeReservation) {
-        throw new AppError(
-          "Penghuni tidak memiliki reservasi aktif di kost ini atau kostId tidak valid.",
-          403
-        );
+      if (!active) {
+        throw new AppError("Penghuni tidak memiliki reservasi aktif di kost ini.", 403);
       }
     } else {
-      const activeReservations = await prisma.reservasi.findMany({
-        where: {
-          user_id: userId,
-          status: "APPROVED",
-        },
-        select: {
-          kost_id: true,
-        },
+      const active = await prisma.reservasi.findMany({
+        where: { user_id: userId, status: "APPROVED" },
+        select: { kost_id: true },
       });
-
-      if (activeReservations.length === 0) {
-        throw new AppError(
-          "Penghuni tidak memiliki reservasi aktif di kost manapun.",
-          404
-        );
+      if (active.length === 0) {
+        throw new AppError("Penghuni tidak memiliki reservasi aktif di kost manapun.", 404);
       }
     }
 
-    const cateringOrders = await prisma.pesananCatering.findMany({
+    const orders = await prisma.pesananCatering.findMany({
       where: {
         user_id: userId,
         ...(kostId && {
           detail_pesanan: {
             some: {
-              menu: {
-                catering: {
-                  kost_id: kostId,
-                },
-              },
+              menu: { catering: { kost_id: kostId } },
             },
           },
         }),
@@ -72,10 +55,7 @@ const getCateringHistoryForTenant = async (userId, kostId) => {
                     catering_id: true,
                     nama_catering: true,
                     kost: {
-                      select: {
-                        kost_id: true,
-                        nama_kost: true,
-                      },
+                      select: { kost_id: true, nama_kost: true },
                     },
                   },
                 },
@@ -94,33 +74,29 @@ const getCateringHistoryForTenant = async (userId, kostId) => {
           },
         },
       },
-      orderBy: {
-        created_at: "desc",
-      },
+      orderBy: { created_at: "desc" },
     });
 
-    const formattedOrders = cateringOrders.map((order) => ({
-      ...order,
-      pembayaran: order.pembayaran
+    return orders.map((o) => ({
+      ...o,
+      pembayaran: o.pembayaran
         ? {
-            ...order.pembayaran,
-            bukti_bayar_url: order.pembayaran.bukti_bayar
-              ? fileService.generateFileUrl(order.pembayaran.bukti_bayar)
-              : null,
-          }
+          ...o.pembayaran,
+          bukti_bayar_url: o.pembayaran.bukti_bayar
+            ? fileService.generateFileUrl(o.pembayaran.bukti_bayar)
+            : null,
+        }
         : null,
-      detail_pesanan: order.detail_pesanan.map((detail) => ({
-        ...detail,
+      detail_pesanan: o.detail_pesanan.map((d) => ({
+        ...d,
         menu: {
-          ...detail.menu,
-          foto_menu_url: detail.menu.foto_menu
-            ? fileService.generateFileUrl(detail.menu.foto_menu)
+          ...d.menu,
+          foto_menu_url: d.menu.foto_menu
+            ? fileService.generateFileUrl(d.menu.foto_menu)
             : null,
         },
       })),
     }));
-
-    return formattedOrders;
   } catch (error) {
     console.error("Error in getCateringHistoryForTenant:", error);
     throw error;
@@ -166,14 +142,14 @@ const createCateringOrderWithPayment = async (
       where: {
         menu_id: { in: menuIds },
         is_available: true,
-        catering_id: catering_id, 
+        catering_id: catering_id,
       },
       select: {
         menu_id: true,
         harga: true,
         catering: {
           select: {
-            catering_id: true, 
+            catering_id: true,
             kost_id: true,
             is_active: true,
           },
@@ -279,7 +255,7 @@ const createCateringOrderWithPayment = async (
         status_penghunian: "AKTIF",
       },
       select: {
-        reservasi_id: true, 
+        reservasi_id: true,
       },
     });
 
