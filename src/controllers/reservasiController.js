@@ -229,10 +229,7 @@ module.exports = {
     const userId = req.user.user_id;
     const userRole = req.user.role;
 
-    if (
-      !id ||
-      !/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/i.test(id)
-    ) {
+    if (!id || !/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/i.test(id)) {
       throw new AppError("ID Reservasi tidak valid.", 400);
     }
 

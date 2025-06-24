@@ -29,7 +29,6 @@ router.put(
   reservasiController.extendReservation
 );
 
-
 router.get(
   "/penghuni",
   handleValidationErrors,
@@ -44,6 +43,7 @@ router.get(
 
 router.get(
   "/detail/:id",
+  validateUUID("id"),
   handleValidationErrors,
   reservasiController.getReservationDetailById
 );

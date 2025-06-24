@@ -841,7 +841,7 @@ const getReservationDetailById = async (
       deposit_amount: reservation.deposit_amount,
       metode_bayar: reservation.metode_bayar,
       catatan: reservation.catatan,
-      bukti_bayar: reservation.bukti_bayar
+      bukti_bayar_url: reservation.bukti_bayar
         ? fileService.generateFileUrl(reservation.bukti_bayar)
         : null,
       rejection_reason: reservation.rejection_reason,
