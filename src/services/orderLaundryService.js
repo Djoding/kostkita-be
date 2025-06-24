@@ -7,46 +7,31 @@ const path = require("path");
 const getLaundryHistoryForTenant = async (userId, kostId) => {
   try {
     if (kostId) {
-      const activeReservation = await prisma.reservasi.findFirst({
+      const active = await prisma.reservasi.findFirst({
         where: {
           user_id: userId,
           kost_id: kostId,
           status: "APPROVED",
         },
       });
-
-      if (!activeReservation) {
-        throw new AppError(
-          "Penghuni tidak memiliki reservasi aktif di kost ini atau kostId tidak valid.",
-          403
-        );
+      if (!active) {
+        throw new AppError("Penghuni tidak memiliki reservasi aktif di kost ini.", 403);
       }
     } else {
-      const activeReservations = await prisma.reservasi.findMany({
-        where: {
-          user_id: userId,
-          status: "APPROVED",
-        },
-        select: {
-          kost_id: true,
-        },
+      const active = await prisma.reservasi.findMany({
+        where: { user_id: userId, status: "APPROVED" },
+        select: { kost_id: true },
       });
-
-      if (activeReservations.length === 0) {
-        throw new AppError(
-          "Penghuni tidak memiliki reservasi aktif di kost manapun.",
-          404
-        );
+      if (active.length === 0) {
+        throw new AppError("Penghuni tidak memiliki reservasi aktif di kost manapun.", 404);
       }
     }
 
-    const laundryOrders = await prisma.pesananLaundry.findMany({
+    const orders = await prisma.pesananLaundry.findMany({
       where: {
         user_id: userId,
         ...(kostId && {
-          laundry: {
-            kost_id: kostId,
-          },
+          laundry: { kost_id: kostId },
         }),
       },
       include: {
@@ -87,24 +72,20 @@ const getLaundryHistoryForTenant = async (userId, kostId) => {
           },
         },
       },
-      orderBy: {
-        created_at: "desc",
-      },
+      orderBy: { created_at: "desc" },
     });
 
-    const formattedOrders = laundryOrders.map((order) => ({
-      ...order,
-      pembayaran: order.pembayaran
+    return orders.map((o) => ({
+      ...o,
+      pembayaran: o.pembayaran
         ? {
-            ...order.pembayaran,
-            bukti_bayar_url: order.pembayaran.bukti_bayar
-              ? fileService.generateFileUrl(order.pembayaran.bukti_bayar)
-              : null,
-          }
+          ...o.pembayaran,
+          bukti_bayar_url: o.pembayaran.bukti_bayar
+            ? fileService.generateFileUrl(o.pembayaran.bukti_bayar)
+            : null,
+        }
         : null,
     }));
-
-    return formattedOrders;
   } catch (error) {
     console.error("Error in getLaundryHistoryForTenant:", error);
     throw error;
