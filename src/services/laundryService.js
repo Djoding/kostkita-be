@@ -386,7 +386,7 @@ class LaundryService {
         layanan: {
           select: {
             layanan_id: true,
-            nama_layayanan: true,
+            nama_layanan: true,
             satuan: true,
           },
         },
