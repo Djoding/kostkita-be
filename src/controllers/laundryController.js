@@ -115,7 +115,7 @@ class LaundryController {
         uploaded_file: {
           original_name: req.file.originalname,
           size: req.file.size,
-          url: laundryData.qris_image,
+          url: updateData.qris_image, // FIX: Changed from laundryData.qris_image to updateData.qris_image
         },
       }),
     });
