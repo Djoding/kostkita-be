@@ -1,3 +1,4 @@
+// services/cateringService.js
 const prisma = require("../config/database");
 const { AppError } = require("../middleware/errorHandler");
 const logger = require("../config/logger");
@@ -84,19 +85,27 @@ class CateringService {
       nama_catering,
       alamat,
       whatsapp_number,
-      qris_image,
+      qris_image, // save path directly
       rekening_info,
       is_partner,
     } = data;
 
+    // Verify pengelola owns the kost
     const kost = await prisma.kost.findFirst({
-      where: { kost_id, pengelola_id: pengelolaId },
+      where: {
+        kost_id,
+        pengelola_id: pengelolaId,
+      },
     });
 
     if (!kost) {
-      throw new AppError("You are not authorized to add catering to this kost", 403);
+      throw new AppError(
+        "You are not authorized to add catering to this kost",
+        403
+      );
     }
 
+    // Check if catering with same name exists in this kost
     const existingCatering = await prisma.catering.findFirst({
       where: {
         kost_id,
@@ -106,7 +115,10 @@ class CateringService {
     });
 
     if (existingCatering) {
-      throw new AppError("Catering with this name already exists in this kost", 409);
+      throw new AppError(
+        "Catering with this name already exists in this kost",
+        409
+      );
     }
 
     const catering = await prisma.catering.create({
@@ -115,7 +127,7 @@ class CateringService {
         nama_catering,
         alamat,
         whatsapp_number,
-        qris_image, // save path directly
+        qris_image,
         rekening_info,
         is_partner: is_partner || false,
         is_active: true,
@@ -131,7 +143,119 @@ class CateringService {
     });
 
     logger.info(`New catering created: ${nama_catering} for kost: ${kost_id}`);
-    return catering;
+
+    return {
+      ...catering,
+      qris_image_url: catering.qris_image
+        ? fileService.generateFileUrl(catering.qris_image)
+        : null,
+    };
+  }
+
+  /**
+   * Update catering - Pengelola only
+   */
+  async updateCatering(cateringId, updateData, pengelolaId) {
+    const {
+      nama_catering,
+      alamat,
+      whatsapp_number,
+      qris_image,
+      rekening_info,
+      is_partner,
+      is_active, // Allow updating active status (soft delete logic)
+    } = updateData;
+
+    const catering = await prisma.catering.findFirst({
+      where: {
+        catering_id: cateringId,
+        kost: {
+          pengelola_id: pengelolaId,
+        },
+      },
+    });
+
+    if (!catering) {
+      throw new AppError("Catering not found or you are not authorized", 403);
+    }
+
+    if (nama_catering && nama_catering !== catering.nama_catering) {
+      const existingCatering = await prisma.catering.findFirst({
+        where: {
+          kost_id: catering.kost_id,
+          nama_catering,
+          is_active: true,
+          catering_id: {
+            not: cateringId,
+          },
+        },
+      });
+      if (existingCatering) {
+        throw new AppError(
+          "Catering with this name already exists in this kost",
+          409
+        );
+      }
+    }
+
+    let finalQrisImage = catering.qris_image; // Keep existing if not provided
+    if (qris_image !== undefined) {
+      // If qris_image is provided (could be null for deletion or new path)
+      if (catering.qris_image && qris_image !== catering.qris_image) {
+        // If old image exists and it's being replaced/deleted
+        await fileService.deleteFile(catering.qris_image);
+      }
+      finalQrisImage = qris_image; // Assign new image (could be null)
+    }
+
+    const updatedCatering = await prisma.catering.update({
+      where: { catering_id: cateringId },
+      data: {
+        nama_catering: nama_catering || catering.nama_catering,
+        alamat: alamat || catering.alamat,
+        whatsapp_number: whatsapp_number, // Allow setting to null/undefined
+        qris_image: finalQrisImage, // Assign final image path (could be null)
+        rekening_info: rekening_info, // Allow updating to null/undefined
+        is_partner: is_partner !== undefined ? is_partner : catering.is_partner,
+        is_active: is_active !== undefined ? is_active : catering.is_active,
+        updated_at: new Date(),
+      },
+    });
+
+    logger.info(`Catering updated: ${cateringId}`);
+
+    return {
+      ...updatedCatering,
+      qris_image_url: updatedCatering.qris_image
+        ? fileService.generateFileUrl(updatedCatering.qris_image)
+        : null,
+    };
+  }
+
+  /**
+   * Delete catering (soft delete) - Pengelola only
+   */
+  async deleteCatering(cateringId, pengelolaId) {
+    const catering = await prisma.catering.findFirst({
+      where: {
+        catering_id: cateringId,
+        kost: {
+          pengelola_id: pengelolaId,
+        },
+      },
+    });
+
+    if (!catering) {
+      throw new AppError("Catering not found or you are not authorized", 403);
+    }
+
+    await prisma.catering.update({
+      where: { catering_id: cateringId },
+      data: { is_active: false, updated_at: new Date() },
+    });
+
+    logger.info(`Catering soft-deleted: ${cateringId}`);
+    return true;
   }
 
   /**
@@ -151,11 +275,17 @@ class CateringService {
       },
     });
 
-    if (!catering) throw new AppError("Catering not found", 404);
+    if (!catering) {
+      throw new AppError("Catering not found", 404);
+    }
 
+    // Verify user has access
     if (userRole === "PENGELOLA") {
       if (catering.kost.pengelola_id !== userId) {
-        throw new AppError("You are not authorized to access this catering", 403);
+        throw new AppError(
+          "You are not authorized to access this catering",
+          403
+        );
       }
     } else if (userRole === "PENGHUNI") {
       const activeReservation = await prisma.reservasi.findFirst({
@@ -168,7 +298,10 @@ class CateringService {
       });
 
       if (!activeReservation) {
-        throw new AppError("You do not have active reservation in this kost", 403);
+        throw new AppError(
+          "You do not have active reservation in this kost",
+          403
+        );
       }
     }
 
@@ -181,8 +314,18 @@ class CateringService {
     });
 
     return {
-      catering,
-      menus,
+      catering: {
+        ...catering,
+        qris_image_url: catering.qris_image
+          ? fileService.generateFileUrl(catering.qris_image)
+          : null,
+      },
+      menus: menus.map((menu) => ({
+        ...menu,
+        foto_menu_url: menu.foto_menu
+          ? fileService.generateFileUrl(menu.foto_menu)
+          : null,
+      })),
     };
   }
 
@@ -384,11 +527,11 @@ class CateringService {
       })),
       pembayaran: order.pembayaran
         ? {
-          ...order.pembayaran,
-          bukti_bayar_url: order.pembayaran.bukti_bayar
-            ? fileService.generateFileUrl(order.pembayaran.bukti_bayar)
-            : null,
-        }
+            ...order.pembayaran,
+            bukti_bayar_url: order.pembayaran.bukti_bayar
+              ? fileService.generateFileUrl(order.pembayaran.bukti_bayar)
+              : null,
+          }
         : null,
     }));
   }
@@ -459,11 +602,11 @@ class CateringService {
       })),
       pembayaran: order.pembayaran
         ? {
-          ...order.pembayaran,
-          bukti_bayar_url: order.pembayaran.bukti_bayar
-            ? fileService.generateFileUrl(order.pembayaran.bukti_bayar)
-            : null,
-        }
+            ...order.pembayaran,
+            bukti_bayar_url: order.pembayaran.bukti_bayar
+              ? fileService.generateFileUrl(order.pembayaran.bukti_bayar)
+              : null,
+          }
         : null,
     };
   }

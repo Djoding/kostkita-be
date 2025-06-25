@@ -1,6 +1,8 @@
+// controllers/cateringController.js
 const cateringService = require("../services/cateringService");
 const { asyncHandler } = require("../middleware/errorHandler");
 const fileService = require("../services/fileService");
+const { AppError } = require("../middleware/errorHandler"); // Pastikan AppError diimpor
 
 class CateringController {
   /**
@@ -73,6 +75,72 @@ class CateringController {
           url: cateringData.qris_image,
         },
       }),
+    });
+  });
+
+  /**
+   * PUT /api/v1/catering/:id
+   * Update catering
+   */
+  updateCatering = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const { user_id } = req.user;
+    let updateData = req.body;
+
+    // Handle file upload if present
+    if (req.file) {
+      try {
+        const processedPath = await fileService.processImage(req.file.path, {
+          width: 800,
+          height: 600,
+          quality: 80,
+          format: "jpeg",
+        });
+
+        const result = await fileService.moveFile(processedPath, "catering");
+        updateData.qris_image = result.url;
+      } catch (error) {
+        await fileService.deleteFile(req.file.path);
+        throw new AppError("Failed to process QRIS image", 500);
+      }
+    } else if (req.body.qris_image === "") {
+      // If qris_image is explicitly set to empty string, it means delete existing
+      updateData.qris_image = null;
+    }
+
+    const catering = await cateringService.updateCatering(
+      id,
+      updateData,
+      user_id
+    );
+
+    res.json({
+      success: true,
+      message: "Catering updated successfully",
+      data: catering,
+      ...(req.file && {
+        uploaded_file: {
+          original_name: req.file.originalname,
+          size: req.file.size,
+          url: cateringData.qris_image,
+        },
+      }),
+    });
+  });
+
+  /**
+   * DELETE /api/v1/catering/:id
+   * Delete catering (soft delete)
+   */
+  deleteCatering = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const { user_id } = req.user;
+
+    await cateringService.deleteCatering(id, user_id);
+
+    res.json({
+      success: true,
+      message: "Catering deleted successfully",
     });
   });
 
