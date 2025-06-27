@@ -3,6 +3,8 @@ const { asyncHandler } = require('../middleware/errorHandler');
 const prisma = require('../config/database');
 const logger = require('../config/logger');
 const fileService = require('../services/fileService');
+const { validationResult } = require('express-validator');
+const jwtService = require('../services/jwtService');
 
 class AuthController {
     /**
@@ -154,21 +156,12 @@ class AuthController {
     * Setup password for OAuth users
     */
     setupPassword = asyncHandler(async (req, res) => {
-        const { email, newPassword, confirmPassword } = req.body;
-
-        if (newPassword !== confirmPassword) {
-            return res.status(400).json({
-                success: false,
-                message: 'Passwords do not match'
-            });
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
         }
 
-        if (newPassword.length < 8) {
-            return res.status(400).json({
-                success: false,
-                message: 'Password must be at least 8 characters long'
-            });
-        }
+        const { email, newPassword } = req.body;
 
         const user = await authService.setupPassword(email, newPassword);
 
@@ -182,7 +175,7 @@ class AuthController {
             success: true,
             message: 'Password setup completed successfully. You are now logged in.',
             data: {
-                user: user,
+                user,
                 accessToken: tokens.accessToken,
                 refreshToken: tokens.refreshToken,
                 tokenType: 'Bearer',
@@ -190,8 +183,7 @@ class AuthController {
             }
         });
     });
-    //  
-
+    
     /**
      * Google OAuth callback
      */
