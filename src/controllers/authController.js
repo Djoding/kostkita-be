@@ -4,7 +4,7 @@ const prisma = require('../config/database');
 const logger = require('../config/logger');
 const fileService = require('../services/fileService');
 const { validationResult } = require('express-validator');
-const jwtService = require('../services/jwtService');
+const jwtService = require('../config/jwt');
 
 class AuthController {
     /**
@@ -183,7 +183,7 @@ class AuthController {
             }
         });
     });
-    
+
     /**
      * Google OAuth callback
      */
