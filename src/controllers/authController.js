@@ -172,6 +172,24 @@ class AuthController {
 
         const user = await authService.setupPassword(email, newPassword);
 
+        const tokens = jwtService.generateTokens({
+            userId: user.user_id,
+            email: user.email,
+            role: user.role
+        });
+
+        res.json({
+            success: true,
+            message: 'Password setup completed successfully. You are now logged in.',
+            data: {
+                user: user,
+                accessToken: tokens.accessToken,
+                refreshToken: tokens.refreshToken,
+                tokenType: 'Bearer',
+                expiresIn: tokens.expiresIn
+            }
+        });
+
         res.json({
             success: true,
             message: 'Password setup completed successfully',
