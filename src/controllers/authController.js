@@ -189,12 +189,6 @@ class AuthController {
                 expiresIn: tokens.expiresIn
             }
         });
-
-        res.json({
-            success: true,
-            message: 'Password setup completed successfully',
-            data: { user }
-        });
     });
 
     /**
