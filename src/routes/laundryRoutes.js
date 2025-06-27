@@ -1,3 +1,4 @@
+// routes/laundryRoutes.js
 const express = require("express");
 const laundryController = require("../controllers/laundryController");
 const { authenticateJWT, authorize } = require("../middleware/auth");
@@ -24,16 +25,38 @@ router.get(
   laundryController.getLaundrysByKost
 );
 
-// // POST /api/v1/laundry - Create laundry (Pengelola only)
-// router.post(
-//   "/",
-//   authorize("PENGELOLA"),
-//   uploadMiddleware.single("qris_image", "temp"),
-//   sanitizeInput,
-//   laundryValidator.createLaundryValidator,
-//   handleValidationErrors,
-//   laundryController.createLaundry
-// );
+// POST /api/v1/laundry - Create laundry (Pengelola only)
+router.post(
+  "/",
+  authorize("PENGELOLA"),
+  uploadMiddleware.single("qris_image", "temp"),
+  parseJsonFields(["rekening_info"]), // Tambahkan ini
+  sanitizeInput,
+  laundryValidator.createLaundryValidator,
+  handleValidationErrors,
+  laundryController.createLaundry
+);
+
+// PUT /api/v1/laundry/:id - Update laundry (Pengelola only)
+router.put(
+  "/:id",
+  authorize("PENGELOLA"),
+  uploadMiddleware.single("qris_image", "temp"),
+  parseJsonFields(["rekening_info"]), // Tambahkan ini
+  sanitizeInput,
+  laundryValidator.updateLaundryValidator,
+  handleValidationErrors,
+  laundryController.updateLaundry
+);
+
+// DELETE /api/v1/laundry/:id - Delete laundry (soft delete) (Pengelola only)
+router.delete(
+  "/:id",
+  authorize("PENGELOLA"),
+  validateUUID("id"),
+  handleValidationErrors,
+  laundryController.deleteLaundry
+);
 
 // GET /api/v1/laundry/orders - Get all user orders (Pengelola only)
 router.get(
@@ -99,18 +122,6 @@ router.delete(
   laundryValidator.deleteServiceValidator,
   handleValidationErrors,
   laundryController.deleteLaundryService
-);
-
-// POST /api/v1/laundry - Create laundry (Pengelola only)
-router.post(
-  "/",
-  authorize("PENGELOLA"),
-  uploadMiddleware.single("qris_image", "temp"),
-  parseJsonFields(["rekening_info"]), // <-- TAMBAHKAN BARIS INI!
-  sanitizeInput,
-  laundryValidator.createLaundryValidator,
-  handleValidationErrors,
-  laundryController.createLaundry
 );
 
 module.exports = router;

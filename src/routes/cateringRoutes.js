@@ -1,3 +1,4 @@
+// routes/cateringRoutes.js
 const express = require("express");
 const cateringController = require("../controllers/cateringController");
 const { authenticateJWT, authorize } = require("../middleware/auth");
@@ -8,6 +9,7 @@ const {
 } = require("../middleware/validation");
 const uploadMiddleware = require("../middleware/upload");
 const cateringValidator = require("../validators/cateringValidator");
+const parseJsonFields = require("../middleware/parseJsonFields"); // Pastikan parseJsonFields diimpor
 
 const router = express.Router();
 
@@ -28,10 +30,32 @@ router.post(
   "/",
   authorize("PENGELOLA"),
   uploadMiddleware.single("qris_image", "temp"),
+  parseJsonFields(["rekening_info"]), // Tambahkan ini jika rekening_info dikirim sebagai stringified JSON
   sanitizeInput,
   cateringValidator.createCateringValidator,
   handleValidationErrors,
   cateringController.createCatering
+);
+
+// PUT /api/v1/catering/:id - Update catering (Pengelola only)
+router.put(
+  "/:id",
+  authorize("PENGELOLA"),
+  uploadMiddleware.single("qris_image", "temp"),
+  parseJsonFields(["rekening_info"]), // Tambahkan ini
+  sanitizeInput,
+  cateringValidator.updateCateringValidator,
+  handleValidationErrors,
+  cateringController.updateCatering
+);
+
+// DELETE /api/v1/catering/:id - Delete catering (soft delete) (Pengelola only)
+router.delete(
+  "/:id",
+  authorize("PENGELOLA"),
+  validateUUID("id"),
+  handleValidationErrors,
+  cateringController.deleteCatering
 );
 
 // GET /api/v1/catering/orders - Get user orders (Pengelola only)
@@ -72,31 +96,34 @@ router.get(
 );
 
 // POST /api/v1/catering/:id/menu - Add catering menu item (Pengelola only)
-router.post('/:id/menu',
-    authorize('PENGELOLA'),
-    uploadMiddleware.single('foto_menu', 'temp'),
-    sanitizeInput,
-    cateringValidator.addMenuItemValidator,
-    handleValidationErrors,
-    cateringController.addCateringMenuItem
+router.post(
+  "/:id/menu",
+  authorize("PENGELOLA"),
+  uploadMiddleware.single("foto_menu", "temp"),
+  sanitizeInput,
+  cateringValidator.addMenuItemValidator,
+  handleValidationErrors,
+  cateringController.addCateringMenuItem
 );
 
 // PUT /api/v1/catering/:catering_id/menu/:menu_id - Update catering menu item (Pengelola only)
-router.put('/:catering_id/menu/:menu_id',
-    authorize('PENGELOLA'),
-    uploadMiddleware.single('foto_menu', 'temp'),
-    sanitizeInput,
-    cateringValidator.updateMenuItemValidator,
-    handleValidationErrors,
-    cateringController.updateCateringMenuItem
+router.put(
+  "/:catering_id/menu/:menu_id",
+  authorize("PENGELOLA"),
+  uploadMiddleware.single("foto_menu", "temp"),
+  sanitizeInput,
+  cateringValidator.updateMenuItemValidator,
+  handleValidationErrors,
+  cateringController.updateCateringMenuItem
 );
 
 // DELETE /api/v1/catering/:catering_id/menu/:menu_id - Delete catering menu item (Pengelola only)
-router.delete('/:catering_id/menu/:menu_id',
-    authorize('PENGELOLA'),
-    cateringValidator.deleteMenuItemValidator,
-    handleValidationErrors,
-    cateringController.deleteCateringMenuItem
+router.delete(
+  "/:catering_id/menu/:menu_id",
+  authorize("PENGELOLA"),
+  cateringValidator.deleteMenuItemValidator,
+  handleValidationErrors,
+  cateringController.deleteCateringMenuItem
 );
 
 module.exports = router;

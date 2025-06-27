@@ -5,8 +5,15 @@ const { AppError } = require("../middleware/errorHandler");
 const path = require("path");
 const { ReservasiStatus, PenghuniStatus } = require("@prisma/client");
 
-const createReservation = async (userId, reservationDetails, buktiBayarFile) => {
-  const { kost_id, tanggal_check_in, durasi_bulan, metode_bayar, catatan } = reservationDetails;
+const createReservation = async (userId, reservationDetails) => {
+  const {
+    kost_id,
+    tanggal_check_in,
+    durasi_bulan,
+    metode_bayar,
+    catatan,
+    bukti_bayar,
+  } = reservationDetails;
   const parsedDurasiBulan = parseInt(durasi_bulan, 10);
 
   if (isNaN(parsedDurasiBulan) || parsedDurasiBulan < 1) {
@@ -28,12 +35,16 @@ const createReservation = async (userId, reservationDetails, buktiBayarFile) => 
     if (!kost) throw new AppError("Kost tidak ditemukan.", 404);
     if (!kost.is_approved) throw new AppError("Kost belum disetujui.", 400);
 
-    const total_harga = new Prisma.Decimal(kost.harga_final).mul(parsedDurasiBulan);
+    const total_harga = new Prisma.Decimal(kost.harga_final).mul(
+      parsedDurasiBulan
+    );
     const deposit_amount = kost.deposit;
 
     const tanggalCheckInDate = new Date(tanggal_check_in);
     const tanggalKeluarDate = new Date(tanggalCheckInDate);
-    tanggalKeluarDate.setMonth(tanggalKeluarDate.getMonth() + parsedDurasiBulan);
+    tanggalKeluarDate.setMonth(
+      tanggalKeluarDate.getMonth() + parsedDurasiBulan
+    );
 
     const activeReservationsCount = await prisma.reservasi.count({
       where: {
@@ -57,7 +68,10 @@ const createReservation = async (userId, reservationDetails, buktiBayarFile) => 
     });
 
     if (existingActiveReservation) {
-      throw new AppError("Anda sudah memiliki reservasi aktif di kost ini.", 409);
+      throw new AppError(
+        "Anda sudah memiliki reservasi aktif di kost ini.",
+        409
+      );
     }
 
     const newReservation = await prisma.reservasi.create({
@@ -68,7 +82,7 @@ const createReservation = async (userId, reservationDetails, buktiBayarFile) => 
         durasi_bulan: parsedDurasiBulan,
         total_harga,
         deposit_amount,
-        bukti_bayar: buktiBayarFile.path,
+        bukti_bayar: bukti_bayar,
         metode_bayar,
         catatan,
         status: "PENDING",
@@ -78,12 +92,19 @@ const createReservation = async (userId, reservationDetails, buktiBayarFile) => 
 
     return newReservation;
   } catch (error) {
-    throw error instanceof AppError ? error : new AppError(`Gagal membuat reservasi kost: ${error.message}`, 500);
+    throw error instanceof AppError
+      ? error
+      : new AppError(`Gagal membuat reservasi kost: ${error.message}`, 500);
   }
 };
 
-const extendReservation = async (reservasiId, userId, extensionDetails, buktiBayarFile) => {
-  const { durasi_perpanjangan_bulan, metode_bayar, catatan } = extensionDetails;
+const extendReservation = async (reservasiId, userId, extensionDetails) => {
+  const {
+    durasi_perpanjangan_bulan,
+    metode_bayar,
+    catatan,
+    bukti_bayar_perpanjangan,
+  } = extensionDetails;
 
   try {
     const existing = await prisma.reservasi.findUnique({
@@ -93,18 +114,24 @@ const extendReservation = async (reservasiId, userId, extensionDetails, buktiBay
 
     if (!existing) throw new AppError("Reservasi tidak ditemukan.", 404);
     if (existing.user_id !== userId) throw new AppError("Akses ditolak.", 403);
-    if (existing.status !== "APPROVED") throw new AppError("Reservasi belum disetujui.", 400);
+    if (existing.status !== "APPROVED")
+      throw new AppError("Reservasi belum disetujui.", 400);
     if (new Date(existing.tanggal_keluar || Date.now()) < new Date()) {
       throw new AppError("Reservasi sudah berakhir.", 400);
     }
 
-    const currentTanggalKeluar = existing.tanggal_keluar || existing.tanggal_check_in;
+    const currentTanggalKeluar =
+      existing.tanggal_keluar || existing.tanggal_check_in;
     const newTanggalKeluar = new Date(currentTanggalKeluar);
-    newTanggalKeluar.setMonth(newTanggalKeluar.getMonth() + durasi_perpanjangan_bulan);
+    newTanggalKeluar.setMonth(
+      newTanggalKeluar.getMonth() + durasi_perpanjangan_bulan
+    );
 
     const pricePerMonth = existing.kost.harga_final;
     const additionalCost = pricePerMonth.mul(durasi_perpanjangan_bulan);
-    const newTotalHarga = new Prisma.Decimal(existing.total_harga).add(additionalCost);
+    const newTotalHarga = new Prisma.Decimal(existing.total_harga).add(
+      additionalCost
+    );
 
     const updated = await prisma.reservasi.update({
       where: { reservasi_id: reservasiId },
@@ -112,7 +139,7 @@ const extendReservation = async (reservasiId, userId, extensionDetails, buktiBay
         durasi_bulan: existing.durasi_bulan + durasi_perpanjangan_bulan,
         total_harga: newTotalHarga,
         tanggal_keluar: newTanggalKeluar,
-        bukti_bayar: buktiBayarFile.path, // URL langsung
+        bukti_bayar: bukti_bayar_perpanjangan,
         metode_bayar,
         catatan,
         updated_at: new Date(),
@@ -121,7 +148,9 @@ const extendReservation = async (reservasiId, userId, extensionDetails, buktiBay
 
     return updated;
   } catch (error) {
-    throw error instanceof AppError ? error : new AppError(`Gagal memperpanjang reservasi: ${error.message}`, 500);
+    throw error instanceof AppError
+      ? error
+      : new AppError(`Gagal memperpanjang reservasi: ${error.message}`, 500);
   }
 };
 
@@ -182,7 +211,8 @@ const getKostandReservedData = async (userId) => {
 
     const formattedAllApprovedKost = allApprovedKost.map((kost) => ({
       ...kost,
-      foto_kost: kost.foto_kost?.map((path) => fileService.generateFileUrl(path)) || [],
+      foto_kost:
+        kost.foto_kost?.map((path) => fileService.generateFileUrl(path)) || [],
     }));
 
     const userReservations = await prisma.reservasi.findMany({
@@ -223,11 +253,16 @@ const getKostandReservedData = async (userId) => {
         deposit_amount: res.deposit_amount,
         catatan: res.catatan,
         ...res.kost,
-        foto_kost: res.kost.foto_kost?.map((path) => fileService.generateFileUrl(path)) || [],
+        foto_kost:
+          res.kost.foto_kost?.map((path) =>
+            fileService.generateFileUrl(path)
+          ) || [],
       };
 
       const checkIn = new Date(res.tanggal_check_in).setHours(0, 0, 0, 0);
-      const checkOut = res.tanggal_keluar ? new Date(res.tanggal_keluar).setHours(0, 0, 0, 0) : null;
+      const checkOut = res.tanggal_keluar
+        ? new Date(res.tanggal_keluar).setHours(0, 0, 0, 0)
+        : null;
 
       const isCheckInReached = checkIn <= today;
       const isCheckOutPassed = checkOut && checkOut < today;
@@ -767,8 +802,8 @@ const getReservationDetailById = async (
         alamat: reservation.kost.alamat,
         foto_kost: reservation.kost.foto_kost
           ? reservation.kost.foto_kost.map((url) =>
-            fileService.generateFileUrl(url)
-          )
+              fileService.generateFileUrl(url)
+            )
           : [],
         qris_image: reservation.kost.qris_image
           ? fileService.generateFileUrl(reservation.kost.qris_image)
@@ -783,19 +818,19 @@ const getReservationDetailById = async (
         pengelola: reservation.kost.pengelola,
         catering_services: reservation.kost.catering
           ? reservation.kost.catering.map((c) => ({
-            ...c,
-            qris_image: c.qris_image
-              ? fileService.generateFileUrl(c.qris_image)
-              : null,
-          }))
+              ...c,
+              qris_image: c.qris_image
+                ? fileService.generateFileUrl(c.qris_image)
+                : null,
+            }))
           : [],
         laundry_services: reservation.kost.laundry
           ? reservation.kost.laundry.map((l) => ({
-            ...l,
-            qris_image: l.qris_image
-              ? fileService.generateFileUrl(l.qris_image)
-              : null,
-          }))
+              ...l,
+              qris_image: l.qris_image
+                ? fileService.generateFileUrl(l.qris_image)
+                : null,
+            }))
           : [],
       },
       user: reservation.user,

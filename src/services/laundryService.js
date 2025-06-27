@@ -1,171 +1,10 @@
+// services/laundryService.js
 const prisma = require("../config/database");
 const { AppError } = require("../middleware/errorHandler");
 const logger = require("../config/logger");
 const fileService = require("./fileService");
 
 class LaundryService {
-  /**
-     * Create laundry - Pengelola only
-     */
-  async createLaundry(data, pengelolaId) {
-    const {
-      kost_id,
-      nama_laundry,
-      alamat,
-      whatsapp_number,
-      qris_image,
-      rekening_info,
-      is_partner,
-    } = data;
-
-    // Verify pengelola owns the kost
-    const kost = await prisma.kost.findFirst({
-      where: {
-        kost_id,
-        pengelola_id: pengelolaId,
-      },
-    });
-
-    if (!kost) {
-      throw new AppError(
-        "You are not authorized to add laundry to this kost",
-        403
-      );
-    }
-
-    // Check if laundry with same name exists in this kost
-    const existingLaundry = await prisma.laundry.findFirst({
-      where: {
-        kost_id,
-        nama_laundry,
-        is_active: true,
-      },
-    });
-
-    if (existingLaundry) {
-      throw new AppError(
-        "Laundry with this name already exists in this kost",
-        409
-      );
-    }
-
-    const isPartnerBoolean =
-      is_partner !== undefined ? is_partner === "true" : false;
-
-
-    const laundry = await prisma.laundry.create({
-      data: {
-        kost_id,
-        nama_laundry,
-        alamat,
-        whatsapp_number,
-        qris_image,
-        rekening_info,
-        is_partner: isPartnerBoolean,
-        is_active: true,
-      },
-      include: {
-        kost: {
-          select: {
-            kost_id: true,
-            nama_kost: true,
-          },
-        },
-      },
-    });
-
-    logger.info(`New laundry created: ${nama_laundry} for kost: ${kost_id}`);
-
-    return {
-      ...laundry,
-      qris_image_url: laundry.qris_image
-        ? fileService.generateFileUrl(laundry.qris_image)
-        : null,
-    };
-  }
-
-  /**
-     * Get laundry orders for pengelola
-     */
-  async getLaundryOrders(pengelolaId, filters = {}) {
-    const { status, laundry_id, start_date, end_date, kost_id } = filters;
-
-    const where = {
-      laundry: {
-        kost: {
-          pengelola_id: pengelolaId,
-        },
-      },
-    };
-
-    if (kost_id) {
-      where.laundry.kost.kost_id = kost_id;
-    }
-    if (status) where.status = status;
-    if (laundry_id) where.laundry_id = laundry_id;
-    if (start_date || end_date) {
-      where.created_at = {};
-      if (start_date) where.created_at.gte = new Date(start_date);
-      if (end_date) where.created_at.lte = new Date(end_date);
-    }
-
-    const orders = await prisma.pesananLaundry.findMany({
-      where,
-      include: {
-        user: {
-          select: {
-            user_id: true,
-            full_name: true,
-            phone: true,
-            whatsapp_number: true,
-          },
-        },
-        laundry: {
-          select: {
-            laundry_id: true,
-            nama_laundry: true,
-            alamat: true,
-            whatsapp_number: true,
-          },
-        },
-        detail_pesanan_laundry: {
-          include: {
-            layanan: {
-              select: {
-                layanan_id: true,
-                nama_layanan: true,
-                satuan: true,
-              },
-            },
-          },
-        },
-        pembayaran: {
-          select: {
-            pembayaran_id: true,
-            jumlah: true,
-            metode: true,
-            bukti_bayar: true,
-            status: true,
-            verified_at: true,
-          },
-        },
-      },
-      orderBy: { created_at: "desc" },
-    });
-
-    return orders.map((order) => ({
-      ...order,
-      pembayaran: order.pembayaran
-        ? {
-          ...order.pembayaran,
-          bukti_bayar_url: order.pembayaran.bukti_bayar
-            ? fileService.generateFileUrl(order.pembayaran.bukti_bayar)
-            : null,
-        }
-        : null,
-    }));
-  }
-
   /**
    * Get laundry list by kost - accessible by both Pengelola & Penghuni
    */
@@ -251,6 +90,7 @@ class LaundryService {
       is_partner,
     } = data;
 
+    // Verify pengelola owns the kost
     const kost = await prisma.kost.findFirst({
       where: {
         kost_id,
@@ -265,6 +105,7 @@ class LaundryService {
       );
     }
 
+    // Check if laundry with same name exists in this kost
     const existingLaundry = await prisma.laundry.findFirst({
       where: {
         kost_id,
@@ -309,6 +150,112 @@ class LaundryService {
         ? fileService.generateFileUrl(laundry.qris_image)
         : null,
     };
+  }
+
+  /**
+   * Update laundry - Pengelola only
+   */
+  async updateLaundry(laundryId, updateData, pengelolaId) {
+    const {
+      nama_laundry,
+      alamat,
+      whatsapp_number,
+      qris_image,
+      rekening_info,
+      is_partner,
+      is_active, // Allow updating active status (soft delete logic)
+    } = updateData;
+
+    const laundry = await prisma.laundry.findFirst({
+      where: {
+        laundry_id: laundryId,
+        kost: {
+          pengelola_id: pengelolaId,
+        },
+      },
+    });
+
+    if (!laundry) {
+      throw new AppError("Laundry not found or you are not authorized", 403);
+    }
+
+    if (nama_laundry && nama_laundry !== laundry.nama_laundry) {
+      const existingLaundry = await prisma.laundry.findFirst({
+        where: {
+          kost_id: laundry.kost_id,
+          nama_laundry,
+          is_active: true,
+          laundry_id: {
+            not: laundryId,
+          },
+        },
+      });
+      if (existingLaundry) {
+        throw new AppError(
+          "Laundry with this name already exists in this kost",
+          409
+        );
+      }
+    }
+
+    let finalQrisImage = laundry.qris_image; // Keep existing if not provided
+    if (qris_image !== undefined) {
+      // If qris_image is provided (could be null for deletion or new path)
+      if (laundry.qris_image && qris_image !== laundry.qris_image) {
+        // If old image exists and it's being replaced/deleted
+        await fileService.deleteFile(laundry.qris_image);
+      }
+      finalQrisImage = qris_image; // Assign new image (could be null)
+    }
+
+    const updatedLaundry = await prisma.laundry.update({
+      where: { laundry_id: laundryId },
+      data: {
+        nama_laundry: nama_laundry || laundry.nama_laundry,
+        alamat: alamat || laundry.alamat,
+        whatsapp_number: whatsapp_number, // Allow setting to null/undefined
+        qris_image: finalQrisImage, // Assign final image path (could be null)
+        rekening_info: rekening_info, // Allow updating to null/undefined
+        is_partner: is_partner !== undefined ? is_partner : laundry.is_partner,
+        is_active: is_active !== undefined ? is_active : laundry.is_active,
+        updated_at: new Date(),
+      },
+    });
+
+    logger.info(`Laundry updated: ${laundryId}`);
+
+    return {
+      ...updatedLaundry,
+      qris_image_url: updatedLaundry.qris_image
+        ? fileService.generateFileUrl(updatedLaundry.qris_image)
+        : null,
+    };
+  }
+
+  /**
+   * Delete laundry (soft delete) - Pengelola only
+   */
+  async deleteLaundry(laundryId, pengelolaId) {
+    const laundry = await prisma.laundry.findFirst({
+      where: {
+        laundry_id: laundryId,
+        kost: {
+          pengelola_id: pengelolaId,
+        },
+      },
+    });
+
+    if (!laundry) {
+      throw new AppError("Laundry not found or you are not authorized", 403);
+    }
+
+    await prisma.laundry.update({
+      where: { laundry_id: laundryId },
+      data: { is_active: false, updated_at: new Date() },
+    });
+
+    logger.info(`Laundry soft-deleted: ${laundryId}`);
+    return true;
   }
 
   /**
@@ -449,6 +396,7 @@ class LaundryService {
     logger.info(
       `New laundry service created for laundry: ${laundryId}, layanan: ${layanan_id}`
     );
+
     return result;
   }
 
@@ -512,11 +460,12 @@ class LaundryService {
     logger.info(
       `Laundry service updated: ${existingService.harga_id} for laundry: ${laundryId}`
     );
+
     return result;
   }
 
   /**
-   * Delete laundry service & pricing - Pengelola only
+   * Delete laundry service & pricing (soft delete) - Pengelola only
    */
   async deleteLaundryService(laundryId, layananId, pengelolaId) {
     // Verify laundry belongs to pengelola
@@ -626,11 +575,11 @@ class LaundryService {
       ...order,
       pembayaran: order.pembayaran
         ? {
-          ...order.pembayaran,
-          bukti_bayar_url: order.pembayaran.bukti_bayar
-            ? fileService.generateFileUrl(order.pembayaran.bukti_bayar)
-            : null,
-        }
+            ...order.pembayaran,
+            bukti_bayar_url: order.pembayaran.bukti_bayar
+              ? fileService.generateFileUrl(order.pembayaran.bukti_bayar)
+              : null,
+          }
         : null,
     }));
   }
@@ -689,11 +638,11 @@ class LaundryService {
       ...order,
       pembayaran: order.pembayaran
         ? {
-          ...order.pembayaran,
-          bukti_bayar_url: order.pembayaran.bukti_bayar
-            ? fileService.generateFileUrl(order.pembayaran.bukti_bayar)
-            : null,
-        }
+            ...order.pembayaran,
+            bukti_bayar_url: order.pembayaran.bukti_bayar
+              ? fileService.generateFileUrl(order.pembayaran.bukti_bayar)
+              : null,
+          }
         : null,
     };
   }
